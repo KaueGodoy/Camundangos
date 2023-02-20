@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     // components
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
+    private AudioManager audioManager;
 
     [Header("Health")]
     public float currentHealth = 0;
@@ -28,7 +30,21 @@ public class Player : MonoBehaviour
 
     [Header("Jump")]
     public float jumpForce = 5f;
+    public float lowJumpMultiplier = 1f;
+    public float fallMultiplier = 2.5f;
+
     private bool jumpRequest = false;
+
+    [Header("Dash")]
+    public float dashSpeed = 5f;
+    public float dashingTime = 0.2f;
+    public float dashingCooldown = 1f;
+
+    private bool canDash = true;
+    private bool dashRequest = false;
+    private bool isDashing;
+
+    [SerializeField] private TrailRenderer tr;
 
     [Header("Attack")]
     public float attackDelay = 0.4f;
@@ -59,8 +75,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-
-        
+        audioManager = GetComponent<AudioManager>();
     }
     void Start()
     {
@@ -69,6 +84,8 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        if (isDashing) return;
+
         if (isAlive)
         {
             ProcessInput();
@@ -78,10 +95,14 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDashing) return;
+
         if (isAlive)
         {
             Move();
             Jump();
+            BetterJump();
+            DashTrigger();
             Flip();
         }
 
@@ -104,6 +125,12 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             attackRequest = true;
+        }
+
+        // dash
+        if (Input.GetButtonDown("Dash") && canDash)
+        {
+            dashRequest = true;
         }
 
         // damage test // DELETE
@@ -153,10 +180,25 @@ public class Player : MonoBehaviour
     {
         if (jumpRequest)
         {
+            FindObjectOfType<AudioManager>().PlaySound("Jump");
             rb.velocity = Vector2.up * jumpForce;
             jumpRequest = false;
         }
     }
+
+    private void BetterJump()
+    {
+        if (rb.velocity.y < 0f)
+        {
+            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+
+        }
+    }
+
     #endregion movement
 
     #region attack
@@ -171,7 +213,7 @@ public class Player : MonoBehaviour
             {
                 isAttacking = true;
                 Debug.Log("Attacking");
-
+                FindObjectOfType<AudioManager>().PlaySound("Attack");
                 Invoke("AttackComplete", attackDelay);
             }
         }
@@ -182,6 +224,39 @@ public class Player : MonoBehaviour
         isAttacking = false;
     }
     #endregion attack
+
+    #region dash
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        tr.emitting = true;
+
+        yield return new WaitForSeconds(dashingTime);
+
+        tr.emitting = false;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+    private void DashTrigger()
+    {
+        if (dashRequest)
+        {
+            StartCoroutine(Dash());
+            dashRequest = false;
+        }
+    }
+    #endregion dash
 
     private void Flip()
     {
@@ -206,12 +281,14 @@ public class Player : MonoBehaviour
     }
     private void Die()
     {
+        FindObjectOfType<AudioManager>().PlaySound("GameOver");
         isAlive = false;
         rb.bodyType = RigidbodyType2D.Static;
     }
 
     private void TakeDamage(float damageAmount)
     {
+        FindObjectOfType<AudioManager>().PlaySound("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);
         isHit = true;
 
