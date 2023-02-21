@@ -47,6 +47,9 @@ public class Player : MonoBehaviour
     [SerializeField] private TrailRenderer tr;
 
     [Header("Attack")]
+    public Transform firePoint;
+    public GameObject pfProjectile;
+
     public float attackDelay = 0.4f;
     private float attackTimer = 0.0f;
 
@@ -75,7 +78,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        audioManager = GetComponent<AudioManager>();
+        audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
     }
     void Start()
     {
@@ -213,6 +216,9 @@ public class Player : MonoBehaviour
             {
                 isAttacking = true;
                 Debug.Log("Attacking");
+
+                Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
+
                 FindObjectOfType<AudioManager>().PlaySound("Attack");
                 Invoke("AttackComplete", attackDelay);
             }
@@ -268,7 +274,7 @@ public class Player : MonoBehaviour
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
-            //.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
+            firePoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
 
         }
 
