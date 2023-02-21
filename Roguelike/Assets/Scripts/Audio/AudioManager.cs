@@ -39,6 +39,7 @@ public class AudioManager : MonoBehaviour
 
         }
 
+        PlaySound("Theme");
         // play BGM here
     }
 

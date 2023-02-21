@@ -87,3 +87,10 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 8121e5844b59f7c4ba6e59ef4a3d8c0d, type: 3}
+    name: Theme
+    volume: 0.15
+    pitch: 1
+    loop: 1
+    spatialBlend: 0
+    source: {fileID: 0}
