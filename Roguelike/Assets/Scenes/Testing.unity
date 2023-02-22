@@ -79963,18 +79963,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 2
-  flatDamage: 4
-  baseCritRate: 5
-  baseCritDamage: 50
-  currentCritRate: 45
-  currentCritDamage: 50
+  baseDamage: 0
+  talentMultiplier: 2
+  flatDamage: 2
+  attack: 0
+  attackCharacter: 6
+  attackWeapon: 4
+  attackBonus: 0.2
+  flatAttack: 4
+  builtCritRate: 0.6
+  builtCritDamage: 1.2
+  CRITRate: 0
+  CRITDamage: 0
+  damageBonus: 0.15
+  damageReduction: 0
+  levelCharacter: 90
+  levelEnemy: 90
+  defReduction: 0
+  defIgnore: 0
+  enemyDefMult: 0
+  rawDamage: 0
+  damage: 0
   finalCritRate: 0
   finalCritDamage: 0
   finalDamage: 0
   isCrit: 0
   damageTrigger: 0
-  timeChanger: 0
 --- !u!1001 &1647772067
 PrefabInstance:
   m_ObjectHideFlags: 0

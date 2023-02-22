@@ -223,7 +223,7 @@ public class Player : MonoBehaviour
             if (!isAttacking)
             {
                 isAttacking = true;
-                Debug.Log("Attacking");
+                //Debug.Log("Attacking");
 
                 Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
 

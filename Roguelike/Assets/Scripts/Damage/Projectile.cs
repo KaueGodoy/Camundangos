@@ -36,9 +36,9 @@ public class Projectile : MonoBehaviour
         {
 
             enemy.ApplyProjectileDamage(projectileDamage);
-            Debug.Log("Initial damage " + projectileDamage);
+            //Debug.Log("Initial damage " + projectileDamage);
             enemy.ApplyBurn(burnAmount);
-            Debug.Log("Burning " + burnAmount);
+            //Debug.Log("Burning " + burnAmount);
         }
 
         // check for enemy HP
