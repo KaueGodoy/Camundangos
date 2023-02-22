@@ -22,25 +22,29 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-    }
 
-    private void Start()
-    {
-        foreach(Sound s in sounds)
+        foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
-            s.source.loop  = s.loop;
+            s.source.loop = s.loop;
             s.source.spatialBlend = s.spatialBlend;
 
 
         }
+    }
+
+    private void Start()
+    {
+        
 
         PlaySound("Theme");
-        // play BGM here
+        
+        // ignore listener pause 
+        // audiosource.ignoreListenerPause = true;
     }
 
     public void PlaySound(string name)
@@ -51,6 +55,13 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound " + name + " not found!");
             return;
         }
+
+        if (PauseMenu.GameIsPaused)
+        {
+            s.source.pitch = 0f;
+            Debug.Log("volume changed");
+        }
+
         s.source.Play();
     }
 

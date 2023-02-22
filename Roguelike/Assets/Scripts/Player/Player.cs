@@ -87,30 +87,38 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if (isDashing) return;
-
-        if (isAlive)
+        if (!PauseMenu.GameIsPaused)
         {
-            ProcessInput();
-            Attack();
+            if (isDashing) return;
+
+            if (isAlive)
+            {
+                ProcessInput();
+                Attack();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        if (isDashing) return;
 
-        if (isAlive)
+        if (!PauseMenu.GameIsPaused)
         {
-            Move();
-            Jump();
-            BetterJump();
-            DashTrigger();
-            Flip();
+            if (isDashing) return;
+
+            if (isAlive)
+            {
+                Move();
+                Jump();
+                BetterJump();
+                DashTrigger();
+                Flip();
+            }
+
+            UpdateTimers();
+            UpdateAnimationState();
         }
 
-        UpdateTimers();
-        UpdateAnimationState();
     }
 
     private void ProcessInput()

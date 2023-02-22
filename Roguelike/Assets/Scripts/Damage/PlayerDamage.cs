@@ -24,6 +24,8 @@ public class PlayerDamage : MonoBehaviour
     public bool isCrit;
     public bool damageTrigger;
 
+    public float timeChanger;
+
     private void Start()
     {
         damageTrigger = false;
@@ -35,6 +37,9 @@ public class PlayerDamage : MonoBehaviour
 
     private void Update()
     {
+        //Time.timeScale = 1f + timeChanger;
+
+
         if (Input.GetButtonDown("Fire1"))
         {
             damageTrigger = true;
