@@ -48,6 +48,13 @@ public class StatusEffectManager : MonoBehaviour
 
             healthScript.currentHealth -= tickDamage;
             burnTickTimers.RemoveAll(i => i == 0);
+
+            // check if enemy is dead
+            if (healthScript.currentHealth <= 0)
+            {
+                Destroy(healthScript.gameObject);
+            }
+
             yield return new WaitForSeconds(tickSpeed);
 
         }

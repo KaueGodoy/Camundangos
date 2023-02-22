@@ -78435,8 +78435,9 @@ GameObject:
   - component: {fileID: 1619070607}
   - component: {fileID: 1619070606}
   - component: {fileID: 1619070608}
-  - component: {fileID: 1619070609}
   - component: {fileID: 1619070610}
+  - component: {fileID: 1619070609}
+  - component: {fileID: 1619070611}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -78716,6 +78717,29 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!114 &1619070611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619070603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 2
+  flatDamage: 4
+  baseCritRate: 5
+  baseCritDamage: 50
+  currentCritRate: 45
+  currentCritDamage: 50
+  finalCritRate: 0
+  finalCritDamage: 0
+  finalDamage: 0
+  isCrit: 0
+  damageTrigger: 0
 --- !u!1001 &1647772067
 PrefabInstance:
   m_ObjectHideFlags: 0

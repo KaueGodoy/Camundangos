@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
 
     [Header("Damage")]
     public float projectileDamage = 6f;
-    
+
     [Header("Burning")]
     public float burnAmount = 4f;
 
@@ -30,17 +30,27 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // check for collision
         StatusEffectManager enemy = collision.GetComponent<StatusEffectManager>();
-        if(enemy != null)
+        if (enemy != null)
         {
-          
+
             enemy.ApplyProjectileDamage(projectileDamage);
             Debug.Log("Initial damage " + projectileDamage);
             enemy.ApplyBurn(burnAmount);
             Debug.Log("Burning " + burnAmount);
         }
 
-        
+        // check for enemy HP
+        Health health = collision.GetComponent<Health>();
+        if (health != null)
+        {
+            if (health.currentHealth <= 0)
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+
 
         Destroy(gameObject);
 
