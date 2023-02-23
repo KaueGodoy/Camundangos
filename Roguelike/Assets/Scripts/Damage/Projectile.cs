@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -32,13 +33,21 @@ public class Projectile : MonoBehaviour
     {
         // check for collision
         StatusEffectManager enemy = collision.GetComponent<StatusEffectManager>();
+        PlayerDamage playerDamage = collision.GetComponent<PlayerDamage>();
         if (enemy != null)
         {
+
+
+            FindObjectOfType<AudioManager>().PlaySound("Hitmarker");
+
 
             enemy.ApplyProjectileDamage(projectileDamage);
             //Debug.Log("Initial damage " + projectileDamage);
             enemy.ApplyBurn(burnAmount);
             //Debug.Log("Burning " + burnAmount);
+            playerDamage.CalculateDamageFormulaCRIT();
+            Debug.Log("NEW DAMAGE FORMULA");
+
         }
 
         // check for enemy HP

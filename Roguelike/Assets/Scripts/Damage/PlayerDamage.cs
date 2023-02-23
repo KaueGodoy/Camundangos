@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
+    private Health enemyHealth;
+
     [Header("Damage Formula")]
  
     [Tooltip("Base damage = (Talent% * ATK)")]
@@ -67,6 +69,19 @@ public class PlayerDamage : MonoBehaviour
     [Tooltip("The enemy defense multiplier")]
     public float enemyDefMult;
 
+    [Header("Enemy Resistance")]
+    [Tooltip("Resistance = base resistance - resistance reduction")]
+    public float resistance;
+
+    [Tooltip("The enemy's base resistance to the Element of the attack being used / 10% base")]
+    public float baseResistance;
+
+    [Tooltip("The total resistance reduction of the relevant Element from effects such as SC and VV / -40% VV effect")]
+    public float resistanceReduction;
+    
+    [Tooltip("The enemy resistance multiplier based on different resistance stats")]
+    public float enemyResMult;
+
     [Header("Final Damage")]
 
     [Tooltip("Damage before enemy def and res")]
@@ -74,7 +89,6 @@ public class PlayerDamage : MonoBehaviour
     
     [Tooltip("Damage = (Base damage) + Flat damage")]
     public float damage;
-
 
 
     [Header("Final Stats")]
@@ -85,6 +99,10 @@ public class PlayerDamage : MonoBehaviour
     public bool isCrit;
     public bool damageTrigger;
 
+    private void Awake()
+    {
+        enemyHealth = GetComponent<Health>();
+    }
 
     private void Start()
     {
@@ -107,7 +125,25 @@ public class PlayerDamage : MonoBehaviour
         enemyDefMult =                          (levelCharacter + 100) / 
                        ((levelCharacter +100) + (levelEnemy + 100) * (1 - defReduction) * (1 - defIgnore));
 
-        damage = ((baseDamage) + flatDamage) * (1 + damageBonus - damageReduction) * CRITDamage * enemyDefMult;
+        resistance = baseResistance - resistanceReduction;
+
+        if(resistance < 0)
+        {
+            enemyResMult = (1 - (resistance / 2)); 
+        }
+        else if (resistance >= 0 && resistance < 0.75f)
+        {
+            enemyResMult = (1 - resistance);
+
+        }
+        else if(resistance >= 0.75f)
+        {
+            enemyResMult = (1 / (4 * resistance + 1));
+        }
+
+
+
+        damage = ((baseDamage) + flatDamage) * (1 + damageBonus - damageReduction) * CRITDamage * enemyDefMult * enemyResMult;
     }
 
     private void Update()
@@ -123,6 +159,8 @@ public class PlayerDamage : MonoBehaviour
         if (Input.GetButtonDown("Skill"))
         {
             CalculateDamageFormula();
+            FindObjectOfType<AudioManager>().PlaySound("PlayerSkill");
+
 
 
 
@@ -133,6 +171,7 @@ public class PlayerDamage : MonoBehaviour
         {
             CalculateDamageFormulaCRIT();
 
+            FindObjectOfType<AudioManager>().PlaySound("PlayerUlt");
 
 
         }
@@ -159,6 +198,7 @@ public class PlayerDamage : MonoBehaviour
 
         isCrit = UnityEngine.Random.Range(0, 100) < CRITRate;
 
+
         attack = (attackCharacter + attackWeapon) * (1 + attackBonus) + flatAttack;
         baseDamage = talentMultiplier * attack;
 
@@ -168,11 +208,30 @@ public class PlayerDamage : MonoBehaviour
         enemyDefMult = (levelCharacter + 100) /
                        ((levelCharacter + 100) + (levelEnemy + 100) * (1 - defReduction) * (1 - defIgnore));
 
+        resistance = baseResistance - resistanceReduction;
+
+        if (resistance < 0)
+        {
+            enemyResMult = (1 - (resistance / 2));
+        }
+        else if (resistance >= 0 && resistance < 0.75f)
+        {
+            enemyResMult = (1 - resistance);
+
+        }
+        else if (resistance >= 0.75f)
+        {
+            enemyResMult = (1 / (4 * resistance + 1));
+        }
+
         rawDamage = (baseDamage + flatDamage) * (1 + damageBonus - damageReduction) * CRITDamage;
 
-        damage = (baseDamage + flatDamage) * (1 + damageBonus - damageReduction) * CRITDamage * enemyDefMult;
+        damage = ((baseDamage) + flatDamage) * (1 + damageBonus - damageReduction) * CRITDamage * enemyDefMult * enemyResMult;
 
         Debug.Log("Damage result: " + damage);
+
+        enemyHealth.currentHealth -= damage;
+        
     }
 
     public void CalculateDamageFormula()
@@ -187,9 +246,11 @@ public class PlayerDamage : MonoBehaviour
 
         rawDamage = (baseDamage + flatDamage) * (1 + damageBonus - damageReduction);
 
-        damage = (baseDamage + flatDamage) * (1 + damageBonus - damageReduction) * enemyDefMult;
+        damage = (baseDamage + flatDamage) * (1 + damageBonus - damageReduction) * enemyDefMult * enemyResMult;
 
         Debug.Log("Damage result: " + damage);
+
+        enemyHealth.currentHealth -= damage;
     }
 
 

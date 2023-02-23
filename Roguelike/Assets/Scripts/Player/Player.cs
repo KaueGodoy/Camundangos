@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     // components
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
-    private AudioManager audioManager;
+    private PlayerDamage playerDamage;
 
     [Header("Health")]
     public float currentHealth = 0;
@@ -78,7 +78,9 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
+        playerDamage = GetComponent<PlayerDamage>();
+
+        //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
     }
     void Start()
     {
@@ -225,6 +227,7 @@ public class Player : MonoBehaviour
                 isAttacking = true;
                 //Debug.Log("Attacking");
 
+                
                 Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
 
                 FindObjectOfType<AudioManager>().PlaySound("Attack");
@@ -246,11 +249,14 @@ public class Player : MonoBehaviour
         canDash = false;
         isDashing = true;
 
+        FindObjectOfType<AudioManager>().PlaySound("PlayerDash");
+
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
 
         rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         tr.emitting = true;
+
 
         yield return new WaitForSeconds(dashingTime);
 

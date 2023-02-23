@@ -297,7 +297,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &93280923
 GameObject:
@@ -779,7 +779,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -867,6 +867,7 @@ GameObject:
   - component: {fileID: 543031594}
   - component: {fileID: 543031593}
   - component: {fileID: 543031592}
+  - component: {fileID: 543031596}
   m_Layer: 0
   m_Name: Enemy_Burning
   m_TagString: Untagged
@@ -882,7 +883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543031590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.13, y: -0.5, z: 0}
+  m_LocalPosition: {x: 5.49, y: -0.68, z: 0}
   m_LocalScale: {x: 1, y: 2.8833, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -917,7 +918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 200
+  maxHealth: 600
 --- !u!61 &543031594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -986,7 +987,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.22068357, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -996,6 +997,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &543031596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543031590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 0
+  talentMultiplier: 2
+  flatDamage: 2
+  attack: 0
+  attackCharacter: 6
+  attackWeapon: 4
+  attackBonus: 0.2
+  flatAttack: 2
+  damageBonus: 0.15
+  damageReduction: 0
+  builtCritRate: 0.55
+  builtCritDamage: 1.2
+  CRITRate: 0
+  CRITDamage: 0
+  levelCharacter: 90
+  levelEnemy: 90
+  defReduction: 0
+  defIgnore: 0
+  enemyDefMult: 0
+  resistance: 0
+  baseResistance: 0.1
+  resistanceReduction: 0
+  enemyResMult: 0
+  rawDamage: 0
+  damage: 0
+  finalCritRate: 0
+  finalCritDamage: 0
+  finalDamage: 0
+  isCrit: 0
+  damageTrigger: 0
 --- !u!1 &585888440
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,7 +1250,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882950234
 GameObject:
@@ -79739,7 +79782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619070603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7, y: -1.41, z: 0.01974811}
+  m_LocalPosition: {x: -5.55, y: -2.07, z: 0.01974811}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -79958,7 +80001,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619070603}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
   m_Name: 
@@ -79971,17 +80014,21 @@ MonoBehaviour:
   attackWeapon: 4
   attackBonus: 0.2
   flatAttack: 4
+  damageBonus: 0.15
+  damageReduction: 0
   builtCritRate: 0.6
   builtCritDamage: 1.2
   CRITRate: 0
   CRITDamage: 0
-  damageBonus: 0.15
-  damageReduction: 0
   levelCharacter: 90
   levelEnemy: 90
   defReduction: 0
   defIgnore: 0
   enemyDefMult: 0
+  resistance: 0
+  baseResistance: 0.1
+  resistanceReduction: 0.4
+  enemyResMult: 0
   rawDamage: 0
   damage: 0
   finalCritRate: 0
@@ -80002,7 +80049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5578363858974069462, guid: b1c76f51df2db3f40997083f60fc2f07, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.32
+      value: 14.49
       objectReference: {fileID: 0}
     - target: {fileID: 5578363858974069462, guid: b1c76f51df2db3f40997083f60fc2f07, type: 3}
       propertyPath: m_LocalPosition.y
@@ -80087,7 +80134,7 @@ Transform:
   - {fileID: 1762551659}
   - {fileID: 1344914068}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1688138936
 GameObject:
