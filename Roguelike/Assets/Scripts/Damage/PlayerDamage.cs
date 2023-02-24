@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
+using static PlayerDamage;
 
 public class PlayerDamage : MonoBehaviour
 {
     private Health enemyHealth;
 
     [Header("Damage Formula")]
- 
+
     [Tooltip("Base damage = (Talent% * ATK)")]
+    public int talentLevel = 1;
     public float baseDamage;
     public float talentMultiplier;
 
@@ -99,66 +101,73 @@ public class PlayerDamage : MonoBehaviour
     public bool isCrit;
     public bool damageTrigger;
 
+    // Enum
+    public enum DamageType{
+        NormalAttack,
+        ChargedAttack,
+        Skill,
+        Ult,
+    }
+
+    // Lists
+    public List<float> normalAttackMultipliers = new List<float>();
+    public List<float> normalAttackTalentLevel = new List<float>();
+
+    public List<int> talentLevelList = new List<int>();
+    
+
+
+
     private void Awake()
     {
         enemyHealth = GetComponent<Health>();
     }
 
+
     private void Start()
     {
         damageTrigger = false;
-        
-        finalCritRate = BASE_CRIT_RATE + builtCritRate;
-        finalCritDamage = BASE_CRIT_DAMAGE + builtCritDamage;
 
 
-        finalDamage = baseDamage + flatDamage;
+        normalAttackMultipliers.Add(0.4455f);
+        normalAttackMultipliers.Add(0.4817f);
+        normalAttackMultipliers.Add(0.518f);
+        normalAttackMultipliers.Add(0.5698f);
+        normalAttackMultipliers.Add(0.6061f);
+        normalAttackMultipliers.Add(0.6475f);
+
+        normalAttackTalentLevel.Add(normalAttackMultipliers[1]);
+        normalAttackTalentLevel.Add(normalAttackMultipliers[2]);
+        normalAttackTalentLevel.Add(normalAttackMultipliers[3]);
+        normalAttackTalentLevel.Add(normalAttackMultipliers[4]);
+        normalAttackTalentLevel.Add(normalAttackMultipliers[5]);
+
+        talentLevelList.Add(1);
+        Debug.Log("Talent level list:" + talentLevelList[0]);
 
 
-
-        attack = (attackCharacter + attackWeapon) * (1 + attackBonus) + flatAttack;
-        baseDamage = talentMultiplier * attack;
-
-        CRITRate = BASE_CRIT_RATE + builtCritRate;
-        CRITDamage = BASE_CRIT_DAMAGE + builtCritDamage;
-
-        enemyDefMult =                          (levelCharacter + 100) / 
-                       ((levelCharacter +100) + (levelEnemy + 100) * (1 - defReduction) * (1 - defIgnore));
-
-        resistance = baseResistance - resistanceReduction;
-
-        if(resistance < 0)
-        {
-            enemyResMult = (1 - (resistance / 2)); 
-        }
-        else if (resistance >= 0 && resistance < 0.75f)
-        {
-            enemyResMult = (1 - resistance);
-
-        }
-        else if(resistance >= 0.75f)
-        {
-            enemyResMult = (1 / (4 * resistance + 1));
-        }
-
-
-
-        damage = ((baseDamage) + flatDamage) * (1 + damageBonus - damageReduction) * CRITDamage * enemyDefMult * enemyResMult;
     }
 
     private void Update()
     {
-        //Time.timeScale = 1f + timeChanger;
-
+       
+        /*
+        for (int i = 0; i < normalAttackMultipliers.Count; i++)
+        {
+            Debug.Log("List " + i);
+        }*/
 
         if (Input.GetButtonDown("Fire1"))
         {
             damageTrigger = true;
+            CalculateDamageFormulaCRIT(DamageType.NormalAttack);
+
         }
 
         if (Input.GetButtonDown("Skill"))
         {
-            CalculateDamageFormula();
+            //CalculateDamageFormula(DamageType.Skill);
+            CalculateDamageFormulaCRIT(DamageType.Skill);
             FindObjectOfType<AudioManager>().PlaySound("PlayerSkill");
 
 
@@ -169,7 +178,8 @@ public class PlayerDamage : MonoBehaviour
 
         if (Input.GetButtonDown("Ult"))
         {
-            CalculateDamageFormulaCRIT();
+            //CalculateDamageFormula(DamageType.Ult);
+            CalculateDamageFormulaCRIT(DamageType.Ult);
 
             FindObjectOfType<AudioManager>().PlaySound("PlayerUlt");
 
@@ -193,11 +203,58 @@ public class PlayerDamage : MonoBehaviour
         damageTrigger = false;
     }
 
-    public void CalculateDamageFormulaCRIT()
+    public void CalculateDamageFormulaCRIT(DamageType damageType)
     {
+
+     
+
+        if (talentLevel == 1)
+        {
+            talentMultiplier = normalAttackMultipliers[0];
+        }
+        else if (talentLevel == 2)
+        {
+            talentMultiplier = normalAttackMultipliers[1];
+        }
+        else if (talentLevel == 3)
+        {
+            talentMultiplier = normalAttackMultipliers[2];
+        }
+        else if (talentLevel == 4)
+        {
+            talentMultiplier = normalAttackMultipliers[3];
+        }
+        else if (talentLevel == 5)
+        {
+            talentMultiplier = normalAttackMultipliers[4];
+        }
+        else if (talentLevel == 6)
+        {
+            talentMultiplier = normalAttackMultipliers[5];
+        }
+       
+
+
+        switch (damageType)
+        {
+            case DamageType.NormalAttack:
+                Debug.Log("Normal attack");
+               
+                break;
+            case DamageType.ChargedAttack:
+                talentMultiplier  = 0.8125f;
+                break;
+            case DamageType.Skill:
+                talentMultiplier = 1.9264f;
+                break;
+            case DamageType.Ult:
+                talentMultiplier = 3.2592f;
+                break;
+        }   
 
         isCrit = UnityEngine.Random.Range(0, 100) < CRITRate;
 
+     
 
         attack = (attackCharacter + attackWeapon) * (1 + attackBonus) + flatAttack;
         baseDamage = talentMultiplier * attack;
@@ -234,8 +291,24 @@ public class PlayerDamage : MonoBehaviour
         
     }
 
-    public void CalculateDamageFormula()
+    public void CalculateDamageFormula(DamageType damageType)
     {
+
+        switch (damageType)
+        {
+            case DamageType.NormalAttack:
+                talentMultiplier = 0.6475f;
+                break;
+            case DamageType.ChargedAttack:
+                talentMultiplier = 0.8125f;
+                break;
+            case DamageType.Skill:
+                talentMultiplier = 1.9264f;
+                break;
+            case DamageType.Ult:
+                talentMultiplier = 3.2592f;
+                break;
+        }
 
         attack = (attackCharacter + attackWeapon) * (1 + attackBonus) + flatAttack;
         baseDamage = talentMultiplier * attack;

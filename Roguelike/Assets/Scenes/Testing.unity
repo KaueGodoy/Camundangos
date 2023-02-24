@@ -589,7 +589,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402737502
 GameObject:
@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  talentLevel: 1
   baseDamage: 0
   talentMultiplier: 2
   flatDamage: 2
@@ -1039,6 +1040,9 @@ MonoBehaviour:
   finalDamage: 0
   isCrit: 0
   damageTrigger: 0
+  normalAttackMultipliers: []
+  normalAttackTalentLevel: []
+  talentLevelList: 
 --- !u!1 &585888440
 GameObject:
   m_ObjectHideFlags: 0
@@ -79883,6 +79887,9 @@ MonoBehaviour:
   firePoint: {fileID: 1889183643}
   pfProjectile: {fileID: 7381527331254552205, guid: 8101830b2c2bb1e4da2de7b0618fff2b, type: 3}
   attackDelay: 0.4
+  timeSinceAttack: 0
+  attackStringReset: 0.8
+  attackString: 0
   jumpableGround:
     serializedVersion: 2
     m_Bits: 64
@@ -80006,6 +80013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  talentLevel: 0
   baseDamage: 0
   talentMultiplier: 2
   flatDamage: 2
@@ -80036,6 +80044,9 @@ MonoBehaviour:
   finalDamage: 0
   isCrit: 0
   damageTrigger: 0
+  normalAttackMultipliers: []
+  normalAttackTalentLevel: []
+  talentLevelList: 
 --- !u!1001 &1647772067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84474,7 +84485,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1346314765700859723, guid: 8de3d16ebf1630c41a3c6c6ea5f53c94, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1346314765700859723, guid: 8de3d16ebf1630c41a3c6c6ea5f53c94, type: 3}
       propertyPath: m_LocalPosition.x

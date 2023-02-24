@@ -52,10 +52,15 @@ public class Player : MonoBehaviour
 
     public float attackDelay = 0.4f;
     private float attackTimer = 0.0f;
+    public float  timeSinceAttack = 0.0f;
+    public float attackStringReset = 0.8f;
+
+    private int currentAttack = 0;
 
     private bool attackRequest = false;
     private bool attackAnimation = false;
     private bool isAttacking = false;
+    public bool attackString = false;
 
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
@@ -66,7 +71,9 @@ public class Player : MonoBehaviour
 
     private const string PLAYER_DEATH = "derildo_death";
     private const string PLAYER_HIT = "derildo_hit";
-    private const string PLAYER_ATTACK = "derildo_attack";
+    private const string PLAYER_ATTACK_STRING_01 = "derildo_attack1";
+    private const string PLAYER_ATTACK_STRING_02 = "derildo_attack2";
+    private const string PLAYER_ATTACK_STRING_03 = "derildo_attack3";
     private const string PLAYER_JUMP = "derildo_jump";
     private const string PLAYER_FALL = "derildo_fall";
     private const string PLAYER_WALK = "derildo_walk";
@@ -157,6 +164,8 @@ public class Player : MonoBehaviour
     #region timers
     private void UpdateTimers()
     {
+        
+
         // hit
         if (isHit)
         {
@@ -173,12 +182,20 @@ public class Player : MonoBehaviour
         if (attackAnimation)
         {
             attackTimer += Time.deltaTime;
-
+            
         }
         if (attackTimer > attackDelay)
         {
             attackAnimation = false;
             attackTimer = 0f;
+        }
+        if(attackString)
+        {
+            timeSinceAttack += Time.deltaTime;
+        }
+        if(timeSinceAttack > attackStringReset)
+        {
+            attackString = false;
         }
     }
     #endregion timers
@@ -221,17 +238,32 @@ public class Player : MonoBehaviour
         {
             attackRequest = false;
             attackAnimation = true;
+            attackString = true;
 
             if (!isAttacking)
             {
                 isAttacking = true;
+                currentAttack++;
                 //Debug.Log("Attacking");
 
+                // loops attack string
+                if(currentAttack > 3)
+                {
+                    currentAttack = 1;
+                }
+
+                // resets attack string if time since last attack is too long
+                if(timeSinceAttack > attackStringReset)
+                {
+                    currentAttack = 1;
+                }
                 
                 Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
 
                 FindObjectOfType<AudioManager>().PlaySound("Attack");
                 Invoke("AttackComplete", attackDelay);
+
+                timeSinceAttack = 0.0f;
             }
         }
     }
@@ -347,7 +379,24 @@ public class Player : MonoBehaviour
         // attack
         else if (attackAnimation)
         {
-            ChangeAnimationState(PLAYER_ATTACK);
+            if(currentAttack == 1)
+            {
+                ChangeAnimationState(PLAYER_ATTACK_STRING_01);
+                Debug.Log("Attack string number: " + currentAttack);
+
+            }
+            else if(currentAttack == 2)
+            {
+                ChangeAnimationState(PLAYER_ATTACK_STRING_02);
+                Debug.Log("Attack string number: " + currentAttack);
+
+            }
+            else if(currentAttack == 3)
+            {
+                ChangeAnimationState(PLAYER_ATTACK_STRING_03);
+                Debug.Log("Attack string number: " + currentAttack);
+
+            }
         }
         // jump
         else if (rb.velocity.y > .1f && !IsGrounded())

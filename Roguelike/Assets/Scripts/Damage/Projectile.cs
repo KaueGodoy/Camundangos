@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -45,7 +44,7 @@ public class Projectile : MonoBehaviour
             //Debug.Log("Initial damage " + projectileDamage);
             enemy.ApplyBurn(burnAmount);
             //Debug.Log("Burning " + burnAmount);
-            playerDamage.CalculateDamageFormulaCRIT();
+            //playerDamage.CalculateDamageFormulaCRIT();
             Debug.Log("NEW DAMAGE FORMULA");
 
         }
