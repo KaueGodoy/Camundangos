@@ -52,14 +52,15 @@ public class Player : MonoBehaviour
 
     public float attackDelay = 0.4f;
     private float attackTimer = 0.0f;
-    public float  timeSinceAttack = 0.0f;
+    public float timeSinceAttack = 0.0f;
     public float attackStringReset = 0.8f;
 
-    private int currentAttack = 0;
+    public int currentAttack = 0;
 
     private bool attackRequest = false;
     private bool attackAnimation = false;
     private bool isAttacking = false;
+    private bool isAttackAnimationComplete = false;
     public bool attackString = false;
 
     [Header("Ground")]
@@ -164,7 +165,7 @@ public class Player : MonoBehaviour
     #region timers
     private void UpdateTimers()
     {
-        
+
 
         // hit
         if (isHit)
@@ -182,20 +183,21 @@ public class Player : MonoBehaviour
         if (attackAnimation)
         {
             attackTimer += Time.deltaTime;
-            
+
         }
         if (attackTimer > attackDelay)
         {
             attackAnimation = false;
             attackTimer = 0f;
         }
-        if(attackString)
+        if (attackString)
         {
             timeSinceAttack += Time.deltaTime;
         }
-        if(timeSinceAttack > attackStringReset)
+        if (timeSinceAttack > attackStringReset)
         {
             attackString = false;
+            currentAttack = 0;
         }
     }
     #endregion timers
@@ -243,35 +245,47 @@ public class Player : MonoBehaviour
             if (!isAttacking)
             {
                 isAttacking = true;
-                currentAttack++;
-                //Debug.Log("Attacking");
 
-                // loops attack string
-                if(currentAttack > 3)
-                {
-                    currentAttack = 1;
-                }
+                UpdateAttackString();
 
-                // resets attack string if time since last attack is too long
-                if(timeSinceAttack > attackStringReset)
-                {
-                    currentAttack = 1;
-                }
-                
-                Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
+                Invoke("InstantiateAttack", attackDelay - 0.1f);
 
-                FindObjectOfType<AudioManager>().PlaySound("Attack");
                 Invoke("AttackComplete", attackDelay);
 
-                timeSinceAttack = 0.0f;
+                ResetAttackString();
             }
         }
+    }
+
+    public void UpdateAttackString()
+    {
+        currentAttack++;
+        //Debug.Log("Attacking");
+
+        // loops attack string
+        if (currentAttack > 3)
+        {
+            currentAttack = 1;
+        }
+
+        
+    }
+
+    private void InstantiateAttack()
+    {
+        Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
+        FindObjectOfType<AudioManager>().PlaySound("Attack");
+    }
+    public void ResetAttackString()
+    {
+        timeSinceAttack = 0.0f;
     }
 
     private void AttackComplete()
     {
         isAttacking = false;
     }
+
     #endregion attack
 
     #region dash
@@ -379,19 +393,19 @@ public class Player : MonoBehaviour
         // attack
         else if (attackAnimation)
         {
-            if(currentAttack == 1)
+            if (currentAttack == 1)
             {
                 ChangeAnimationState(PLAYER_ATTACK_STRING_01);
                 Debug.Log("Attack string number: " + currentAttack);
 
             }
-            else if(currentAttack == 2)
+            else if (currentAttack == 2)
             {
                 ChangeAnimationState(PLAYER_ATTACK_STRING_02);
                 Debug.Log("Attack string number: " + currentAttack);
 
             }
-            else if(currentAttack == 3)
+            else if (currentAttack == 3)
             {
                 ChangeAnimationState(PLAYER_ATTACK_STRING_03);
                 Debug.Log("Attack string number: " + currentAttack);

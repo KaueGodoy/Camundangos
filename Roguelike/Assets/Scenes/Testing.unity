@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 600
+  maxHealth: 2000
 --- !u!61 &543031594
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1619070609}
   talentLevel: 1
   baseDamage: 0
   talentMultiplier: 2
@@ -1040,9 +1041,13 @@ MonoBehaviour:
   finalDamage: 0
   isCrit: 0
   damageTrigger: 0
-  normalAttackMultipliers: []
-  normalAttackTalentLevel: []
-  talentLevelList: 
+  basicAttackTalentLevel: 1
+  basicAttack_TalentLevel1_String01: 0.4455
+  basicAttack_TalentLevel1_String02: 0.4247
+  basicAttack_TalentLevel1_String03: 0.5461
+  basicAttack_TalentLevel2_String01: 0.4817
+  basicAttack_TalentLevel2_String02: 0.4622
+  basicAttack_TalentLevel2_String03: 0.5906
 --- !u!1 &585888440
 GameObject:
   m_ObjectHideFlags: 0
@@ -79889,6 +79894,7 @@ MonoBehaviour:
   attackDelay: 0.4
   timeSinceAttack: 0
   attackStringReset: 0.8
+  currentAttack: 0
   attackString: 0
   jumpableGround:
     serializedVersion: 2
@@ -80013,6 +80019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27da744aeee45564aa2df2d05e41adce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   talentLevel: 0
   baseDamage: 0
   talentMultiplier: 2
@@ -80044,9 +80051,13 @@ MonoBehaviour:
   finalDamage: 0
   isCrit: 0
   damageTrigger: 0
-  normalAttackMultipliers: []
-  normalAttackTalentLevel: []
-  talentLevelList: 
+  basicAttackTalentLevel: 0
+  basicAttack_TalentLevel1_String01: 0.4455
+  basicAttack_TalentLevel1_String02: 0.4247
+  basicAttack_TalentLevel1_String03: 0.5461
+  basicAttack_TalentLevel2_String01: 0.4817
+  basicAttack_TalentLevel2_String02: 0.4622
+  basicAttack_TalentLevel2_String03: 0.5906
 --- !u!1001 &1647772067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80239,7 +80250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889183642}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.27, y: 0.37, z: 0}
+  m_LocalPosition: {x: 1.45, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
