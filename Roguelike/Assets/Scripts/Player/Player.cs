@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     public float lowJumpMultiplier = 1f;
     public float fallMultiplier = 2.5f;
 
+    public float jumpCounter = 0f;
+    public float maxJump = 2f;
+
     private bool jumpRequest = false;
 
     [Header("Dash")]
@@ -136,10 +139,21 @@ public class Player : MonoBehaviour
         // horizontal movement
         moveX = Input.GetAxisRaw("Horizontal");
 
-        // jump
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        // reset jump counter
+        if (IsGrounded() && !Input.GetButton("Jump"))
         {
-            jumpRequest = true;
+            jumpCounter = 0f;
+        }
+
+        // jump
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (IsGrounded() || jumpCounter < maxJump)
+            {
+                jumpRequest = true;
+                jumpCounter++;
+                
+            }
         }
 
         // attack
@@ -268,7 +282,7 @@ public class Player : MonoBehaviour
             currentAttack = 1;
         }
 
-        
+
     }
 
     private void InstantiateAttack()
@@ -294,6 +308,11 @@ public class Player : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+
+        if (!IsGrounded() && jumpCounter != 0)
+        {
+            jumpCounter--;
+        }
 
         FindObjectOfType<AudioManager>().PlaySound("PlayerDash");
 
