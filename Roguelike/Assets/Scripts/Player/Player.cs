@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public float maxJump = 2f;
 
     private bool jumpRequest = false;
+    public bool IsJumpingMidAir = false;
 
     [Header("Dash")]
     public float dashSpeed = 5f;
@@ -143,6 +144,8 @@ public class Player : MonoBehaviour
         if (IsGrounded() && !Input.GetButton("Jump"))
         {
             jumpCounter = 0f;
+            IsJumpingMidAir = false;
+            maxJump = 2f;
         }
 
         // jump
@@ -152,7 +155,7 @@ public class Player : MonoBehaviour
             {
                 jumpRequest = true;
                 jumpCounter++;
-                
+
             }
         }
 
@@ -227,21 +230,48 @@ public class Player : MonoBehaviour
         if (jumpRequest)
         {
             FindObjectOfType<AudioManager>().PlaySound("Jump");
-            rb.velocity = Vector2.up * jumpForce;
+
+            if (IsJumpingMidAir)
+            {
+                // changing velocity to jump (could also do += Vector2.up * jumpForce;)
+                rb.velocity = Vector2.up * jumpForce;
+                IsJumpingMidAir = false;
+            }
+            else
+            {
+                // adding force to jump (less prone to bug)
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+
             jumpRequest = false;
         }
     }
 
     private void BetterJump()
-    {
+    {   
+        /*
         if (rb.velocity.y < 0f)
         {
-            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
         }
         else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
-            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
 
+        }*/
+
+        // changing gravity directly
+        if (rb.velocity.y < 0f)
+        {
+            rb.gravityScale = fallMultiplier;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.gravityScale = lowJumpMultiplier;
+        }
+        else
+        {
+            rb.gravityScale = 1f;
         }
     }
 
@@ -308,10 +338,12 @@ public class Player : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
+        IsJumpingMidAir = false;
 
-        // NEEDS IMPROVEMT
+        // NEEDS IMPROVEMENT
         if (!IsGrounded() && jumpCounter != 0)
         {
+            IsJumpingMidAir = true;
             jumpCounter--;
         }
 

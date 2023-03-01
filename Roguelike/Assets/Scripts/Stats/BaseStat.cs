@@ -12,6 +12,8 @@ public class BaseStat
     public float BaseValue { get; set; }
     public float FinalValue { get; set; }
 
+    // enum > json > constructor (overload) > enemy stats > get stats > player stats
+
     public BaseStat(string statName, string statDescription, float baseValue)
     {
         BaseAdditives = new List<StatBonus>();
