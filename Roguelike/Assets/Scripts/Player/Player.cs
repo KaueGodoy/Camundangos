@@ -309,6 +309,7 @@ public class Player : MonoBehaviour
         canDash = false;
         isDashing = true;
 
+        // NEEDS IMPROVEMT
         if (!IsGrounded() && jumpCounter != 0)
         {
             jumpCounter--;

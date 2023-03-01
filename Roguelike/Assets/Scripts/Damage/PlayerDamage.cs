@@ -9,6 +9,8 @@ public class PlayerDamage : MonoBehaviour
 {
     private Health enemyHealth;
     public Player player;
+    public CharacterStats characterStats;
+    public BaseStat baseStat;
 
     #region Damage Formula
 
@@ -118,26 +120,6 @@ public class PlayerDamage : MonoBehaviour
         Ult,
     }
 
-    // Lists
-    /*
-    public List<float> normalAttackMultipliers = new List<float>();
-    public List<float> normalAttackTalentLevel = new List<float>();
-
-    public List<int> talentLevelList = new List<int>();
-    */
-    // talents
-
-    // talent lvl
-    // attack string multiplers 
-    // attack string 01
-    // attack string 02
-    // attack string 03
-
-
-    // attack type
-    // talent lvl
-    // current atk string
-
     [Header("New Talents")]
     public int basicAttackTalentLevel = 1;
 
@@ -149,12 +131,7 @@ public class PlayerDamage : MonoBehaviour
     public float basicAttack_TalentLevel2_String02 = 0.4622f;
     public float basicAttack_TalentLevel2_String03 = 0.5906f;
 
-
-
-
     #endregion Derildo numbers
-
-
 
     private void Awake()
     {
@@ -165,36 +142,10 @@ public class PlayerDamage : MonoBehaviour
     private void Start()
     {
         damageTrigger = false;
-
-        /*
-        normalAttackMultipliers.Add(0.4455f);
-        normalAttackMultipliers.Add(0.4817f);
-        normalAttackMultipliers.Add(0.518f);
-        normalAttackMultipliers.Add(0.5698f);
-        normalAttackMultipliers.Add(0.6061f);
-        normalAttackMultipliers.Add(0.6475f);
-
-        normalAttackTalentLevel.Add(normalAttackMultipliers[1]);
-        normalAttackTalentLevel.Add(normalAttackMultipliers[2]);
-        normalAttackTalentLevel.Add(normalAttackMultipliers[3]);
-        normalAttackTalentLevel.Add(normalAttackMultipliers[4]);
-        normalAttackTalentLevel.Add(normalAttackMultipliers[5]);
-
-        talentLevelList.Add(1);
-        Debug.Log("Talent level list:" + talentLevelList[0]);
-        */
-
     }
 
     private void Update()
     {
-
-        /*
-        for (int i = 0; i < normalAttackMultipliers.Count; i++)
-        {
-            Debug.Log("List " + i);
-        }*/
-
         if (Input.GetButtonDown("Fire1"))
         {
             damageTrigger = true;
@@ -325,10 +276,12 @@ public class PlayerDamage : MonoBehaviour
 
         isCrit = UnityEngine.Random.Range(0, 100) < CRITRate;
 
-
+        //characterStats.stats[0] = characterStats.stats[1].AddStatBonus(new StatBonus(65));
 
         attack = (attackCharacter + attackWeapon) * (1 + attackBonus) + flatAttack;
         baseDamage = talentMultiplier * attack;
+
+
 
         CRITRate = BASE_CRIT_RATE + builtCritRate;
         CRITDamage = BASE_CRIT_DAMAGE + builtCritDamage;

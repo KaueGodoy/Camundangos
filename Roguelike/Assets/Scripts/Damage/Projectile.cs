@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -59,8 +60,13 @@ public class Projectile : MonoBehaviour
             }
         }
 
+        // check collision with player - not destryoing the bullet
+        Player player = collision.GetComponent<Player>();
+        if (!player)
+        {
+            Destroy(gameObject);
 
-        Destroy(gameObject);
+        }
 
     }
 
