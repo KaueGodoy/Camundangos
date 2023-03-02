@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1619070609}
-  stat: {fileID: 0}
+  characterStats: {fileID: 0}
   talentLevel: 1
   baseDamage: 0
   talentMultiplier: 2
@@ -79883,16 +79883,19 @@ MonoBehaviour:
   currentHealth: 3
   maxHealth: 3
   hitCooldown: 0.3
+  jumpableGround:
+    serializedVersion: 2
+    m_Bits: 64
   moveSpeed: 12
   jumpForce: 8.2
   lowJumpMultiplier: 1.8
   fallMultiplier: 5.5
   jumpCounter: 0
   maxJump: 2
-  dashSpeed: 20
-  dashingTime: 0.25
-  dashingCooldown: 0.4
-  tr: {fileID: 1619070610}
+  defaultMaxJump: 2
+  hangTime: 0.2
+  hangTimeCounter: 0
+  IsJumpingMidAir: 0
   firePoint: {fileID: 1889183643}
   pfProjectile: {fileID: 7381527331254552205, guid: 8101830b2c2bb1e4da2de7b0618fff2b, type: 3}
   attackDelay: 0.4
@@ -79900,9 +79903,10 @@ MonoBehaviour:
   attackStringReset: 0.8
   currentAttack: 0
   attackString: 0
-  jumpableGround:
-    serializedVersion: 2
-    m_Bits: 64
+  dashSpeed: 20
+  dashingTime: 0.25
+  dashingCooldown: 0.4
+  tr: {fileID: 1619070610}
 --- !u!96 &1619070610
 TrailRenderer:
   serializedVersion: 2
@@ -80024,7 +80028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  stat: {fileID: 0}
+  characterStats: {fileID: 0}
   talentLevel: 0
   baseDamage: 0
   talentMultiplier: 2

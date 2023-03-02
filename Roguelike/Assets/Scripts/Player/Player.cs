@@ -22,67 +22,8 @@ public class Player : MonoBehaviour
     private float hitTimer = 0.0f;
     private bool isHit = false;
 
-    [Header("Movement")]
-    public float moveSpeed = 5f;
-    private float moveX;
-
-    private bool isFacingRight = true;
-
-    [Header("Jump")]
-    public float jumpForce = 5f;
-    public float lowJumpMultiplier = 1f;
-    public float fallMultiplier = 2.5f;
-
-    public float jumpCounter = 0f;
-    public float maxJump = 2f;
-
-    private bool jumpRequest = false;
-    public bool IsJumpingMidAir = false;
-
-    [Header("Dash")]
-    public float dashSpeed = 5f;
-    public float dashingTime = 0.2f;
-    public float dashingCooldown = 1f;
-
-    private bool canDash = true;
-    private bool dashRequest = false;
-    private bool isDashing;
-
-    [SerializeField] private TrailRenderer tr;
-
-    [Header("Attack")]
-    public Transform firePoint;
-    public GameObject pfProjectile;
-
-    public float attackDelay = 0.4f;
-    private float attackTimer = 0.0f;
-    public float timeSinceAttack = 0.0f;
-    public float attackStringReset = 0.8f;
-
-    public int currentAttack = 0;
-
-    private bool attackRequest = false;
-    private bool attackAnimation = false;
-    private bool isAttacking = false;
-    private bool isAttackAnimationComplete = false;
-    public bool attackString = false;
-
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
-
-    // animation
-    private Animator animator;
-    private string currentAnimation;
-
-    private const string PLAYER_DEATH = "derildo_death";
-    private const string PLAYER_HIT = "derildo_hit";
-    private const string PLAYER_ATTACK_STRING_01 = "derildo_attack1";
-    private const string PLAYER_ATTACK_STRING_02 = "derildo_attack2";
-    private const string PLAYER_ATTACK_STRING_03 = "derildo_attack3";
-    private const string PLAYER_JUMP = "derildo_jump";
-    private const string PLAYER_FALL = "derildo_fall";
-    private const string PLAYER_WALK = "derildo_walk";
-    private const string PLAYER_IDLE = "derildo_idle";
 
 
     private void Awake()
@@ -135,6 +76,8 @@ public class Player : MonoBehaviour
 
     }
 
+    #region Input
+
     private void ProcessInput()
     {
         // horizontal movement
@@ -145,16 +88,36 @@ public class Player : MonoBehaviour
         {
             jumpCounter = 0f;
             IsJumpingMidAir = false;
-            maxJump = 2f;
+            maxJump = defaultMaxJump;
+        }
+
+        // grounded 
+        if (IsGrounded())
+        {
+            hangTimeCounter = hangTime;
+        }
+        else
+        {
+            hangTimeCounter -= Time.deltaTime;
         }
 
         // jump
         if (Input.GetButtonDown("Jump"))
         {
-            if (IsGrounded() || jumpCounter < maxJump)
+            jumpBufferCounter = jumpBufferLength;
+
+            if (jumpBufferCounter > 0f && (hangTimeCounter > 0f || jumpCounter < maxJump))
             {
                 jumpRequest = true;
                 jumpCounter++;
+
+            }
+        }
+        else
+        {
+            if (jumpBufferCounter > -2f)
+            {
+                jumpBufferCounter -= Time.deltaTime;
 
             }
         }
@@ -179,11 +142,11 @@ public class Player : MonoBehaviour
 
     }
 
-    #region timers
+    #endregion
+
+    #region Timers
     private void UpdateTimers()
     {
-
-
         // hit
         if (isHit)
         {
@@ -217,13 +180,45 @@ public class Player : MonoBehaviour
             currentAttack = 0;
         }
     }
-    #endregion timers
+    #endregion 
 
-    #region movement
+    #region Movement
+
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+    private float moveX;
+
+    private bool isFacingRight = true;
+
     private void Move()
     {
         rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
     }
+
+    #endregion
+
+    #region Jump
+
+    [Header("Jump")]
+    public float jumpForce = 5f;
+    public float lowJumpMultiplier = 1f;
+    public float fallMultiplier = 2.5f;
+    [Space]
+    public float jumpCounter = 0f;
+    public float maxJump = 2f;
+    public float defaultMaxJump = 2f;
+    [Space]
+    // coyote jump
+    public float hangTime = 0.2f;
+    public float hangTimeCounter;
+    [Space]
+    // jump buffer
+    public float jumpBufferLength = 0.2f;
+    public float jumpBufferCounter;
+    [Space]
+    public bool IsJumpingMidAir = false;
+
+    private bool jumpRequest = false;
 
     private void Jump()
     {
@@ -240,15 +235,19 @@ public class Player : MonoBehaviour
             else
             {
                 // adding force to jump (less prone to bug)
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                rb.velocity = Vector2.up * jumpForce;
+
             }
 
+            hangTimeCounter = 0f;
+            jumpBufferCounter = 0f;
             jumpRequest = false;
         }
     }
 
     private void BetterJump()
-    {   
+    {
         /*
         if (rb.velocity.y < 0f)
         {
@@ -275,9 +274,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    #endregion movement
+    #endregion Jump
 
-    #region attack
+    #region Attack
+
+    [Header("Attack")]
+    public Transform firePoint;
+    public GameObject pfProjectile;
+
+    public float attackDelay = 0.4f;
+    private float attackTimer = 0.0f;
+    public float timeSinceAttack = 0.0f;
+    public float attackStringReset = 0.8f;
+
+    public int currentAttack = 0;
+
+    private bool attackRequest = false;
+    private bool attackAnimation = false;
+    private bool isAttacking = false;
+    private bool isAttackAnimationComplete = false;
+    public bool attackString = false;
+
     private void Attack()
     {
         if (attackRequest)
@@ -330,9 +347,20 @@ public class Player : MonoBehaviour
         isAttacking = false;
     }
 
-    #endregion attack
+    #endregion
 
-    #region dash
+    #region Dash
+
+    [Header("Dash")]
+    public float dashSpeed = 5f;
+    public float dashingTime = 0.2f;
+    public float dashingCooldown = 1f;
+
+    private bool canDash = true;
+    private bool dashRequest = false;
+    private bool isDashing;
+
+    [SerializeField] private TrailRenderer tr;
 
     private IEnumerator Dash()
     {
@@ -374,7 +402,7 @@ public class Player : MonoBehaviour
             dashRequest = false;
         }
     }
-    #endregion dash
+    #endregion
 
     private void Flip()
     {
@@ -419,7 +447,20 @@ public class Player : MonoBehaviour
     }
 
 
-    #region animation
+    #region Animation
+
+    private Animator animator;
+    private string currentAnimation;
+
+    private const string PLAYER_DEATH = "derildo_death";
+    private const string PLAYER_HIT = "derildo_hit";
+    private const string PLAYER_ATTACK_STRING_01 = "derildo_attack1";
+    private const string PLAYER_ATTACK_STRING_02 = "derildo_attack2";
+    private const string PLAYER_ATTACK_STRING_03 = "derildo_attack3";
+    private const string PLAYER_JUMP = "derildo_jump";
+    private const string PLAYER_FALL = "derildo_fall";
+    private const string PLAYER_WALK = "derildo_walk";
+    private const string PLAYER_IDLE = "derildo_idle";
 
     public void ChangeAnimationState(string newAnimation)
     {
@@ -485,7 +526,7 @@ public class Player : MonoBehaviour
             ChangeAnimationState(PLAYER_IDLE);
         }
     }
-    #endregion animation
+    #endregion 
 
     private bool IsGrounded()
     {
