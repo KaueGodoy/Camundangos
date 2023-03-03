@@ -19,6 +19,8 @@ public class Projectile : MonoBehaviour
     [Header("Distance")]
     public float projectileDistance = 2f;
 
+    public CharacterStats characterStats { get; set; }
+
     private void Start()
     {
         rb.velocity = transform.right * projectileSpeed;
@@ -66,6 +68,13 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
 
+        }
+
+        if(collision.tag == "Enemy")
+        {
+            Debug.Log("Enemy hit");
+            collision.GetComponent<IEnemy>().TakeDamage(2f);
+            //collision.GetComponent<IEnemy>().TakeDamage(CharacterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
         }
 
     }

@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseStat
 {
+    public enum BaseStatType { Attack, Defense, AttackSpeed }
+
     public PlayerDamage damage;
     public List<StatBonus> BaseAdditives { get; set; }
+    public BaseStatType StatType { get; set; }
     public string StatName { get; set; }
     public string StatDescription { get; set; }
     public float BaseValue { get; set; }
@@ -20,6 +24,15 @@ public class BaseStat
         this.StatName = statName;
         this.StatDescription = statDescription;
         this.BaseValue = baseValue;
+    }
+
+    public BaseStat(BaseStatType statType, float baseValue, string statName)
+    {
+        this.BaseAdditives = new List<StatBonus>();
+        this.StatType = statType;
+        this.StatName = statName;
+        this.BaseValue = baseValue;
+
     }
 
     public void AddStatBonus(StatBonus statBonus)
