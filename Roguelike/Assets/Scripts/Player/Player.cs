@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private PlayerDamage playerDamage;
 
+    public CharacterStats characterStats;
+
     [Header("Health")]
     public float currentHealth = 0;
     public float maxHealth = 3;
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
     {
         currentHealth = maxHealth;
         isAlive = true;
+        //characterStats = new CharacterStats(10, 10, 3);
     }
     void Update()
     {
