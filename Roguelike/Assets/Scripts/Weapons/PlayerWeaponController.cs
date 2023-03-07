@@ -32,13 +32,41 @@ public class PlayerWeaponController : MonoBehaviour
         EquippedWeapon.transform.SetParent(playerHand.transform);
 
         characterStats.AddStatBonus(itemToEquip.Stats);
-        Debug.Log(weaponEquipped.Stats[0]);
+        Debug.Log(weaponEquipped.Stats[0].GetCalculatedStatValue());
 
+    }
+
+    private void Update()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            PerformWeaponAttack();
+        }
+
+        if (Input.GetButtonDown("Skill"))
+        {
+            PerformWeaponSkillAttack();
+        }
+
+        if (Input.GetButtonDown("Ult"))
+        {
+            PerformWeaponUltAttack();
+        }
     }
 
     public void PerformWeaponAttack()
     {
         weaponEquipped.PerformAttack();
+    }
+
+    public void PerformWeaponSkillAttack()
+    {
+        weaponEquipped.PerformSkillAttack();
+    }
+
+    public void PerformWeaponUltAttack()
+    {
+        weaponEquipped.PerformUltAttack();
     }
 
 }

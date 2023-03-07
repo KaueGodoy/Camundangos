@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     {
         currentHealth = maxHealth;
         isAlive = true;
-        //characterStats = new CharacterStats(10, 10, 3);
+        characterStats = new CharacterStats(10, 10, 3);
     }
     void Update()
     {

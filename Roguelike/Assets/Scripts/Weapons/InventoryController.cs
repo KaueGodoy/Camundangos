@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    public PlayerWeaponController playerWeaponController;
+    PlayerWeaponController playerWeaponController;
     public Item sword;
 
     private void Start()
