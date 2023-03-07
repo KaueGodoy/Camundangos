@@ -39,18 +39,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 2786248373
     locked: 0
-  - name: Doors
+  - name: Terrain
     uniqueID: 2261800985
     locked: 0
-  - name: Platform
-    uniqueID: 517389015
+  - name: Default
+    uniqueID: 0
     locked: 0
-  - name: Ground
-    uniqueID: 1203313381
+  - name: Foreground
+    uniqueID: 517389015
     locked: 0
