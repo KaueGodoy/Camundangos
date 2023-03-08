@@ -295,7 +295,6 @@ public class Player : MonoBehaviour
     private bool attackRequest = false;
     private bool attackAnimation = false;
     private bool isAttacking = false;
-    private bool isAttackAnimationComplete = false;
     public bool attackString = false;
 
     private void Attack()

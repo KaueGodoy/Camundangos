@@ -72,7 +72,7 @@ public class Projectile : MonoBehaviour
 
         if(collision.tag == "Enemy")
         {
-            Debug.Log("Enemy hit");
+            //Debug.Log("Enemy hit");
             collision.GetComponent<IEnemy>().TakeDamage(2f);
             //collision.GetComponent<IEnemy>().TakeDamage(CharacterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
         }

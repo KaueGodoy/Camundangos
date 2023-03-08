@@ -227,7 +227,7 @@ public class PlayerDamage : MonoBehaviour
         switch (damageType)
         {
             case DamageType.NormalAttack:
-                Debug.Log("Normal attack");
+                //Debug.Log("Normal attack");
                 if (basicAttackTalentLevel == 1)
                 {
                     if(player.currentAttack != 0)
@@ -309,7 +309,7 @@ public class PlayerDamage : MonoBehaviour
 
         damage = ((baseDamage) + flatDamage) * (1 + damageBonus - damageReduction) * CRITDamage * enemyDefMult * enemyResMult;
 
-        Debug.Log("Damage result: " + damage);
+        //Debug.Log("Damage result: " + damage);
 
         enemyHealth.currentHealth -= damage;
 
