@@ -10,7 +10,6 @@ public class Staff : MonoBehaviour, IWeapon, IProjectileWeapon
 
     Fireball fireball;
 
-
     private void Awake()
     {
         fireball = Resources.Load<Fireball>("Projectiles/Fireball");
