@@ -10,6 +10,8 @@ public class InventoryController : MonoBehaviour
     PlayerWeaponController playerWeaponController;
     ConsumableController consumableController;
 
+    public List<Item> playerItems = new List<Item>();
+
     public Item sword;
     public Item staff;
 
@@ -38,7 +40,18 @@ public class InventoryController : MonoBehaviour
         staff = new Item(staffStats, "staff");
 
 
-        logPotion = new Item(new List<BaseStat>(), "logPotion", "Drink this to log", "Drink", "Log Potion", false);
+        //logPotion = new Item(new List<BaseStat>(), "logPotion", "Drink this to log", "Drink", "Log Potion", false);
+    }
+
+    public void GiveItem(string itemSlug)
+    {
+        playerItems.Add(ItemDatabase.Instance.GetItem(itemSlug));
+        Debug.Log(playerItems.Count + " items in inventory. Added: " + itemSlug);
+    }
+
+    public void EquipItem(Item itemToEquip)
+    {
+        playerWeaponController.EquipWeapon(itemToEquip);
     }
 
     private void Update()
