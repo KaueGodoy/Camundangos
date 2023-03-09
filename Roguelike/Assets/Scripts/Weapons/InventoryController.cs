@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+    public static InventoryController Instance { get; set; }
+    
     PlayerWeaponController playerWeaponController;
     ConsumableController consumableController;
 
@@ -15,6 +17,15 @@ public class InventoryController : MonoBehaviour
 
     private void Start()
     {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         playerWeaponController = GetComponent<PlayerWeaponController>();
         consumableController = GetComponent<ConsumableController>();
 
@@ -32,6 +43,7 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             playerWeaponController.EquipWeapon(sword);

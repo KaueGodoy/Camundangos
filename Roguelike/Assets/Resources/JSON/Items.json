@@ -1,0 +1,60 @@
+[
+  {
+    "objectSlug": "sword",
+    "itemName": "Sword",
+    "description": "Normal sword",
+    "itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 25,
+        "StatName": "Character's attack"
+      },
+      {
+        "StatType": "Defense",
+        "BaseValue": 4,
+        "StatName": "Character's defense"
+      },
+      {
+        "StatType": "AttackSpeed",
+        "BaseValue": 4,
+        "StatName": "Character's Atk Spd"
+      }
+    ]
+  },
+  {
+    "objectSlug": "staff",
+    "itemName": "Cactus",
+    "description": "A long, sharp cactus.",
+    "itemType":  "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 800,
+        "StatName": "Character's attack"
+      },
+      {
+        "StatType": "Defense",
+        "BaseValue": 2,
+        "StatName": "Character's defense"
+      },
+      {
+        "StatType": "AttackSpeed",
+        "BaseValue": 1,
+        "StatName": "Character's Atk Spd"
+      }
+    ]
+  },
+  {
+    "objectSlug": "potion_log",
+    "itemName": "Log Potion",
+    "description": "A potion that logs something to the console.",
+    "itemType": "Consumable",
+    "actionName": "Drink",
+    "itemModifier": 0
+  }
+]
