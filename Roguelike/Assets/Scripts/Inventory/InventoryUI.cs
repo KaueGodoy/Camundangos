@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public RectTransform inventoryPanel;
+    public RectTransform scrollViewContent;
+    InventoryUIItem ItemContainer { get; set; }
+    bool MenuIsActive { get; set; }
+    Item CurrentSelectedItem { get; set; }
+
+    private void Start()
     {
-        
+        ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
+        UIEventHandler.OnItemAddedToInventory += ItemAdded;
+        inventoryPanel.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ItemAdded(Item item)
     {
-        
+
     }
 }
