@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
         }
 
         // attack
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Skill"))
         {
             attackRequest = true;
         }
