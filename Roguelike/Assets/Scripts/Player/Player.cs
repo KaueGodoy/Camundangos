@@ -13,17 +13,6 @@ public class Player : MonoBehaviour
 
     public CharacterStats characterStats;
 
-    [Header("Health")]
-    public float currentHealth = 0;
-    public float maxHealth = 3;
-    private bool isAlive;
-    private readonly float deathAnimationTime = 0.8f;
-
-    [Space]
-    public float hitCooldown = 0.3f;
-    private float hitTimer = 0.0f;
-    private bool isHit = false;
-
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
 
@@ -36,6 +25,8 @@ public class Player : MonoBehaviour
         playerDamage = GetComponent<PlayerDamage>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
+
+        UpdateUI();
     }
     void Start()
     {
@@ -53,6 +44,7 @@ public class Player : MonoBehaviour
             {
                 ProcessInput();
                 Attack();
+                UpdateUI();
             }
         }
     }
@@ -137,12 +129,17 @@ public class Player : MonoBehaviour
             dashRequest = true;
         }
 
-        // damage test // DELETE
+        // damage test DELETE
         if (Input.GetButtonDown("Fire2"))
         {
-            TakeDamage(1);
+            TakeDamage(damageAmount);
         }
 
+        // heal test DELETE
+        if (Input.GetButtonDown("Pickup"))
+        {
+            Heal(healAmount);
+        }
     }
 
     #endregion
@@ -183,7 +180,54 @@ public class Player : MonoBehaviour
             currentAttack = 0;
         }
     }
-    #endregion 
+    #endregion
+
+    #region Health
+
+    [Header("Health")]
+    public float currentHealth = 0;
+    public float maxHealth = 3;
+
+    [Header("Damage and Heal")]
+    public float damageAmount = 1f;
+    public float healAmount = 1f;
+
+    private bool isAlive;
+    private readonly float deathAnimationTime = 0.8f;
+
+    [Space]
+    public float hitCooldown = 0.3f;
+    private float hitTimer = 0.0f;
+    private bool isHit = false;
+
+
+    private void TakeDamage(float damageAmount)
+    {
+        FindObjectOfType<AudioManager>().PlaySound("Hit");
+        currentHealth -= Mathf.FloorToInt(damageAmount);
+        isHit = true;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+
+            Invoke("RestartLevel", deathAnimationTime);
+        }
+    }
+
+    private void Heal(float healAmount)
+    {
+        FindObjectOfType<AudioManager>().PlaySound("Hit");
+        currentHealth += Mathf.FloorToInt(healAmount);
+
+        if(currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
+    #endregion
+
 
     #region Movement
 
@@ -422,6 +466,8 @@ public class Player : MonoBehaviour
 
     }
 
+    #region Level
+
     private void RestartLevel()
     {
         isAlive = true;
@@ -433,20 +479,7 @@ public class Player : MonoBehaviour
         isAlive = false;
         rb.bodyType = RigidbodyType2D.Static;
     }
-
-    private void TakeDamage(float damageAmount)
-    {
-        FindObjectOfType<AudioManager>().PlaySound("Hit");
-        currentHealth -= Mathf.FloorToInt(damageAmount);
-        isHit = true;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-
-            Invoke("RestartLevel", deathAnimationTime);
-        }
-    }
+    #endregion 
 
 
     #region Animation
@@ -528,7 +561,19 @@ public class Player : MonoBehaviour
             ChangeAnimationState(PLAYER_IDLE);
         }
     }
-    #endregion 
+    #endregion
+
+    #region UI
+    [Header("UI Elements")]
+
+    [SerializeField] private PlayerHealthBar healthBar;
+
+    public void UpdateUI()
+    {
+        healthBar.UpdateHealthBar(maxHealth, currentHealth);
+    }
+
+    #endregion
 
     private bool IsGrounded()
     {
