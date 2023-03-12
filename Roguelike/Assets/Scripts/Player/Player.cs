@@ -567,10 +567,12 @@ public class Player : MonoBehaviour
     [Header("UI Elements")]
 
     [SerializeField] private PlayerHealthBar healthBar;
+    [SerializeField] private PlayerCooldowns cooldowns;
 
     public void UpdateUI()
     {
         healthBar.UpdateHealthBar(maxHealth, currentHealth);
+        //cooldowns.UpdateCooldowns(attackTimer);
     }
 
     #endregion
