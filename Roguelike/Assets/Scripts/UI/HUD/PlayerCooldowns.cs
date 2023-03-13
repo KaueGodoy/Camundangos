@@ -4,15 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerCooldowns : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI cooldownText;
     [SerializeField] private Image foregroundImage;
+    [SerializeField] private Image iconImage;
 
     public float cooldownTimer;
     public float cooldownValue = 5.00f;
     public bool triggerCooldown;
+
+    public float target;
+    public float reduceSpeed = 2f;
+
 
     private void Start()
     {
@@ -45,7 +51,10 @@ public class PlayerCooldowns : MonoBehaviour
 
             float convertedCooldownTimer = Mathf.Round(cooldownTimer * Mathf.Pow(10, numberOfDecimals)) / Mathf.Pow(10, numberOfDecimals);
 
-            foregroundImage.gameObject.SetActive(false);
+            iconImage.gameObject.SetActive(false);
+            //foregroundImage.gameObject.SetActive(false);
+            foregroundImage.fillAmount = cooldownTimer / cooldownValue;
+
             cooldownText.gameObject.SetActive(true);
             cooldownText.text = convertedCooldownTimer + "";
 
@@ -58,8 +67,10 @@ public class PlayerCooldowns : MonoBehaviour
 
     public void ResetCooldown()
     {
+        iconImage.gameObject.SetActive(true);
         triggerCooldown = false;
         cooldownTimer = cooldownValue;
+        target = cooldownTimer / cooldownValue;
         cooldownText.gameObject.SetActive(false);
         foregroundImage.gameObject.SetActive(true);
     }
