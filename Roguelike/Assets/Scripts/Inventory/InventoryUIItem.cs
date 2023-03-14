@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryUIItem : MonoBehaviour
 {
     public Item item;
+    public TextMeshProUGUI itemText;
 
     public void SetItem(Item item)
     {
@@ -14,6 +17,11 @@ public class InventoryUIItem : MonoBehaviour
 
     void SetupItemValues()
     {
-        //this.transform.Find("Item_Name").GetComponent<Text>().text = item.ItemName;
+        itemText.text = item.ItemName;
+    }
+
+    public void OnSelectItemButton()
+    {
+        InventoryController.Instance.SetItemDetails(item, GetComponent<Button>());
     }
 }

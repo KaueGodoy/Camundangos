@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
     public static InventoryController Instance { get; set; }
     
-    PlayerWeaponController playerWeaponController;
-    ConsumableController consumableController;
+    public PlayerWeaponController playerWeaponController;
+    public ConsumableController consumableController;
+    public InventoryUIDetails inventoryDetailsPanel;
 
     public List<Item> playerItems = new List<Item>();
 
@@ -31,22 +33,22 @@ public class InventoryController : MonoBehaviour
         playerWeaponController = GetComponent<PlayerWeaponController>();
         consumableController = GetComponent<ConsumableController>();
 
-        List<BaseStat> swordStats = new List<BaseStat>();
-        swordStats.Add(new BaseStat("ATK", "Equipped sword", 6));
-        sword = new Item(swordStats, "sword");
+        GiveItem("sword");
+        GiveItem("potion_log");
 
-        List<BaseStat> staffStats = new List<BaseStat>();
-        staffStats.Add(new BaseStat("ATK", "Equipped staff", 2));
-        staff = new Item(staffStats, "staff");
-
-
-        //logPotion = new Item(new List<BaseStat>(), "logPotion", "Drink this to log", "Drink", "Log Potion", false);
     }
 
     public void GiveItem(string itemSlug)
     {
-        playerItems.Add(ItemDatabase.Instance.GetItem(itemSlug));
+        Item item = ItemDatabase.Instance.GetItem(itemSlug);
+        playerItems.Add(item);
         Debug.Log(playerItems.Count + " items in inventory. Added: " + itemSlug);
+        UIEventHandler.ItemAddedToInventory(item);
+    }
+
+    public void SetItemDetails(Item item, Button selectedButton)
+    {
+        inventoryDetailsPanel.SetItem(item, selectedButton);
     }
 
     public void EquipItem(Item itemToEquip)
@@ -54,19 +56,9 @@ public class InventoryController : MonoBehaviour
         playerWeaponController.EquipWeapon(itemToEquip);
     }
 
-    private void Update()
+    public void ConsumeItem(Item itemToConsume)
     {
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            playerWeaponController.EquipWeapon(sword);
-            consumableController.ConsumeItem(logPotion);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            playerWeaponController.EquipWeapon(staff);
-        }
-
+        consumableController.ConsumeItem(itemToConsume);    
     }
+
 }

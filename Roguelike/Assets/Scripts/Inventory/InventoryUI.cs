@@ -17,8 +17,19 @@ public class InventoryUI : MonoBehaviour
         inventoryPanel.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            MenuIsActive = !MenuIsActive;
+            inventoryPanel.gameObject.SetActive(MenuIsActive);
+        }
+    }
+
     public void ItemAdded(Item item)
     {
-
+        InventoryUIItem emptyItem = Instantiate(ItemContainer);
+        emptyItem.SetItem(item);
+        emptyItem.transform.SetParent(scrollViewContent);
     }
 }
