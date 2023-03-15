@@ -14,7 +14,7 @@ public class ConsumableController : MonoBehaviour
 
     public void ConsumeItem(Item item)
     {
-        GameObject itemToSpawn = Instantiate(Resources.Load<GameObject>("Consumables/Potions" + item.ObjectSlug));
+        GameObject itemToSpawn = Instantiate(Resources.Load<GameObject>("Consumables/Potions/" + item.ObjectSlug));
 
         if (item.ItemModifier)
         {

@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemText: {fileID: 1458430074053137941}
+  itemIcon: {fileID: 1458430073243634755}
 --- !u!114 &8211194291034754807
 MonoBehaviour:
   m_ObjectHideFlags: 0

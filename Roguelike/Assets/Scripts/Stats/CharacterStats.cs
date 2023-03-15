@@ -20,7 +20,7 @@ public class CharacterStats : MonoBehaviour
 
     public BaseStat GetStat(BaseStat.BaseStatType stat)
     {
-        return this.stats.Find(x => x.StatType == stat);    
+        return this.stats.Find(x => x.StatType == stat);
     }
 
     public void AddStatBonus(List<BaseStat> statBonuses)

@@ -21,6 +21,8 @@ public class InventoryUIDetails : MonoBehaviour
 
     public void SetItem(Item item, Button selectedButton)
     {
+        itemInteractButton.onClick.RemoveAllListeners();
+
         this.item = item;
         selectedItemButton = selectedButton;
 

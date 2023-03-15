@@ -19,6 +19,9 @@ public class PlayerCooldowns : MonoBehaviour
     public float target;
     public float reduceSpeed = 2f;
 
+    Color cooldownColor = new Color32(164, 164, 164, 255);
+    Color defaultColor = new Color32(255, 255, 255, 255);
+
 
     private void Start()
     {
@@ -51,7 +54,9 @@ public class PlayerCooldowns : MonoBehaviour
 
             float convertedCooldownTimer = Mathf.Round(cooldownTimer * Mathf.Pow(10, numberOfDecimals)) / Mathf.Pow(10, numberOfDecimals);
 
-            iconImage.gameObject.SetActive(false);
+            iconImage.color = cooldownColor;
+
+            //iconImage.gameObject.SetActive(false);
             //foregroundImage.gameObject.SetActive(false);
             foregroundImage.fillAmount = cooldownTimer / cooldownValue;
 
@@ -67,6 +72,7 @@ public class PlayerCooldowns : MonoBehaviour
 
     public void ResetCooldown()
     {
+        iconImage.color = defaultColor;
         iconImage.gameObject.SetActive(true);
         triggerCooldown = false;
         cooldownTimer = cooldownValue;
