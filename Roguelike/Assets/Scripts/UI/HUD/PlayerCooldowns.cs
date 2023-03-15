@@ -20,7 +20,7 @@ public class PlayerCooldowns : MonoBehaviour
     public float reduceSpeed = 2f;
 
     Color cooldownColor = new Color32(164, 164, 164, 255);
-    Color defaultColor = new Color32(255, 255, 255, 255);
+    Color defaultColor = new Color32(255, 255, 255, 168);
 
 
     private void Start()

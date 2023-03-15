@@ -7,13 +7,13 @@ public class Slime : MonoBehaviour, IEnemy
     public float currentHealth, power, defense;
     public float maxHealth = 10;
 
-    //private CharacterStats characterStats;
+    private CharacterStats characterStats;
 
     public int ID { get; set; }
 
     void Start()
     {
-        //characterStats = new CharacterStats(10, 5, 2);
+        characterStats = new CharacterStats(10, 5, 2);
         currentHealth = maxHealth;
     }
 

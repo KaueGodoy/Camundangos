@@ -6,6 +6,7 @@ public class Sword : MonoBehaviour, IWeapon
 {
     private Animator animator;
     public List<BaseStat> Stats { get; set; }
+    public CharacterStats CharacterStats { get; set; }
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class Sword : MonoBehaviour, IWeapon
 
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<IEnemy>().TakeDamage(Stats[0].GetCalculatedStatValue());
+            collision.GetComponent<IEnemy>().TakeDamage(CharacterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
             Debug.Log("Hit: " + collision.name);
         }
 

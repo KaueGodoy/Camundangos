@@ -17,6 +17,7 @@ public class CameraHandler : MonoBehaviour
     private void Update()
     {
         cameraFollow.Setup(() => playerTransform.position);
+        
     }
 
 }

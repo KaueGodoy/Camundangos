@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
@@ -10,6 +12,7 @@ public class BaseStat
 
     public PlayerDamage damage;
     public List<StatBonus> BaseAdditives { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
     public BaseStatType StatType { get; set; }
     public string StatName { get; set; }
     public string StatDescription { get; set; }

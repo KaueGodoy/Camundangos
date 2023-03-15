@@ -10,17 +10,17 @@
       {
         "StatType": "Attack",
         "BaseValue": 25,
-        "StatName": "Character's attack"
+        "StatName": "Base ATK"
       },
       {
         "StatType": "Defense",
         "BaseValue": 4,
-        "StatName": "Character's defense"
+        "StatName": "Base DEF"
       },
       {
         "StatType": "AttackSpeed",
         "BaseValue": 4,
-        "StatName": "Character's Atk Spd"
+        "StatName": "Base ATK SPEED"
       }
     ]
   },
