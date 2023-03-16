@@ -29,6 +29,7 @@ public class PlayerWeaponController : MonoBehaviour
             playerHand.transform.position, playerHand.transform.rotation);
 
         weaponEquipped = EquippedWeapon.GetComponent<IWeapon>();
+        weaponEquipped.CharacterStats = characterStats;
 
         if (EquippedWeapon.GetComponent<IProjectileWeapon>() != null)
         {

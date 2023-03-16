@@ -201,8 +201,10 @@ public class Player : MonoBehaviour
     private bool isHit = false;
 
 
-    private void TakeDamage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
+        Debug.Log("Player takes: " + damageAmount + " damage");
+
         FindObjectOfType<AudioManager>().PlaySound("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);
         isHit = true;
