@@ -14,11 +14,6 @@ public class InventoryController : MonoBehaviour
 
     public List<Item> playerItems = new List<Item>();
 
-    public Item sword;
-    public Item staff;
-
-    public Item logPotion;
-
     private void Start()
     {
         if(Instance != null && Instance != this)
@@ -35,6 +30,7 @@ public class InventoryController : MonoBehaviour
 
         GiveItem("sword");
         GiveItem("potion_log");
+        GiveItem("staff");
 
     }
 

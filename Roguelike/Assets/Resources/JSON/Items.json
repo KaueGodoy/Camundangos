@@ -26,7 +26,7 @@
   },
   {
     "objectSlug": "staff",
-    "itemName": "Cactus",
+    "itemName": "Staff",
     "description": "A long, sharp cactus.",
     "itemType":  "Weapon",
     "actionName": "Equip",
@@ -35,17 +35,17 @@
       {
         "StatType": "Attack",
         "BaseValue": 800,
-        "StatName": "Character's attack"
+        "StatName": "Base ATK"
       },
       {
         "StatType": "Defense",
         "BaseValue": 2,
-        "StatName": "Character's defense"
+        "StatName": "Base DEF"
       },
       {
         "StatType": "AttackSpeed",
         "BaseValue": 1,
-        "StatName": "Character's Atk Spd"
+        "StatName": "Base ATK SPEED"
       }
     ]
   },

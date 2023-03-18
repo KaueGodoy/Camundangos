@@ -8,6 +8,7 @@ public class Staff : MonoBehaviour, IWeapon, IProjectileWeapon
     public List<BaseStat> Stats { get; set; }
     public Transform ProjectileSpawn { get; set; }
     public CharacterStats CharacterStats { get; set; }
+    public float CurrentDamage { get; set; }
 
     Fireball fireball;
 
@@ -17,7 +18,7 @@ public class Staff : MonoBehaviour, IWeapon, IProjectileWeapon
         animator = GetComponent<Animator>();
     }
 
-    public void PerformAttack()
+    public void PerformAttack(float damage)
     {
         animator.SetTrigger("Base_Attack");
         Debug.Log(this.name + " basic staff attack!");
@@ -40,4 +41,5 @@ public class Staff : MonoBehaviour, IWeapon, IProjectileWeapon
         Fireball fireballInstance = (Fireball)Instantiate(fireball, ProjectileSpawn.position, ProjectileSpawn.rotation);
         fireballInstance.Direction = ProjectileSpawn.right;
     }
+
 }

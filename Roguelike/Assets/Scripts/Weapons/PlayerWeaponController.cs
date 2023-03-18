@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     Transform spawnProjectile;
     CharacterStats characterStats;
+    Item currentlyEquippedItem;
     IWeapon weaponEquipped;
 
     private void Start()
@@ -21,24 +23,25 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (EquippedWeapon != null)
         {
-            characterStats.RemoveStatBonus(EquippedWeapon.GetComponent<IWeapon>().Stats);
-            Destroy(playerHand.transform.GetChild(0).gameObject);
+            InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
+            characterStats.RemoveStatBonus(weaponEquipped.Stats);
+            Destroy(EquippedWeapon.transform.gameObject);
         }
 
         EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
             playerHand.transform.position, playerHand.transform.rotation);
 
         weaponEquipped = EquippedWeapon.GetComponent<IWeapon>();
-        weaponEquipped.CharacterStats = characterStats;
 
         if (EquippedWeapon.GetComponent<IProjectileWeapon>() != null)
         {
             EquippedWeapon.GetComponent<IProjectileWeapon>().ProjectileSpawn = spawnProjectile;
         }
 
-        weaponEquipped.Stats = itemToEquip.Stats;
-
         EquippedWeapon.transform.SetParent(playerHand.transform);
+
+        weaponEquipped.Stats = itemToEquip.Stats;
+        currentlyEquippedItem = itemToEquip;
 
         characterStats.AddStatBonus(itemToEquip.Stats);
         Debug.Log(weaponEquipped.Stats[0].GetCalculatedStatValue());
@@ -49,7 +52,11 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            PerformWeaponAttack();
+            if (EquippedWeapon != null)
+            {
+                PerformWeaponAttack();
+
+            }
         }
 
         if (Input.GetButtonDown("Skill"))
@@ -65,7 +72,27 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void PerformWeaponAttack()
     {
-        weaponEquipped.PerformAttack();
+        weaponEquipped.PerformAttack(CalculateDamage());
+    }
+
+    private float CalculateDamage()
+    {
+        float damageToDeal = (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
+
+
+        damageToDeal += CalculateCrit(damageToDeal);
+        Debug.Log("Damage dealt: " + damageToDeal);
+        return damageToDeal;
+    }
+
+    private float CalculateCrit(float damage)
+    {
+        if (Random.value <= 0.5f)
+        {
+            float critDamage = (damage * .50f);
+            return critDamage;
+        }
+        return 0;
     }
 
     public void PerformWeaponSkillAttack()

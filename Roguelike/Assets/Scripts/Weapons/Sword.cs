@@ -7,16 +7,18 @@ public class Sword : MonoBehaviour, IWeapon
     private Animator animator;
     public List<BaseStat> Stats { get; set; }
     public CharacterStats CharacterStats { get; set; }
+    public float CurrentDamage { get; set; }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    public void PerformAttack()
+    public void PerformAttack(float damage)
     {
+        CurrentDamage = damage;
         animator.SetTrigger("Base_Attack");
-        Debug.Log(this.name + " basic attack!");
+        //Debug.Log(this.name + " basic attack!");
     }
 
     public void PerformSkillAttack()
@@ -36,7 +38,7 @@ public class Sword : MonoBehaviour, IWeapon
 
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<IEnemy>().TakeDamage(CharacterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
+            collision.GetComponent<IEnemy>().TakeDamage(CurrentDamage);
             Debug.Log("Hit: " + collision.name);
         }
 
