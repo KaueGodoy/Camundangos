@@ -44,6 +44,10 @@ public class PlayerWeaponController : MonoBehaviour
         currentlyEquippedItem = itemToEquip;
 
         characterStats.AddStatBonus(itemToEquip.Stats);
+
+        UIEventHandler.ItemEquipped(itemToEquip);
+        UIEventHandler.StatsChanged();
+
         Debug.Log(weaponEquipped.Stats[0].GetCalculatedStatValue());
 
     }
@@ -58,7 +62,7 @@ public class PlayerWeaponController : MonoBehaviour
 
             }
         }
-
+        /*
         if (Input.GetButtonDown("Skill"))
         {
             PerformWeaponSkillAttack();
@@ -67,7 +71,7 @@ public class PlayerWeaponController : MonoBehaviour
         if (Input.GetButtonDown("Ult"))
         {
             PerformWeaponUltAttack();
-        }
+        }*/
     }
 
     public void PerformWeaponAttack()

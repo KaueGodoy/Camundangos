@@ -19,6 +19,11 @@ public class PlayerHealthBar : MonoBehaviour
         target = currentHealth / maxHealth;
         hpText.text = currentHealth + " / " + maxHealth;
 
+        if(currentHealth <= 0)
+        {
+            hpText.text = 0.ToString() + " / " + maxHealth;
+        }
+
         // dynamic color change
         //healthColor = Color.Lerp(Color.red, Color.green, target);
         //healthBarSprite.color = healthColor;

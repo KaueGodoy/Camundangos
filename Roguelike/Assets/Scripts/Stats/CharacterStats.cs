@@ -10,9 +10,9 @@ public class CharacterStats
     {
         stats = new List<BaseStat>()
         {
-            new BaseStat(BaseStat.BaseStatType.Attack, attack, "current ATK"),
-            new BaseStat(BaseStat.BaseStatType.Defense, defense, "current DEF"),
-            new BaseStat(BaseStat.BaseStatType.AttackSpeed, attackSpeed, "current ATK speed"),
+            new BaseStat(BaseStat.BaseStatType.Attack, attack, "ATK"),
+            new BaseStat(BaseStat.BaseStatType.Defense, defense, "DEF"),
+            new BaseStat(BaseStat.BaseStatType.AttackSpeed, attackSpeed, "ATK SPD"),
 
         };
     }

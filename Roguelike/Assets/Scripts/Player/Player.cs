@@ -25,14 +25,17 @@ public class Player : MonoBehaviour
         playerDamage = GetComponent<PlayerDamage>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
-
-        UpdateUI();
+        characterStats = new CharacterStats(10, 10, 3);
+        Debug.Log("Player init");
+        
     }
     void Start()
     {
         currentHealth = maxHealth;
         isAlive = true;
-        characterStats = new CharacterStats(10, 10, 3);
+     
+        UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+        UpdateUI();
     }
     void Update()
     {
@@ -209,12 +212,17 @@ public class Player : MonoBehaviour
         currentHealth -= Mathf.FloorToInt(damageAmount);
         isHit = true;
 
+        UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+
+
         if (currentHealth <= 0)
         {
+            UpdateUI();
             Die();
-
+            UIEventHandler.HealthChanged(0, this.maxHealth);
             Invoke("RestartLevel", deathAnimationTime);
         }
+
     }
 
     private void Heal(float healAmount)

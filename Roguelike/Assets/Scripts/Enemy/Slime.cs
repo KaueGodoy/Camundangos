@@ -47,7 +47,7 @@ public class Slime : MonoBehaviour, IEnemy
         {
             ChasePlayer();
             CancelInvoke("PerformAttack");
-            Debug.Log("Player found! " + distance);
+            //Debug.Log("Player found! " + distance);
         }
 
 
