@@ -36,7 +36,7 @@ public class CharacterPanel : MonoBehaviour
         PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
         UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
         UIEventHandler.OnStatsChanged += UpdateStats;
-        UIEventHandler.OnItemEquipped += EquipWeapon;
+        UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
         InitializeStats();
     }
 
@@ -67,9 +67,33 @@ public class CharacterPanel : MonoBehaviour
         }
     }
 
-    private void EquipWeapon(Item item)
+    private void UpdateEquippedWeapon(Item item)
     {
-        Debug.Log(item.ItemName);
+        weaponIcon.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
+        weaponNameText.text = item.ItemName;
+
+        for (int i = 0; i < item.Stats.Count; i++)
+        {
+            weaponStatTexts.Add(Instantiate(weaponStatPrefab));
+            weaponStatTexts[i].transform.SetParent(weaponStatPanel);
+            weaponStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
+        }
+    }
+
+    public void UnequipWeapon()
+    {
+        if (PlayerWeaponController.EquippedWeapon != null)
+        {
+            weaponNameText.text = " ";
+            weaponIcon.sprite = defaultWeaponSprite;
+
+            for (int i = 0; i < weaponStatTexts.Count; i++)
+            {
+                Destroy(weaponStatTexts[i].gameObject);
+            }
+            weaponStatTexts.Clear();
+            PlayerWeaponController.UnequipWeapon();
+        }
     }
 
 }

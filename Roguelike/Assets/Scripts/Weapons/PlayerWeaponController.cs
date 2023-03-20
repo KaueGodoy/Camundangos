@@ -23,9 +23,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (EquippedWeapon != null)
         {
-            InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
-            characterStats.RemoveStatBonus(weaponEquipped.Stats);
-            Destroy(EquippedWeapon.transform.gameObject);
+            UnequipWeapon();
         }
 
         EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
@@ -50,6 +48,14 @@ public class PlayerWeaponController : MonoBehaviour
 
         Debug.Log(weaponEquipped.Stats[0].GetCalculatedStatValue());
 
+    }
+
+    public void UnequipWeapon()
+    {
+        InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
+        characterStats.RemoveStatBonus(weaponEquipped.Stats);
+        Destroy(EquippedWeapon.transform.gameObject);
+        UIEventHandler.StatsChanged();
     }
 
     private void Update()

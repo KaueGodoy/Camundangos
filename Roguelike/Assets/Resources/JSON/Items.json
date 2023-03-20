@@ -10,17 +10,17 @@
       {
         "StatType": "Attack",
         "BaseValue": 25,
-        "StatName": "Base ATK"
+        "StatName": "ATK"
       },
       {
         "StatType": "Defense",
         "BaseValue": 4,
-        "StatName": "Base DEF"
+        "StatName": "DEF"
       },
       {
         "StatType": "AttackSpeed",
         "BaseValue": 4,
-        "StatName": "Base ATK SPEED"
+        "StatName": "ATK SPD"
       }
     ]
   },
@@ -35,17 +35,17 @@
       {
         "StatType": "Attack",
         "BaseValue": 800,
-        "StatName": "Base ATK"
+        "StatName": "ATK"
       },
       {
         "StatType": "Defense",
         "BaseValue": 2,
-        "StatName": "Base DEF"
+        "StatName": "DEF"
       },
       {
         "StatType": "AttackSpeed",
         "BaseValue": 1,
-        "StatName": "Base ATK SPEED"
+        "StatName": "ATK SPD"
       }
     ]
   },
