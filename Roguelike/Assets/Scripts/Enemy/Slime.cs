@@ -9,6 +9,10 @@ public class Slime : MonoBehaviour, IEnemy
     public float currentHealth;
     public float maxHealth = 200;
 
+    [Header("HP Bar")]
+    public Transform pfHealthBar;
+    public Vector3 offset = new Vector3(0, 1f);
+
     [Header("Movement")]
     public float moveSpeed = 3f;
 
@@ -30,6 +34,18 @@ public class Slime : MonoBehaviour, IEnemy
     {
         characterStats = new CharacterStats(10, 5, 2);
         currentHealth = maxHealth;
+
+
+        HealthSystem healthSystem = new HealthSystem(maxHealth);
+
+        Transform healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, transform.rotation, transform);
+        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+
+        healthBar.Setup(healthSystem);
+        Debug.Log("Health: " + healthSystem.GetHealthPercent());
+        Debug.Log("Health: " + healthSystem.GetCurrentHealth());
+
+
     }
 
     private void FixedUpdate()
