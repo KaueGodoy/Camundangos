@@ -121,9 +121,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 0
         width: 64
-        height: 64
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,9 +142,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 0
         width: 64
-        height: 64
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,9 +163,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 0
         width: 64
-        height: 64
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cc4f718af140e145858594416f6bd14
-      internalID: -680015191
+      spriteID: 1ae71b13fc0ca2c479ba26804c7bb073
+      internalID: 1752629709
       vertices: []
       indices: 
       edges: []
@@ -184,30 +184,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 490a0a79c8613bb4dbae1c6f79e2fa30
-      internalID: -207277626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors_4
-      rect:
-        serializedVersion: 2
-        x: 0
         y: 0
         width: 64
-        height: 64
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,71 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af80fa669ce51b7408854cfc85e93bc9
-      internalID: 1144795883
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b4a1bdd8a7d2f1f4f96462555889eeca
-      internalID: -574427053
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors_6
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25840e7fdd291234fb29157f0ced559d
-      internalID: -1449160732
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors_7
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e2f671a6e0876e8428ebad792351c1df
-      internalID: -2126984576
+      spriteID: 82e1d40b47ebf3b43893a3e51351477f
+      internalID: 777717042
       vertices: []
       indices: 
       edges: []
@@ -297,12 +213,8 @@ TextureImporter:
     nameFileIdTable:
       Doors_0: -862391624
       Doors_1: 1876568927
-      Doors_2: -680015191
-      Doors_3: -207277626
-      Doors_4: 1144795883
-      Doors_5: -574427053
-      Doors_6: -1449160732
-      Doors_7: -2126984576
+      Doors_2: 1752629709
+      Doors_3: 777717042
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
