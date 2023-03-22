@@ -8,7 +8,8 @@ public class EnemyShootRetreat : MonoBehaviour
 
     public Transform target;
 
-    public float minimunDistance = 4f;
+    public float retreatRange = 4f;
+    public float shootRange = 8f;
     public float moveSpeed = 2f;
 
     public GameObject projectile;
@@ -18,16 +19,18 @@ public class EnemyShootRetreat : MonoBehaviour
 
     private void Update()
     {
-
-        if(Time.time > nextShotTime)
-        {
-            Instantiate(projectile, transform.position, Quaternion.identity);
-            nextShotTime = Time.time + timeBetweenShots;
-        }
-
         float distance = Vector2.Distance(transform.position, target.position);
 
-        if (distance < minimunDistance)
+        if (distance < shootRange)
+        {
+            if (Time.time > nextShotTime)
+            {
+                Instantiate(projectile, transform.position, Quaternion.identity);
+                nextShotTime = Time.time + timeBetweenShots;
+            }
+        }
+
+        if (distance < retreatRange)
         {
             Retreat();
         }
