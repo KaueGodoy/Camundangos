@@ -32,7 +32,7 @@ public class Slime : MonoBehaviour, IEnemy
 
     void Start()
     {
-        characterStats = new CharacterStats(10, 5, 2);
+        characterStats = new CharacterStats(200, 10, 300, 5, 2);
         currentHealth = maxHealth;
 
 

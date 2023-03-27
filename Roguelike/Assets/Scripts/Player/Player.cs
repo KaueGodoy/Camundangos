@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         playerDamage = GetComponent<PlayerDamage>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
-        characterStats = new CharacterStats(10, 10, 3);
+        characterStats = new CharacterStats(maxHealth, 10, 50, 10, 3);
         Debug.Log("Player init");
         
     }

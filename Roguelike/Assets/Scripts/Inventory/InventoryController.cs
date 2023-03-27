@@ -31,6 +31,7 @@ public class InventoryController : MonoBehaviour
         GiveItem("sword");
         GiveItem("potion_log");
         GiveItem("staff");
+        GiveItem("potion_hp");
 
     }
 

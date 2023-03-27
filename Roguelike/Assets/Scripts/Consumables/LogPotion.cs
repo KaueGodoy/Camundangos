@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LogPotion : MonoBehaviour, IConsumable
 {
+    public List<BaseStat> Stats { get; set; }
     public void Consume()
     {
         Debug.Log("You've just consumed this potion. Nice");

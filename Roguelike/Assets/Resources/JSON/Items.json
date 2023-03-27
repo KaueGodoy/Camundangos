@@ -9,8 +9,13 @@
     "Stats": [
       {
         "StatType": "Attack",
-        "BaseValue": 25,
+        "BaseValue": 674,
         "StatName": "ATK"
+      },
+      {
+        "StatType": "CritDamage",
+        "BaseValue": 41.1,
+        "StatName": "CRIT DAMAGE"
       },
       {
         "StatType": "Defense",
@@ -28,7 +33,7 @@
     "objectSlug": "staff",
     "itemName": "Staff",
     "description": "A long, sharp cactus.",
-    "itemType":  "Weapon",
+    "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
     "Stats": [
@@ -56,5 +61,20 @@
     "itemType": "Consumable",
     "actionName": "Drink",
     "itemModifier": 0
+  },
+  {
+    "objectSlug": "potion_hp",
+    "itemName": "HP Potion",
+    "description": "A potion that gives MAX HP",
+    "itemType": "Consumable",
+    "actionName": "Drink",
+    "itemModifier": 1,
+    "Stats": [
+      {
+        "StatType": "HP",
+        "BaseValue": 300,
+        "StatName": "HP"
+      }
+    ]
   }
 ]

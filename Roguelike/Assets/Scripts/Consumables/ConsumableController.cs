@@ -6,6 +6,7 @@ using UnityEngine;
 public class ConsumableController : MonoBehaviour
 {
     CharacterStats stats;
+    IConsumable itemToConsume;
 
     private void Start()
     {
@@ -19,11 +20,20 @@ public class ConsumableController : MonoBehaviour
         if (item.ItemModifier)
         {
             itemToSpawn.GetComponent<IConsumable>().Consume(stats);
+
+            itemToConsume = itemToSpawn.GetComponent<IConsumable>();
+
+
+            itemToConsume.Stats = item.Stats;
+
+            stats.AddStatBonus(item.Stats);
+            UIEventHandler.StatsChanged();
         }
         else
         {
             itemToSpawn.GetComponent<IConsumable>().Consume();
         }
+
 
     }
 }

@@ -99,7 +99,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (Random.value <= 0.5f)
         {
-            float critDamage = (damage * .50f);
+            float critDamage = (damage * ((characterStats.GetStat(BaseStat.BaseStatType.CritDamage).GetCalculatedStatValue()) / 100));
             return critDamage;
         }
         return 0;

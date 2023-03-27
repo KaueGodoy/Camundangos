@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class BaseStat
 {
-    public enum BaseStatType { Attack, Defense, AttackSpeed }
+    public enum BaseStatType { HP, Attack, AttackPercent, CritDamage, Defense, AttackSpeed }
 
     public PlayerDamage damage;
     public List<StatBonus> BaseAdditives { get; set; }
@@ -34,9 +34,8 @@ public class BaseStat
     {
         this.BaseAdditives = new List<StatBonus>();
         this.StatType = statType;
-        this.StatName = statName;
         this.BaseValue = baseValue;
-
+        this.StatName = statName;
     }
 
     public void AddStatBonus(StatBonus statBonus)
