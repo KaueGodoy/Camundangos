@@ -87,8 +87,11 @@ public class PlayerWeaponController : MonoBehaviour
 
     private float CalculateDamage()
     {
-        float damageToDeal = (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
+        float baseDamage =   (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue())
+                             * (1 + (characterStats.GetStat(BaseStat.BaseStatType.AttackBonus).GetCalculatedStatValue() / 100)) 
+                             + (characterStats.GetStat(BaseStat.BaseStatType.FlatAttack).GetCalculatedStatValue());
 
+        float damageToDeal = baseDamage * (1 + characterStats.GetStat(BaseStat.BaseStatType.DamageBonus).GetCalculatedStatValue() / 100);
 
         damageToDeal += CalculateCrit(damageToDeal);
         Debug.Log("Damage dealt: " + damageToDeal);
@@ -97,7 +100,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private float CalculateCrit(float damage)
     {
-        if (Random.value <= 0.5f)
+        if (Random.value <= (characterStats.GetStat(BaseStat.BaseStatType.CritRate).GetCalculatedStatValue() / 100))
         {
             float critDamage = (damage * ((characterStats.GetStat(BaseStat.BaseStatType.CritDamage).GetCalculatedStatValue()) / 100));
             return critDamage;

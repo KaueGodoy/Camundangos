@@ -16,6 +16,20 @@ public class Player : MonoBehaviour
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
 
+    #region BaseStats
+
+    [Header("Base Stats")]
+    public float baseHealth = 22000f;
+    public float baseAttack = 10;
+    public float baseAttackPercent = 0;
+    public float baseAttackFlat = 0;
+    public float baseDamageBonus = 0;
+    public float baseCritRate = 5;
+    public float baseCritDamage = 50;
+    public float baseDefense = 15;
+    public float baseAttackSpeed = 5;
+
+    #endregion
 
     private void Awake()
     {
@@ -25,7 +39,7 @@ public class Player : MonoBehaviour
         playerDamage = GetComponent<PlayerDamage>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
-        characterStats = new CharacterStats(maxHealth, 10, 50, 10, 3);
+        characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed );
         Debug.Log("Player init");
         
     }
