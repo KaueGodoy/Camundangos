@@ -584,6 +584,7 @@ public class Player : MonoBehaviour
         {
             ChangeAnimationState(PLAYER_IDLE);
         }
+
     }
     #endregion
 
