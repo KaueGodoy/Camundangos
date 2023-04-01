@@ -8,6 +8,7 @@ public class Sword : MonoBehaviour, IWeapon
     public List<BaseStat> Stats { get; set; }
     public CharacterStats CharacterStats { get; set; }
     public float CurrentDamage { get; set; }
+    public bool isCritical;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class Sword : MonoBehaviour, IWeapon
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<IEnemy>().TakeDamage(CurrentDamage);
+            DamagePopup.Create(transform.position, (int)CurrentDamage, isCritical);
             Debug.Log("Hit: " + collision.name);
         }
 
