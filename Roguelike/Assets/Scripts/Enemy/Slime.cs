@@ -28,6 +28,9 @@ public class Slime : MonoBehaviour, IEnemy
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
 
+    HealthSystem healthSystem;
+    Transform healthBarTransform;
+
     public int ID { get; set; }
 
     void Start()
@@ -36,12 +39,14 @@ public class Slime : MonoBehaviour, IEnemy
         currentHealth = maxHealth;
 
 
-        HealthSystem healthSystem = new HealthSystem(maxHealth);
+        healthSystem = new HealthSystem(maxHealth);
 
-        Transform healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, transform.rotation, transform);
+        healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, transform.rotation, transform);
+        healthBarTransform.gameObject.SetActive(false);
+
         HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
-
         healthBar.Setup(healthSystem);
+
         Debug.Log("Health: " + healthSystem.GetHealthPercent());
         Debug.Log("Health: " + healthSystem.GetCurrentHealth());
 
@@ -88,6 +93,8 @@ public class Slime : MonoBehaviour, IEnemy
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        healthSystem.Damage(damage);
+        healthBarTransform.gameObject.SetActive(true);
 
         if (currentHealth <= 0)
         {
