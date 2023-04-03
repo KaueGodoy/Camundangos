@@ -71,6 +71,7 @@ public class Slime : MonoBehaviour, IEnemy
             //Debug.Log("Player found! " + distance);
         }
 
+        Debug.Log(distance);
 
         /* 3D only?
         withinAggroColliders = Physics.OverlapSphere(transform.position, 100, aggroLayerMask);
