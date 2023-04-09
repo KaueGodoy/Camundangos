@@ -18,6 +18,8 @@ public class Projectile : MonoBehaviour
 
     [Header("Distance")]
     public float projectileDistance = 2f;
+    public bool isCritical;
+
 
     public CharacterStats characterStats { get; set; }
 
@@ -74,6 +76,8 @@ public class Projectile : MonoBehaviour
         {
             //Debug.Log("Enemy hit");
             collision.GetComponent<IEnemy>().TakeDamage(projectileDamage);
+            DamagePopup.Create(transform.position, (int)projectileDamage, isCritical);
+
             //collision.GetComponent<IEnemy>().TakeDamage(CharacterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
         }
 

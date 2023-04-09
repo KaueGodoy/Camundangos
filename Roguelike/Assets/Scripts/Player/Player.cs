@@ -351,6 +351,7 @@ public class Player : MonoBehaviour
 
     [Header("Attack")]
     public Transform firePoint;
+    public Transform spawnPoint;
     public GameObject pfProjectile;
 
     public float attackDelay = 0.4f;
@@ -485,6 +486,7 @@ public class Player : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
             firePoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
+            spawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
 
         }
 

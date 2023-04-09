@@ -1,8 +1,8 @@
 [
   {
     "objectSlug": "sword",
-    "itemName": "Sword",
-    "description": "Normal sword",
+    "itemName": "Dormant Flames",
+    "description": "Only the one can choose the path to walk through the fire and flames",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
@@ -41,26 +41,26 @@
   },
   {
     "objectSlug": "staff",
-    "itemName": "Staff",
-    "description": "A long, sharp cactus.",
+    "itemName": "Staff of Green Ice",
+    "description": "One must be fool to be deceived by appearance",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
     "Stats": [
       {
         "StatType": "Attack",
-        "BaseValue": 800,
+        "BaseValue": 542,
         "StatName": "ATK"
       },
       {
-        "StatType": "Defense",
-        "BaseValue": 2,
-        "StatName": "DEF"
+        "StatType": "CritDamage",
+        "BaseValue": 88.2,
+        "StatName": "CRIT DAMAGE"
       },
       {
-        "StatType": "AttackSpeed",
-        "BaseValue": 1,
-        "StatName": "ATK SPD"
+        "StatType": "AttackBonus",
+        "BaseValue": 15.0,
+        "StatName": "ATK%"
       }
     ]
   },

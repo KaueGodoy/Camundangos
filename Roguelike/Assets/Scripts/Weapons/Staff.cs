@@ -21,19 +21,19 @@ public class Staff : MonoBehaviour, IWeapon, IProjectileWeapon
     public void PerformAttack(float damage)
     {
         animator.SetTrigger("Base_Attack");
-        Debug.Log(this.name + " basic staff attack!");
+        //Debug.Log(this.name + " basic staff attack!");
     }
 
     public void PerformSkillAttack()
     {
         animator.SetTrigger("Skill_Attack");
-        Debug.Log(this.name + " skill attack!");
+        //Debug.Log(this.name + " skill attack!");
     }
 
     public void PerformUltAttack()
     {
         animator.SetTrigger("Ult_Attack");
-        Debug.Log(this.name + " ult attack!");
+        //Debug.Log(this.name + " ult attack!");
     }
 
     public void CastProjectile()

@@ -9,6 +9,7 @@ public class Fireball : MonoBehaviour
     public float Range { get; set; }
     public float Speed { get; set; }
     public float Damage { get; set; }
+    public bool isCritical;
 
     Vector2 spawnPosition;
 
@@ -27,6 +28,8 @@ public class Fireball : MonoBehaviour
         {
             Extinguish();
         }
+
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,10 +37,16 @@ public class Fireball : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<IEnemy>().TakeDamage(Damage);
+            DamagePopup.Create(transform.position, (int)Damage, isCritical);
+
             Debug.Log("Hit: " + collision.name);
         }
 
-        Extinguish();
+        Player player = collision.GetComponent<Player>();
+        if (!player)
+        {
+            Extinguish();
+        }
 
     }
 
