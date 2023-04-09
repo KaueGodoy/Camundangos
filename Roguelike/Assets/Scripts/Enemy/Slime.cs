@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skeleton : MonoBehaviour, IEnemy
+public class Slime : MonoBehaviour, IEnemy
 {
 
     [Header("Health")]
@@ -21,19 +21,35 @@ public class Skeleton : MonoBehaviour, IEnemy
     public float attackRange = 2f;
 
     [Header("Aggro")]
+    public float aggroRange = 20f;
     public Player player;
+    public LayerMask aggroLayerMask;
+    private Collider[] withinAggroColliders;
 
-    private CharacterStats characterStats;
+    [Header("Drop")]
+    public PickupItem pickupItem;
+
+    public DropTable DropTable { get; set; }
+    public int ID { get; set; }
 
     HealthSystem healthSystem;
     Transform healthBarTransform;
 
-    public int ID { get; set; }
+    private CharacterStats characterStats;
+
 
     void Start()
     {
         characterStats = new CharacterStats(200, 10, 15, 15, 15, 25, 300, 5, 2);
         currentHealth = maxHealth;
+
+        DropTable = new DropTable();
+        DropTable.loot = new List<LootDrop>
+        {
+            new LootDrop("sword", 25),
+            new LootDrop("staff", 25),
+            new LootDrop("potion_log", 100)
+        };
 
 
         healthSystem = new HealthSystem(maxHealth);
@@ -46,9 +62,32 @@ public class Skeleton : MonoBehaviour, IEnemy
 
         Debug.Log("Health: " + healthSystem.GetHealthPercent());
         Debug.Log("Health: " + healthSystem.GetCurrentHealth());
-
-
     }
+
+    private void FixedUpdate()
+    {
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+
+        if (distance < attackRange)
+        {
+            if (!IsInvoking("PerformAttack"))
+            {
+                InvokeRepeating("PerformAttack", .5f, 1.5f);
+            }
+        }
+        else if (distance < aggroRange)
+        {
+            ChasePlayer();
+            CancelInvoke("PerformAttack");
+            //Debug.Log("Player found! " + distance);
+        }
+    }
+
+    public void ChasePlayer()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+    }
+
 
     public void PerformAttack()
     {
@@ -69,6 +108,17 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     public void Die()
     {
+        DropLoot();
         Destroy(gameObject);
+    }
+
+    void DropLoot()
+    {
+        Item item = DropTable.GetDrop();
+        if (item != null)
+        {
+            PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
+            instance.ItemDrop = item;
+        }
     }
 }

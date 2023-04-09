@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour, IEnemy
+public class Skeleton : MonoBehaviour, IEnemy
 {
 
     [Header("Health")]
@@ -20,14 +20,6 @@ public class Slime : MonoBehaviour, IEnemy
     public float damage = 5f;
     public float attackRange = 2f;
 
-    [Header("Aggro")]
-    public float aggroRange = 20f;
-    public Player player;
-    public LayerMask aggroLayerMask;
-
-    private CharacterStats characterStats;
-    private Collider[] withinAggroColliders;
-
     HealthSystem healthSystem;
     Transform healthBarTransform;
 
@@ -35,9 +27,7 @@ public class Slime : MonoBehaviour, IEnemy
 
     void Start()
     {
-        characterStats = new CharacterStats(200, 10, 15, 15, 15, 25, 300, 5, 2);
         currentHealth = maxHealth;
-
 
         healthSystem = new HealthSystem(maxHealth);
 
@@ -52,43 +42,9 @@ public class Slime : MonoBehaviour, IEnemy
 
 
     }
-
-    private void FixedUpdate()
-    {
-        float distance = Vector2.Distance(transform.position, player.transform.position);
-
-        if (distance < attackRange)
-        {
-            if (!IsInvoking("PerformAttack"))
-            {
-                InvokeRepeating("PerformAttack", .5f, 1.5f);
-            }
-        }
-        else if (distance < aggroRange)
-        {
-            ChasePlayer();
-            CancelInvoke("PerformAttack");
-            //Debug.Log("Player found! " + distance);
-        }
-
-        //Debug.Log(distance);
-
-        /* 3D only?
-        withinAggroColliders = Physics.OverlapSphere(transform.position, 100, aggroLayerMask);
-        if (withinAggroColliders.Length > 0)
-        {
-            Debug.Log("Player found!");
-        }*/
-    }
-
-    public void ChasePlayer()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 5 * Time.deltaTime);
-    }
-
     public void PerformAttack()
     {
-        player.TakeDamage(damage);
+
     }
 
     public void TakeDamage(float damage)
@@ -107,4 +63,6 @@ public class Slime : MonoBehaviour, IEnemy
     {
         Destroy(gameObject);
     }
+
+
 }

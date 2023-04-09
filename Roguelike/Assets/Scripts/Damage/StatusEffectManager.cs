@@ -21,20 +21,27 @@ public class StatusEffectManager : MonoBehaviour
 
     public void ApplyBurn(float ticks)
     {
-        if(burnTickTimers.Count <= 0)
+        if (healthScript != null)
         {
-            burnTickTimers.Add(ticks);
-            StartCoroutine(Burn());
+            if (burnTickTimers.Count <= 0)
+            {
+                burnTickTimers.Add(ticks);
+                StartCoroutine(Burn());
+            }
+            else
+            {
+                burnTickTimers.Add(ticks);
+            }
         }
-        else
-        { 
-            burnTickTimers.Add(ticks);
-        }
+
     }
 
     public void ApplyProjectileDamage(float damage)
     {
-        healthScript.currentHealth -= damage;
+        if (healthScript != null)
+        {
+            healthScript.currentHealth -= damage;
+        }
     }
 
     IEnumerator Burn()

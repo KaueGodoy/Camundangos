@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6486536768056531318}
-  projectileDamage: 2
+  projectileDamage: 10000
   burnAmount: 4
   projectileSpeed: 15
   projectileDistance: 1.5
