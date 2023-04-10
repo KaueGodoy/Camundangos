@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public Transform target;
-
     public float minimunDistance = 10f;
     public float moveSpeed = 2f;
 
+    public Transform target;
+
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
+    private Vector2 direction;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -26,26 +29,21 @@ public class EnemyFollow : MonoBehaviour
         }
         else
         {
-            // attack
+            direction = Vector2.zero;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = direction * moveSpeed;
     }
 
     private void Chase()
     {
-        
-        //transform.LookAt(target.position);
 
-        // Calculate the direction to the player
-        Vector2 direction = (target.position - transform.position).normalized;
+        direction = (target.position - transform.position).normalized;
 
-        // Calculate the angle between the current position and the player
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Set the rotation of the enemy to face the player
-        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
-
-        // Flip the sprite horizontally depending on the player's position
+        // flip
         if (direction.x > 0)
         {
             spriteRenderer.flipX = true;
@@ -55,7 +53,18 @@ public class EnemyFollow : MonoBehaviour
             spriteRenderer.flipX = false;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+
     }
+
+
+
+
+    //transform.LookAt(target.position);
+    // Calculate the angle between the current position and the player
+    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+    // Set the rotation of the enemy to face the player
+    //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 }

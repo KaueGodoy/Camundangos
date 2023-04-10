@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour, IEnemy
 {
-
     [Header("Health")]
     public float currentHealth;
     public float maxHealth = 200;
@@ -28,19 +27,6 @@ public class Skeleton : MonoBehaviour, IEnemy
     void Start()
     {
         currentHealth = maxHealth;
-
-        healthSystem = new HealthSystem(maxHealth);
-
-        healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, transform.rotation, transform);
-        healthBarTransform.gameObject.SetActive(false);
-
-        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
-        healthBar.Setup(healthSystem);
-
-        Debug.Log("Health: " + healthSystem.GetHealthPercent());
-        Debug.Log("Health: " + healthSystem.GetCurrentHealth());
-
-
     }
     public void PerformAttack()
     {
@@ -49,9 +35,16 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     public void TakeDamage(float damage)
     {
+        if (currentHealth == maxHealth)
+        {
+            InstantiateHealthBar();
+        }
+
         currentHealth -= damage;
         healthSystem.Damage(damage);
-        healthBarTransform.gameObject.SetActive(true);
+
+        //Debug.Log("Health: " + healthSystem.GetHealthPercent());
+        //Debug.Log("Health: " + healthSystem.GetCurrentHealth());
 
         if (currentHealth <= 0)
         {
@@ -59,10 +52,22 @@ public class Skeleton : MonoBehaviour, IEnemy
         }
     }
 
+    private void InstantiateHealthBar()
+    {
+        healthSystem = new HealthSystem(maxHealth);
+
+        healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, transform.rotation, transform);
+        //healthBarTransform.gameObject.SetActive(false);
+
+        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+        healthBar.Setup(healthSystem);
+
+        Debug.Log("Health: " + healthSystem.GetHealthPercent());
+        Debug.Log("Health: " + healthSystem.GetCurrentHealth());
+    }
+
     public void Die()
     {
         Destroy(gameObject);
     }
-
-
 }
