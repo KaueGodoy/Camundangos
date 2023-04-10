@@ -12,13 +12,6 @@ public class Skeleton : MonoBehaviour, IEnemy
     public Transform pfHealthBar;
     public Vector3 offset = new Vector3(0, 1f);
 
-    [Header("Movement")]
-    public float moveSpeed = 3f;
-
-    [Header("Damage")]
-    public float damage = 5f;
-    public float attackRange = 2f;
-
     HealthSystem healthSystem;
     Transform healthBarTransform;
 

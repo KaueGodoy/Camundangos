@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public float minimunDistance = 10f;
+    [Header("Movement")]
     public float moveSpeed = 2f;
+    public float chaseRange = 10f;
+
+    [Header("Attack")]
+    public Player player;
+    public float attackRange = 5f;
+    public float damage = 300f;
 
     public Transform target;
 
@@ -23,13 +29,28 @@ public class EnemyFollow : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, target.position);
 
-        if (distance < minimunDistance)
+        if (distance < chaseRange)
         {
             Chase();
+
+            if (distance < attackRange)
+            {
+
+                if (!IsInvoking("PerformAttack"))
+                {
+                    InvokeRepeating("PerformAttack", .5f, 1.5f);
+                }
+
+            }
+            else
+            {
+                CancelInvoke("PerformAttack");
+            }
         }
         else
         {
             direction = Vector2.zero;
+            CancelInvoke("PerformAttack");
         }
     }
 
@@ -40,10 +61,14 @@ public class EnemyFollow : MonoBehaviour
 
     private void Chase()
     {
-
         direction = (target.position - transform.position).normalized;
+        Flip();
+        //transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
-        // flip
+    }
+
+    private void Flip()
+    {
         if (direction.x > 0)
         {
             spriteRenderer.flipX = true;
@@ -52,11 +77,12 @@ public class EnemyFollow : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
-
-        //transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-
     }
 
+    public void PerformAttack()
+    {
+        player.TakeDamage(damage);
+    }
 
 
 
