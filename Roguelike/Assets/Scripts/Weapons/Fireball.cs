@@ -9,6 +9,7 @@ public class Fireball : MonoBehaviour
     public float Range { get; set; }
     public float Speed { get; set; }
     public float Damage { get; set; }
+
     public bool isCritical;
 
     Vector2 spawnPosition;
@@ -18,8 +19,9 @@ public class Fireball : MonoBehaviour
         spawnPosition = transform.position;
         Range = 10f;
         Speed = 70f;
-        Damage = 5f;
+        Damage = 250f;
         GetComponent<Rigidbody2D>().AddForce(Direction * Speed);
+
     }
 
     private void Update()
@@ -29,7 +31,6 @@ public class Fireball : MonoBehaviour
             Extinguish();
         }
 
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
