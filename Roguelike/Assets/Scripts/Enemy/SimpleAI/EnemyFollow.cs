@@ -7,6 +7,7 @@ public class EnemyFollow : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 2f;
     public float chaseRange = 10f;
+    public bool isChasing = false;
 
     [Header("Attack")]
     public Player player;
@@ -29,39 +30,30 @@ public class EnemyFollow : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, target.position);
 
-        if (distance < chaseRange)
+        if (distance < attackRange)
         {
+            isChasing = false;
+            Attack();
+
+        }
+        else if (distance < chaseRange)
+        {
+            isChasing = true;
             Chase();
-
-            if (distance < attackRange)
-            {
-
-                if (!IsInvoking("PerformAttack"))
-                {
-                    InvokeRepeating("PerformAttack", .5f, 1.5f);
-                }
-
-            }
-            else
-            {
-                CancelInvoke("PerformAttack");
-            }
         }
         else
         {
-            direction = Vector2.zero;
-            CancelInvoke("PerformAttack");
+            isChasing = false;
+            Idle();
         }
-    }
 
-    private void FixedUpdate()
-    {
-        rb.velocity = direction * moveSpeed;
     }
 
     private void Chase()
     {
         direction = (target.position - transform.position).normalized;
+        rb.velocity = direction * moveSpeed;
+        CancelInvoke("PerformAttack");
         Flip();
         //transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
@@ -79,10 +71,28 @@ public class EnemyFollow : MonoBehaviour
         }
     }
 
+    private void Attack()
+    {
+        if (!IsInvoking("PerformAttack"))
+        {
+            InvokeRepeating("PerformAttack", .5f, 1.5f);
+        }
+    }
+
     public void PerformAttack()
     {
         player.TakeDamage(damage);
     }
+
+    private void Idle()
+    {
+        // do nothing
+        direction = Vector2.zero;
+        CancelInvoke("PerformAttack");
+        // Debug.Log("In idle state...");
+    }
+
+  
 
 
 
