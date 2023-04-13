@@ -49,7 +49,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     {
         healthSystem = new HealthSystem(maxHealth);
 
-        healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, transform.rotation, transform);
+        healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, Quaternion.identity, transform);
         //healthBarTransform.gameObject.SetActive(false);
 
         HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();

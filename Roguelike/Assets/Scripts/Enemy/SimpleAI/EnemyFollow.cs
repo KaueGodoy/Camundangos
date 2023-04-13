@@ -64,15 +64,15 @@ public class EnemyFollow : MonoBehaviour
     private void Chase()
     {
         direction = (target.position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed;
+        Move();
         CancelInvoke("PerformAttack");
-        Flip();
+        FlipSprite();
         //transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
     }
 
 
-    private void Flip()
+    private void FlipScale()
     {
         if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
         {
@@ -89,17 +89,22 @@ public class EnemyFollow : MonoBehaviour
         if (patrolPoints.Length == 0) return; // no patrol points defined
 
         direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed;
+        Move();
 
         if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < 0.1f)
         {
             // switch to the next patrol point
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
-           
+            Debug.Log(patrolIndex);
         }
 
-        Flip();
+        FlipSprite();
         CancelInvoke("PerformAttack");
+    }
+
+    private void Move()
+    {
+        rb.velocity = direction * moveSpeed;
     }
 
     private void Attack()
@@ -113,7 +118,8 @@ public class EnemyFollow : MonoBehaviour
     public void PerformAttack()
     {
         player.TakeDamage(damage);
-        DamagePopup.Create(player.transform.position, (int)damage, isCritical);
+        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage, isCritical);
+
     }
 
     private void Idle()
@@ -124,16 +130,14 @@ public class EnemyFollow : MonoBehaviour
         // Debug.Log("In idle state...");
     }
 
-    private void Flip2()
+    private void FlipSprite()
     {
-        if (direction.x > 0)
+        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
         {
-            spriteRenderer.flipX = true;
+            isFacingRight = !isFacingRight;
+            spriteRenderer.flipX = isFacingRight;
         }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
+
     }
 
 
