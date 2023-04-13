@@ -36,6 +36,7 @@ public class Slime : MonoBehaviour, IEnemy
     Transform healthBarTransform;
 
     private CharacterStats characterStats;
+    private bool isCritical;
 
 
     void Start()
@@ -92,6 +93,8 @@ public class Slime : MonoBehaviour, IEnemy
     public void PerformAttack()
     {
         player.TakeDamage(damage);
+        DamagePopup.Create(transform.position, (int)damage, isCritical);
+
     }
 
     public void TakeDamage(float damage)

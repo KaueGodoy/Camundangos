@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
@@ -8,6 +9,8 @@ public class EnemyFollow : MonoBehaviour
     public float moveSpeed = 2f;
     public float chaseRange = 10f;
     public bool isChasing = false;
+    public bool isFacingRight;
+    public bool isPatrolling;
 
     [Header("Attack")]
     public Player player;
@@ -19,6 +22,12 @@ public class EnemyFollow : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector2 direction;
+
+    [Header("Patrol")]
+    public Transform[] patrolPoints;
+    private int patrolIndex = 0;
+
+    private bool isCritical;
 
     private void Awake()
     {
@@ -33,18 +42,21 @@ public class EnemyFollow : MonoBehaviour
         if (distance < attackRange)
         {
             isChasing = false;
+            isPatrolling = false;
             Attack();
 
         }
         else if (distance < chaseRange)
         {
             isChasing = true;
+            isPatrolling = false;
             Chase();
         }
         else
         {
             isChasing = false;
-            Idle();
+            isPatrolling = true;
+            Patrol();
         }
 
     }
@@ -59,16 +71,35 @@ public class EnemyFollow : MonoBehaviour
 
     }
 
+
     private void Flip()
     {
-        if (direction.x > 0)
+        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
         {
-            spriteRenderer.flipX = true;
+            // flipping the player using scale
+            Vector3 localScale = transform.localScale;
+            isFacingRight = !isFacingRight;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
-        else
+    }
+
+    private void Patrol()
+    {
+        if (patrolPoints.Length == 0) return; // no patrol points defined
+
+        direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
+        rb.velocity = direction * moveSpeed;
+
+        if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < 0.1f)
         {
-            spriteRenderer.flipX = false;
+            // switch to the next patrol point
+            patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
+           
         }
+
+        Flip();
+        CancelInvoke("PerformAttack");
     }
 
     private void Attack()
@@ -82,6 +113,7 @@ public class EnemyFollow : MonoBehaviour
     public void PerformAttack()
     {
         player.TakeDamage(damage);
+        DamagePopup.Create(player.transform.position, (int)damage, isCritical);
     }
 
     private void Idle()
@@ -92,8 +124,17 @@ public class EnemyFollow : MonoBehaviour
         // Debug.Log("In idle state...");
     }
 
-  
-
+    private void Flip2()
+    {
+        if (direction.x > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
 
 
     //transform.LookAt(target.position);
