@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 088e31b9e5727194f891a7173f659729
+guid: 09733befedb0f644b9263fc6472a4c62
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DerildoJump_0
+      name: DerildoRight_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbe3352bece4e04418918118555ca5ba
-      internalID: 198971082
+      spriteID: f64f64f316bb57746b9e576f40d86645
+      internalID: -1559808776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_1
+      name: DerildoRight_1
       rect:
         serializedVersion: 2
         x: 42
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50cf9b9a857508b48b9bd59a96086933
-      internalID: -83541968
+      spriteID: 16de41c354d28bf4388fd1f95cf51f59
+      internalID: 1453201482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_2
+      name: DerildoRight_2
       rect:
         serializedVersion: 2
         x: 84
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e933e184324cb94fba3c90d07d60330
-      internalID: -1002387131
+      spriteID: 5a53af1e5cf3c9643a8618c9f8259b15
+      internalID: -76746748
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_3
+      name: DerildoRight_3
       rect:
         serializedVersion: 2
         x: 126
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dcecbae9d3a52b48bc84285c811fab4
-      internalID: -499578211
+      spriteID: e6d2f4a555afc0f489ad95afe6eb989a
+      internalID: -1232499171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_4
+      name: DerildoRight_4
       rect:
         serializedVersion: 2
         x: 168
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 540b2f36243cbe84685a8bb6c64569e3
-      internalID: 1503878145
+      spriteID: fac9ed76c3fdf054b914953ada096f64
+      internalID: -1447512955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_5
+      name: DerildoRight_5
       rect:
         serializedVersion: 2
         x: 210
@@ -236,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99f81ac6eb2249348a08a54fe1619659
-      internalID: -1996481739
+      spriteID: 13916de69ba1a4d498f09da3634381b7
+      internalID: -878040977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_6
+      name: DerildoRight_6
       rect:
         serializedVersion: 2
         x: 252
@@ -257,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0f24c0d88b9bbc489b1fbabbbba5b1b
-      internalID: -645708918
+      spriteID: ad38aa4c635c80d4cac461cc746c7022
+      internalID: -587285665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_7
+      name: DerildoRight_7
       rect:
         serializedVersion: 2
         x: 294
@@ -278,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51ac71df419cdfb4e85207a9aec48456
-      internalID: 2143188457
+      spriteID: 8bb20f2f030bcd642bc94a07786e21a6
+      internalID: -1608964555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DerildoJump_8
+      name: DerildoRight_8
       rect:
         serializedVersion: 2
         x: 336
@@ -299,8 +299,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c43490a3bf2269d44b500c8ffbb66dc6
-      internalID: 1090017212
+      spriteID: 40b6e1312c8cdc44e8fa6df85889ba20
+      internalID: 1655947701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DerildoRight_9
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24a4ec8451b997c4987f320f670094f3
+      internalID: -533938700
       vertices: []
       indices: 
       edges: []
@@ -316,15 +337,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DerildoJump_0: 198971082
-      DerildoJump_1: -83541968
-      DerildoJump_2: -1002387131
-      DerildoJump_3: -499578211
-      DerildoJump_4: 1503878145
-      DerildoJump_5: -1996481739
-      DerildoJump_6: -645708918
-      DerildoJump_7: 2143188457
-      DerildoJump_8: 1090017212
+      DerildoRight_0: -1559808776
+      DerildoRight_1: 1453201482
+      DerildoRight_2: -76746748
+      DerildoRight_3: -1232499171
+      DerildoRight_4: -1447512955
+      DerildoRight_5: -878040977
+      DerildoRight_6: -587285665
+      DerildoRight_7: -1608964555
+      DerildoRight_8: 1655947701
+      DerildoRight_9: -533938700
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

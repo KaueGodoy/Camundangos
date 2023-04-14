@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 09733befedb0f644b9263fc6472a4c62
+guid: ab12499b9d09ec741b9cb6189259a8c0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f64f64f316bb57746b9e576f40d86645
-      internalID: -1559808776
+      spriteID: 888e9378c8e6f6d49978d0063e9cc3d1
+      internalID: -240960694
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16de41c354d28bf4388fd1f95cf51f59
-      internalID: 1453201482
+      spriteID: 15f26a68db5105b4fad33fd30f39105f
+      internalID: 1973172659
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a53af1e5cf3c9643a8618c9f8259b15
-      internalID: -76746748
+      spriteID: e76ff4f278d97b74a93e267301f37d30
+      internalID: -1846306661
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6d2f4a555afc0f489ad95afe6eb989a
-      internalID: -1232499171
+      spriteID: e2ab3d8ecd3998a4d9aa1888042efb4f
+      internalID: -143539501
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fac9ed76c3fdf054b914953ada096f64
-      internalID: -1447512955
+      spriteID: 4cf87216ec41cef4aa54550edf130128
+      internalID: -2057448571
       vertices: []
       indices: 
       edges: []
@@ -236,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13916de69ba1a4d498f09da3634381b7
-      internalID: -878040977
+      spriteID: f57a8dd2e9d6f4d49bead56abb212201
+      internalID: -1019130709
       vertices: []
       indices: 
       edges: []
@@ -257,8 +257,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad38aa4c635c80d4cac461cc746c7022
-      internalID: -587285665
+      spriteID: 92dc41de1c23e2740a68e4f71e83df1a
+      internalID: -459295883
       vertices: []
       indices: 
       edges: []
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bb20f2f030bcd642bc94a07786e21a6
-      internalID: -1608964555
+      spriteID: e76d2c5ee8fd49149986a9486ae50f58
+      internalID: -55312325
       vertices: []
       indices: 
       edges: []
@@ -299,8 +299,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40b6e1312c8cdc44e8fa6df85889ba20
-      internalID: 1655947701
+      spriteID: 67ea2cf7a89d18143a753dbdbd66e0c2
+      internalID: -1975008320
       vertices: []
       indices: 
       edges: []
@@ -320,8 +320,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24a4ec8451b997c4987f320f670094f3
-      internalID: -533938700
+      spriteID: 4cd4fa3ecc26b0747881938754f28380
+      internalID: -2099622890
       vertices: []
       indices: 
       edges: []
@@ -337,16 +337,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DerildoRight_0: -1559808776
-      DerildoRight_1: 1453201482
-      DerildoRight_2: -76746748
-      DerildoRight_3: -1232499171
-      DerildoRight_4: -1447512955
-      DerildoRight_5: -878040977
-      DerildoRight_6: -587285665
-      DerildoRight_7: -1608964555
-      DerildoRight_8: 1655947701
-      DerildoRight_9: -533938700
+      DerildoRight_0: -240960694
+      DerildoRight_1: 1973172659
+      DerildoRight_2: -1846306661
+      DerildoRight_3: -143539501
+      DerildoRight_4: -2057448571
+      DerildoRight_5: -1019130709
+      DerildoRight_6: -459295883
+      DerildoRight_7: -55312325
+      DerildoRight_8: -1975008320
+      DerildoRight_9: -2099622890
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

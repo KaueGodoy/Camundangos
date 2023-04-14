@@ -26,7 +26,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-8758739485817138300
+--- !u!1102 &-8715056176484894758
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -46,13 +46,13 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 56952ec4a09426548baab20b0629adf5, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3e0fb53e987293a4a87033125b219dc8, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-8561187531775260657
+--- !u!1102 &-5513484233499078604
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -72,33 +72,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 01e110028cf08604c9ae52efa5e03dad, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-7355375640690865941
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: derildo_walk
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a93eced8dc179f94091d38d3ed1a8b4d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3ec16cf8ce5259f438a6f4d14c2fcce9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -198,15 +172,6 @@ AnimatorStateMachine:
     m_State: {fileID: 217894351371223413}
     m_Position: {x: 390, y: 80, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -7355375640690865941}
-    m_Position: {x: 390, y: 320, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8758739485817138300}
-    m_Position: {x: 390, y: 380, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8561187531775260657}
-    m_Position: {x: 390, y: 440, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -358444972883209833}
     m_Position: {x: 390, y: 500, z: 0}
   - serializedVersion: 1
@@ -221,6 +186,15 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 6496022510425095978}
     m_Position: {x: 390, y: 140, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -774227272005004558}
+    m_Position: {x: 390, y: 320, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8715056176484894758}
+    m_Position: {x: 390, y: 380, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5513484233499078604}
+    m_Position: {x: 390, y: 440, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -231,6 +205,32 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 690, y: 170, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -4065846586009195838}
+--- !u!1102 &-774227272005004558
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: derildo_walk
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 1799f04d6aebda0489afd7b0de06b103, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-358444972883209833
 AnimatorState:
   serializedVersion: 6
