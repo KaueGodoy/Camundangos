@@ -73,7 +73,7 @@ public class Slime : MonoBehaviour, IEnemy
         {
             if (!IsInvoking("PerformAttack"))
             {
-                InvokeRepeating("PerformAttack", .5f, 1.5f);
+                InvokeRepeating("PerformAttack", .3f, .5f);
             }
         }
         else if (distance < aggroRange)
