@@ -73,6 +73,14 @@
     "itemModifier": 0
   },
   {
+    "objectSlug": "coin",
+    "itemName": "Coin",
+    "description": "Money",
+    "itemType": "Consumable",
+    "actionName": "Use",
+    "itemModifier": 0
+  },
+  {
     "objectSlug": "potion_hp",
     "itemName": "HP Potion",
     "description": "A potion that gives MAX HP",

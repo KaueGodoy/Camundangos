@@ -24,6 +24,7 @@ public class EnemyShootRetreat : MonoBehaviour
     public float shootRange = 10f;
     public float retreatRange = 2.5f;
     public float retreatSpeed = 5f;
+    public float retreatForce = 0.4f;
 
 
     [Header("Projectile")]
@@ -40,6 +41,9 @@ public class EnemyShootRetreat : MonoBehaviour
     private void Update()
     {
         float distance = Vector2.Distance(transform.position, target.position);
+        direction = (target.position - transform.position).normalized;
+        FlipSprite();
+
 
         if (distance < retreatRange)
         {
@@ -49,7 +53,6 @@ public class EnemyShootRetreat : MonoBehaviour
         }
         else if (distance < shootRange)
         {
-            direction = Vector2.zero;
             isIdle = false;
             isChasing = false;
             Attack();
@@ -65,16 +68,14 @@ public class EnemyShootRetreat : MonoBehaviour
             // idle
             isChasing = false;
             isIdle = true;
-            direction = Vector2.zero;
+            //direction = Vector2.zero;
         }
     }
 
     private void Chase()
     {
-        direction = (target.position - transform.position).normalized;
         Move();
         CancelInvoke("InstatiateShot");
-        FlipSprite();
     }
 
     private void Move()
@@ -90,10 +91,25 @@ public class EnemyShootRetreat : MonoBehaviour
             spriteRenderer.flipX = isFacingRight;
         }
     }
-
     private void Retreat()
     {
+        // rb add force
+        Vector2 retreatDirection = (transform.position - target.position).normalized;
+        rb.AddForce(retreatDirection * retreatForce, ForceMode2D.Impulse);
+    }
+
+    private void Retreat2()
+    {
+        // transform
         rb.MovePosition(Vector2.MoveTowards(transform.position, target.position, (-moveSpeed * retreatSpeed) * Time.deltaTime));
+    }
+
+    private void Retreat3()
+    {
+        // rb only x axis
+        float newX = Mathf.MoveTowards(transform.position.x, target.position.x, -moveSpeed * retreatSpeed * Time.deltaTime);
+        Vector2 newPosition = new Vector2(newX, transform.position.y);
+        rb.MovePosition(newPosition);
     }
 
     private void Attack()

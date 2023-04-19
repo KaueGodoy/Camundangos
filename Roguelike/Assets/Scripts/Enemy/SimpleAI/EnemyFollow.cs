@@ -38,6 +38,8 @@ public class EnemyFollow : MonoBehaviour
     private void Update()
     {
         float distance = Vector2.Distance(transform.position, target.position);
+        direction = (target.position - transform.position).normalized;
+        FlipSprite();
 
         if (distance < attackRange)
         {
@@ -63,12 +65,9 @@ public class EnemyFollow : MonoBehaviour
 
     private void Chase()
     {
-        direction = (target.position - transform.position).normalized;
         Move();
         CancelInvoke("PerformAttack");
-        FlipSprite();
         //transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-
     }
 
 
@@ -98,7 +97,6 @@ public class EnemyFollow : MonoBehaviour
             Debug.Log(patrolIndex);
         }
 
-        FlipSprite();
         CancelInvoke("PerformAttack");
     }
 
