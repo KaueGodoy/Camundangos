@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    [Header("Movement")]
     public float speed = 2f; // The speed of the platform
     public float distance = 5f; // The distance the platform moves
+    public float yOffset = 0f;
+
+    [Header("Direction")]
     public bool moveVertically = false; // Toggle for vertical movement
+    public bool moveDiagonally = false; // Toggle for vertical movement
 
     private Vector3 startPosition;
-    private float timer = 0f;
+    private float sinValue;
 
     // Start is called before the first frame update
     void Start()
@@ -20,17 +25,25 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-
         // Calculate the new position of the platform
-        Vector3 newPos = new Vector3(startPosition.x + distance * Mathf.Sin(timer * speed),
-                                     startPosition.y,
-                                     startPosition.z);
+
+        sinValue += Time.deltaTime * speed;
+        float x = startPosition.x + distance * Mathf.Sin(sinValue);
+        float y = startPosition.y + yOffset;
+        float z = startPosition.z;
+
+        Vector3 newPos = new Vector3(x, y, z);
 
         if (moveVertically)
         {
             newPos.x = startPosition.x;
-            newPos.y = startPosition.y + distance * Mathf.Sin(timer * speed);
+            newPos.y = startPosition.y + distance * Mathf.Sin(sinValue);
+        }
+
+        if (moveDiagonally)
+        {
+            newPos.x = startPosition.x + distance * Mathf.Sin(sinValue);
+            newPos.y = startPosition.y + distance * Mathf.Sin(sinValue);
         }
 
         // Move the platform
@@ -50,4 +63,15 @@ public class MovingPlatform : MonoBehaviour
             Gizmos.DrawLine(transform.position, transform.position - new Vector3(0, distance, 0));
         }
     }
+
+    private void OnBecameVisible()
+    {
+
+    }
 }
+
+/*
+     Vector3 newPos2 = new Vector3(startPosition.x + distance * Mathf.Sin(timer * speed),
+                                  startPosition.y,
+                                  startPosition.z);
+     */
