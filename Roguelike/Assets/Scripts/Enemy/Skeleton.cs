@@ -12,6 +12,10 @@ public class Skeleton : MonoBehaviour, IEnemy
     public Transform pfHealthBar;
     public Vector3 offset = new Vector3(0, 1f);
 
+    [Header("Drop")]
+    public PickupItem pickupItem;
+    public DropTable DropTable { get; set; }
+
     HealthSystem healthSystem;
     Transform healthBarTransform;
 
@@ -62,5 +66,15 @@ public class Skeleton : MonoBehaviour, IEnemy
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    void DropLoot()
+    {
+        Item item = DropTable.GetDrop();
+        if (item != null)
+        {
+            PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
+            instance.ItemDrop = item;
+        }
     }
 }
