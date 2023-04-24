@@ -24,6 +24,12 @@ public class Skeleton : MonoBehaviour, IEnemy
     void Start()
     {
         currentHealth = maxHealth;
+
+        DropTable = new DropTable();
+        DropTable.loot = new List<LootDrop>
+        {
+            new LootDrop("coin", 100),
+        };
     }
     public void PerformAttack()
     {
@@ -65,6 +71,7 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     public void Die()
     {
+        DropLoot();
         Destroy(gameObject);
     }
 
