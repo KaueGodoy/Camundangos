@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 26
+  controlID: 6170
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -175,9 +175,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: f6faffff16630000f6640000
+      m_SelectedIDs: c2daffff
+      m_LastClickedID: -9534
+      m_ExpandedIDs: c2daffff2afbffffce5e0000745f00009e6000003061000064620000a0620000cc63000080640000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 27
+  controlID: 6171
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -534,9 +534,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 57.601334, y: 1.5270324, z: 0.12378821}
+    m_Target: {x: 161.5221, y: 1.7140424, z: -0.0064439476}
     speed: 2
-    m_Value: {x: 57.601334, y: 1.5270324, z: 0.12378821}
+    m_Value: {x: 161.5221, y: 1.7140424, z: -0.0064439476}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -587,9 +587,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 5.886537
+    m_Target: 14.0804825
     speed: 2
-    m_Value: 5.886537
+    m_Value: 14.0804825
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -816,8 +816,8 @@ MonoBehaviour:
     y: 448
     width: 941
     height: 479
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 10}
@@ -867,22 +867,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Enemy
+    - Assets/Scripts/Enemy/SimpleAI
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/Enemy
+  - Assets/Scripts/Enemy/SimpleAI
   m_LastFoldersGridSize: 16
   m_LastProjectPath: J:\- HD Backup\- Bibliotecas\Documents\- Desktop\Code\GitHub\ROGUELIKE\Roguelike
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 174}
-    m_SelectedIDs: ee6b0000
-    m_LastClickedID: 27630
-    m_ExpandedIDs: 00000000a86b0000aa6b0000ac6b0000ae6b0000b06b0000b26b0000b46b0000ee6b000000ca9a3b
+    scrollPos: {x: 0, y: 126}
+    m_SelectedIDs: 40710000
+    m_LastClickedID: 28992
+    m_ExpandedIDs: 000000006c6b00006e6b0000706b0000726b0000746b0000766b0000786b00008c77000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -910,7 +910,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a86b0000aa6b0000ac6b0000ae6b0000b06b0000b26b0000b46b0000
+    m_ExpandedIDs: 000000006c6b00006e6b0000706b0000726b0000746b0000766b0000786b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -935,9 +935,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 1cf9ffff
-    m_LastClickedInstanceID: -1764
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: c2daffff
+    m_LastClickedInstanceID: -9534
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000425e000000000000b01dffff567700003c62000046620000108b00006c5c0000cc7f0000b2630000c08f0000845c00006663000020610000f4780000d46a0000e6650000a4650000f0680000b4860000487c0000ec67000054f90100be940000b4680000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1050,7 +1050,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 181}
     m_SelectedIDs: fe680000
     m_LastClickedID: 26878
-    m_ExpandedIDs: 00000000a86b0000aa6b0000ac6b0000ae6b0000b06b0000b26b0000b46b0000
+    m_ExpandedIDs: 000000006c6b00006e6b0000706b0000726b0000746b0000766b0000786b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1078,7 +1078,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a86b0000aa6b0000ac6b0000ae6b0000b06b0000b26b0000b46b0000
+    m_ExpandedIDs: 000000006c6b00006e6b0000706b0000726b0000746b0000766b0000786b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1164,7 +1164,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1764
+  m_LastSelectedObjectID: -9534
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1268,7 +1268,7 @@ MonoBehaviour:
     m_CachedPref: -151
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1764
+  m_LastInspectedObjectInstanceID: -9534
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 1
@@ -1307,6 +1307,6 @@ MonoBehaviour:
     m_CachedPref: 50
     m_ControlHash: 1964396721
     m_PrefName: Preview_TilemapBrushInspector
-  m_Palette: {fileID: 7256246831256215432, guid: c8855683610ab064296248e99bb3a797, type: 3}
+  m_Palette: {fileID: 7256246831256215432, guid: 8a924f5ca2c621542bc4dc3522e8bd3b, type: 3}
   m_DrawGridGizmo: 1
   m_DrawGizmos: 1

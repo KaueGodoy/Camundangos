@@ -94,7 +94,7 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
         {
             // switch to the next patrol point
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
-            Debug.Log(patrolIndex);
+            //Debug.Log(patrolIndex);
         }
 
         CancelInvoke("PerformAttack");
