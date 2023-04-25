@@ -15,9 +15,11 @@ public class EnemyPatrolJump : MonoBehaviour
     public float attackRange = 5f;
     public float damage = 300f;
 
-    [Header("Jumo")]
+    [Header("Jump")]
     public float jumpForce = 15f;
-
+    public float jumpTime = 0.3f;
+    public float jumpCooldown = 1.5f;
+    private float lastJumpTime;
 
     public Transform target;
 
@@ -50,7 +52,7 @@ public class EnemyPatrolJump : MonoBehaviour
         float distance = Vector2.Distance(transform.position, target.position);
         direction = (target.position - transform.position).normalized;
         FlipSprite();
-
+        /*
         if (Vector2.Distance(transform.position, target.position) < 5f)
         {
             currentState = FishState.Jump;
@@ -58,15 +60,23 @@ public class EnemyPatrolJump : MonoBehaviour
         else
         {
             currentState = FishState.Patrol;
-        }
+        }*/
 
         //Patrol();
-
     }
 
     private void FixedUpdate()
     {
+        CheckTimers();
         EnemyBehavior(currentState);
+        Debug.Log("State: " + currentState);
+    }
+
+    private void CheckTimers()
+    {
+
+
+
     }
 
     private void EnemyBehavior(FishState currentState)
@@ -96,12 +106,27 @@ public class EnemyPatrolJump : MonoBehaviour
             Debug.Log(patrolIndex);
         }
 
+        if (Time.time - lastJumpTime > jumpCooldown)
+        {
+            currentState = FishState.Jump;
+            lastJumpTime = Time.time;
+        }
+
         CancelInvoke("PerformAttack");
     }
-
+    IEnumerator WaitForPatrol()
+    {
+        yield return new WaitForSeconds(jumpTime*2); // Wait for 1 second
+        currentState = FishState.Patrol; // Switch back to Patrol state
+    }
     private void Jump()
     {
+        rb.velocity = Vector2.zero; // Stop the Rigidbody2D
         rb.AddForce(new Vector2(0, jumpForce));
+
+        
+        lastJumpTime = Time.time;
+        StartCoroutine(WaitForPatrol());
     }
 
     private void Move()
@@ -122,6 +147,11 @@ public class EnemyPatrolJump : MonoBehaviour
         player.TakeDamage(damage);
         DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage, isCritical);
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Attack();
     }
 
     private void Idle()
