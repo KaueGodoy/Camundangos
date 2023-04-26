@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class EnemyPatrolJump : MonoBehaviour
 {
+    public Player player;
+
     [Header("Movement")]
     public float moveSpeed = 2f;
     public bool isFacingRight;
     public bool isPatrolling;
 
     [Header("Attack")]
-    public Player player;
     public float attackRange = 5f;
     public float damage = 300f;
 
@@ -19,64 +20,47 @@ public class EnemyPatrolJump : MonoBehaviour
     public float jumpForce = 15f;
     public float jumpTime = 0.3f;
     public float jumpCooldown = 1.5f;
-    private float lastJumpTime;
-
-    public Transform target;
-
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rb;
-    private Vector2 direction;
+    public float lowJumpMultiplier = 1f;
+    public float fallMultiplier = 2.5f;
+    public float lastJumpTime;
 
     [Header("Patrol")]
     public Transform[] patrolPoints;
     private int patrolIndex = 0;
 
+    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
+    private Vector2 direction;
+
     private bool isCritical;
+
+    private FishState currentState;
 
     public enum FishState
     {
         Patrol, Jump
     }
 
-    private FishState currentState = FishState.Patrol;
-
-
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
+    private void Start()
+    {
+        currentState = FishState.Patrol;
+    }
 
     private void Update()
     {
-        float distance = Vector2.Distance(transform.position, target.position);
-        direction = (target.position - transform.position).normalized;
         FlipSprite();
-        /*
-        if (Vector2.Distance(transform.position, target.position) < 5f)
-        {
-            currentState = FishState.Jump;
-        }
-        else
-        {
-            currentState = FishState.Patrol;
-        }*/
 
-        //Patrol();
     }
 
     private void FixedUpdate()
     {
-        CheckTimers();
         EnemyBehavior(currentState);
         Debug.Log("State: " + currentState);
-    }
-
-    private void CheckTimers()
-    {
-
-
-
     }
 
     private void EnemyBehavior(FishState currentState)
@@ -103,7 +87,6 @@ public class EnemyPatrolJump : MonoBehaviour
         {
             // switch to the next patrol point
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
-            Debug.Log(patrolIndex);
         }
 
         if (Time.time - lastJumpTime > jumpCooldown)
@@ -114,19 +97,20 @@ public class EnemyPatrolJump : MonoBehaviour
 
         CancelInvoke("PerformAttack");
     }
-    IEnumerator WaitForPatrol()
-    {
-        yield return new WaitForSeconds(jumpTime*2); // Wait for 1 second
-        currentState = FishState.Patrol; // Switch back to Patrol state
-    }
+
     private void Jump()
     {
-        rb.velocity = Vector2.zero; // Stop the Rigidbody2D
         rb.AddForce(new Vector2(0, jumpForce));
 
-        
         lastJumpTime = Time.time;
+
         StartCoroutine(WaitForPatrol());
+
+    }
+    IEnumerator WaitForPatrol()
+    {
+        yield return new WaitForSeconds(2f); // Wait for 1 second
+        currentState = FishState.Patrol; // Switch back to Patrol state
     }
 
     private void Move()
@@ -146,20 +130,20 @@ public class EnemyPatrolJump : MonoBehaviour
     {
         player.TakeDamage(damage);
         DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage, isCritical);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Attack();
+        if (player != null)
+        {
+            PerformAttack();
+        }
     }
 
     private void Idle()
     {
-        // do nothing
         direction = Vector2.zero;
         CancelInvoke("PerformAttack");
-        // Debug.Log("In idle state...");
     }
 
     private void FlipSprite()
