@@ -136,7 +136,8 @@ public class EnemyPatrolJump : MonoBehaviour
     {
         if (player != null)
         {
-            PerformAttack();
+            player.TakeDamage(damage);
+            DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage, isCritical);
         }
     }
 
