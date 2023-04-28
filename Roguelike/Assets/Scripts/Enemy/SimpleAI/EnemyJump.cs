@@ -7,13 +7,17 @@ public class EnemyJump : MonoBehaviour
     public float jumpRange = 5.0f;
     public float jumpSpeed = 5.0f;
     public float returnSpeed = 2.0f;
+    public float jumpCooldown = 2.0f;
 
     private bool isJumping = false;
-    private Vector3 initialPosition;
-    private Transform playerTransform;
+    private bool hasJumped = false;
+    private float lastJumpTime = -Mathf.Infinity;
 
     [Header("Damage")]
     public float damage = 100f;
+
+    private Vector3 initialPosition;
+    private Transform playerTransform;
 
 
     void Start()
@@ -26,12 +30,11 @@ public class EnemyJump : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        Debug.Log(distanceToPlayer);
-
-        if (distanceToPlayer <= jumpRange && !isJumping)
+        if (distanceToPlayer <= jumpRange && !hasJumped && Time.time >= lastJumpTime + jumpCooldown)
         {
-            isJumping = true;
+            hasJumped = true;
             Jump();
+            lastJumpTime = Time.time;
         }
 
         if (isJumping)
@@ -50,12 +53,14 @@ public class EnemyJump : MonoBehaviour
             if (transform.position.y <= initialPosition.y)
             {
                 transform.position = initialPosition;
+                hasJumped = false; // Reset the jump trigger
             }
         }
     }
 
     void Jump()
     {
+        isJumping = true;
         // Add code for any jump animation or sound effect
     }
 
