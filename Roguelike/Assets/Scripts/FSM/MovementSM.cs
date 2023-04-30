@@ -10,8 +10,8 @@ public class MovementSM : StateMachine
     public Moving movingState;
     [HideInInspector]
     public Jumping jumpingState;
-
-    public Rigidbody2D rigidbody;
+   
+    public new Rigidbody2D rigidbody;
     public SpriteRenderer spriteRenderer;
 
     public float speed = 4f;
