@@ -39,15 +39,15 @@ public class Player : MonoBehaviour
         playerDamage = GetComponent<PlayerDamage>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
-        characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed );
+        characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
         Debug.Log("Player init");
-        
+
     }
     void Start()
     {
         currentHealth = maxHealth;
         isAlive = true;
-     
+
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
         UpdateUI();
     }
@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
             {
                 ProcessInput();
                 Attack();
+                Ult();
                 UpdateUI();
             }
         }
@@ -138,6 +139,12 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Skill"))
         {
             attackRequest = true;
+        }
+
+        // ult
+        if (Input.GetButtonDown("Ult"))
+        {
+            ultAttackRequest = true;
         }
 
         // dash
@@ -244,7 +251,7 @@ public class Player : MonoBehaviour
         FindObjectOfType<AudioManager>().PlaySound("Hit");
         currentHealth += Mathf.FloorToInt(healAmount);
 
-        if(currentHealth >= maxHealth)
+        if (currentHealth >= maxHealth)
         {
             currentHealth = maxHealth;
         }
@@ -349,7 +356,7 @@ public class Player : MonoBehaviour
 
     #region Attack
 
-    [Header("Attack")]
+    [Header("Attack/Skill")]
     public Transform firePoint;
     public Transform spawnPoint;
     public GameObject pfProjectile;
@@ -420,6 +427,52 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Ult
+
+    [Header("Ult")]
+    public Transform UltSpawnPoint;
+    public GameObject pfUltProjectile;
+
+    public float ultAttackDelay = 0.4f;
+    private float ultAttackTimer = 0.0f;
+    public float ultTimeSinceAttack = 0.0f;
+
+    private bool ultAttackRequest = false;
+    private bool ultAttackAnimation = false;
+    private bool isUlting = false;
+
+    private void Ult()
+    {
+        if (ultAttackRequest)
+        {
+            ultAttackRequest = false;
+            ultAttackAnimation = true;
+
+            if (!isUlting)
+            {
+                isUlting = true;
+
+                Invoke("InstantiateUlt", ultAttackDelay - 0.1f);
+                Invoke("UltComplete", ultAttackDelay);
+
+            }
+        }
+    }
+
+    private void InstantiateUlt()
+    {
+        Instantiate(pfUltProjectile, UltSpawnPoint.position, UltSpawnPoint.rotation);
+        FindObjectOfType<AudioManager>().PlaySound("Attack");
+    }
+
+    private void UltComplete()
+    {
+        isUlting = false;
+    }
+
+
+    #endregion
+
     #region Dash
 
     [Header("Dash")]
@@ -485,9 +538,10 @@ public class Player : MonoBehaviour
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+
             firePoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
             spawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
-
+            UltSpawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
         }
 
     }
@@ -499,6 +553,7 @@ public class Player : MonoBehaviour
         isAlive = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
     private void Die()
     {
         FindObjectOfType<AudioManager>().PlaySound("GameOver");
