@@ -187,7 +187,6 @@ public class Player : MonoBehaviour
         if (attackAnimation)
         {
             attackTimer += Time.deltaTime;
-
         }
         if (attackTimer > attackDelay)
         {
@@ -203,6 +202,18 @@ public class Player : MonoBehaviour
             attackString = false;
             currentAttack = 0;
         }
+
+        // ult
+        if (ultAttackAnimation)
+        {
+            ultAttackTimer += Time.deltaTime;
+        }
+        if (ultAttackTimer > ultAttackDelay)
+        {
+            ultAttackAnimation = false;
+            ultAttackTimer = 0f;
+        }
+
     }
     #endregion
 
@@ -620,6 +631,10 @@ public class Player : MonoBehaviour
                 Debug.Log("Attack string number: " + currentAttack);
 
             }
+        }
+        else if (ultAttackAnimation)
+        {
+            ChangeAnimationState(PLAYER_ATTACK_STRING_02);
         }
         // jump
         else if (rb.velocity.y > .1f && !IsGrounded())

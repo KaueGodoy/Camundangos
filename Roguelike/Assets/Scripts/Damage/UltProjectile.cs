@@ -15,13 +15,14 @@ public class UltProjectile : MonoBehaviour
 
     [Header("Distance")]
     public float projectileDistance = 2f;
-    public bool isCritical;
 
     public CharacterStats characterStats { get; set; }
 
     private void Start()
     {
-        rb.velocity = transform.right * projectileSpeed;
+        //rb.velocity = transform.right * projectileSpeed;
+        rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);
+
     }
 
     private void Update()
@@ -31,18 +32,12 @@ public class UltProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // check collision with player - not destryoing the bullet
-        Player player = collision.GetComponent<Player>();
-        if (!player)
-        {
-            Destroy(gameObject);
-        }
-
         if (collision.tag == "Enemy")
         {
             collision.GetComponent<IEnemy>().TakeDamage(projectileDamage);
-            DamagePopup.Create(transform.position, (int)projectileDamage, isCritical);
+            DamagePopup.Create(transform.position, (int)projectileDamage);
             FindObjectOfType<AudioManager>().PlaySound("Hitmarker");
+            Destroy(gameObject);
         }
     }
 
