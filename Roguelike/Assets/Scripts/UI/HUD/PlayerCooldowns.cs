@@ -8,6 +8,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerCooldowns : MonoBehaviour
 {
+
+    public Player player;
+
     [Header("Skil")]
     [SerializeField] private TextMeshProUGUI cooldownText;
     [SerializeField] private Image foregroundImage;
@@ -16,6 +19,7 @@ public class PlayerCooldowns : MonoBehaviour
     public float cooldownTimer;
     public float cooldownValue = 5.00f;
     public bool triggerCooldown;
+    public bool offCooldown = true;
 
     public float target;
     public float reduceSpeed = 2f;
@@ -51,11 +55,11 @@ public class PlayerCooldowns : MonoBehaviour
 
     private void Update()
     {
-
+        /*
         if (Input.GetButtonDown("Skill"))
         {
             triggerCooldown = true;
-        }
+        }*/
 
 
         if (Input.GetButtonDown("Ult"))
@@ -73,8 +77,11 @@ public class PlayerCooldowns : MonoBehaviour
 
     public void TriggerCooldown()
     {
+
         if (triggerCooldown)
         {
+            offCooldown = false;
+
             cooldownTimer -= Time.deltaTime;
 
             int numberOfDecimals = 1;
@@ -90,11 +97,16 @@ public class PlayerCooldowns : MonoBehaviour
             cooldownText.gameObject.SetActive(true);
             cooldownText.text = convertedCooldownTimer + "";
 
+            player.attackRequest = false;
+
             if (cooldownTimer <= 0)
             {
+                offCooldown = true;
                 ResetCooldown();
             }
+
         }
+
     }
 
     public void UltTriggerCooldown()

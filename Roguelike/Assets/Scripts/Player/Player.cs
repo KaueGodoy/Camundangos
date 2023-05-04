@@ -379,14 +379,16 @@ public class Player : MonoBehaviour
 
     public int currentAttack = 0;
 
-    private bool attackRequest = false;
+    public bool attackRequest = false;
     private bool attackAnimation = false;
     private bool isAttacking = false;
     public bool attackString = false;
 
+    public PlayerCooldowns skillCooldowns;
+
     private void Attack()
     {
-        if (attackRequest)
+        if (attackRequest && skillCooldowns.offCooldown)
         {
             attackRequest = false;
             attackAnimation = true;
