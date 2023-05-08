@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
+
         }
 
         // Changes the height position of the player..
