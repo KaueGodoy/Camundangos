@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused;
     public GameObject pauseMenuUI;
+
+    public PlayerInput playerInput;
 
     private void Awake()
     {
@@ -16,7 +19,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || playerInput.actions["Pause"].triggered)
         {
             if(GameIsPaused)
             {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     private PlayerDamage playerDamage;
 
     public CharacterStats characterStats;
+    public PlayerInput playerInput;
 
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
@@ -97,7 +99,7 @@ public class Player : MonoBehaviour
         moveX = Input.GetAxisRaw("Horizontal");
 
         // reset jump counter
-        if (IsGrounded() && !Input.GetButton("Jump"))
+        if (IsGrounded() && (!Input.GetButton("Jump") || !playerInput.actions["Jump"].triggered))
         {
             jumpCounter = 0f;
             IsJumpingMidAir = false;
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
         }
 
         // jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") || playerInput.actions["Jump"].triggered)
         {
             jumpBufferCounter = jumpBufferLength;
 
@@ -136,19 +138,19 @@ public class Player : MonoBehaviour
         }
 
         // attack
-        if (Input.GetButtonDown("Skill"))
+        if (Input.GetButtonDown("Skill") || playerInput.actions["Skill"].triggered)
         {
             attackRequest = true;
         }
 
         // ult
-        if (Input.GetButtonDown("Ult"))
+        if (Input.GetButtonDown("Ult") || playerInput.actions["Ult"].triggered)
         {
             ultAttackRequest = true;
         }
 
         // dash
-        if (Input.GetButtonDown("Dash") && canDash)
+        if ((Input.GetButtonDown("Dash") || playerInput.actions["Dash"].triggered) && canDash)
         {
             dashRequest = true;
         }
@@ -450,27 +452,34 @@ public class Player : MonoBehaviour
     private float ultAttackTimer = 0.0f;
     public float ultTimeSinceAttack = 0.0f;
 
-    private bool ultAttackRequest = false;
+    public bool ultAttackRequest = false;
     private bool ultAttackAnimation = false;
     private bool isUlting = false;
 
     private void Ult()
     {
-        if (ultAttackRequest)
+        if (skillCooldowns.ultOffCooldown)
         {
-            ultAttackRequest = false;
-            ultAttackAnimation = true;
-
-            if (!isUlting)
+            if (ultAttackRequest)
             {
-                isUlting = true;
+                ultAttackRequest = false;
+                ultAttackAnimation = true;
 
-                Invoke("InstantiateUlt", ultAttackDelay - 0.1f);
-                Invoke("UltComplete", ultAttackDelay);
+                if (!isUlting)
+                {
+                    isUlting = true;
 
+                    Invoke("InstantiateUlt", ultAttackDelay - 0.1f);
+                    Invoke("UltComplete", ultAttackDelay);
+                }
             }
         }
+        else
+        {
+            ultAttackRequest = false; // Reset the ult attack request if the ult is on cooldown
+        }
     }
+
 
     private void InstantiateUlt()
     {

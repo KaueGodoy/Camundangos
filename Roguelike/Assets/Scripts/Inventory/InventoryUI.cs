@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class InventoryUI : MonoBehaviour
     InventoryUIItem ItemContainer { get; set; }
     bool MenuIsActive { get; set; }
     Item CurrentSelectedItem { get; set; }
+
+    public PlayerInput playerInput;
+
 
     private void Start()
     {
@@ -19,7 +23,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) || playerInput.actions["Inventory"].triggered)
         {
             MenuIsActive = !MenuIsActive;
             inventoryPanel.gameObject.SetActive(MenuIsActive);

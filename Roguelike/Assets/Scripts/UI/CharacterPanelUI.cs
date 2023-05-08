@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharacterPanelUI : MonoBehaviour
 {
     public RectTransform characterPanel;
     bool PanelIsActive { get; set; }
+
+    public PlayerInput playerInput;
 
     void Start()
     {
@@ -14,7 +17,7 @@ public class CharacterPanelUI : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) || playerInput.actions["Stats"].triggered)
         {
             PanelIsActive = !PanelIsActive;
             characterPanel.gameObject.SetActive(PanelIsActive);

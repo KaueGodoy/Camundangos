@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerWeaponController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerWeaponController : MonoBehaviour
     CharacterStats characterStats;
     Item currentlyEquippedItem;
     IWeapon weaponEquipped;
+
+    public PlayerInput playerInput;
 
     private void Start()
     {
@@ -59,7 +62,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") || playerInput.actions["Attack"].triggered)
         {
             if (EquippedWeapon != null)
             {

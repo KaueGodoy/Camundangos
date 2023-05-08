@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.InputSystem;
 
 public class PlayerCooldowns : MonoBehaviour
 {
 
     public Player player;
+    public PlayerInput playerInput;
 
     [Header("Skil")]
     [SerializeField] private TextMeshProUGUI cooldownText;
@@ -36,6 +38,8 @@ public class PlayerCooldowns : MonoBehaviour
     public float ultCooldownTimer;
     public float ultCooldownValue = 10.0f;
     public bool ultTriggerCooldown;
+    public bool ultOffCooldown = true;
+
 
     public float ultTarget;
     public float ultReduceSpeed = 2f;
@@ -55,14 +59,14 @@ public class PlayerCooldowns : MonoBehaviour
 
     private void Update()
     {
-        /*
-        if (Input.GetButtonDown("Skill"))
+
+        if (Input.GetButtonDown("Skill") || playerInput.actions["Skill"].triggered)
         {
             triggerCooldown = true;
-        }*/
+        }
 
 
-        if (Input.GetButtonDown("Ult"))
+        if (Input.GetButtonDown("Ult") || playerInput.actions["Ult"].triggered)
         {
             ultTriggerCooldown = true;
         }
@@ -113,6 +117,8 @@ public class PlayerCooldowns : MonoBehaviour
     {
         if (ultTriggerCooldown)
         {
+            ultOffCooldown = false;
+
             ultCooldownTimer -= Time.deltaTime;
 
             int numberOfDecimals = 1;
@@ -130,6 +136,7 @@ public class PlayerCooldowns : MonoBehaviour
 
             if (ultCooldownTimer <= 0)
             {
+                ultOffCooldown = true;
                 UltResetCooldown();
             }
         }
