@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     private PlayerDamage playerDamage;
 
     public CharacterStats characterStats;
-    public PlayerInput playerInput;
+
+    private PlayerControls playerControls;
 
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
@@ -44,6 +45,8 @@ public class Player : MonoBehaviour
         characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
         Debug.Log("Player init");
 
+        playerControls = new PlayerControls();
+
     }
     void Start()
     {
@@ -53,6 +56,16 @@ public class Player : MonoBehaviour
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
         UpdateUI();
     }
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
+
     void Update()
     {
         if (!PauseMenu.GameIsPaused)
@@ -96,10 +109,10 @@ public class Player : MonoBehaviour
     private void ProcessInput()
     {
         // horizontal movement
-        moveX = Input.GetAxisRaw("Horizontal");
+        //moveX = Input.GetAxisRaw("Horizontal");
 
         // reset jump counter
-        if (IsGrounded() && (!Input.GetButton("Jump") || !playerInput.actions["Jump"].triggered))
+        if (IsGrounded() && !playerControls.Player.Jump.triggered)
         {
             jumpCounter = 0f;
             IsJumpingMidAir = false;
@@ -117,7 +130,7 @@ public class Player : MonoBehaviour
         }
 
         // jump
-        if (Input.GetButtonDown("Jump") || playerInput.actions["Jump"].triggered)
+        if (playerControls.Player.Jump.triggered)
         {
             jumpBufferCounter = jumpBufferLength;
 
@@ -138,19 +151,19 @@ public class Player : MonoBehaviour
         }
 
         // attack
-        if (Input.GetButtonDown("Skill") || playerInput.actions["Skill"].triggered)
+        if (playerControls.Player.Skill.triggered)
         {
             attackRequest = true;
         }
 
         // ult
-        if (Input.GetButtonDown("Ult") || playerInput.actions["Ult"].triggered)
+        if (playerControls.Player.Ult.triggered)
         {
             ultAttackRequest = true;
         }
 
         // dash
-        if ((Input.GetButtonDown("Dash") || playerInput.actions["Dash"].triggered) && canDash)
+        if (playerControls.Player.Dash.triggered && canDash)
         {
             dashRequest = true;
         }
@@ -279,11 +292,30 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
     private float moveX;
 
+    private Vector2 moveH;
+    private Vector2 direction;
+
     private bool isFacingRight = true;
+
+    private void Move2()
+    {
+        rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+    }
 
     private void Move()
     {
-        rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+        moveH = playerControls.Player.Move.ReadValue<Vector2>();
+
+        direction = new Vector2(moveH.x * moveSpeed, rb.velocity.y);
+
+        if (direction != Vector2.zero)
+        {
+            rb.velocity = direction;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     #endregion

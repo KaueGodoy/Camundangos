@@ -11,7 +11,8 @@ public class PlayerCooldowns : MonoBehaviour
 {
 
     public Player player;
-    public PlayerInput playerInput;
+    
+    private PlayerControls playerControls;
 
     [Header("Skil")]
     [SerializeField] private TextMeshProUGUI cooldownText;
@@ -48,7 +49,10 @@ public class PlayerCooldowns : MonoBehaviour
     //Color ultDefaultColor = new Color32(255, 255, 255, 168);
     Color ultDefaultColor = new Color32(255, 150, 150, 168);
 
-
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
 
 
     private void Start()
@@ -57,16 +61,26 @@ public class PlayerCooldowns : MonoBehaviour
         UltResetCooldown();
     }
 
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
+
     private void Update()
     {
 
-        if (Input.GetButtonDown("Skill") || playerInput.actions["Skill"].triggered)
+        if (playerControls.Player.Skill.triggered)
         {
             triggerCooldown = true;
         }
 
 
-        if (Input.GetButtonDown("Ult") || playerInput.actions["Ult"].triggered)
+        if (playerControls.Player.Ult.triggered)
         {
             ultTriggerCooldown = true;
         }

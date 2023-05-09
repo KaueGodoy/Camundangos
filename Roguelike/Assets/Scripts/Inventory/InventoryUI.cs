@@ -11,8 +11,21 @@ public class InventoryUI : MonoBehaviour
     bool MenuIsActive { get; set; }
     Item CurrentSelectedItem { get; set; }
 
-    public PlayerInput playerInput;
+    private PlayerControls playerControls;
 
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
 
     private void Start()
     {
@@ -23,7 +36,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) || playerInput.actions["Inventory"].triggered)
+        if (playerControls.UI.Inventory.triggered)
         {
             MenuIsActive = !MenuIsActive;
             inventoryPanel.gameObject.SetActive(MenuIsActive);

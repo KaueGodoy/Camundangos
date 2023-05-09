@@ -1,30 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MobileControls : MonoBehaviour
 {
-    [SerializeField]
-    Player player;
-
     [Header("Movement")]
     public float moveSpeed = 5f;
 
     private Vector2 moveH;
     private Vector2 direction;
-    private Vector2 moveX;
 
     [Header("Jump")]
     public float jumpForce = 5f;
 
-    private PlayerInput playerInput;
+    private PlayerControls playerControls;
     private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+    }
 
     private void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
     }
 
     private void Update()
@@ -32,27 +43,27 @@ public class MobileControls : MonoBehaviour
         Move();
 
         // Player
-        if (playerInput.actions["Jump"].triggered)
+        if (playerControls.Player.Jump.triggered)
         {
             rb.velocity = Vector2.up * jumpForce;
         }
 
-        if (playerInput.actions["Attack"].triggered)
+        if (playerControls.Player.Attack.triggered)
         {
             Debug.Log("Attack triggered");
         }
 
-        if (playerInput.actions["Skill"].triggered)
+        if (playerControls.Player.Skill.triggered)
         {
             Debug.Log("Skill triggered");
         }
 
-        if (playerInput.actions["Ult"].triggered)
+        if (playerControls.Player.Ult.triggered)
         {
             Debug.Log("Ult triggered");
         }
 
-        if (playerInput.actions["Dash"].triggered)
+        if (playerControls.Player.Dash.triggered)
         {
             Debug.Log("Dash triggered");
         }
@@ -79,7 +90,7 @@ public class MobileControls : MonoBehaviour
 
     private void Move()
     {
-        moveH = playerInput.actions["Move"].ReadValue<Vector2>();
+        moveH = playerControls.Player.Move.ReadValue<Vector2>();
 
         direction = new Vector2(moveH.x * moveSpeed, rb.velocity.y);
 
