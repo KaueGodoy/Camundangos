@@ -104,7 +104,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 8000
   pfHealthBar: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
-  offset: {x: 0, y: 1, z: 0}
+  offset: {x: 0, y: 1.5, z: 0}
   pickupItem: {fileID: 6130498630557675459, guid: 7114ae008266a3d4a84455a166d349c1, type: 3}
 --- !u!114 &3913641605237920997
 MonoBehaviour:
@@ -144,18 +144,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.058647633, y: -0.019776016}
+  m_Offset: {x: -0.014411926, y: 0.053944707}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8913584, y: 1.5583851}
+  m_Size: {x: 1.5695953, y: 2.5314977}
   m_EdgeRadius: 0
 --- !u!50 &3913641605237920994
 Rigidbody2D:
