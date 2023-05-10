@@ -6,12 +6,18 @@ using UnityEngine;
 public class UltProjectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     [Header("Damage")]
     public float projectileDamage = 6f;
 
-    [Header("Speed")]
+    [Header("Speed/Angle")]
     public float projectileSpeed = 5f;
+    public float angle = 45f;
+
+    private float radians;
+    private float xVelocity;
+    private float yVelocity;
 
     [Header("Distance")]
     public float projectileDistance = 2f;
@@ -21,7 +27,28 @@ public class UltProjectile : MonoBehaviour
     private void Start()
     {
         //rb.velocity = transform.right * projectileSpeed;
-        rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);
+        //rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);
+        radians = angle * Mathf.Deg2Rad;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        Player player = FindObjectOfType<Player>();
+
+        if (player.isFacingRight)
+        {
+            //rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);     
+            xVelocity = projectileSpeed * Mathf.Cos(radians);
+            yVelocity = -projectileSpeed * Mathf.Sin(radians);
+            rb.velocity = new Vector2(xVelocity, yVelocity);
+
+        }
+        else
+        {
+            // rb.velocity = new Vector2(-projectileSpeed, -projectileSpeed);
+            spriteRenderer.flipX = false;
+            xVelocity = -projectileSpeed * Mathf.Cos(radians);
+            yVelocity = -projectileSpeed * Mathf.Sin(radians);
+            rb.velocity = new Vector2(xVelocity, yVelocity);
+        }
 
     }
 

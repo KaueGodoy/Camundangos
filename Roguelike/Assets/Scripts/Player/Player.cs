@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
     private Vector2 moveH;
     private Vector2 direction;
 
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
 
     private void Move2()
     {
@@ -584,7 +584,7 @@ public class Player : MonoBehaviour
 
     private void Flip()
     {
-        if (isFacingRight && moveX < 0f || !isFacingRight && moveX > 0f)
+        if (isFacingRight && moveH.x < 0f || !isFacingRight && moveH.x > 0f)
         {
             // flipping the player using scale
 
@@ -690,7 +690,7 @@ public class Player : MonoBehaviour
             ChangeAnimationState(PLAYER_FALL);
         }
         // move
-        else if (moveX > 0 || moveX < 0)
+        else if (moveH.x > 0 || moveH.x < 0)
         {
             ChangeAnimationState(PLAYER_WALK);
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MobileControls : MonoBehaviour
+public class MobileControlsTemplate : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -69,7 +69,8 @@ public class MobileControls : MonoBehaviour
         }
 
         // UI
-        /*
+        /* using player input
+         * 
         if (playerInput.actions["Pause"].triggered)
         {
             Debug.Log("Pause triggered");
@@ -84,6 +85,7 @@ public class MobileControls : MonoBehaviour
         {
             Debug.Log("Stats triggered");
         }
+
         */
 
     }
