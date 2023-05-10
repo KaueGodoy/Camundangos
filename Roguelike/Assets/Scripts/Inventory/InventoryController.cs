@@ -29,10 +29,15 @@ public class InventoryController : MonoBehaviour
         consumableController = GetComponent<ConsumableController>();
 
         GiveItem("sword");
-        GiveItem("potion_log");
         GiveItem("staff");
+        GiveItem("potion_log");
         GiveItem("potion_hp");
         GiveItem("coin");
+        GiveItem("potion_log");
+        GiveItem("potion_log");
+        GiveItem("potion_log");
+        GiveItem("potion_log");
+        GiveItem("potion_log");
 
     }
 
