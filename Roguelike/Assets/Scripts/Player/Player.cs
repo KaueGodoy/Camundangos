@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -14,7 +15,11 @@ public class Player : MonoBehaviour
 
     public CharacterStats characterStats;
 
+
     private PlayerControls playerControls;
+
+    [SerializeField]
+    private InputActionReference playerInputAction;
 
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
@@ -59,11 +64,13 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
+        playerInputAction.action.Enable();
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
+        playerInputAction.action.Disable();
     }
 
     void Update()
@@ -386,7 +393,7 @@ public class Player : MonoBehaviour
         if (rb.velocity.y < 0f)
         {
             rb.gravityScale = fallMultiplier;
-        }
+        }/*
         else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.gravityScale = lowJumpMultiplier;
@@ -394,7 +401,24 @@ public class Player : MonoBehaviour
         else
         {
             rb.gravityScale = 1f;
-        }
+        }*/
+
+        //!Input.GetButton("Jump)
+        //!playerControls.Player.Jump.triggered
+
+
+        playerInputAction.action.started += context =>
+         {
+             if (rb.velocity.y > 0 && context.interaction is HoldInteraction)
+             {
+                 rb.gravityScale = lowJumpMultiplier;
+             }
+             else if (context.interaction is PressInteraction)
+             {
+                 rb.gravityScale = 1f;
+             }
+         };
+
     }
 
     #endregion Jump
