@@ -8,18 +8,14 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    // components
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
-    private PlayerDamage playerDamage;
-
     public CharacterStats characterStats;
 
-
+    private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
     private PlayerControls playerControls;
+    [SerializeField] private InputActionReference playerInputAction;
 
-    [SerializeField]
-    private InputActionReference playerInputAction;
+    private PlayerDamage playerDamage;
 
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
@@ -257,7 +253,6 @@ public class Player : MonoBehaviour
     private float hitTimer = 0.0f;
     private bool isHit = false;
 
-
     public void TakeDamage(float damageAmount)
     {
         Debug.Log("Player takes: " + damageAmount + " damage");
@@ -268,7 +263,6 @@ public class Player : MonoBehaviour
 
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
 
-
         if (currentHealth <= 0)
         {
             UpdateUI();
@@ -276,7 +270,6 @@ public class Player : MonoBehaviour
             UIEventHandler.HealthChanged(0, this.maxHealth);
             Invoke("RestartLevel", deathAnimationTime);
         }
-
     }
 
     private void Heal(float healAmount)
@@ -304,7 +297,7 @@ public class Player : MonoBehaviour
 
     public bool isFacingRight = true;
 
-    private void Move2()
+    private void MoveOld()
     {
         rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
     }
@@ -331,7 +324,8 @@ public class Player : MonoBehaviour
 
     [Header("Jump")]
     public float jumpForce = 5f;
-    public float lowJumpMultiplier = 1f;
+    public float tapJumpMultiplier = 1f;
+    public float holdJumpMultiplier = 1f;
     public float fallMultiplier = 2.5f;
     [Space]
     public float jumpCounter = 0f;
@@ -378,22 +372,35 @@ public class Player : MonoBehaviour
 
     private void BetterJump()
     {
-        /*
-        if (rb.velocity.y < 0f)
-        {
-            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
-
-        }*/
-
         // changing gravity directly
         if (rb.velocity.y < 0f)
         {
             rb.gravityScale = fallMultiplier;
-        }/*
+        }
+
+        playerInputAction.action.canceled += context =>
+        {
+            if (rb.velocity.y > 0)
+            {
+                rb.gravityScale = tapJumpMultiplier;
+                Debug.Log("tap jump");
+            }
+
+        };
+        playerInputAction.action.performed += context =>
+        {
+            rb.gravityScale = holdJumpMultiplier;
+            Debug.Log("hold jump");
+        };
+
+        /* OLD
+          
+         
+        // changing gravity directly
+        if (rb.velocity.y < 0f)
+        {
+            rb.gravityScale = fallMultiplier;
+        }
         else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.gravityScale = lowJumpMultiplier;
@@ -401,24 +408,38 @@ public class Player : MonoBehaviour
         else
         {
             rb.gravityScale = 1f;
+        }
+
+        --- velocity instead of gravity
+
+        if (rb.velocity.y < 0f)
+        {
+            rb.velocity += Vector2.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector2.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+        }
+
+        */
+    }
+    public void JumpPlayerInputComponent(InputAction.CallbackContext context)
+    {
+        /*
+        if (rb.velocity.y < 0f)
+        {
+            rb.gravityScale = fallMultiplier;
+        }
+        if (context.performed && IsGrounded())
+        {
+            rb.gravityScale = 1f;
+            rb.velocity = Vector2.up * jumpForce;
+        }
+        if (context.canceled && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.gravityScale = tapJumpMultiplier;
         }*/
-
-        //!Input.GetButton("Jump)
-        //!playerControls.Player.Jump.triggered
-
-
-        playerInputAction.action.started += context =>
-         {
-             if (rb.velocity.y > 0 && context.interaction is HoldInteraction)
-             {
-                 rb.gravityScale = lowJumpMultiplier;
-             }
-             else if (context.interaction is PressInteraction)
-             {
-                 rb.gravityScale = 1f;
-             }
-         };
-
     }
 
     #endregion Jump
@@ -477,8 +498,6 @@ public class Player : MonoBehaviour
         {
             currentAttack = 1;
         }
-
-
     }
 
     private void InstantiateAttack()
@@ -535,7 +554,6 @@ public class Player : MonoBehaviour
             ultAttackRequest = false; // Reset the ult attack request if the ult is on cooldown
         }
     }
-
 
     private void InstantiateUlt()
     {
@@ -662,7 +680,6 @@ public class Player : MonoBehaviour
 
         animator.Play(newAnimation);
         currentAnimation = newAnimation;
-
     }
 
     private void UpdateAnimationState()
