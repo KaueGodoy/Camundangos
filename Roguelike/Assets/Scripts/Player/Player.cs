@@ -404,14 +404,12 @@ public class Player : MonoBehaviour
             if (rb.velocity.y > 0)
             {
                 rb.gravityScale = tapJumpMultiplier;
-                Debug.Log("tap jump");
             }
 
         };
         playerInputAction.action.performed += context =>
         {
             rb.gravityScale = holdJumpMultiplier;
-            Debug.Log("hold jump");
         };
 
         /* OLD
