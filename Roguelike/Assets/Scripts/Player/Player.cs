@@ -56,7 +56,28 @@ public class Player : MonoBehaviour
 
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
         UpdateUI();
+
+        // handling input through events
+        //playerControls.Player.Jump.performed += _ => Jump2();
+        //ReadInput();
     }
+
+    private void ReadInput()
+    {
+        // list of player inputs with events being subscribed and calling the functions to perform the action using the start method
+        playerControls.Player.Jump.performed += context => Jump3(context.ReadValue<float>());
+    }
+
+    private void Jump2()
+    {
+        Debug.Log("Handling input with events calling the methods instead of having the methods in the update function");
+    }
+
+    private void Jump3(float jumpForce)
+    {
+        Debug.Log("Using the context to pass a value ");
+    }
+
     private void OnEnable()
     {
         playerControls.Enable();
@@ -172,13 +193,13 @@ public class Player : MonoBehaviour
         }
 
         // damage test DELETE
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             TakeDamage(damageAmount);
         }
 
         // heal test DELETE
-        if (Input.GetButtonDown("Pickup"))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             Heal(healAmount);
         }
