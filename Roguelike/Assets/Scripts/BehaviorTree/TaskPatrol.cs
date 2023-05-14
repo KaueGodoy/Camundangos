@@ -30,6 +30,7 @@ public class TaskPatrol : Node
             if (_waitCounter > _waitTime)
             {
                 _waiting = false;
+                // animation = true
             }
         }
         else
@@ -42,11 +43,13 @@ public class TaskPatrol : Node
                 _waiting = true;
 
                 _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
+                // animation = false
             }
             else
             {
                 _transform.position = Vector2.MoveTowards(_transform.position, wp.position, EnemyBT.speed * Time.deltaTime);
                 //_transform.LookAt(wp.position);
+                Debug.Log("Moving to waypoints");
 
             }
         }
