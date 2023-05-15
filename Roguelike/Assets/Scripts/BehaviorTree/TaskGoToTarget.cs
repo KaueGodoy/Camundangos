@@ -17,6 +17,13 @@ public class TaskGoToTarget : Node
     {
         Transform target = (Transform)GetData("target");
 
+        if (target == null)
+        {
+            state = NodeState.Failure;
+            return state;
+        }
+
+
         if (Vector2.Distance(_transform.position, target.position) <= EnemyBT.fovRange * 20)
         {
             _transform.position = Vector2.MoveTowards(
