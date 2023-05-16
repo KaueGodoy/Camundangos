@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthSystem
@@ -8,6 +9,7 @@ public class HealthSystem
     public event EventHandler OnHealthChanged;
     public event EventHandler OnDead;
 
+    public event EventHandler OnDamaged;
 
     private float currentHealth;
     private float maxHealth;
@@ -30,6 +32,8 @@ public class HealthSystem
 
     public void Damage(float damageAmount)
     {
+        OnDamaged?.Invoke(this, EventArgs.Empty);
+
         currentHealth -= damageAmount;
         if (currentHealth < 0)
         {
