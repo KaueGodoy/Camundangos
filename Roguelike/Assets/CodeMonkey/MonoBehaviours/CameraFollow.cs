@@ -21,7 +21,7 @@ namespace CodeMonkey.MonoBehaviours {
      * Place on Camera GameObject
      * */
     public class CameraFollow : MonoBehaviour {
-
+        
         public static CameraFollow Instance { get; private set; }
 
         private Camera myCamera;

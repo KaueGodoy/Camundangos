@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour, IEnemy
 {
-
     [Header("Health")]
     public float currentHealth;
     public float maxHealth = 200;
@@ -24,7 +23,6 @@ public class Slime : MonoBehaviour, IEnemy
 
     private CharacterStats characterStats;
     private bool isCritical;
-
 
     void Start()
     {
@@ -78,6 +76,7 @@ public class Slime : MonoBehaviour, IEnemy
     public void Die()
     {
         DropLoot();
+        healthSystem.Die();
         Destroy(gameObject);
     }
 

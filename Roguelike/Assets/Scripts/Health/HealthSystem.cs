@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthSystem
@@ -32,20 +31,20 @@ public class HealthSystem
 
     public void Damage(float damageAmount)
     {
-        OnDamaged?.Invoke(this, EventArgs.Empty);
-
         currentHealth -= damageAmount;
+
         if (currentHealth < 0)
         {
             currentHealth = 0;
         }
-        if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
+        OnHealthChanged?.Invoke(this, EventArgs.Empty);
+        OnDamaged?.Invoke(this, EventArgs.Empty);
 
         if (currentHealth <= 0)
         {
             Die();
         }
-    }
+    }   
 
     public void Die()
     {

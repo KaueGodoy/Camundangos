@@ -13,6 +13,7 @@ public class ColliderTrigger : MonoBehaviour
         if (player != null)
         {
             OnPlayerEnterTrigger?.Invoke(this, EventArgs.Empty);
+            Destroy(gameObject);
         }
     }
 }

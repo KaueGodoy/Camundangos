@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,13 +19,17 @@ public class BossBattle : MonoBehaviour
     [SerializeField] private GameObject pfEnemy;
     [SerializeField] private Slime slime;
 
+    public EventHandler BossOnDead;
+
+    private Stage stage;
 
     private List<Vector3> spawnPositionList;
-    private Stage stage;
+    private List<GameObject> enemySpawnList;
 
     private void Awake()
     {
         spawnPositionList = new List<Vector3>();
+        enemySpawnList = new List<GameObject>();
 
         foreach (Transform spawnPosition in transform.Find("SpawnPositions"))
         {
@@ -39,7 +45,11 @@ public class BossBattle : MonoBehaviour
     {
         colliderTrigger.OnPlayerEnterTrigger += ColliderTrigger_OnPlayerEnterTrigger;
 
-        slime.GetComponent<HealthSystem>().OnDamaged += BossBattle_OnDamaged;
+        //slime.GetComponent<HealthSystem>().OnDamaged += BossBattle_OnDamaged;
+        //slime.GetComponent<HealthSystem>().OnDead += BossBattle_OnDead;
+        BossOnDead += BossBattle_OnDead;
+
+
     }
 
     private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
@@ -48,24 +58,70 @@ public class BossBattle : MonoBehaviour
         colliderTrigger.OnPlayerEnterTrigger -= ColliderTrigger_OnPlayerEnterTrigger;
     }
 
-    private void BossBattle_OnDamaged(object sender, System.EventArgs e)
+    private void Update()
+    {
+        if (slime.currentHealth != slime.maxHealth)
+        {
+            CheckStage();
+        }
+
+
+    }
+
+    private void CheckStage()
     {
         float healthPercent = slime.currentHealth / slime.maxHealth;
 
         switch (stage)
         {
-            default:
             case Stage.Stage_1:
-                if (healthPercent >= 0.7f)
+                if (healthPercent <= 0.7f)
                 {
                     StartNextStage();
                 }
                 break;
-
-
+            case Stage.Stage_2:
+                if (healthPercent <= 0.3f)
+                {
+                    StartNextStage();
+                }
+                break;
         }
-        // takes damage
 
+        if (healthPercent <= 0)
+        {
+            slime.currentHealth = 0;
+            BossOnDead?.Invoke(this, EventArgs.Empty);
+        }
+        Debug.Log("Health: " + slime.currentHealth + " Percent: " + healthPercent);
+    }
+
+    /*
+    private void BossBattle_OnDamaged(object sender, System.EventArgs e)
+    {
+        switch (stage)
+        {
+            case Stage.Stage_1:
+                if ()
+                {
+                    StartNextStage();
+                }
+                break;
+            case Stage.Stage_2:
+                if ()
+                {
+                    StartNextStage();
+                }
+                break;
+        }
+
+    }*/
+
+    private void BossBattle_OnDead(object sender, System.EventArgs e)
+    {
+        Debug.Log("Boss dead");
+        DestroyAllEnemies();
+        CancelInvoke("SpawnEnemy");
     }
 
     private void StartBattle()
@@ -79,7 +135,6 @@ public class BossBattle : MonoBehaviour
     {
         switch (stage)
         {
-            default:
             case Stage.WaitingToStart:
                 stage = Stage.Stage_1;
                 break;
@@ -90,13 +145,59 @@ public class BossBattle : MonoBehaviour
                 stage = Stage.Stage_3;
                 break;
         }
+        Debug.Log("Starting next stage: " + stage);
     }
 
 
     private void SpawnEnemy()
     {
-        Vector3 spawnPosition = spawnPositionList[Random.Range(0, spawnPositionList.Count)];
-        Instantiate(pfEnemy, spawnPosition, Quaternion.identity);
-        //Invoke("SpawnEnemy", .5f);
+        int amount = 0;
+        foreach (GameObject enemy in enemySpawnList)
+        {
+            
+            if (enemySpawnList.Count >= 3)
+            {
+                CancelInvoke("SpawnEnemy");
+
+                //enemySpawnList.Remove(enemy);
+            }
+            else
+            {
+                Invoke("SpawnEnemy", 0.5f);
+
+            }
+
+
+        }
+
+        Vector3 spawnPosition = spawnPositionList[UnityEngine.Random.Range(0, spawnPositionList.Count)];
+        GameObject slime = Instantiate(pfEnemy, spawnPosition, Quaternion.identity);
+
+        Invoke("SpawnEnemy", 0.5f);
+
+        enemySpawnList.Add(slime);
+        Debug.Log(enemySpawnList.Count);
+
+        //CheckEnemyAmount();
+
+    }
+
+    private void CheckEnemyAmount()
+    {
+
+
+        /*
+        if (enemySpawnList.Count > 3)
+        {
+            CancelInvoke("SpawnEnemy");
+        }*/
+    }
+
+    private void DestroyAllEnemies()
+    {
+        foreach (GameObject enemy in enemySpawnList)
+        {
+            Destroy(enemy);
+        }
     }
 }
