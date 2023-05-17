@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossBattle : MonoBehaviour
@@ -16,15 +14,19 @@ public class BossBattle : MonoBehaviour
     }
 
     [SerializeField] private ColliderTrigger colliderTrigger;
-    [SerializeField] private GameObject pfEnemy;
-    [SerializeField] private Slime slime;
 
-    public EventHandler BossOnDead;
+    [SerializeField] private GameObject pfEnemy;
+    [SerializeField] private GameObject pfSlime;
+    [SerializeField] private GameObject pfSkeleton;
+
+    [SerializeField] private Slime slime;
 
     private Stage stage;
 
     private List<Vector3> spawnPositionList;
     private List<GameObject> enemySpawnList;
+
+    public EventHandler BossOnDead;
 
     private void Awake()
     {
@@ -37,8 +39,6 @@ public class BossBattle : MonoBehaviour
         }
 
         stage = Stage.WaitingToStart;
-
-
     }
 
     private void Start()
@@ -48,8 +48,6 @@ public class BossBattle : MonoBehaviour
         //slime.GetComponent<HealthSystem>().OnDamaged += BossBattle_OnDamaged;
         //slime.GetComponent<HealthSystem>().OnDead += BossBattle_OnDead;
         BossOnDead += BossBattle_OnDead;
-
-
     }
 
     private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
@@ -64,6 +62,7 @@ public class BossBattle : MonoBehaviour
         {
             CheckStage();
         }
+
 
 
     }
@@ -137,60 +136,76 @@ public class BossBattle : MonoBehaviour
         {
             case Stage.WaitingToStart:
                 stage = Stage.Stage_1;
+                StageOne();
                 break;
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
+                StageTwo();
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;
+                StageThree();
                 break;
         }
         Debug.Log("Starting next stage: " + stage);
     }
 
-
     private void SpawnEnemy()
     {
-        int amount = 0;
+        Vector3 spawnPosition = spawnPositionList[UnityEngine.Random.Range(0, spawnPositionList.Count)];
+
+        int randomNumber = UnityEngine.Random.Range(0, 100);
+
+        pfEnemy = pfSlime;
+
+        if (randomNumber < 60) pfEnemy = pfSlime;
+        if (randomNumber < 20) pfEnemy = pfSkeleton;
+
+        pfEnemy = Instantiate(pfEnemy, spawnPosition, Quaternion.identity);
+
+        Invoke("SpawnEnemy", 0.5f);
+
+        //pfSlime = Instantiate(pfSlime, spawnPosition, Quaternion.identity);
+        //pfSkeleton = Instantiate(pfSkeleton, spawnPosition, Quaternion.identity);
+
+        enemySpawnList.Add(pfEnemy);
+        //Debug.Log(enemySpawnList.Count);
+    }
+
+    private void StageOne()
+    {
+        Debug.Log("This is the stage 1");
+    }
+
+    private void StageTwo()
+    {
+        Debug.Log("This is the stage 2");
+    }
+
+    private void StageThree()
+    {
+        Debug.Log("This is the stage 3");
+    }
+
+    private void CheckEnemyAmount()
+    {
+        //int amount = 0;
         foreach (GameObject enemy in enemySpawnList)
         {
-            
-            if (enemySpawnList.Count >= 3)
+
+            if (enemySpawnList.Count <= 3)
             {
-                CancelInvoke("SpawnEnemy");
+                Invoke("SpawnEnemy", 0.5f);
 
                 //enemySpawnList.Remove(enemy);
             }
             else
             {
-                Invoke("SpawnEnemy", 0.5f);
-
+                CancelInvoke("SpawnEnemy");
             }
 
 
         }
-
-        Vector3 spawnPosition = spawnPositionList[UnityEngine.Random.Range(0, spawnPositionList.Count)];
-        GameObject slime = Instantiate(pfEnemy, spawnPosition, Quaternion.identity);
-
-        Invoke("SpawnEnemy", 0.5f);
-
-        enemySpawnList.Add(slime);
-        Debug.Log(enemySpawnList.Count);
-
-        //CheckEnemyAmount();
-
-    }
-
-    private void CheckEnemyAmount()
-    {
-
-
-        /*
-        if (enemySpawnList.Count > 3)
-        {
-            CancelInvoke("SpawnEnemy");
-        }*/
     }
 
     private void DestroyAllEnemies()
