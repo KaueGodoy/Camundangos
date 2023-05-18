@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
-using UnityEditor.U2D;
 
 public class TaskPatrol : Node
 {
@@ -49,7 +48,7 @@ public class TaskPatrol : Node
             {
                 _transform.position = Vector2.MoveTowards(_transform.position, wp.position, EnemyBT.speed * Time.deltaTime);
                 //_transform.LookAt(wp.position);
-                Debug.Log("Moving to waypoints");
+                //Debug.Log("Moving to waypoints");
 
             }
         }

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BossBattle : MonoBehaviour
 {
@@ -14,18 +16,18 @@ public class BossBattle : MonoBehaviour
     }
 
     [SerializeField] private ColliderTrigger colliderTrigger;
+    [SerializeField] private Slime slime;
 
-    [SerializeField] private GameObject pfEnemy;
+    private GameObject pfEnemy;
     [SerializeField] private GameObject pfSlime;
     [SerializeField] private GameObject pfSkeleton;
-
-    [SerializeField] private Slime slime;
 
     private Stage stage;
 
     private List<Vector3> spawnPositionList;
-    private List<GameObject> enemySpawnList;
+    public List<GameObject> enemySpawnList;
 
+    public EventHandler BossOnDamaged;
     public EventHandler BossOnDead;
 
     private void Awake()
@@ -47,7 +49,12 @@ public class BossBattle : MonoBehaviour
 
         //slime.GetComponent<HealthSystem>().OnDamaged += BossBattle_OnDamaged;
         //slime.GetComponent<HealthSystem>().OnDead += BossBattle_OnDead;
+        BossOnDamaged += BossBattle_OnDamaged;
         BossOnDead += BossBattle_OnDead;
+
+        UpdateUI();
+        healthBar.gameObject.SetActive(false);
+
     }
 
     private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
@@ -60,10 +67,13 @@ public class BossBattle : MonoBehaviour
     {
         if (slime.currentHealth != slime.maxHealth)
         {
-            CheckStage();
+            BossOnDamaged?.Invoke(this, EventArgs.Empty);
+            //CheckStage();
         }
 
+        UpdateUI();
 
+      
 
     }
 
@@ -90,37 +100,53 @@ public class BossBattle : MonoBehaviour
         if (healthPercent <= 0)
         {
             slime.currentHealth = 0;
+            BossOnDamaged -= BossBattle_OnDamaged;
+
             BossOnDead?.Invoke(this, EventArgs.Empty);
         }
         Debug.Log("Health: " + slime.currentHealth + " Percent: " + healthPercent);
     }
 
-    /*
+
     private void BossBattle_OnDamaged(object sender, System.EventArgs e)
     {
+        Debug.Log("Boss damaged");
+
+        float healthPercent = slime.currentHealth / slime.maxHealth;
+
         switch (stage)
         {
             case Stage.Stage_1:
-                if ()
+                if (healthPercent <= 0.7f)
                 {
                     StartNextStage();
                 }
                 break;
             case Stage.Stage_2:
-                if ()
+                if (healthPercent <= 0.3f)
                 {
                     StartNextStage();
                 }
                 break;
         }
 
-    }*/
+        if (healthPercent <= 0)
+        {
+            UpdateUI();
+            slime.currentHealth = 0;
+            BossOnDamaged -= BossBattle_OnDamaged;
+
+            BossOnDead?.Invoke(this, EventArgs.Empty);
+        }
+        Debug.Log("Health: " + slime.currentHealth + " Percent: " + healthPercent);
+    }
 
     private void BossBattle_OnDead(object sender, System.EventArgs e)
     {
         Debug.Log("Boss dead");
         DestroyAllEnemies();
         CancelInvoke("SpawnEnemy");
+        Destroy(healthBar.gameObject);
     }
 
     private void StartBattle()
@@ -128,6 +154,8 @@ public class BossBattle : MonoBehaviour
         Debug.Log("Start battle");
         StartNextStage();
         SpawnEnemy();
+        healthBar.gameObject.SetActive(true);
+
     }
 
     private void StartNextStage()
@@ -150,7 +178,37 @@ public class BossBattle : MonoBehaviour
         Debug.Log("Starting next stage: " + stage);
     }
 
+    [SerializeField]
+    private int maxEnemyCount = 10; // Set your desired maximum enemy count here
+
     private void SpawnEnemy()
+    {
+        if (enemySpawnList.Count < maxEnemyCount)
+        {
+            Vector3 spawnPosition = spawnPositionList[UnityEngine.Random.Range(0, spawnPositionList.Count)];
+            int randomNumber = UnityEngine.Random.Range(0, 100);
+
+            pfEnemy = pfSlime;
+
+            if (randomNumber < 60)
+            {
+                pfEnemy = pfSlime;
+            }
+            else if (randomNumber < 20)
+            {
+                pfEnemy = pfSkeleton;
+            }
+
+            pfEnemy = Instantiate(pfEnemy, spawnPosition, Quaternion.identity);
+            enemySpawnList.Add(pfEnemy);
+
+            Invoke("SpawnEnemy", 0.5f);
+
+        }
+    }
+
+
+    private void SpawnEnemy2()
     {
         Vector3 spawnPosition = spawnPositionList[UnityEngine.Random.Range(0, spawnPositionList.Count)];
 
@@ -214,5 +272,15 @@ public class BossBattle : MonoBehaviour
         {
             Destroy(enemy);
         }
+
+        BossOnDead -= BossBattle_OnDead;
+
+    }
+
+    [SerializeField] private BossHealthBar healthBar;
+    private string bossName = "Slime Boss";
+    public void UpdateUI()
+    {
+        healthBar.UpdateHealthBar(slime.maxHealth, slime.currentHealth, bossName);
     }
 }
