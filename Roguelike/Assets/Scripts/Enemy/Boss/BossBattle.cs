@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.GraphicsBuffer;
 
 public class BossBattle : MonoBehaviour
 {
@@ -73,7 +74,6 @@ public class BossBattle : MonoBehaviour
 
         UpdateUI();
 
-      
 
     }
 
@@ -153,7 +153,6 @@ public class BossBattle : MonoBehaviour
     {
         Debug.Log("Start battle");
         StartNextStage();
-        SpawnEnemy();
         healthBar.gameObject.SetActive(true);
 
     }
@@ -186,84 +185,65 @@ public class BossBattle : MonoBehaviour
         if (enemySpawnList.Count < maxEnemyCount)
         {
             Vector3 spawnPosition = spawnPositionList[UnityEngine.Random.Range(0, spawnPositionList.Count)];
+
             int randomNumber = UnityEngine.Random.Range(0, 100);
 
             pfEnemy = pfSlime;
 
-            if (randomNumber < 60)
-            {
-                pfEnemy = pfSlime;
-            }
-            else if (randomNumber < 20)
-            {
-                pfEnemy = pfSkeleton;
-            }
+            if (randomNumber < 60) pfEnemy = pfSlime;
+            if (randomNumber < 20) pfEnemy = pfSkeleton;
 
             pfEnemy = Instantiate(pfEnemy, spawnPosition, Quaternion.identity);
             enemySpawnList.Add(pfEnemy);
 
-            Invoke("SpawnEnemy", 0.5f);
-
         }
-    }
-
-
-    private void SpawnEnemy2()
-    {
-        Vector3 spawnPosition = spawnPositionList[UnityEngine.Random.Range(0, spawnPositionList.Count)];
-
-        int randomNumber = UnityEngine.Random.Range(0, 100);
-
-        pfEnemy = pfSlime;
-
-        if (randomNumber < 60) pfEnemy = pfSlime;
-        if (randomNumber < 20) pfEnemy = pfSkeleton;
-
-        pfEnemy = Instantiate(pfEnemy, spawnPosition, Quaternion.identity);
 
         Invoke("SpawnEnemy", 0.5f);
+        Debug.Log("number of enemies alive: " + enemySpawnList.Count);
 
-        //pfSlime = Instantiate(pfSlime, spawnPosition, Quaternion.identity);
-        //pfSkeleton = Instantiate(pfSkeleton, spawnPosition, Quaternion.identity);
+    }
 
-        enemySpawnList.Add(pfEnemy);
-        //Debug.Log(enemySpawnList.Count);
+    public void RemoveEnemyFromList(GameObject enemy)
+    {
+        enemySpawnList.Remove(enemy);
     }
 
     private void StageOne()
     {
         Debug.Log("This is the stage 1");
+        SpawnEnemy();
+
     }
 
     private void StageTwo()
     {
         Debug.Log("This is the stage 2");
+        CancelInvoke("SpawnEnemy");
+
+        float upForce = 5f;
+        slime.transform.position = new Vector3(slime.transform.position.x, slime.transform.position.y + upForce);
+
+        /*
+        Rigidbody2D slimeRb = slime.GetComponent<Rigidbody2D>();
+        float forceMagnitude = 3f;
+        float targetY = 5f;
+        float currentY = slime.transform.position.y;
+        float displacement = targetY - currentY;
+
+        if (Mathf.Abs(displacement) > 0.1f)
+        {
+            Vector2 force = new Vector2(0f, displacement * forceMagnitude);
+            slimeRb.AddForce(force);
+        }
+        else
+        {
+            slimeRb.velocity = Vector2.zero;
+        }*/
     }
 
     private void StageThree()
     {
         Debug.Log("This is the stage 3");
-    }
-
-    private void CheckEnemyAmount()
-    {
-        //int amount = 0;
-        foreach (GameObject enemy in enemySpawnList)
-        {
-
-            if (enemySpawnList.Count <= 3)
-            {
-                Invoke("SpawnEnemy", 0.5f);
-
-                //enemySpawnList.Remove(enemy);
-            }
-            else
-            {
-                CancelInvoke("SpawnEnemy");
-            }
-
-
-        }
     }
 
     private void DestroyAllEnemies()
