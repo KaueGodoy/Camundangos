@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
 
 public class BossBattle : MonoBehaviour
 {
@@ -18,6 +15,7 @@ public class BossBattle : MonoBehaviour
 
     [SerializeField] private ColliderTrigger colliderTrigger;
     [SerializeField] private Slime slime;
+    private EnemyPatrolOnly slimePatrol;
 
     private GameObject pfEnemy;
     [SerializeField] private GameObject pfSlime;
@@ -47,6 +45,8 @@ public class BossBattle : MonoBehaviour
     private void Start()
     {
         colliderTrigger.OnPlayerEnterTrigger += ColliderTrigger_OnPlayerEnterTrigger;
+        slimePatrol = slime.GetComponent<EnemyPatrolOnly>();
+        slimePatrol.enabled = false;
 
         //slime.GetComponent<HealthSystem>().OnDamaged += BossBattle_OnDamaged;
         //slime.GetComponent<HealthSystem>().OnDead += BossBattle_OnDead;
@@ -212,6 +212,9 @@ public class BossBattle : MonoBehaviour
     {
         Debug.Log("This is the stage 1");
         SpawnEnemy();
+        slimePatrol.enabled = true;
+
+        //slime.GetComponent<EnemyPatrolOnly>().enabled = true;
 
     }
 
@@ -219,6 +222,10 @@ public class BossBattle : MonoBehaviour
     {
         Debug.Log("This is the stage 2");
         CancelInvoke("SpawnEnemy");
+        slimePatrol.patrolEnabled = false;
+        //slimePatrol.enabled = false;
+
+        //slime.GetComponent<EnemyPatrolOnly>().enabled = false;
 
         float upForce = 5f;
         slime.transform.position = new Vector3(slime.transform.position.x, slime.transform.position.y + upForce);

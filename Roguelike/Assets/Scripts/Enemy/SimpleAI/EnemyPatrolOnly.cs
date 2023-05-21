@@ -32,6 +32,8 @@ public class EnemyPatrolOnly : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 direction;
 
+    public bool patrolEnabled = true;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,14 +42,23 @@ public class EnemyPatrolOnly : MonoBehaviour
 
     private void Update()
     {
-        FlipSprite();
-        Patrol();
+        if (!patrolEnabled)
+        {
+            StopMovement();
+        }
+        else
+        {
+            FlipSprite();
+            Patrol();
+        }
     }
-
 
     private void FixedUpdate()
     {
-        CheckTimers();
+        if (patrolEnabled)
+        {
+            CheckTimers();
+        }
     }
 
     private void CheckTimers()
@@ -128,6 +139,11 @@ public class EnemyPatrolOnly : MonoBehaviour
             Vector3 direction = collision.gameObject.transform.position - transform.position;
             playerRb.AddForce(direction.normalized * knockbackForce, ForceMode2D.Impulse);
         }
+    }
+
+    public void StopMovement()
+    {
+        rb.velocity = Vector3.zero;
     }
 
     private void FlipSprite()
