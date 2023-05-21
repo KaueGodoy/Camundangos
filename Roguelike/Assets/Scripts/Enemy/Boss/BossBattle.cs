@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class BossBattle : MonoBehaviour
@@ -34,7 +35,7 @@ public class BossBattle : MonoBehaviour
         spawnPositionList = new List<Vector3>();
         enemySpawnList = new List<GameObject>();
 
-        foreach (Transform spawnPosition in transform.Find("SpawnPositions"))
+        foreach (Transform spawnPosition in slime.transform.Find("SpawnPositions"))
         {
             spawnPositionList.Add(spawnPosition.position);
         }
@@ -66,13 +67,23 @@ public class BossBattle : MonoBehaviour
 
     private void Update()
     {
-        if (slime.currentHealth != slime.maxHealth)
+        if (slime.IsDamaged())
         {
             BossOnDamaged?.Invoke(this, EventArgs.Empty);
             //CheckStage();
         }
 
         UpdateUI();
+
+
+        if (slime.IsAlive())
+        {
+            for (int i = 0; i < spawnPositionList.Count; i++)
+            {
+                Transform spawnPosition = slime.transform.Find("SpawnPositions").GetChild(i);
+                spawnPositionList[i] = spawnPosition.position;
+            }
+        }
 
 
     }
