@@ -16,6 +16,7 @@ public class BossBattle : MonoBehaviour
 
     [SerializeField] private ColliderTrigger colliderTrigger;
     [SerializeField] private Slime slime;
+    [SerializeField] private Player player;
     private EnemyPatrolOnly slimePatrol;
 
     private GameObject pfEnemy;
@@ -85,6 +86,10 @@ public class BossBattle : MonoBehaviour
             }
         }
 
+        if (stage == Stage.Stage_2)
+        {
+            TeleportEnemy();
+        }
 
     }
 
@@ -231,33 +236,47 @@ public class BossBattle : MonoBehaviour
 
     private void StageTwo()
     {
+        // exiting stage one
         Debug.Log("This is the stage 2");
         CancelInvoke("SpawnEnemy");
         slimePatrol.patrolEnabled = false;
-        //slimePatrol.enabled = false;
-
         //slime.GetComponent<EnemyPatrolOnly>().enabled = false;
 
-        float upForce = 5f;
-        slime.transform.position = new Vector3(slime.transform.position.x, slime.transform.position.y + upForce);
+        // starting stage two
 
-        /*
-        Rigidbody2D slimeRb = slime.GetComponent<Rigidbody2D>();
-        float forceMagnitude = 3f;
-        float targetY = 5f;
-        float currentY = slime.transform.position.y;
-        float displacement = targetY - currentY;
 
-        if (Mathf.Abs(displacement) > 0.1f)
-        {
-            Vector2 force = new Vector2(0f, displacement * forceMagnitude);
-            slimeRb.AddForce(force);
-        }
-        else
-        {
-            slimeRb.velocity = Vector2.zero;
-        }*/
+
+
+
     }
+
+    [SerializeField] private float yOffset = 6.5f;
+    public bool hasTeleported = false;
+    public float fallingTime = 0.5f;
+
+    private void TeleportEnemy()
+    {
+        if (!hasTeleported)
+        {
+            slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+            //hasTeleported = true;
+
+        }
+        if (hasTeleported)
+        {
+            Debug.Log("Falling down");
+            //StartCoroutine(FallDown());
+        }
+
+    }
+
+    private IEnumerator FallDown()
+    {
+        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y);
+        yield return new WaitForSeconds(fallingTime);
+        hasTeleported = false;
+    }
+
 
     private void StageThree()
     {
