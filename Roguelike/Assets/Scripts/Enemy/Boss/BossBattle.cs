@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class BossBattle : MonoBehaviour
@@ -163,6 +162,7 @@ public class BossBattle : MonoBehaviour
         DestroyAllEnemies();
         CancelInvoke("SpawnEnemy");
         Destroy(healthBar.gameObject);
+        StopAllCoroutines();
     }
 
     private void StartBattle()
@@ -258,21 +258,76 @@ public class BossBattle : MonoBehaviour
     {
         if (!hasTeleported)
         {
-            slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
-            //hasTeleported = true;
-
+            StartCoroutine(FallDown());
         }
-        if (hasTeleported)
-        {
-            Debug.Log("Falling down");
-            //StartCoroutine(FallDown());
-        }
-
     }
+
+    private IEnumerator FallDown2()
+    {
+        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+        hasTeleported = true;
+        yield return new WaitForSeconds(fallingTime);
+
+        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y);
+        yield return new WaitForSeconds(fallingTime);
+        hasTeleported = false;
+    }
+    public float fallYOffset = 1.4f;
+    public float fallingCooldown = 1f;
+
 
     private IEnumerator FallDown()
     {
-        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y);
+        // resets condition
+        hasTeleported = true;
+
+        float elapsedTime = 0f;
+        float totalDuration = fallingTime;
+
+        // falls down at the speed based on the fallingTime value
+        while (elapsedTime < totalDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / totalDuration); // Normalize the time
+
+            // gets slime current position and place where should fall current position right before falling
+            Vector3 startPosition = slime.transform.position;
+            Vector3 fallPosition = new Vector3(player.transform.position.x, player.transform.position.y + fallYOffset);
+
+            // falls down
+            slime.transform.position = Vector3.Lerp(startPosition, fallPosition, t);
+            yield return null;
+        }
+
+        // disintegration animation
+
+        // enters cooldown
+        yield return new WaitForSeconds(fallingTime + fallingCooldown);
+        // gets current position during this frame
+        Vector3 targetPosition = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+        // teleports above the player
+        slime.transform.position = targetPosition;
+        hasTeleported = false;
+    }
+
+    private IEnumerator CopyPlayerMovement()
+    {
+        Vector3 startPosition = slime.transform.position;
+        Vector3 targetPosition = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+
+        float elapsedTime = 0f;
+        float totalDuration = fallingTime;
+
+        while (elapsedTime < totalDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / totalDuration); // Normalize the time
+
+            slime.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        slime.transform.position = targetPosition;
         yield return new WaitForSeconds(fallingTime);
         hasTeleported = false;
     }

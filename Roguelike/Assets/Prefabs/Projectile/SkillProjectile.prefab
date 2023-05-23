@@ -150,8 +150,9 @@ MonoBehaviour:
   rb: {fileID: 6486536768056531318}
   projectileDamage: 10000
   burnAmount: 4
-  projectileSpeed: 15
+  projectileSpeed: 25
   projectileDistance: 1.5
+  isCritical: 0
 --- !u!95 &-6407014167967339395
 Animator:
   serializedVersion: 5
@@ -172,3 +173,4 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -64,7 +64,7 @@ public class UltProjectile : MonoBehaviour
             collision.GetComponent<IEnemy>().TakeDamage(projectileDamage);
             DamagePopup.Create(transform.position, (int)projectileDamage);
             FindObjectOfType<AudioManager>().PlaySound("Hitmarker");
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
