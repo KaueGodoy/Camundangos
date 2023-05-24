@@ -13,19 +13,16 @@ public class BossBattle : MonoBehaviour
         Stage_3,
     }
 
+    [Header("Initial Stage")]
     [SerializeField] private ColliderTrigger colliderTrigger;
     [SerializeField] private Slime slime;
     [SerializeField] private Player player;
-    private EnemyPatrolOnly slimePatrol;
 
-    private GameObject pfEnemy;
-    [SerializeField] private GameObject pfSlime;
-    [SerializeField] private GameObject pfSkeleton;
+    // idea
+    // count time when battle starts and let the skeleton hp be the slime remaining hp * time passed since battle
+    // skeletonBoss.maxHealth = slime.currentHealth * timer;
 
     private Stage stage;
-
-    private List<Vector3> spawnPositionList;
-    public List<GameObject> enemySpawnList;
 
     public EventHandler BossOnDamaged;
     public EventHandler BossOnDead;
@@ -46,6 +43,7 @@ public class BossBattle : MonoBehaviour
     private void Start()
     {
         colliderTrigger.OnPlayerEnterTrigger += ColliderTrigger_OnPlayerEnterTrigger;
+
         slimePatrol = slime.GetComponent<EnemyPatrolOnly>();
         slimePatrol.enabled = false;
 
@@ -59,29 +57,22 @@ public class BossBattle : MonoBehaviour
 
     }
 
-    private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
-    {
-        StartBattle();
-        colliderTrigger.OnPlayerEnterTrigger -= ColliderTrigger_OnPlayerEnterTrigger;
-    }
-
     private void Update()
     {
         if (slime.IsDamaged())
         {
             BossOnDamaged?.Invoke(this, EventArgs.Empty);
-            //CheckStage();
         }
 
-        UpdateUI();
-
-
-        if (slime.IsAlive())
+        if (stage == Stage.Stage_1)
         {
-            for (int i = 0; i < spawnPositionList.Count; i++)
+            if (slime.IsAlive())
             {
-                Transform spawnPosition = slime.transform.Find("SpawnPositions").GetChild(i);
-                spawnPositionList[i] = spawnPosition.position;
+                for (int i = 0; i < spawnPositionList.Count; i++)
+                {
+                    Transform spawnPosition = slime.transform.Find("SpawnPositions").GetChild(i);
+                    spawnPositionList[i] = spawnPosition.position;
+                }
             }
         }
 
@@ -90,38 +81,27 @@ public class BossBattle : MonoBehaviour
             TeleportEnemy();
         }
 
+        if (stage == Stage.Stage_3)
+        {
+            //SpawnSkeleton();
+            if (skeletonBoss.currentHealth <= 0)
+            {
+                EndBattle();
+            }
+        }
+
+        if (healthBar != null)
+        {
+
+            UpdateUI();
+        }
     }
 
-    private void CheckStage()
+    private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
     {
-        float healthPercent = slime.currentHealth / slime.maxHealth;
-
-        switch (stage)
-        {
-            case Stage.Stage_1:
-                if (healthPercent <= 0.7f)
-                {
-                    StartNextStage();
-                }
-                break;
-            case Stage.Stage_2:
-                if (healthPercent <= 0.3f)
-                {
-                    StartNextStage();
-                }
-                break;
-        }
-
-        if (healthPercent <= 0)
-        {
-            slime.currentHealth = 0;
-            BossOnDamaged -= BossBattle_OnDamaged;
-
-            BossOnDead?.Invoke(this, EventArgs.Empty);
-        }
-        Debug.Log("Health: " + slime.currentHealth + " Percent: " + healthPercent);
+        StartBattle();
+        colliderTrigger.OnPlayerEnterTrigger -= ColliderTrigger_OnPlayerEnterTrigger;
     }
-
 
     private void BossBattle_OnDamaged(object sender, System.EventArgs e)
     {
@@ -161,7 +141,7 @@ public class BossBattle : MonoBehaviour
         Debug.Log("Boss dead");
         DestroyAllEnemies();
         CancelInvoke("SpawnEnemy");
-        Destroy(healthBar.gameObject);
+        //Destroy(healthBar.gameObject);
         StopAllCoroutines();
     }
 
@@ -193,8 +173,30 @@ public class BossBattle : MonoBehaviour
         Debug.Log("Starting next stage: " + stage);
     }
 
-    [SerializeField]
-    private int maxEnemyCount = 10; // Set your desired maximum enemy count here
+    #region Stage 01
+
+    /// <summary>
+    /// patrol between two points (movement, flip)
+    /// spawns enemies (instantiate prefabs)
+    /// </summary>
+
+    [Header("Stage 01")]
+    [SerializeField] private GameObject pfSlime;
+    [SerializeField] private GameObject pfSkeleton;
+    [SerializeField] private int maxEnemyCount = 10; // Set your desired maximum enemy count here
+
+    private EnemyPatrolOnly slimePatrol;
+    private GameObject pfEnemy;
+
+    private List<Vector3> spawnPositionList;
+
+    public List<GameObject> enemySpawnList;
+    private void StageOne()
+    {
+        Debug.Log("This is the stage 1");
+        SpawnEnemy();
+        slimePatrol.enabled = true;
+    }
 
     private void SpawnEnemy()
     {
@@ -224,15 +226,18 @@ public class BossBattle : MonoBehaviour
         enemySpawnList.Remove(enemy);
     }
 
-    private void StageOne()
-    {
-        Debug.Log("This is the stage 1");
-        SpawnEnemy();
-        slimePatrol.enabled = true;
+    #endregion
 
-        //slime.GetComponent<EnemyPatrolOnly>().enabled = true;
+    #region Stage 02
 
-    }
+    [Header("Stage 02")]
+    [SerializeField] private float yOffset = 6.5f;
+
+    [SerializeField] private float fallYOffset = 1.4f;
+    [SerializeField] private float fallingTime = 0.5f;
+    [SerializeField] private float fallingCooldown = 1f;
+
+    [SerializeField] private bool hasTeleported = false;
 
     private void StageTwo()
     {
@@ -243,16 +248,7 @@ public class BossBattle : MonoBehaviour
         //slime.GetComponent<EnemyPatrolOnly>().enabled = false;
 
         // starting stage two
-
-
-
-
-
     }
-
-    [SerializeField] private float yOffset = 6.5f;
-    public bool hasTeleported = false;
-    public float fallingTime = 0.5f;
 
     private void TeleportEnemy()
     {
@@ -261,20 +257,6 @@ public class BossBattle : MonoBehaviour
             StartCoroutine(FallDown());
         }
     }
-
-    private IEnumerator FallDown2()
-    {
-        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
-        hasTeleported = true;
-        yield return new WaitForSeconds(fallingTime);
-
-        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y);
-        yield return new WaitForSeconds(fallingTime);
-        hasTeleported = false;
-    }
-    public float fallYOffset = 1.4f;
-    public float fallingCooldown = 1f;
-
 
     private IEnumerator FallDown()
     {
@@ -306,7 +288,22 @@ public class BossBattle : MonoBehaviour
         // gets current position during this frame
         Vector3 targetPosition = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
         // teleports above the player
-        slime.transform.position = targetPosition;
+        if (slime != null)
+        {
+            slime.transform.position = targetPosition;
+        }
+        hasTeleported = false;
+    }
+
+
+    private IEnumerator FallDown2()
+    {
+        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+        hasTeleported = true;
+        yield return new WaitForSeconds(fallingTime);
+
+        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y);
+        yield return new WaitForSeconds(fallingTime);
         hasTeleported = false;
     }
 
@@ -332,10 +329,58 @@ public class BossBattle : MonoBehaviour
         hasTeleported = false;
     }
 
+    #endregion
+
+    #region Stage 03
+
+    /// <summary>
+    /// slime dies (setActive(false))
+    /// spanws skeleton with the slime current hp (Destroy(slime.gameobject)
+    /// </summary>
+
+    [Header("Stage 03")]
+    [SerializeField] private GameObject pfskeletonBoss;
+    private GameObject pfskeletonBossInstance;
+
+    [SerializeField] private Skeleton skeletonBoss;
+    private float skeletonHealthFromSlime;
+    private float skeletonMaxHealth;
 
     private void StageThree()
     {
         Debug.Log("This is the stage 3");
+        skeletonHealthFromSlime = slime.currentHealth;
+        skeletonMaxHealth = skeletonBoss.maxHealth;
+        //slime.gameObject.SetActive(false);
+        SpawnSkeleton();
+
+        slime.currentHealth = 0;
+        //Destroy(slime.gameObject);
+    }
+
+    private void SpawnSkeleton()
+    {
+        pfskeletonBossInstance = Instantiate(pfskeletonBoss, slime.transform.position, Quaternion.identity);
+
+        skeletonBoss = pfskeletonBossInstance.GetComponent<Skeleton>();
+        skeletonBoss.maxHealth = skeletonHealthFromSlime;
+        //skeletonBoss.currentHealth = skeletonHealthFromSlime;
+
+
+        Debug.Log("This is the skeleton health value from slime: " + skeletonHealthFromSlime +
+                    " This is the skeleton health value changed: " + skeletonBoss.currentHealth +
+                    " Old max health from prefab: " + skeletonMaxHealth);
+
+    }
+
+    #endregion
+
+    #region End Battle
+
+    private void EndBattle()
+    {
+        skeletonBoss.currentHealth = 0;
+        UpdateUI();
     }
 
     private void DestroyAllEnemies()
@@ -346,13 +391,39 @@ public class BossBattle : MonoBehaviour
         }
 
         BossOnDead -= BossBattle_OnDead;
-
     }
 
+    #endregion
+
+    #region UI
+
+    /// <summary>
+    /// Updates UI Elements
+    /// </summary>
+
+    [Header("UI")]
     [SerializeField] private BossHealthBar healthBar;
+
     private string bossName = "Slime Boss";
+    private string bossName2 = "Skeleton Boss";
+
     public void UpdateUI()
     {
-        healthBar.UpdateHealthBar(slime.maxHealth, slime.currentHealth, bossName);
+        if (slime.IsAlive())
+        {
+            healthBar.UpdateHealthBar(slime.maxHealth, slime.currentHealth, bossName);
+        }
+
+        if (slime.isDead())
+        {
+            healthBar.UpdateHealthBar((int)skeletonBoss.maxHealth, (int)skeletonBoss.currentHealth, bossName2);
+        }
+
+        if (skeletonBoss.isDead())
+        {
+            healthBar.gameObject.SetActive(false);
+        }
     }
+
+    #endregion
 }

@@ -7,6 +7,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     [Header("Health")]
     public float currentHealth;
     public float maxHealth = 200;
+    private readonly float healthThreshold = 0.0f;
 
     [Header("HP Bar")]
     public Transform pfHealthBar;
@@ -31,6 +32,7 @@ public class Skeleton : MonoBehaviour, IEnemy
             new LootDrop("coin", 100),
         };
     }
+
     public void PerformAttack()
     {
 
@@ -83,5 +85,20 @@ public class Skeleton : MonoBehaviour, IEnemy
             PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
             instance.ItemDrop = item;
         }
+    }
+
+    public bool IsAlive()
+    {
+        return currentHealth > healthThreshold;
+    }
+
+    public bool isDead()
+    {
+        return currentHealth <= healthThreshold;
+    }
+
+    public bool IsDamaged()
+    {
+        return currentHealth < maxHealth;
     }
 }
