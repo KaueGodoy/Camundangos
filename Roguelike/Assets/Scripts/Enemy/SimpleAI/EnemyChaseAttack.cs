@@ -12,11 +12,11 @@ public class EnemyChaseAttack : MonoBehaviour
     public bool isFacingRight;
 
     [Header("Attack")]
-    public Player player;
     public float attackRange = 5f;
     public float damage = 300f;
+    private Player player;
 
-    public Transform target;
+    private Transform target;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -28,6 +28,28 @@ public class EnemyChaseAttack : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player"); // Using tag
+                                                                              //GameObject playerObject = GameObject.Find("Player"); // Using name
+
+        if (playerObject != null)
+        {
+            // Get the Player component from the player object
+            player = playerObject.GetComponent<Player>();
+            target = playerObject.transform;
+
+            if (player == null)
+            {
+                Debug.LogError("Player component not found on the player object!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object not found!");
+        }
     }
 
     private void Update()
