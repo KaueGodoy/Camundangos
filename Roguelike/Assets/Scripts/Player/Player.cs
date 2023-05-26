@@ -470,17 +470,19 @@ public class Player : MonoBehaviour
     public Transform spawnPoint;
     public GameObject pfProjectile;
 
-    public float attackDelay = 0.4f;
     private float attackTimer = 0.0f;
+
+    public float attackDelay = 0.4f;
     public float timeSinceAttack = 0.0f;
     public float attackStringReset = 0.8f;
 
     public int currentAttack = 0;
 
     public bool attackRequest = false;
+    public bool attackString = false;
+
     private bool attackAnimation = false;
     private bool isAttacking = false;
-    public bool attackString = false;
 
     public PlayerCooldowns skillCooldowns;
 

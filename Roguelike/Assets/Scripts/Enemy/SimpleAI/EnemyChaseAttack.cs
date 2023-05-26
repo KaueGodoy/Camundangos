@@ -1,28 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyChaseAttack : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed = 2f;
-    public float chaseRange = 10f;
-    public bool isChasing = false;
-    public bool isFacingRight;
-
-    [Header("Attack")]
-    public float attackRange = 5f;
-    public float damage = 300f;
-    private Player player;
-
     private Transform target;
-
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector2 direction;
-
-    private bool isCritical;
 
     private void Awake()
     {
@@ -32,8 +17,7 @@ public class EnemyChaseAttack : MonoBehaviour
 
     private void Start()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player"); // Using tag
-                                                                              //GameObject playerObject = GameObject.Find("Player"); // Using name
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
         if (playerObject != null)
         {
@@ -54,6 +38,8 @@ public class EnemyChaseAttack : MonoBehaviour
 
     private void Update()
     {
+        UpdateCooldowns();
+
         float distance = Vector2.Distance(transform.position, target.position);
         direction = (target.position - transform.position).normalized;
         FlipSprite();
@@ -74,6 +60,40 @@ public class EnemyChaseAttack : MonoBehaviour
 
     }
 
+    private void UpdateCooldowns()
+    {
+        // attack
+        if (attackAnimation)
+        {
+            attackTimer += Time.deltaTime;
+        }
+        if (attackTimer > attackDelay)
+        {
+            attackAnimation = false;
+            attackTimer = 0f;
+        }
+    }
+
+    #region Movement
+
+    /// <summary>
+    /// move the character left and right
+    /// chase the player 
+    /// flip the sprite
+    /// </summary>
+
+    [Header("Movement")]
+    public float moveSpeed = 2f;
+    public float chaseRange = 10f;
+    public bool isChasing = false;
+    public bool isFacingRight;
+
+
+    private void Move()
+    {
+        rb.velocity = direction * moveSpeed;
+    }
+
     private void Chase()
     {
         isChasing = true;
@@ -85,15 +105,41 @@ public class EnemyChaseAttack : MonoBehaviour
         }
     }
 
-    private void Move()
+    private void FlipSprite()
     {
-        rb.velocity = direction * moveSpeed;
+        if (direction.x > 0f && isFacingRight || direction.x < 0f && !isFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
     }
+
+    #endregion
+
+
+    #region Attack
+
+    /// <summary>
+    /// attack the player when within range
+    /// </summary>
+
+    [Header("Attack")]
+    public float attackRange = 5f;
+    public float damage = 300f;
+
+    public bool attackAnimation = false;
+
+    public float attackTimer = 0.0f;
+    public float attackDelay = 0.4f;
+    public float timeSinceAttack = 0.0f;
+
+    private Player player;
 
     private void Attack()
     {
         isChasing = false;
         direction = Vector2.zero;
+        attackAnimation = true;
 
         if (!IsInvoking("PerformAttack"))
         {
@@ -104,13 +150,18 @@ public class EnemyChaseAttack : MonoBehaviour
     public void PerformAttack()
     {
         player.TakeDamage(damage);
-        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage, isCritical);
-
+        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage);
     }
+
+    #endregion
+
+    /// <summary>
+    /// do nothing
+    /// play idle animation
+    /// </summary>
 
     private void Idle()
     {
-        // do nothing
         isChasing = false;
         direction = Vector2.zero;
 
@@ -118,15 +169,5 @@ public class EnemyChaseAttack : MonoBehaviour
         {
             CancelInvoke("PerformAttack");
         }
-    }
-
-    private void FlipSprite()
-    {
-        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
-        }
-
     }
 }

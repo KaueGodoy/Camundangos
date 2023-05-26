@@ -352,15 +352,17 @@ public class BossBattle : MonoBehaviour
         skeletonHealthFromSlime = slime.currentHealth;
         skeletonMaxHealth = skeletonBoss.maxHealth;
         //slime.gameObject.SetActive(false);
+
         SpawnSkeleton();
 
-        slime.currentHealth = 0;
+        slime.isDead();
         //Destroy(slime.gameObject);
     }
 
     private void SpawnSkeleton()
     {
-        pfskeletonBossInstance = Instantiate(pfskeletonBoss, slime.transform.position, Quaternion.identity);
+        Vector3 skeletonBossSpawnPosition = new Vector3(slime.transform.position.x, slime.transform.position.y + 10f);
+        pfskeletonBossInstance = Instantiate(pfskeletonBoss, skeletonBossSpawnPosition, Quaternion.identity);
 
         skeletonBoss = pfskeletonBossInstance.GetComponent<Skeleton>();
         skeletonBoss.maxHealth = skeletonHealthFromSlime;
@@ -414,14 +416,14 @@ public class BossBattle : MonoBehaviour
             healthBar.UpdateHealthBar(slime.maxHealth, slime.currentHealth, bossName);
         }
 
-        if (slime.isDead())
+        if (stage == Stage.Stage_3)
         {
             healthBar.UpdateHealthBar((int)skeletonBoss.maxHealth, (int)skeletonBoss.currentHealth, bossName2);
         }
 
         if (skeletonBoss.isDead())
         {
-            healthBar.gameObject.SetActive(false);
+            //healthBar.gameObject.SetActive(false);
         }
     }
 

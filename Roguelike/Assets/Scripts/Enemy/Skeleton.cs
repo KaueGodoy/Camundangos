@@ -7,11 +7,18 @@ public class Skeleton : MonoBehaviour, IEnemy
     [Header("Health")]
     public float currentHealth;
     public float maxHealth = 200;
+    public float deathAnimationTime = 0.4f;
     private readonly float healthThreshold = 0.0f;
 
     [Header("HP Bar")]
     public Transform pfHealthBar;
     public Vector3 offset = new Vector3(0, 1f);
+
+    [Header("Timers")]
+    public float hitCooldown = 0.3f;
+    public bool isHit = false;
+
+    public float hitTimer = 0.0f;
 
     [Header("Drop")]
     public PickupItem pickupItem;
@@ -45,6 +52,8 @@ public class Skeleton : MonoBehaviour, IEnemy
             InstantiateHealthBar();
         }
 
+        isHit = true;
+
         currentHealth -= damage;
         healthSystem.Damage(damage);
 
@@ -53,7 +62,7 @@ public class Skeleton : MonoBehaviour, IEnemy
 
         if (currentHealth <= 0)
         {
-            Die();
+            Invoke("Die", deathAnimationTime);
         }
     }
 

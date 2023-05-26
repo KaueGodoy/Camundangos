@@ -6,6 +6,7 @@ public class SkeletonBossAnimationController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Skeleton skeleton;
+    private EnemyChaseAttack enemyBehavior;
 
     // Start is called before the first frame update
     void Start()
@@ -13,11 +14,24 @@ public class SkeletonBossAnimationController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         skeleton = GetComponent<Skeleton>();
         animator = GetComponent<Animator>();
+        enemyBehavior = GetComponent<EnemyChaseAttack>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // hit
+        if (skeleton.isHit)
+        {
+            skeleton.hitTimer += Time.deltaTime;
+        }
+
+        if (skeleton.hitTimer > skeleton.hitCooldown)
+        {
+            skeleton.isHit = false;
+            skeleton.hitTimer = 0f;
+        }
+
         UpdateAnimationState();
     }
 
@@ -46,23 +60,15 @@ public class SkeletonBossAnimationController : MonoBehaviour
             ChangeAnimationState(SkeletonBossDeath);
         }
         // hit
-        else if (skeleton.IsDamaged())
+        else if (skeleton.isHit)
         {
             ChangeAnimationState(SkeletonBossHit);
         }
         // attack
-        
-        /*
-        else if (attackAnimation)
+        else if (enemyBehavior.attackAnimation)
         {
-            if (currentAttack == 1)
-            {
-                ChangeAnimationState(PLAYER_ATTACK_STRING_01);
-                Debug.Log("Attack string number: " + currentAttack);
-
-            }
-        }*/
-
+            ChangeAnimationState(SkeletonBossAttack);
+        }
         // move
         else if (rb.velocity.x > 0 || rb.velocity.x < 0)
         {
