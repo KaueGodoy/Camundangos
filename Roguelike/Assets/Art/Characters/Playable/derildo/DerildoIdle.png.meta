@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c1aee3161ce75248bef629468455292
+guid: 3a44aa6d586bfdd4b96ed539c3ca7305
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -102,7 +102,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efd362390558f4a47828d4a0602650ff
-      internalID: -653120541
+      spriteID: 16a53c8afd07fb34f8df0abf836a1af3
+      internalID: 563129721
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ffaf3bd400d3c745b32bc0d50377e5c
-      internalID: -558948239
+      spriteID: d8a8f6fc7d2c0c34a8d022e482b074d5
+      internalID: 837806804
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d398b109449f2894f921e6e327773e6d
-      internalID: 1638067100
+      spriteID: a0f09f64b62cf684b9e5774b9edd502d
+      internalID: 398632863
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48e1089122417fa41b0205a66c38c55d
-      internalID: -1721096923
+      spriteID: 16d8514520319414fb5e030e93916d52
+      internalID: 1441792981
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a6c300aa3dfa8448a3a2a6c084574d0
-      internalID: 916572936
+      spriteID: 1b5dda7c360669942a221ffc4b0aaa2e
+      internalID: -980884896
       vertices: []
       indices: 
       edges: []
@@ -236,71 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 449d19abc722b83469a9b7ad779818be
-      internalID: 991189649
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DerildoIdle_6
-      rect:
-        serializedVersion: 2
-        x: 252
-        y: 0
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a894a5c4234cc54d8c84b3497b39fca
-      internalID: -790634305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DerildoIdle_7
-      rect:
-        serializedVersion: 2
-        x: 294
-        y: 0
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7eec7e9c96e999d47954abede7b6d3f9
-      internalID: 1924692583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DerildoIdle_8
-      rect:
-        serializedVersion: 2
-        x: 336
-        y: 0
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3208f140a3b7f1a448bac3c1f7803b72
-      internalID: 1812010310
+      spriteID: 5572aa3cea9497349901a1f85727c158
+      internalID: -365148905
       vertices: []
       indices: 
       edges: []
@@ -316,15 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DerildoIdle_0: -653120541
-      DerildoIdle_1: -558948239
-      DerildoIdle_2: 1638067100
-      DerildoIdle_3: -1721096923
-      DerildoIdle_4: 916572936
-      DerildoIdle_5: 991189649
-      DerildoIdle_6: -790634305
-      DerildoIdle_7: 1924692583
-      DerildoIdle_8: 1812010310
+      DerildoIdle_0: 563129721
+      DerildoIdle_1: 837806804
+      DerildoIdle_2: 398632863
+      DerildoIdle_3: 1441792981
+      DerildoIdle_4: -980884896
+      DerildoIdle_5: -365148905
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
