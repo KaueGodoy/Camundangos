@@ -52,9 +52,7 @@ public class BossBattle : MonoBehaviour
         BossOnDamaged += BossBattle_OnDamaged;
         BossOnDead += BossBattle_OnDead;
 
-        UpdateUI();
         healthBar.gameObject.SetActive(false);
-
     }
 
     private void Update()
@@ -76,6 +74,8 @@ public class BossBattle : MonoBehaviour
             }
         }
 
+        // NEEDS TO BE REMOVED FROM UPDATE
+
         if (stage == Stage.Stage_2)
         {
             TeleportEnemy();
@@ -90,11 +90,7 @@ public class BossBattle : MonoBehaviour
             }
         }
 
-        if (healthBar != null)
-        {
 
-            UpdateUI();
-        }
     }
 
     private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
@@ -127,12 +123,13 @@ public class BossBattle : MonoBehaviour
 
         if (healthPercent <= 0)
         {
-            UpdateUI();
             slime.currentHealth = 0;
             BossOnDamaged -= BossBattle_OnDamaged;
-
             BossOnDead?.Invoke(this, EventArgs.Empty);
         }
+
+        if (healthBar != null) UpdateUI();
+
         Debug.Log("Health: " + slime.currentHealth + " Percent: " + healthPercent);
     }
 
@@ -140,15 +137,16 @@ public class BossBattle : MonoBehaviour
     {
         Debug.Log("Boss dead");
         DestroyAllEnemies();
-        CancelInvoke("SpawnEnemy");
-        //Destroy(healthBar.gameObject);
+        CancelInvoke();
         StopAllCoroutines();
+        Destroy(healthBar.gameObject);
     }
 
     private void StartBattle()
     {
         Debug.Log("Start battle");
         StartNextStage();
+        if (healthBar != null) UpdateUI();
         healthBar.gameObject.SetActive(true);
 
     }
@@ -355,7 +353,6 @@ public class BossBattle : MonoBehaviour
 
         SpawnSkeleton();
 
-        slime.isDead();
         //Destroy(slime.gameObject);
     }
 
@@ -382,7 +379,6 @@ public class BossBattle : MonoBehaviour
     private void EndBattle()
     {
         skeletonBoss.currentHealth = 0;
-        UpdateUI();
     }
 
     private void DestroyAllEnemies()

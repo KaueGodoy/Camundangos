@@ -8,7 +8,6 @@ public class SkeletonBossAnimationController : MonoBehaviour
     private Skeleton skeleton;
     private EnemyChaseAttack enemyBehavior;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -81,5 +80,36 @@ public class SkeletonBossAnimationController : MonoBehaviour
         }
 
     }
+
+    /*
+    private void UpdateAnimationState()
+    {
+        // death
+        if (skeleton.isDead())
+        {
+            AnimationHandler.PlayAnimation(SkeletonBossDeath);
+        }
+        // hit
+        else if (skeleton.isHit)
+        {
+            AnimationHandler.PlayAnimation(SkeletonBossHit);
+        }
+        // attack
+        else if (enemyBehavior.attackAnimation)
+        {
+            AnimationHandler.PlayAnimation(SkeletonBossAttack);
+        }
+        // move
+        else if (rb.velocity.x > 0 || rb.velocity.x < 0)
+        {
+            AnimationHandler.PlayAnimation(SkeletonBossWalk);
+        }
+        // idle
+        else
+        {
+            AnimationHandler.PlayAnimation(SkeletonBossIdle);
+        }
+
+    }*/
 
 }
