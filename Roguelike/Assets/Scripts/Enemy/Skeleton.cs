@@ -7,21 +7,9 @@ public class Skeleton : MonoBehaviour, IEnemy
     [Header("Health")]
     public float currentHealth;
     public float maxHealth = 200;
-    public float deathAnimationTime = 0.4f;
+    [SerializeField] private float deathAnimationTime = 0.4f;
     private readonly float healthThreshold = 0.0f;
 
-    [Header("HP Bar")]
-    public Transform pfHealthBar;
-    public Vector3 offset = new Vector3(0, 1f);
-
-    [Header("Timers")]
-    public float hitCooldown = 0.3f;
-    public bool isHit = false;
-
-    public float hitTimer = 0.0f;
-
-    [Header("Drop")]
-    public PickupItem pickupItem;
     public DropTable DropTable { get; set; }
 
     HealthSystem healthSystem;
@@ -29,7 +17,7 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     public int ID { get; set; }
 
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth;
 
@@ -38,6 +26,32 @@ public class Skeleton : MonoBehaviour, IEnemy
         {
             new LootDrop("coin", 100),
         };
+    }
+
+    private void Update()
+    {
+        UpdateTimers();
+    }
+
+    [Header("Timers")]
+    private float hitCooldown = 0.3f;
+    [HideInInspector] public bool isHit = false;
+
+    private float hitTimer = 0.0f;
+
+    private void UpdateTimers()
+    {
+        // hit
+        if (isHit)
+        {
+            hitTimer += Time.deltaTime;
+        }
+
+        if (hitTimer > hitCooldown)
+        {
+            isHit = false;
+            hitTimer = 0f;
+        }
     }
 
     public void PerformAttack()
@@ -66,6 +80,16 @@ public class Skeleton : MonoBehaviour, IEnemy
         }
     }
 
+    public void Die()
+    {
+        DropLoot();
+        Destroy(gameObject);
+    }
+
+    [Header("HP Bar")]
+    public Transform pfHealthBar;
+    public Vector3 offset = new Vector3(0, 1f);
+
     private void InstantiateHealthBar()
     {
         healthSystem = new HealthSystem(maxHealth);
@@ -80,11 +104,8 @@ public class Skeleton : MonoBehaviour, IEnemy
         Debug.Log("Health: " + healthSystem.GetCurrentHealth());
     }
 
-    public void Die()
-    {
-        DropLoot();
-        Destroy(gameObject);
-    }
+    [Header("Drop")]
+    public PickupItem pickupItem;
 
     void DropLoot()
     {
@@ -109,5 +130,10 @@ public class Skeleton : MonoBehaviour, IEnemy
     public bool IsDamaged()
     {
         return currentHealth < maxHealth;
+    }
+
+    public bool isFullHealth()
+    {
+        return currentHealth == maxHealth;
     }
 }

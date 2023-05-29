@@ -16,21 +16,8 @@ public class SkeletonBossAnimationController : MonoBehaviour
         enemyBehavior = GetComponent<EnemyChaseAttack>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // hit
-        if (skeleton.isHit)
-        {
-            skeleton.hitTimer += Time.deltaTime;
-        }
-
-        if (skeleton.hitTimer > skeleton.hitCooldown)
-        {
-            skeleton.isHit = false;
-            skeleton.hitTimer = 0f;
-        }
-
         UpdateAnimationState();
     }
 
@@ -69,9 +56,11 @@ public class SkeletonBossAnimationController : MonoBehaviour
             ChangeAnimationState(SkeletonBossAttack);
         }
         // move
-        else if (rb.velocity.x > 0 || rb.velocity.x < 0)
+        else if (Mathf.Abs(rb.velocity.x) > Mathf.Epsilon)
         {
             ChangeAnimationState(SkeletonBossWalk);
+            // Mathf.Abs(rb.velocity.x) > Mathf.Epsilon
+            // rb.velocity.x > 0 || rb.velocity.x < 0
         }
         // idle
         else

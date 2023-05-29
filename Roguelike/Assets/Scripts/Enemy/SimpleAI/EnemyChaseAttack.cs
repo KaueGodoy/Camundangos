@@ -88,21 +88,27 @@ public class EnemyChaseAttack : MonoBehaviour
     public bool isChasing = false;
     public bool isFacingRight;
 
-
     private void Move()
     {
         rb.velocity = direction * moveSpeed;
+        rb.mass = 10f;
+
+        if (rb.velocity.y <= 0.1f)
+        {
+            rb.gravityScale = 50f;
+        }
+        else
+        {
+            rb.gravityScale = 1f;
+        }
+
     }
 
     private void Chase()
     {
         isChasing = true;
+        CancelInvoke();
         Move();
-
-        if (IsInvoking("PerformAttack"))
-        {
-            CancelInvoke("PerformAttack");
-        }
     }
 
     private void FlipSprite()
@@ -124,14 +130,13 @@ public class EnemyChaseAttack : MonoBehaviour
     /// </summary>
 
     [Header("Attack")]
-    public float attackRange = 5f;
-    public float damage = 300f;
+    [SerializeField] private float attackRange = 5f;
+    [SerializeField] private float damage = 300f;
 
-    public bool attackAnimation = false;
+    [HideInInspector] public bool attackAnimation = false;
 
-    public float attackTimer = 0.0f;
-    public float attackDelay = 0.4f;
-    public float timeSinceAttack = 0.0f;
+    private float attackTimer = 0.0f;
+    private float attackDelay = 0.4f;
 
     private Player player;
 
@@ -164,10 +169,6 @@ public class EnemyChaseAttack : MonoBehaviour
     {
         isChasing = false;
         direction = Vector2.zero;
-
-        if (IsInvoking("PerformAttack"))
-        {
-            CancelInvoke("PerformAttack");
-        }
+        CancelInvoke();
     }
 }

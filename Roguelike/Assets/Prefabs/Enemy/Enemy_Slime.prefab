@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 2075969924, guid: ad300a6e342c28c458ffd7c1c1102557, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -156,6 +156,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6640651120795482211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,10 +187,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  chaseRange: 18
+  chaseRange: 12
   isChasing: 0
   isFacingRight: 0
-  player: {fileID: 0}
   attackRange: 3
   damage: 300
-  target: {fileID: 0}
+  attackAnimation: 0
+  attackTimer: 0
+  attackDelay: 0.4
+  timeSinceAttack: 0
