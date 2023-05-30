@@ -353,7 +353,7 @@ public class BossBattle : MonoBehaviour
 
         SpawnSkeleton();
 
-        //Destroy(slime.gameObject);
+        Destroy(slime.gameObject);
     }
 
     private void SpawnSkeleton()
