@@ -44,7 +44,7 @@ public class BossBattle : MonoBehaviour
     {
         colliderTrigger.OnPlayerEnterTrigger += ColliderTrigger_OnPlayerEnterTrigger;
 
-        slimePatrol = slime.GetComponent<EnemyPatrolOnly>();
+        slimePatrol = slime.GetComponent<EnemyPatrolAttack>();
         slimePatrol.enabled = false;
 
         //slime.GetComponent<HealthSystem>().OnDamaged += BossBattle_OnDamaged;
@@ -183,7 +183,7 @@ public class BossBattle : MonoBehaviour
     [SerializeField] private GameObject pfSkeleton;
     [SerializeField] private int maxEnemyCount = 10; // Set your desired maximum enemy count here
 
-    private EnemyPatrolOnly slimePatrol;
+    private EnemyPatrolAttack slimePatrol;
     private GameObject pfEnemy;
 
     private List<Vector3> spawnPositionList;
