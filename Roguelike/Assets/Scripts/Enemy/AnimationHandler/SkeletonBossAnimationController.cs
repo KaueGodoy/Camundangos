@@ -56,7 +56,7 @@ public class SkeletonBossAnimationController : MonoBehaviour
             ChangeAnimationState(SkeletonBossAttack);
         }
         // move
-        else if (Mathf.Abs(rb.velocity.x) > Mathf.Epsilon)
+        else if (rb.velocity.x > 0 || rb.velocity.x < 0)
         {
             ChangeAnimationState(SkeletonBossWalk);
             // Mathf.Abs(rb.velocity.x) > Mathf.Epsilon

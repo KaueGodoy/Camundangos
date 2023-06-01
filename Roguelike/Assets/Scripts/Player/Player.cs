@@ -175,6 +175,12 @@ public class Player : MonoBehaviour
         }
 
         // attack
+        //if (playerControls.Player.Attack.triggered)
+        //{
+        //    basicAttackRequest = true;
+        //}
+
+        // skill
         if (playerControls.Player.Skill.triggered)
         {
             attackRequest = true;
