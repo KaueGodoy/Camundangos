@@ -10,8 +10,6 @@ public class Skeleton : MonoBehaviour, IEnemy
     [SerializeField] private float deathAnimationTime = 0.4f;
     private readonly float healthThreshold = 0.0f;
 
-    public DropTable DropTable { get; set; }
-
     HealthSystem healthSystem;
     Transform healthBarTransform;
 
@@ -83,6 +81,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     public void Die()
     {
         DropLoot();
+        healthSystem.Die();
         Destroy(gameObject);
     }
 
@@ -106,6 +105,8 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     [Header("Drop")]
     public PickupItem pickupItem;
+    public DropTable DropTable { get; set; }
+
 
     void DropLoot()
     {

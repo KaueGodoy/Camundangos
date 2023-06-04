@@ -7,23 +7,13 @@ public class Slime : MonoBehaviour, IEnemy
     [Header("Health")]
     public float currentHealth;
     public float maxHealth = 200;
+    [SerializeField] private float deathAnimationTime = 0.4f;
     private readonly float healthThreshold = 0.0f;
-
-    [Header("HP Bar")]
-    public Transform pfHealthBar;
-    public Vector3 offset = new Vector3(0, 1f);
-
-    [Header("Drop")]
-    public PickupItem pickupItem;
-    public DropTable DropTable { get; set; }
 
     public int ID { get; set; }
 
     HealthSystem healthSystem;
     Transform healthBarTransform;
-
-    private CharacterStats characterStats;
-    private bool isCritical;
 
     void Start()
     {
@@ -40,12 +30,65 @@ public class Slime : MonoBehaviour, IEnemy
 
     }
 
+    private void Update()
+    {
+        UpdateTimers();
+    }
+
+    [Header("Timers")]
+    private float hitCooldown = 0.3f;
+    [HideInInspector] public bool isHit = false;
+
+    private float hitTimer = 0.0f;
+
+    private void UpdateTimers()
+    {
+        // hit
+        if (isHit)
+        {
+            hitTimer += Time.deltaTime;
+        }
+
+        if (hitTimer > hitCooldown)
+        {
+            isHit = false;
+            hitTimer = 0f;
+        }
+    }
+
     public void PerformAttack()
     {
-        //player.TakeDamage(damage);
-        //DamagePopup.Create(transform.position, (int)damage, isCritical);
 
     }
+
+    public void TakeDamage(float damage)
+    {
+        if (currentHealth == maxHealth)
+        {
+            InstantiateHealthBar();
+        }
+
+        isHit = true;
+
+        currentHealth -= damage;
+        healthSystem.Damage(damage);
+
+        if (currentHealth <= 0)
+        {
+            Invoke("Die", deathAnimationTime);
+        }
+    }
+
+    public void Die()
+    {
+        DropLoot();
+        healthSystem.Die();
+        Destroy(gameObject);
+    }
+
+    [Header("HP Bar")]
+    public Transform pfHealthBar;
+    public Vector3 offset = new Vector3(0, 1f);
 
     private void InstantiateHealthBar()
     {
@@ -58,28 +101,9 @@ public class Slime : MonoBehaviour, IEnemy
 
     }
 
-    public void TakeDamage(float damage)
-    {
-        if (currentHealth == maxHealth)
-        {
-            InstantiateHealthBar();
-        }
-
-        currentHealth -= damage;
-        healthSystem.Damage(damage);
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        DropLoot();
-        healthSystem.Die();
-        Destroy(gameObject);
-    }
+    [Header("Drop")]
+    public PickupItem pickupItem;
+    public DropTable DropTable { get; set; }
 
     void DropLoot()
     {
@@ -104,5 +128,10 @@ public class Slime : MonoBehaviour, IEnemy
     public bool IsDamaged()
     {
         return currentHealth < maxHealth;
+    }
+
+    public bool isFullHealth()
+    {
+        return currentHealth == maxHealth;
     }
 }

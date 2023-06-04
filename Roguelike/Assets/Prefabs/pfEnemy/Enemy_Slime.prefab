@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6640651120795482237}
   - component: {fileID: 6640651120795482211}
   - component: {fileID: 6867186540210432215}
+  - component: {fileID: 138174322816769845}
   m_Layer: 0
   m_Name: Enemy_Slime
   m_TagString: Enemy
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2075969924, guid: ad300a6e342c28c458ffd7c1c1102557, type: 3}
+  m_Sprite: {fileID: -1155179640, guid: 5f3a54afd4ccb2348b759b4ab6aee9e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -193,6 +194,15 @@ MonoBehaviour:
   attackRange: 3
   damage: 300
   attackAnimation: 0
-  attackTimer: 0
-  attackDelay: 0.4
-  timeSinceAttack: 0
+--- !u!114 &138174322816769845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6640651120795482215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6637cf4be4c52c244a118297b6b3dc5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
