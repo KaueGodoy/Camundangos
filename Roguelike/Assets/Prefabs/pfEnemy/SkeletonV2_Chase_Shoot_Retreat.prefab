@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3913641605237920992}
   - component: {fileID: 3913641605237920996}
   - component: {fileID: 3913641605237920995}
-  - component: {fileID: 3913641605237920993}
   - component: {fileID: 3913641605237920994}
+  - component: {fileID: 3913641605237920993}
   - component: {fileID: 3913641605237920998}
   - component: {fileID: 3913641605237920997}
   - component: {fileID: 2338212598549418554}
@@ -116,27 +116,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9951935, y: 3.3908658}
   m_EdgeRadius: 0
---- !u!95 &3913641605237920993
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3913641605237920927}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9252fdd928ad6784b9659628da981f40, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &3913641605237920994
 Rigidbody2D:
   serializedVersion: 4
@@ -158,6 +137,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &3913641605237920993
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3913641605237920927}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9252fdd928ad6784b9659628da981f40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3913641605237920998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,8 +198,8 @@ MonoBehaviour:
   retreatRange: 5
   retreatSpeed: 5
   retreatForce: 0.4
-  timeBetweenShots: 1.5
-  nextShotTime: 0
+  attackDuration: 0.9
+  shotRate: 0.9
   projectile: {fileID: 9121000923334141551, guid: d88f6fc0459f9b84e9239eedaa255537, type: 3}
   attackAnimation: 0
 --- !u!114 &2338212598549418554

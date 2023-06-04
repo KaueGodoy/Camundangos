@@ -147,11 +147,10 @@ public class EnemyPatrolAttack : MonoBehaviour
 
     private void FlipSprite()
     {
-        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
+        if (direction.x > 0f && isFacingRight || direction.x < 0f && !isFacingRight)
         {
             isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
+            spriteRenderer.flipX = !spriteRenderer.flipX;
         }
-
     }
 }

@@ -24,78 +24,47 @@ public class SkeletonLongRangeAnimationController : MonoBehaviour
     private Animator animator;
     private string currentAnimation;
 
-    private const string skeletonIdle = "skeletonv2_idle";
+    private const string SkeletonIdle = "skeletonv2_idle";
+    //private const string SkeletonWalk = "skeletonv2_walk";
     private const string SkeletonAttack = "skeletonv2_attack";
+    private const string SkeletonHit = "skeletonv2_hit";
+    private const string SkeletonDeath = "skeletonv2_death";
 
     public void ChangeAnimationState(string newAnimation)
     {
         if (currentAnimation == newAnimation) return;
 
-        animator.Play(newAnimation);    
+        animator.Play(newAnimation);
         currentAnimation = newAnimation;
     }
 
     private void UpdateAnimationState()
     {
         // death
-        //if (skeleton.isDead())
-        //{
-        //    ChangeAnimationState(SkeletonBossDeath);
-        //}
-        //// hit
-        //else if (skeleton.isHit)
-        //{
-        //    ChangeAnimationState(SkeletonBossHit);
-        //}
-        //// attack
-         if (enemyBehavior.attackAnimation)
-        {
-            ChangeAnimationState(SkeletonAttack);
-        }
-        //// move
-        //else if (rb.velocity.x > 0 || rb.velocity.x < 0)
-        //{
-        //    ChangeAnimationState(SkeletonBossWalk);
-        //    // Mathf.Abs(rb.velocity.x) > Mathf.Epsilon
-        //    // rb.velocity.x > 0 || rb.velocity.x < 0
-        //}
-        // idle
-        else
-        {
-            ChangeAnimationState(skeletonIdle);
-        }
-
-    }
-
-    /*
-    private void UpdateAnimationState()
-    {
-        // death
         if (skeleton.isDead())
         {
-            AnimationHandler.PlayAnimation(SkeletonBossDeath);
+            ChangeAnimationState(SkeletonDeath);
         }
         // hit
         else if (skeleton.isHit)
         {
-            AnimationHandler.PlayAnimation(SkeletonBossHit);
+            ChangeAnimationState(SkeletonHit);
         }
-        // attack
-        else if (enemyBehavior.attackAnimation)
+        //// attack
+        if (enemyBehavior.attackAnimation)
         {
-            AnimationHandler.PlayAnimation(SkeletonBossAttack);
+            ChangeAnimationState(SkeletonAttack);
         }
-        // move
+        //// move
         else if (rb.velocity.x > 0 || rb.velocity.x < 0)
         {
-            AnimationHandler.PlayAnimation(SkeletonBossWalk);
+            ChangeAnimationState(SkeletonIdle);
         }
         // idle
         else
         {
-            AnimationHandler.PlayAnimation(SkeletonBossIdle);
+            ChangeAnimationState(SkeletonIdle);
         }
 
-    }*/
-
+    }
 }
