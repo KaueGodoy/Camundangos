@@ -11,39 +11,8 @@ public class PlayerCooldowns : MonoBehaviour
 {
 
     public Player player;
-    
+    private float fillAmountFull = 1f;
     private PlayerControls playerControls;
-
-    [Header("Skil")]
-    [SerializeField] private TextMeshProUGUI cooldownText;
-    [SerializeField] private Image foregroundImage;
-    [SerializeField] private Image iconImage;
-
-    public float cooldownTimer;
-    public float cooldownValue = 5.00f;
-    public bool triggerCooldown;
-    public bool offCooldown = true;
-
-    public float target;
-    public float reduceSpeed = 2f;
-
-    Color cooldownColor = new Color32(164, 164, 164, 255);
-    Color defaultColor = new Color32(255, 255, 255, 168);
-
-    // ult
-    [Header("Ult")]
-    [SerializeField] private TextMeshProUGUI ultCooldownText;
-    [SerializeField] private Image ultForegroundImage;
-    [SerializeField] private Image ultIconImage;
-
-    public float ultCooldownTimer;
-    public float ultCooldownValue = 10.0f;
-    public bool ultTriggerCooldown;
-    public bool ultOffCooldown = true;
-
-
-    public float ultTarget;
-    public float ultReduceSpeed = 2f;
 
     Color ultCooldownColor = new Color32(164, 164, 164, 255);
     //Color ultDefaultColor = new Color32(255, 255, 255, 168);
@@ -53,7 +22,6 @@ public class PlayerCooldowns : MonoBehaviour
     {
         playerControls = new PlayerControls();
     }
-
 
     private void Start()
     {
@@ -93,6 +61,24 @@ public class PlayerCooldowns : MonoBehaviour
         UltTriggerCooldown();
     }
 
+    #region Skill
+
+    [Header("Skil")]
+    [SerializeField] private TextMeshProUGUI cooldownText;
+    [SerializeField] private Image foregroundImage;
+    [SerializeField] private Image iconImage;
+
+    public float cooldownTimer;
+    public float cooldownValue = 5.00f;
+    public bool triggerCooldown;
+    public bool offCooldown = true;
+
+    public float target;
+    public float reduceSpeed = 2f;
+
+    Color cooldownColor = new Color32(164, 164, 164, 255);
+    Color defaultColor = new Color32(255, 255, 255, 168);
+
     public void TriggerCooldown()
     {
 
@@ -126,6 +112,35 @@ public class PlayerCooldowns : MonoBehaviour
         }
 
     }
+
+    public void ResetCooldown()
+    {
+        iconImage.color = defaultColor;
+        iconImage.gameObject.SetActive(true);
+        triggerCooldown = false;
+        cooldownTimer = cooldownValue;
+        target = cooldownTimer / cooldownValue;
+        cooldownText.gameObject.SetActive(false);
+        foregroundImage.fillAmount = fillAmountFull;
+        foregroundImage.gameObject.SetActive(true);
+    }
+
+    #endregion
+
+    #region Ult
+
+    [Header("Ult")]
+    [SerializeField] private TextMeshProUGUI ultCooldownText;
+    [SerializeField] private Image ultForegroundImage;
+    [SerializeField] private Image ultIconImage;
+
+    public float ultCooldownTimer;
+    public float ultCooldownValue = 10.0f;
+    public bool ultTriggerCooldown;
+    public bool ultOffCooldown = true;
+
+    public float ultTarget;
+    public float ultReduceSpeed = 2f;
 
     public void UltTriggerCooldown()
     {
@@ -164,18 +179,9 @@ public class PlayerCooldowns : MonoBehaviour
         ultCooldownTimer = ultCooldownValue;
         ultTarget = ultCooldownTimer / ultCooldownValue;
         ultCooldownText.gameObject.SetActive(false);
+        ultForegroundImage.fillAmount = fillAmountFull;
         ultForegroundImage.gameObject.SetActive(true);
     }
 
-    public void ResetCooldown()
-    {
-        iconImage.color = defaultColor;
-        iconImage.gameObject.SetActive(true);
-        triggerCooldown = false;
-        cooldownTimer = cooldownValue;
-        target = cooldownTimer / cooldownValue;
-        cooldownText.gameObject.SetActive(false);
-        foregroundImage.gameObject.SetActive(true);
-    }
-
+    #endregion
 }

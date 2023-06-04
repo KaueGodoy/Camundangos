@@ -100,6 +100,7 @@ public class Player : MonoBehaviour
             {
                 ProcessInput();
                 Attack();
+                PerformSkill();
                 Ult();
                 UpdateUI();
             }
@@ -175,15 +176,15 @@ public class Player : MonoBehaviour
         }
 
         // attack
-        //if (playerControls.Player.Attack.triggered)
-        //{
-        //    basicAttackRequest = true;
-        //}
+        if (playerControls.Player.Attack.triggered)
+        {
+            attackRequest = true;
+        }
 
         // skill
         if (playerControls.Player.Skill.triggered)
         {
-            attackRequest = true;
+            skillAttackRequest = true;
         }
 
         // ult
@@ -246,6 +247,17 @@ public class Player : MonoBehaviour
         {
             attackString = false;
             currentAttack = 0;
+        }
+
+        // skill
+        if (skillAttackAnimation)
+        {
+            skillAttackTimer += Time.deltaTime;
+        }
+        if (skillAttackTimer > skillAttackDelay)
+        {
+            skillAttackAnimation = false;
+            skillAttackTimer = 0f;
         }
 
         // ult
@@ -471,11 +483,7 @@ public class Player : MonoBehaviour
 
     #region Attack
 
-    [Header("Attack/Skill")]
-    public Transform firePoint;
-    public Transform spawnPoint;
-    public GameObject pfProjectile;
-
+    [Header("Attack")]
     private float attackTimer = 0.0f;
 
     public float attackDelay = 0.4f;
@@ -490,11 +498,9 @@ public class Player : MonoBehaviour
     private bool attackAnimation = false;
     private bool isAttacking = false;
 
-    public PlayerCooldowns skillCooldowns;
-
     private void Attack()
     {
-        if (attackRequest && skillCooldowns.offCooldown)
+        if (attackRequest)
         {
             attackRequest = false;
             attackAnimation = true;
@@ -505,8 +511,6 @@ public class Player : MonoBehaviour
                 isAttacking = true;
 
                 UpdateAttackString();
-
-                Invoke("InstantiateAttack", attackDelay - 0.1f);
 
                 Invoke("AttackComplete", attackDelay);
 
@@ -527,11 +531,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void InstantiateAttack()
-    {
-        Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
-        FindObjectOfType<AudioManager>().PlaySound("Attack");
-    }
     public void ResetAttackString()
     {
         timeSinceAttack = 0.0f;
@@ -540,6 +539,62 @@ public class Player : MonoBehaviour
     private void AttackComplete()
     {
         isAttacking = false;
+    }
+
+    #endregion
+
+    #region Skill
+
+    [Header("Skill")]
+    public Transform firePoint;
+    public Transform spawnPoint;
+    public GameObject pfProjectile;
+
+    private float skillAttackTimer = 0.0f;
+
+    public float skillAttackDelay = 0.4f;
+    public float skillTimeSinceAttack = 0.0f;
+
+    public bool skillAttackRequest = false;
+
+    private bool skillAttackAnimation = false;
+    private bool skillIsAttacking = false;
+
+    public PlayerCooldowns skillCooldowns;
+
+    private void PerformSkill()
+    {
+        if (skillCooldowns.offCooldown)
+        {
+            if (skillAttackRequest)
+            {
+                skillAttackRequest = false;
+                skillAttackAnimation = true;
+
+                if (!skillIsAttacking)
+                {
+                    skillIsAttacking = true;
+
+                    Invoke("InstantiateSkill", skillAttackDelay - 0.1f);
+                    Invoke("SkillComplete", skillAttackDelay);
+                }
+            }
+        }
+        else
+        {
+            skillAttackRequest = false; // Reset the ult attack request if the ult is on cooldown
+        }
+    }
+
+    private void InstantiateSkill()
+    {
+        Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
+        FindObjectOfType<AudioManager>().PlaySound("Attack");
+    }
+
+    private void SkillComplete()
+    {
+        skillIsAttacking = false;
     }
 
     #endregion
@@ -691,15 +746,17 @@ public class Player : MonoBehaviour
     private Animator animator;
     private string currentAnimation;
 
-    private const string PLAYER_DEATH = "derildo_death";
-    private const string PLAYER_HIT = "derildo_hit";
-    private const string PLAYER_ATTACK_STRING_01 = "derildo_attack1";
-    private const string PLAYER_ATTACK_STRING_02 = "derildo_attack2";
-    private const string PLAYER_ATTACK_STRING_03 = "derildo_attack3";
-    private const string PLAYER_JUMP = "derildo_jump";
-    private const string PLAYER_FALL = "derildo_fall";
-    private const string PLAYER_WALK = "derildo_walk";
-    private const string PLAYER_IDLE = "derildo_idle";
+    private const string DerildoDeath = "derildo_death";
+    private const string DerildoHit = "derildo_hit";
+    private const string DerildoAttackString01 = "derildo_attack1";
+    private const string DerildoAttackString02 = "derildo_attack2";
+    private const string DerildoAttackString03 = "derildo_attack3";
+    private const string DerildoSkill = "derildo_skill";
+    private const string DerildoUlt = "derildo_ult";
+    private const string DerildoJump = "derildo_jump";
+    private const string DerildoFall = "derildo_fall";
+    private const string DerildoWalk = "derildo_walk";
+    private const string DerildoIdle = "derildo_idle";
 
     public void ChangeAnimationState(string newAnimation)
     {
@@ -714,58 +771,65 @@ public class Player : MonoBehaviour
         // death
         if (!isAlive)
         {
-            ChangeAnimationState(PLAYER_DEATH);
+            ChangeAnimationState(DerildoDeath);
         }
         // hit
         else if (isHit)
         {
-            ChangeAnimationState(PLAYER_HIT);
+            ChangeAnimationState(DerildoHit);
         }
         // attack
         else if (attackAnimation)
         {
             if (currentAttack == 1)
             {
-                ChangeAnimationState(PLAYER_ATTACK_STRING_01);
+                ChangeAnimationState(DerildoAttackString01);
                 Debug.Log("Attack string number: " + currentAttack);
 
             }
             else if (currentAttack == 2)
             {
-                ChangeAnimationState(PLAYER_ATTACK_STRING_02);
+                ChangeAnimationState(DerildoAttackString02);
                 Debug.Log("Attack string number: " + currentAttack);
 
             }
             else if (currentAttack == 3)
             {
-                ChangeAnimationState(PLAYER_ATTACK_STRING_03);
+                ChangeAnimationState(DerildoAttackString03);
                 Debug.Log("Attack string number: " + currentAttack);
 
             }
         }
+        // skill
+        else if (skillAttackAnimation)
+        {
+            ChangeAnimationState(DerildoSkill);
+
+        }
+        // ult
         else if (ultAttackAnimation)
         {
-            ChangeAnimationState(PLAYER_ATTACK_STRING_02);
+            ChangeAnimationState(DerildoUlt);
         }
         // jump
         else if (rb.velocity.y > .1f && !IsGrounded())
         {
-            ChangeAnimationState(PLAYER_JUMP);
+            ChangeAnimationState(DerildoJump);
         }
         // fall
         else if (rb.velocity.y < .1f && !IsGrounded())
         {
-            ChangeAnimationState(PLAYER_FALL);
+            ChangeAnimationState(DerildoFall);
         }
         // move
         else if (moveH.x > 0 || moveH.x < 0)
         {
-            ChangeAnimationState(PLAYER_WALK);
+            ChangeAnimationState(DerildoWalk);
         }
         // idle
         else
         {
-            ChangeAnimationState(PLAYER_IDLE);
+            ChangeAnimationState(DerildoIdle);
         }
 
     }
