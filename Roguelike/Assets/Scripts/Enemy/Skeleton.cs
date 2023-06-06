@@ -81,6 +81,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     [Header("Death")]
     [SerializeField] private float deathAnimationTime = 0.55f;
     [SerializeField] private GameObject pfDeathEffect;
+
     private void DeathEffect()
     {
         if (pfDeathEffect != null)

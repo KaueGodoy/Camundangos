@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -1155179640, guid: 5f3a54afd4ccb2348b759b4ab6aee9e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -172,6 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 10000
+  isHit: 0
+  deathAnimationTime: 0.55
+  pfDeathEffect: {fileID: 6219346067317580066, guid: b36fb41bf12a24145a16f9711be0cd80, type: 3}
   pfHealthBar: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
   offset: {x: 0, y: 1, z: 0}
   pickupItem: {fileID: 6130498630557675459, guid: 7114ae008266a3d4a84455a166d349c1, type: 3}

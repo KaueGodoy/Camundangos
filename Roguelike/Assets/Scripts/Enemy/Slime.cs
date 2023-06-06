@@ -7,7 +7,6 @@ public class Slime : MonoBehaviour, IEnemy
     [Header("Health")]
     public float currentHealth;
     public float maxHealth = 200;
-    [SerializeField] private float deathAnimationTime = 0.4f;
     private readonly float healthThreshold = 0.0f;
 
     public int ID { get; set; }
@@ -73,12 +72,27 @@ public class Slime : MonoBehaviour, IEnemy
         currentHealth -= damage;
         healthSystem.Damage(damage);
 
+
         if (currentHealth <= 0)
         {
+            DeathEffect();
             Invoke("Die", deathAnimationTime);
         }
     }
 
+    [Header("Death")]
+    [SerializeField] private float deathAnimationTime = 0.55f;
+    [SerializeField] private GameObject pfDeathEffect;
+
+    private void DeathEffect()
+    {
+        if (pfDeathEffect != null)
+        {
+            this.gameObject.SetActive(false);
+            GameObject effect = Instantiate(pfDeathEffect, transform.position, Quaternion.identity);
+            Destroy(effect, deathAnimationTime);
+        }
+    }
     public void Die()
     {
         DropLoot();

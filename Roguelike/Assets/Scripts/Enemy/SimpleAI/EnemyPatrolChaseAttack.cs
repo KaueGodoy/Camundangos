@@ -1,38 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyPatrolChaseAttack : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed = 2f;
-    public float chaseRange = 10f;
-    public bool isChasing = false;
-    public bool isFacingRight;
-    public bool isPatrolling;
-
-    [Header("Attack")]
-    public Player player;
-    public float attackRange = 5f;
-    public float damage = 300f;
-
-    public Transform target;
-
+    private Player player;
+    private Transform target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector2 direction;
-
-    [Header("Patrol")]
-    public Transform[] patrolPoints;
-    private int patrolIndex = 0;
-
-    private bool isCritical;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject != null)
+        {
+            player = playerObject.GetComponent<Player>();
+            target = playerObject.transform;
+
+            if (player == null)
+            {
+                Debug.LogError("Player component not found on the player object!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object not found!");
+        }
     }
 
     private void Update()
@@ -63,47 +64,69 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
 
     }
 
-    private void Chase()
-    {
-        Move();
-        CancelInvoke("PerformAttack");
-        //transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-    }
+    #region Movement
 
+    [Header("Movement")]
+    public float moveSpeed = 2f;
+    public float chaseRange = 10f;
+    public bool isChasing = false;
+    public bool isFacingRight;
+    public bool isPatrolling;
 
-    private void FlipScale()
-    {
-        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
-        {
-            // flipping the player using scale
-            Vector3 localScale = transform.localScale;
-            isFacingRight = !isFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
+    [Header("Patrol")]
+    public Transform[] patrolPoints;
+    private int patrolIndex = 0;
 
     private void Patrol()
     {
         if (patrolPoints.Length == 0) return; // no patrol points defined
 
         direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
-        Move();
 
         if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < 0.1f)
         {
             // switch to the next patrol point
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
-            //Debug.Log(patrolIndex);
+            Debug.Log(patrolIndex);
         }
 
-        CancelInvoke("PerformAttack");
+        Move();
+    }
+
+    private void Chase()
+    {
+        Move();
+        CancelInvoke();
     }
 
     private void Move()
     {
         rb.velocity = direction * moveSpeed;
     }
+
+    private void FlipSprite()
+    {
+        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            spriteRenderer.flipX = isFacingRight;
+        }
+    }
+
+    private void Idle()
+    {
+        direction = Vector2.zero;
+        CancelInvoke("PerformAttack");
+    }
+
+    #endregion
+
+
+    #region Attack
+
+    [Header("Attack")]
+    public float attackRange = 5f;
+    public float damage = 300f;
 
     private void Attack()
     {
@@ -116,34 +139,9 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
     public void PerformAttack()
     {
         player.TakeDamage(damage);
-        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage, isCritical);
+        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage);
 
     }
 
-    private void Idle()
-    {
-        // do nothing
-        direction = Vector2.zero;
-        CancelInvoke("PerformAttack");
-        // Debug.Log("In idle state...");
-    }
-
-    private void FlipSprite()
-    {
-        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
-        }
-
-    }
-
-
-    //transform.LookAt(target.position);
-    // Calculate the angle between the current position and the player
-    //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-    // Set the rotation of the enemy to face the player
-    //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
+    #endregion
 }

@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1681769412, guid: 1d80cd889164da8469ea76a7924351c0, type: 3}
+  m_Sprite: {fileID: 871206665, guid: 28e0549d26da4934fa7c45a78437b66b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,7 +149,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -172,8 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 15000
-  deathAnimationTime: 0.4
   isHit: 0
+  deathAnimationTime: 0.4
+  pfDeathEffect: {fileID: 6219346067317580066, guid: b36fb41bf12a24145a16f9711be0cd80, type: 3}
   pfHealthBar: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
   offset: {x: 0, y: 1.5, z: 0}
   pickupItem: {fileID: 6130498630557675459, guid: 7114ae008266a3d4a84455a166d349c1, type: 3}
@@ -194,13 +195,11 @@ MonoBehaviour:
   isChasing: 0
   isFacingRight: 0
   isPatrolling: 0
-  player: {fileID: 0}
-  attackRange: 3
-  damage: 300
-  target: {fileID: 0}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
+  attackRange: 3
+  damage: 300
 --- !u!114 &6637403106567729758
 MonoBehaviour:
   m_ObjectHideFlags: 0

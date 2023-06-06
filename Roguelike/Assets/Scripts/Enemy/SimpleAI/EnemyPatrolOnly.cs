@@ -4,32 +4,11 @@ using UnityEngine;
 
 public class EnemyPatrolOnly : MonoBehaviour
 {
-    public Player player;
-
-    [Header("Movement")]
-    public float moveSpeed = 2f;
-    public bool isFacingRight;
-    public bool isPatrolling;
-
-    [Header("Attack")]
-    public float attackRange = 5f;
-    public float damage = 300f;
-
-    [Header("Knockback")]
-    public float knockbackForce = 10f;
-    public float knockbackDuration = 0.5f;
-
-    public bool isKnockback = false;
-    public float knockbackTimer = 0f;
-
-    [Header("Patrol")]
-    public Transform[] patrolPoints;
-    private int patrolIndex = 0;
-
-
+    private Transform target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector2 direction;
+    private Player player;
 
     public bool patrolEnabled = true;
 
@@ -37,6 +16,27 @@ public class EnemyPatrolOnly : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject != null)
+        {
+            // Get the Player component from the player object
+            player = playerObject.GetComponent<Player>();
+            target = playerObject.transform;
+
+            if (player == null)
+            {
+                Debug.LogError("Player component not found on the player object!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object not found!");
+        }
     }
 
     private void Update()
@@ -72,6 +72,17 @@ public class EnemyPatrolOnly : MonoBehaviour
         }
     }
 
+    #region Movement
+
+    [Header("Movement")]
+    public float moveSpeed = 2f;
+    public bool isFacingRight;
+    public bool isPatrolling;
+
+    [Header("Patrol")]
+    public Transform[] patrolPoints;
+    private int patrolIndex = 0;
+
     private void Patrol()
     {
         if (patrolPoints.Length == 0) return; // no patrol points defined
@@ -85,7 +96,7 @@ public class EnemyPatrolOnly : MonoBehaviour
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
         }
 
-        CancelInvoke("PerformAttack");
+        CancelInvoke();
     }
 
     private void Move()
@@ -93,28 +104,35 @@ public class EnemyPatrolOnly : MonoBehaviour
         rb.velocity = direction * moveSpeed;
     }
 
-    private void Attack()
+    public void StopMovement()
     {
-        if (!IsInvoking("PerformAttack"))
+        rb.velocity = Vector3.zero;
+    }
+
+    private void FlipSprite()
+    {
+        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
         {
-            InvokeRepeating("PerformAttack", .5f, 1.5f);
+            isFacingRight = !isFacingRight;
+            spriteRenderer.flipX = isFacingRight;
         }
+
     }
 
-    public void PerformAttack()
-    {
-        player.TakeDamage(damage);
-        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage);
-    }
+    #endregion
 
-    private void ApplyKnockback()
-    {
-        Rigidbody2D playerRigidbody = player.GetComponent<Rigidbody2D>();
-        Vector2 direction = player.gameObject.transform.position - transform.position;
-        playerRigidbody.velocity = direction.normalized * knockbackForce;
-        isKnockback = true;
-        knockbackTimer = knockbackDuration;
-    }
+    #region Attack
+
+    [Header("Attack")]
+    public float attackRange = 5f;
+    public float damage = 300f;
+
+    [Header("Knockback")]
+    public float knockbackForce = 10f;
+    public float knockbackDuration = 0.5f;
+
+    public bool isKnockback = false;
+    public float knockbackTimer = 0f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -140,18 +158,29 @@ public class EnemyPatrolOnly : MonoBehaviour
         }
     }
 
-    public void StopMovement()
+    public void PerformAttack()
     {
-        rb.velocity = Vector3.zero;
+        player.TakeDamage(damage);
+        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage);
     }
 
-    private void FlipSprite()
+    private void Attack()
     {
-        if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
+        if (!IsInvoking("PerformAttack"))
         {
-            isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
+            InvokeRepeating("PerformAttack", .5f, 1.5f);
         }
-
     }
+
+    private void ApplyKnockback()
+    {
+        Rigidbody2D playerRigidbody = player.GetComponent<Rigidbody2D>();
+        Vector2 direction = player.gameObject.transform.position - transform.position;
+        playerRigidbody.velocity = direction.normalized * knockbackForce;
+        isKnockback = true;
+        knockbackTimer = knockbackDuration;
+    }
+
+    #endregion
+
 }
