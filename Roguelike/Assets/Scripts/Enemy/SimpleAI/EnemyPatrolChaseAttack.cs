@@ -40,7 +40,6 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
     {
         float distance = Vector2.Distance(transform.position, target.position);
         direction = (target.position - transform.position).normalized;
-        FlipSprite();
 
         if (distance < attackRange)
         {
@@ -62,6 +61,7 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
             Patrol();
         }
 
+        FlipSprite();
     }
 
     #region Movement
@@ -79,18 +79,16 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
 
     private void Patrol()
     {
-        if (patrolPoints.Length == 0) return; // no patrol points defined
+        if (patrolPoints.Length == 0) return; 
 
         direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
+        Move();
 
         if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) < 0.1f)
         {
-            // switch to the next patrol point
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
-            Debug.Log(patrolIndex);
         }
 
-        Move();
     }
 
     private void Chase()
