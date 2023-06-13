@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         playerDamage = GetComponent<PlayerDamage>();
@@ -51,6 +50,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         currentHealth = maxHealth;
         isAlive = true;
 

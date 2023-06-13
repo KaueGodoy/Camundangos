@@ -78,17 +78,37 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-
         fader.gameObject.SetActive(true);
-        LeanTween.scale(fader, Vector3.zero, 0f);
-        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setOnComplete(() =>
+
+        //LeanTween.scale(fader, Vector3.zero, 0f);
+        //LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setOnComplete(() =>
+        //{
+        //    SceneManager.LoadScene(0);
+        //});
+
+        pauseMenuUI.gameObject.SetActive(false);
+
+        LeanTween.scale(fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
         {
             SceneManager.LoadScene(0);
         });
 
+        Time.timeScale = 1f;
+
+        //Invoke("TransitionToMainMenu", 1f);
+
+
+
     }
+
+    private void TransitionToMainMenu()
+    {
+        LeanTween.scale(fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
+        {
+            SceneManager.LoadScene(0);
+        });
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quitting...");
