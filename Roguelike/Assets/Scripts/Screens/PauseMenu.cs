@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused;
     public GameObject pauseMenuUI;
+    [SerializeField] RectTransform fader;
 
     private PlayerControls playerControls;
 
@@ -16,6 +17,17 @@ public class PauseMenu : MonoBehaviour
         playerControls = new PlayerControls();
         GameIsPaused = false;
     }
+
+    private void Start()
+    {
+        fader.gameObject.SetActive(false);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0);
+        LeanTween.scale(fader, Vector3.zero, 0.5f).setOnComplete(() =>
+        {
+            fader.gameObject.SetActive(false);
+        });
+    }
+
     private void OnEnable()
     {
         playerControls.Enable();
@@ -29,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (playerControls.UI.Pause.triggered)
         {
-            if(GameIsPaused)
+            if (GameIsPaused)
             {
                 Resume();
             }
@@ -37,7 +49,7 @@ public class PauseMenu : MonoBehaviour
             {
                 Pause();
             }
-        }    
+        }
     }
 
     public void Resume()
@@ -67,8 +79,15 @@ public class PauseMenu : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
         GameIsPaused = false;
+
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setOnComplete(() =>
+        {
+            SceneManager.LoadScene(0);
+        });
+
     }
     public void QuitGame()
     {
