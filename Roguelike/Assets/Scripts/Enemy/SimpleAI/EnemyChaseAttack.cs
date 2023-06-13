@@ -90,7 +90,11 @@ public class EnemyChaseAttack : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = direction * moveSpeed;
+        if (rb.bodyType == RigidbodyType2D.Dynamic)
+        {
+            rb.velocity = direction * moveSpeed;
+        }
+
         rb.mass = 10f;
 
         if (rb.velocity.y <= 0.1f)

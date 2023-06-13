@@ -24,10 +24,10 @@ public class UIEventHandler : MonoBehaviour
         OnItemEquipped(item);
     }
 
-    public static void HealthChanged(float currentHealth, float maxHealth)
-    {
-        OnPlayerHealthChanged(currentHealth, maxHealth);
-    }
+    //public static void HealthChanged(float currentHealth, float maxHealth)
+    //{
+    //    OnPlayerHealthChanged(currentHealth, maxHealth);
+    //}
 
     public static void StatsChanged()
     {

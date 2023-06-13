@@ -50,12 +50,12 @@ public class SkeletonLongRangeAnimationController : MonoBehaviour
         {
             ChangeAnimationState(SkeletonHit);
         }
-        //// attack
-        if (enemyBehavior.attackAnimation)
+        // attack
+        else if (enemyBehavior.attackAnimation)
         {
             ChangeAnimationState(SkeletonAttack);
         }
-        //// move
+        // move
         else if (rb.velocity.x > 0 || rb.velocity.x < 0)
         {
             ChangeAnimationState(SkeletonIdle);

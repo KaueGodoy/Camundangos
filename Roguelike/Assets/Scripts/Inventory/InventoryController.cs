@@ -33,12 +33,6 @@ public class InventoryController : MonoBehaviour
         GiveItem("potion_log");
         GiveItem("potion_hp");
         GiveItem("coin");
-        GiveItem("potion_log");
-        GiveItem("potion_log");
-        GiveItem("potion_log");
-        GiveItem("potion_log");
-        GiveItem("potion_log");
-
     }
 
     public void GiveItem(string itemSlug)

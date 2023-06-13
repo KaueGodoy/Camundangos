@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 
 public class CharacterPanel : MonoBehaviour
 {
-    [Header("Health")]
+    //[Header("Health")]
     [SerializeField] private Player player;
-    [SerializeField] private TextMeshProUGUI health;
-    [SerializeField] private Image healthFill;
+    //[SerializeField] private TextMeshProUGUI health;
+    //[SerializeField] private Image healthFill;
 
-    [Header("Level")]
-    [SerializeField] private TextMeshProUGUI level;
-    [SerializeField] private Image levelFill;
+    //[Header("Level")]
+    //[SerializeField] private TextMeshProUGUI level;
+    //[SerializeField] private Image levelFill;
 
     [Header("Stats")]
     [SerializeField] private TextMeshProUGUI playerStatPrefab;
@@ -34,17 +33,17 @@ public class CharacterPanel : MonoBehaviour
     private void Start()
     {
         PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
-        UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
+        //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
         UIEventHandler.OnStatsChanged += UpdateStats;
         UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
         InitializeStats();
     }
 
-    private void UpdateHealth(float currentHealth, float maxHealth)
-    {
-        this.health.text = currentHealth.ToString();
-        this.healthFill.fillAmount = currentHealth / maxHealth;
-    }
+    //private void UpdateHealth(float currentHealth, float maxHealth)
+    //{
+    //    this.health.text = currentHealth.ToString();
+    //    this.healthFill.fillAmount = currentHealth / maxHealth;
+    //}
 
     private void InitializeStats()
     {

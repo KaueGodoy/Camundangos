@@ -38,6 +38,8 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
 
     private void Update()
     {
+        UpdateCooldowns();
+
         float distance = Vector2.Distance(transform.position, target.position);
         direction = (target.position - transform.position).normalized;
 
@@ -64,6 +66,20 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
         FlipSprite();
     }
 
+    private void UpdateCooldowns()
+    {
+        // attack
+        if (attackAnimation)
+        {
+            attackTimer += Time.deltaTime;
+        }
+        if (attackTimer > attackDelay)
+        {
+            attackAnimation = false;
+            attackTimer = 0f;
+        }
+    }
+
     #region Movement
 
     [Header("Movement")]
@@ -79,7 +95,7 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
 
     private void Patrol()
     {
-        if (patrolPoints.Length == 0) return; 
+        if (patrolPoints.Length == 0) return;
 
         direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
         Move();
@@ -99,7 +115,10 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = direction * moveSpeed;
+        if (rb.bodyType == RigidbodyType2D.Dynamic)
+        {
+            rb.velocity = direction * moveSpeed;
+        }
     }
 
     private void FlipSprite()
@@ -126,8 +145,16 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
     public float attackRange = 5f;
     public float damage = 300f;
 
+    // Timers
+    [HideInInspector] public bool attackAnimation = false;
+
+    private float attackTimer = 0.0f;
+    private float attackDelay = 0.85f;
+
     private void Attack()
     {
+        attackAnimation = true;
+
         if (!IsInvoking("PerformAttack"))
         {
             InvokeRepeating("PerformAttack", .5f, 1.5f);

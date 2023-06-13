@@ -108,7 +108,10 @@ public class EnemyShootRetreat : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = direction * moveSpeed;
+        if (rb.bodyType == RigidbodyType2D.Dynamic)
+        {
+            rb.velocity = direction * moveSpeed;
+        }
     }
 
     private void FlipSprite()

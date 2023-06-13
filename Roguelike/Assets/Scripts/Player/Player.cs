@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         isAlive = true;
 
-        UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+        //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
         UpdateUI();
 
         // handling input through events
@@ -301,13 +301,13 @@ public class Player : MonoBehaviour
         currentHealth -= Mathf.FloorToInt(damageAmount);
         isHit = true;
 
-        UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+        //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
 
         if (currentHealth <= 0)
         {
             UpdateUI();
             Die();
-            UIEventHandler.HealthChanged(0, this.maxHealth);
+            //UIEventHandler.HealthChanged(0, this.maxHealth);
             Invoke("RestartLevel", deathAnimationTime);
         }
     }
