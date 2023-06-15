@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class EnemyShootRetreat : MonoBehaviour
 {
+    private Player player;
     private Transform target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -38,6 +39,11 @@ public class EnemyShootRetreat : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        CancelInvoke();
+    }
+
     private void Update()
     {
         UpdateCooldowns();
@@ -45,7 +51,6 @@ public class EnemyShootRetreat : MonoBehaviour
         float distance = Vector2.Distance(transform.position, target.position);
         direction = (target.position - transform.position).normalized;
         FlipSprite();
-
 
         if (distance < retreatRange)
         {
@@ -161,14 +166,11 @@ public class EnemyShootRetreat : MonoBehaviour
     [SerializeField] private float shotRate = 0.9f;
     public GameObject projectile;
 
-
     // Timers
     [HideInInspector] public bool attackAnimation = false;
 
     private float attackTimer = 0.0f;
     private float attackDelay = 0.85f;
-
-    private Player player;
 
     private void Attack()
     {
@@ -185,6 +187,5 @@ public class EnemyShootRetreat : MonoBehaviour
     {
         Instantiate(projectile, transform.position, Quaternion.identity);
     }
-
     #endregion
 }

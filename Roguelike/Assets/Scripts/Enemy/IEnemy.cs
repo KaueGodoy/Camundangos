@@ -8,4 +8,5 @@ public interface IEnemy
     void Die();
     void TakeDamage(float damage);
     void PerformAttack();
+    bool IsDead { get; set; }
 }

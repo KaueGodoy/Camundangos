@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        Debug.Log("Player takes: " + damageAmount + " damage");
+        Debug.Log("Player takes: " + damageAmount);
 
         FindObjectOfType<AudioManager>().PlaySound("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);

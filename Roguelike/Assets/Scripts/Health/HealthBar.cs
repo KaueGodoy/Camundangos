@@ -20,7 +20,22 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        transform.Find("Bar").localScale = new Vector3(healthSystem.GetHealthPercent(), 1);
+        //if (healthSystem != null)
+        //{
+        //    transform.Find("Bar").localScale = new Vector3(healthSystem.GetHealthPercent(), 1);
+        //}
+
+        Transform barTransform = transform.Find("Bar");
+
+        if (barTransform != null)
+        {
+            barTransform.localScale = new Vector3(healthSystem.GetHealthPercent(), 1);
+        }
+        else
+        {
+            Debug.LogWarning("Bar transform not found.");
+        }
+
     }
 
     private void Update()

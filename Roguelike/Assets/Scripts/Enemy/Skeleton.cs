@@ -15,6 +15,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     Transform healthBarTransform;
 
     public int ID { get; set; }
+    public bool IsDead { get; set; }
 
     private void Start()
     {
@@ -106,12 +107,6 @@ public class Skeleton : MonoBehaviour, IEnemy
         Destroy(gameObject);
     }
 
-    private void DestroyHealthBar()
-    {
-        healthSystem.Die();
-        Destroy(healthBarTransform.gameObject);
-    }
-
     [Header("HP Bar")]
     public Transform pfHealthBar;
     public Vector3 offset = new Vector3(0, 1f);
@@ -130,9 +125,17 @@ public class Skeleton : MonoBehaviour, IEnemy
         Debug.Log("Health: " + healthSystem.GetCurrentHealth());
     }
 
+    private void DestroyHealthBar()
+    {
+        healthSystem.Die();
+        healthBarTransform.gameObject.SetActive(false);
+        //Destroy(healthBarTransform.gameObject);
+    }
+
     [Header("Drop")]
     public PickupItem pickupItem;
     public DropTable DropTable { get; set; }
+
 
     void DropLoot()
     {

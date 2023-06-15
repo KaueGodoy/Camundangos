@@ -10,6 +10,7 @@ public class Slime : MonoBehaviour, IEnemy
     private readonly float healthThreshold = 0.0f;
 
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
 
     public int ID { get; set; }
 
@@ -19,6 +20,7 @@ public class Slime : MonoBehaviour, IEnemy
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
 
         currentHealth = maxHealth;
 
@@ -79,9 +81,10 @@ public class Slime : MonoBehaviour, IEnemy
 
         if (currentHealth <= 0)
         {
-            DestroyHealthBar();
+            DisableHealthBar();
 
             rb.bodyType = RigidbodyType2D.Static;
+            boxCollider.enabled = false;
 
 
             Invoke("Die", deathAnimationTime);
@@ -123,15 +126,17 @@ public class Slime : MonoBehaviour, IEnemy
 
     }
 
-    private void DestroyHealthBar()
+    private void DisableHealthBar()
     {
         healthSystem.Die();
-        Destroy(healthBarTransform.gameObject);
+        healthBarTransform.gameObject.SetActive(false);
+        //Destroy(healthBarTransform.gameObject);
     }
 
     [Header("Drop")]
     public PickupItem pickupItem;
     public DropTable DropTable { get; set; }
+    public bool IsDead { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     void DropLoot()
     {

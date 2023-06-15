@@ -42,8 +42,8 @@ public class PlayerWeaponController : MonoBehaviour
             UnequipWeapon();
         }
 
-        EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
-            playerHand.transform.position, playerHand.transform.rotation);
+        EquippedWeapon = Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
+       playerHand.transform.position, playerHand.transform.rotation);
 
         weaponEquipped = EquippedWeapon.GetComponent<IWeapon>();
 

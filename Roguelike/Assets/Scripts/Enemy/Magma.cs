@@ -17,6 +17,7 @@ public class Magma : MonoBehaviour, IEnemy
     Transform healthBarTransform;
 
     public int ID { get; set; }
+    public bool IsDead { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     void Start()
     {

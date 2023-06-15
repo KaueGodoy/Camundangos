@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BossBattle : MonoBehaviour
@@ -86,7 +87,7 @@ public class BossBattle : MonoBehaviour
             //SpawnSkeleton();
             if (skeletonBoss.currentHealth <= 0)
             {
-                EndBattle();
+                //EndBattle();
             }
         }
 
@@ -126,6 +127,7 @@ public class BossBattle : MonoBehaviour
             slime.currentHealth = 0;
             BossOnDamaged -= BossBattle_OnDamaged;
             BossOnDead?.Invoke(this, EventArgs.Empty);
+            EndBattle();
         }
 
         if (healthBar != null) UpdateUI();
@@ -136,9 +138,9 @@ public class BossBattle : MonoBehaviour
     private void BossBattle_OnDead(object sender, System.EventArgs e)
     {
         Debug.Log("Boss dead");
-        DestroyAllEnemies();
         CancelInvoke();
         StopAllCoroutines();
+        BossOnDead -= BossBattle_OnDead;
         Destroy(healthBar.gameObject);
     }
 
@@ -243,6 +245,7 @@ public class BossBattle : MonoBehaviour
         Debug.Log("This is the stage 2");
         CancelInvoke("SpawnEnemy");
         slimePatrol.patrolEnabled = false;
+        DestroyAllEnemies();
         //slime.GetComponent<EnemyPatrolOnly>().enabled = false;
 
         // starting stage two
@@ -349,11 +352,15 @@ public class BossBattle : MonoBehaviour
         Debug.Log("This is the stage 3");
         skeletonHealthFromSlime = slime.currentHealth;
         skeletonMaxHealth = skeletonBoss.maxHealth;
-        //slime.gameObject.SetActive(false);
 
+        MoveSlime();
         SpawnSkeleton();
 
-        Destroy(slime.gameObject);
+    }
+
+    private void MoveSlime()
+    {
+        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 15f, player.transform.position.z);    
     }
 
     private void SpawnSkeleton()
@@ -378,7 +385,8 @@ public class BossBattle : MonoBehaviour
 
     private void EndBattle()
     {
-        skeletonBoss.currentHealth = 0;
+        Destroy(pfskeletonBossInstance.gameObject);
+        Destroy(slime.gameObject);
     }
 
     private void DestroyAllEnemies()
@@ -388,7 +396,6 @@ public class BossBattle : MonoBehaviour
             Destroy(enemy);
         }
 
-        BossOnDead -= BossBattle_OnDead;
     }
 
     #endregion
@@ -412,10 +419,10 @@ public class BossBattle : MonoBehaviour
             healthBar.UpdateHealthBar(slime.maxHealth, slime.currentHealth, bossName);
         }
 
-        if (stage == Stage.Stage_3)
-        {
-            healthBar.UpdateHealthBar((int)skeletonBoss.maxHealth, (int)skeletonBoss.currentHealth, bossName2);
-        }
+        //if (stage == Stage.Stage_3)
+        //{
+        //    healthBar.UpdateHealthBar((int)skeletonBoss.maxHealth, (int)skeletonBoss.currentHealth, bossName2);
+        //}
 
         if (skeletonBoss.isDead())
         {
