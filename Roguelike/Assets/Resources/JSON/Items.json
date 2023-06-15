@@ -1,8 +1,8 @@
 [
   {
     "objectSlug": "sword",
-    "itemName": "Dormant Flames",
-    "description": "He who can cross the fire can awake the flames",
+    "itemName": "ZeKa Pyrostorm",
+    "description": "Reza a lenda que a espada surgiu das chamas incessantes vindas do tornado de fogo do viajante proibido, ZeKa",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
@@ -41,8 +41,8 @@
   },
   {
     "objectSlug": "staff",
-    "itemName": "Staff of Green Ice",
-    "description": "One must be fool to be deceived by appearance",
+    "itemName": "Glacial ZeKa",
+    "description": "A chama incessante se torna o gelo nao hesitante, eterno solido",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,

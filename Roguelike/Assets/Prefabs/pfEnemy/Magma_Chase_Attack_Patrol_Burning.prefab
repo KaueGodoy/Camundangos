@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 6050463316063228297}
   - component: {fileID: 6050463316063228293}
   - component: {fileID: 6050463316063228292}
-  - component: {fileID: 6050463316063228291}
-  - component: {fileID: 6050463316063228318}
-  - component: {fileID: 6050463316063228294}
   - component: {fileID: 6050463316063228289}
   - component: {fileID: 6050463316063228288}
+  - component: {fileID: 6050463316063228291}
+  - component: {fileID: 6050463316063228294}
   m_Layer: 0
   m_Name: Magma_Chase_Attack_Patrol_Burning
   m_TagString: Enemy
@@ -116,61 +115,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3237982, y: 3.4873543}
   m_EdgeRadius: 0
---- !u!114 &6050463316063228291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6050463316063228296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23fde65a51a93b449c9a650e40e8d28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 16000
-  pfHealthBar: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
-  offset: {x: 0, y: 2, z: 0}
---- !u!114 &6050463316063228318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6050463316063228296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ac59474a38c8c4d832e7211b2c78c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  chaseRange: 10
-  isChasing: 0
-  isFacingRight: 0
-  isPatrolling: 0
-  player: {fileID: 0}
-  attackRange: 3
-  damage: 1000
-  target: {fileID: 0}
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &6050463316063228294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6050463316063228296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b52591b90617cf4ab9a860e4b184138, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickDamage: 4
-  tickSpeed: 0.75
-  burnTickTimers: []
 --- !u!50 &6050463316063228289
 Rigidbody2D:
   serializedVersion: 4
@@ -213,3 +157,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6050463316063228291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050463316063228296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23fde65a51a93b449c9a650e40e8d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 16000
+  pfHealthBar: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
+  offset: {x: 0, y: 2, z: 0}
+--- !u!114 &6050463316063228294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050463316063228296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b52591b90617cf4ab9a860e4b184138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickDamage: 4
+  tickSpeed: 0.75
+  burnTickTimers: []

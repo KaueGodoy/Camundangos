@@ -151,13 +151,16 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
     private float attackTimer = 0.0f;
     private float attackDelay = 0.85f;
 
+    [SerializeField] private float attackDuration = 0.9f;
+    [SerializeField] private float attackRate = 0.9f;
+
     private void Attack()
     {
         attackAnimation = true;
 
         if (!IsInvoking("PerformAttack"))
         {
-            InvokeRepeating("PerformAttack", .5f, 1.5f);
+            InvokeRepeating("PerformAttack", attackDuration, attackRate);
         }
     }
 

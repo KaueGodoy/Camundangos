@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 160278525070411248}
   - component: {fileID: 160278525070411251}
   - component: {fileID: 160278525070411250}
+  - component: {fileID: 571679817}
   m_Layer: 0
   m_Name: SkeletonV2_Chase_Attack_Patrol
   m_TagString: Enemy
@@ -199,3 +200,18 @@ MonoBehaviour:
   - {fileID: 0}
   attackRange: 3
   damage: 300
+  attackAnimation: 0
+  attackDuration: 0.9
+  attackRate: 0.9
+--- !u!114 &571679817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160278525070411252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5861025f61cd51340a24a58bf377a33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

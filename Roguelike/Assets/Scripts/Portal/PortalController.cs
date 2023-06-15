@@ -48,7 +48,7 @@ public class PortalController : MonoBehaviour
         //Scale
         faderTeleport.gameObject.SetActive(true);
         LeanTween.scale(faderTeleport, Vector3.zero, 0.3f);
-        LeanTween.scale(faderTeleport, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        LeanTween.scale(faderTeleport, new Vector3(1, 1, 1), 0.8f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
         {
             faderTeleport.gameObject.SetActive(false);
         });

@@ -10,6 +10,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     private readonly float healthThreshold = 0.0f;
 
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
 
     HealthSystem healthSystem;
     Transform healthBarTransform;
@@ -20,6 +21,7 @@ public class Skeleton : MonoBehaviour, IEnemy
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
 
         currentHealth = maxHealth;
 
@@ -78,13 +80,13 @@ public class Skeleton : MonoBehaviour, IEnemy
 
         if (currentHealth <= 0)
         {
-            rb.bodyType = RigidbodyType2D.Static;
+            DisableHealthBar();
 
-            DestroyHealthBar();
+            rb.bodyType = RigidbodyType2D.Static;
+            boxCollider.enabled = false;
 
             Invoke("Die", deathAnimationTime);
             Invoke("DeathEffect", deathAnimationTime);
-            Invoke("DropLoot", deathAnimationTime);
         }
     }
 
@@ -104,6 +106,7 @@ public class Skeleton : MonoBehaviour, IEnemy
 
     public void Die()
     {
+        DropLoot();
         Destroy(gameObject);
     }
 
@@ -125,7 +128,7 @@ public class Skeleton : MonoBehaviour, IEnemy
         Debug.Log("Health: " + healthSystem.GetCurrentHealth());
     }
 
-    private void DestroyHealthBar()
+    private void DisableHealthBar()
     {
         healthSystem.Die();
         healthBarTransform.gameObject.SetActive(false);
