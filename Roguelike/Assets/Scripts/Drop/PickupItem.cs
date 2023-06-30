@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupItem : MonoBehaviour
+public class PickupItem : Interactable
 {
     public Item ItemDrop { get; set; }
 
@@ -16,10 +16,11 @@ public class PickupItem : MonoBehaviour
         }
     }
 
-    public void Interact()
+    public override void Interact()
     {
         InventoryController.Instance.GiveItem(ItemDrop);
         Debug.Log(ItemDrop.ItemName);
+        Debug.Log("Interacting with item object");
         Destroy(gameObject);
     }
 }
