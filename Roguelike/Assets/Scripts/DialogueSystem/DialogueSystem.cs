@@ -15,14 +15,15 @@ public class DialogueSystem : MonoBehaviour
     public List<string> dialogueLines;
 
     Button continueButton;
-    TextMeshPro dialogueText, nameText;
+    TMP_Text dialogueText, nameText, buttonText;
     int dialogueIndex;
 
     private void Awake()
     {
         continueButton = dialoguePanel.transform.Find("Button").GetComponent<Button>();
-        dialogueText = dialoguePanel.transform.Find("TextBox").GetComponent<TextMeshPro>();
-        nameText = dialoguePanel.transform.Find("Name").GetChild(0).GetComponent<TextMeshPro>();
+        //buttonText = dialoguePanel.transform.Find("Button/Continue").GetComponent<TMP_Text>();
+        dialogueText = dialoguePanel.transform.Find("TextBox").GetComponent<TMP_Text>();
+        nameText = dialoguePanel.transform.Find("Name/Text").GetComponent<TMP_Text>();
 
         continueButton.onClick.AddListener(delegate { ContinueDialogue(); });
 
@@ -51,25 +52,26 @@ public class DialogueSystem : MonoBehaviour
         Debug.Log(dialogueLines.Count);
 
         CreateDialogue();
-
     }
 
     public void CreateDialogue()
     {
         dialogueText.text = dialogueLines[dialogueIndex];
         nameText.text = npcName;
+        //buttonText.text = "Continue";
         dialoguePanel.SetActive(true);
     }
 
     public void ContinueDialogue()
     {
-        if (dialogueIndex < dialogueLines.Count)
+        if (dialogueIndex < dialogueLines.Count - 1)
         {
             dialogueIndex++;
             dialogueText.text = dialogueLines[dialogueIndex];
         }
         else
         {
+            //buttonText.text = "End";
             dialoguePanel.SetActive(false);
         }
     }
