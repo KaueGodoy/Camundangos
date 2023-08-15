@@ -8,8 +8,8 @@ public class UIEventHandler : MonoBehaviour
     public static event ItemEventHandler OnItemAddedToInventory;
     public static event ItemEventHandler OnItemEquipped;
 
-    public delegate void PlayerHealthEventHandler(float currentHealth, float maxHealth);
-    public static event PlayerHealthEventHandler OnPlayerHealthChanged;
+    //public delegate void PlayerHealthEventHandler(float currentHealth, float maxHealth);
+    //public static event PlayerHealthEventHandler OnPlayerHealthChanged;
 
     public delegate void StatsEventHandler();
     public static event StatsEventHandler OnStatsChanged;   

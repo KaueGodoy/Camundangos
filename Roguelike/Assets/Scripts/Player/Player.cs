@@ -39,7 +39,11 @@ public class Player : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+
         playerDamage = GetComponent<PlayerDamage>();
+
+        skillCooldowns = GetComponent<PlayerCooldowns>();
+        healthBar = GetComponent<PlayerHealthBar>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
         characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
@@ -295,7 +299,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        Debug.Log("Player takes: " + damageAmount);
+        Debug.Log($"Player takes: {damageAmount} damage");
 
         FindObjectOfType<AudioManager>().PlaySound("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);
@@ -413,6 +417,7 @@ public class Player : MonoBehaviour
     private void BetterJump()
     {
         // changing gravity directly
+
         if (rb.velocity.y < 0f)
         {
             rb.gravityScale = fallMultiplier;
@@ -420,6 +425,8 @@ public class Player : MonoBehaviour
 
         playerInputAction.action.canceled += context =>
         {
+            if (rb == null) return;
+
             if (rb.velocity.y > 0)
             {
                 rb.gravityScale = tapJumpMultiplier;
@@ -428,6 +435,7 @@ public class Player : MonoBehaviour
         };
         playerInputAction.action.performed += context =>
         {
+            if (rb == null) return;
             rb.gravityScale = holdJumpMultiplier;
         };
 
@@ -565,6 +573,8 @@ public class Player : MonoBehaviour
 
     private void PerformSkill()
     {
+        //if (skillCooldowns == null) return;
+
         if (skillCooldowns.offCooldown)
         {
             if (skillAttackRequest)
@@ -616,6 +626,8 @@ public class Player : MonoBehaviour
 
     private void Ult()
     {
+        if (skillCooldowns == null) return;
+
         if (skillCooldowns.ultOffCooldown)
         {
             if (ultAttackRequest)
@@ -839,8 +851,7 @@ public class Player : MonoBehaviour
     #region UI
     [Header("UI Elements")]
 
-    [SerializeField] private PlayerHealthBar healthBar;
-    [SerializeField] private PlayerCooldowns cooldowns;
+    private PlayerHealthBar healthBar;
 
     public void UpdateUI()
     {

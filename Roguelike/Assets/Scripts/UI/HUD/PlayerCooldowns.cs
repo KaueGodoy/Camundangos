@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
-using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem;
 
 public class PlayerCooldowns : MonoBehaviour
 {
-
-    public Player player;
+    private Player _player;
     private float fillAmountFull = 1f;
     private PlayerControls playerControls;
 
@@ -21,6 +16,9 @@ public class PlayerCooldowns : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        offCooldown = true;
+
     }
 
     private void Start()
@@ -101,7 +99,7 @@ public class PlayerCooldowns : MonoBehaviour
             cooldownText.gameObject.SetActive(true);
             cooldownText.text = convertedCooldownTimer + "";
 
-            player.attackRequest = false;
+            _player.attackRequest = false;
 
             if (cooldownTimer <= 0)
             {

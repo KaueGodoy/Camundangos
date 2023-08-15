@@ -410,7 +410,7 @@ public class BossBattle : MonoBehaviour
     [SerializeField] private BossHealthBar healthBar;
 
     private string bossName = "Slime Boss";
-    private string bossName2 = "Skeleton Boss";
+    //private string bossName2 = "Skeleton Boss";
 
     public void UpdateUI()
     {
