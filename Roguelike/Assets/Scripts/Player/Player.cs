@@ -10,9 +10,9 @@ public class Player : MonoBehaviour
 {
     public CharacterStats characterStats;
 
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider;
-    private PlayerControls playerControls;
+    private Rigidbody2D _rb;
+    private BoxCollider2D _boxCollider;
+    private PlayerControls _playerControls;
     [SerializeField] private InputActionReference playerInputAction;
 
     private PlayerDamage playerDamage;
@@ -37,25 +37,24 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
-        animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _animator = GetComponent<Animator>();
 
-        playerDamage = GetComponent<PlayerDamage>();
+        _playerCooldowns = GetComponent<PlayerCooldowns>();
+        _healthBar = GetComponent<PlayerHealthBar>();
 
-        skillCooldowns = GetComponent<PlayerCooldowns>();
-        healthBar = GetComponent<PlayerHealthBar>();
+        //playerDamage = GetComponent<PlayerDamage>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
         characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
         Debug.Log("Player init");
 
-        playerControls = new PlayerControls();
+        _playerControls = new PlayerControls();
 
     }
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-
         currentHealth = maxHealth;
         isAlive = true;
 
@@ -70,7 +69,7 @@ public class Player : MonoBehaviour
     private void ReadInput()
     {
         // list of player inputs with events being subscribed and calling the functions to perform the action using the start method
-        playerControls.Player.Jump.performed += context => Jump3(context.ReadValue<float>());
+        _playerControls.Player.Jump.performed += context => Jump3(context.ReadValue<float>());
     }
 
     private void Jump2()
@@ -85,52 +84,50 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        playerControls.Enable();
+        _playerControls.Enable();
         playerInputAction.action.Enable();
     }
 
     private void OnDisable()
     {
-        playerControls.Disable();
+        _playerControls.Disable();
         playerInputAction.action.Disable();
     }
 
     void Update()
     {
-        if (!PauseMenu.GameIsPaused)
-        {
-            if (isDashing) return;
+        if (PauseMenu.GameIsPaused) return;
 
-            if (isAlive)
-            {
-                ProcessInput();
-                Attack();
-                PerformSkill();
-                Ult();
-                UpdateUI();
-            }
+        if (isDashing) return;
+
+        if (isAlive)
+        {
+            ProcessInput();
+            Attack();
+            PerformSkill();
+            Ult();
+            UpdateUI();
         }
     }
 
     private void FixedUpdate()
     {
 
-        if (!PauseMenu.GameIsPaused)
+        if (PauseMenu.GameIsPaused) return;
+
+        if (isDashing) return;
+
+        if (isAlive)
         {
-            if (isDashing) return;
-
-            if (isAlive)
-            {
-                Move();
-                Jump();
-                BetterJump();
-                DashTrigger();
-                Flip();
-            }
-
-            UpdateTimers();
-            UpdateAnimationState();
+            Move();
+            Jump();
+            BetterJump();
+            DashTrigger();
+            Flip();
         }
+
+        UpdateTimers();
+        UpdateAnimationState();
 
     }
 
@@ -142,7 +139,7 @@ public class Player : MonoBehaviour
         //moveX = Input.GetAxisRaw("Horizontal");
 
         // reset jump counter
-        if (IsGrounded() && !playerControls.Player.Jump.triggered)
+        if (IsGrounded() && !_playerControls.Player.Jump.triggered)
         {
             jumpCounter = 0f;
             IsJumpingMidAir = false;
@@ -160,7 +157,7 @@ public class Player : MonoBehaviour
         }
 
         // jump
-        if (playerControls.Player.Jump.triggered)
+        if (_playerControls.Player.Jump.triggered)
         {
             jumpBufferCounter = jumpBufferLength;
 
@@ -168,7 +165,6 @@ public class Player : MonoBehaviour
             {
                 jumpRequest = true;
                 jumpCounter++;
-
             }
         }
         else
@@ -181,25 +177,25 @@ public class Player : MonoBehaviour
         }
 
         // attack
-        if (playerControls.Player.Attack.triggered)
+        if (_playerControls.Player.Attack.triggered)
         {
             attackRequest = true;
         }
 
         // skill
-        if (playerControls.Player.Skill.triggered)
+        if (_playerControls.Player.Skill.triggered)
         {
             skillAttackRequest = true;
         }
 
         // ult
-        if (playerControls.Player.Ult.triggered)
+        if (_playerControls.Player.Ult.triggered)
         {
             ultAttackRequest = true;
         }
 
         // dash
-        if (playerControls.Player.Dash.triggered && canDash)
+        if (_playerControls.Player.Dash.triggered && canDash)
         {
             dashRequest = true;
         }
@@ -222,11 +218,8 @@ public class Player : MonoBehaviour
     #region Timers
     private void UpdateTimers()
     {
-        // hit
         if (isHit)
-        {
             hitTimer += Time.deltaTime;
-        }
 
         if (hitTimer > hitCooldown)
         {
@@ -234,42 +227,36 @@ public class Player : MonoBehaviour
             hitTimer = 0f;
         }
 
-        // attack
         if (attackAnimation)
-        {
             attackTimer += Time.deltaTime;
-        }
+
         if (attackTimer > attackDelay)
         {
             attackAnimation = false;
             attackTimer = 0f;
         }
+
         if (attackString)
-        {
             timeSinceAttack += Time.deltaTime;
-        }
+
         if (timeSinceAttack > attackStringReset)
         {
             attackString = false;
             currentAttack = 0;
         }
 
-        // skill
         if (skillAttackAnimation)
-        {
             skillAttackTimer += Time.deltaTime;
-        }
+
         if (skillAttackTimer > skillAttackDelay)
         {
             skillAttackAnimation = false;
             skillAttackTimer = 0f;
         }
 
-        // ult
         if (ultAttackAnimation)
-        {
             ultAttackTimer += Time.deltaTime;
-        }
+
         if (ultAttackTimer > ultAttackDelay)
         {
             ultAttackAnimation = false;
@@ -343,22 +330,22 @@ public class Player : MonoBehaviour
 
     private void MoveOld()
     {
-        rb.velocity = new Vector2(moveX * moveSpeed, rb.velocity.y);
+        _rb.velocity = new Vector2(moveX * moveSpeed, _rb.velocity.y);
     }
 
     private void Move()
     {
-        moveH = playerControls.Player.Move.ReadValue<Vector2>();
+        moveH = _playerControls.Player.Move.ReadValue<Vector2>();
 
-        direction = new Vector2(moveH.x * moveSpeed, rb.velocity.y);
+        direction = new Vector2(moveH.x * moveSpeed, _rb.velocity.y);
 
         if (direction != Vector2.zero)
         {
-            rb.velocity = direction;
+            _rb.velocity = direction;
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            _rb.velocity = Vector3.zero;
         }
     }
 
@@ -397,14 +384,14 @@ public class Player : MonoBehaviour
             if (IsJumpingMidAir)
             {
                 // changing velocity to jump (could also do += Vector2.up * jumpForce;)
-                rb.velocity = Vector2.up * jumpForce;
+                _rb.velocity = Vector2.up * jumpForce;
                 IsJumpingMidAir = false;
             }
             else
             {
                 // adding force to jump (less prone to bug)
                 //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                rb.velocity = Vector2.up * jumpForce;
+                _rb.velocity = Vector2.up * jumpForce;
 
             }
 
@@ -418,25 +405,25 @@ public class Player : MonoBehaviour
     {
         // changing gravity directly
 
-        if (rb.velocity.y < 0f)
+        if (_rb.velocity.y < 0f)
         {
-            rb.gravityScale = fallMultiplier;
+            _rb.gravityScale = fallMultiplier;
         }
 
         playerInputAction.action.canceled += context =>
         {
-            if (rb == null) return;
+            if (_rb == null) return;
 
-            if (rb.velocity.y > 0)
+            if (_rb.velocity.y > 0)
             {
-                rb.gravityScale = tapJumpMultiplier;
+                _rb.gravityScale = tapJumpMultiplier;
             }
 
         };
         playerInputAction.action.performed += context =>
         {
-            if (rb == null) return;
-            rb.gravityScale = holdJumpMultiplier;
+            if (_rb == null) return;
+            _rb.gravityScale = holdJumpMultiplier;
         };
 
         /* OLD
@@ -569,13 +556,13 @@ public class Player : MonoBehaviour
     private bool skillAttackAnimation = false;
     private bool skillIsAttacking = false;
 
-    public PlayerCooldowns skillCooldowns;
+    private PlayerCooldowns _playerCooldowns;
 
     private void PerformSkill()
     {
         //if (skillCooldowns == null) return;
 
-        if (skillCooldowns.offCooldown)
+        if (_playerCooldowns.offCooldown)
         {
             if (skillAttackRequest)
             {
@@ -626,9 +613,9 @@ public class Player : MonoBehaviour
 
     private void Ult()
     {
-        if (skillCooldowns == null) return;
+        if (_playerCooldowns == null) return;
 
-        if (skillCooldowns.ultOffCooldown)
+        if (_playerCooldowns.ultOffCooldown)
         {
             if (ultAttackRequest)
             {
@@ -692,17 +679,17 @@ public class Player : MonoBehaviour
 
         FindObjectOfType<AudioManager>().PlaySound("PlayerDash");
 
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
+        float originalGravity = _rb.gravityScale;
+        _rb.gravityScale = 0f;
 
-        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        _rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
         tr.emitting = true;
 
 
         yield return new WaitForSeconds(dashingTime);
 
         tr.emitting = false;
-        rb.gravityScale = originalGravity;
+        _rb.gravityScale = originalGravity;
         isDashing = false;
 
         yield return new WaitForSeconds(dashingCooldown);
@@ -749,14 +736,14 @@ public class Player : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().PlaySound("GameOver");
         isAlive = false;
-        rb.bodyType = RigidbodyType2D.Static;
+        _rb.bodyType = RigidbodyType2D.Static;
     }
     #endregion 
 
 
     #region Animation
 
-    private Animator animator;
+    private Animator _animator;
     private string currentAnimation;
 
     private const string DerildoDeath = "derildo_death";
@@ -775,7 +762,7 @@ public class Player : MonoBehaviour
     {
         if (currentAnimation == newAnimation) return;
 
-        animator.Play(newAnimation);
+        _animator.Play(newAnimation);
         currentAnimation = newAnimation;
     }
 
@@ -825,12 +812,12 @@ public class Player : MonoBehaviour
             ChangeAnimationState(DerildoUlt);
         }
         // jump
-        else if (rb.velocity.y > .1f && !IsGrounded())
+        else if (_rb.velocity.y > .1f && !IsGrounded())
         {
             ChangeAnimationState(DerildoJump);
         }
         // fall
-        else if (rb.velocity.y < .1f && !IsGrounded())
+        else if (_rb.velocity.y < .1f && !IsGrounded())
         {
             ChangeAnimationState(DerildoFall);
         }
@@ -851,11 +838,11 @@ public class Player : MonoBehaviour
     #region UI
     [Header("UI Elements")]
 
-    private PlayerHealthBar healthBar;
+    private PlayerHealthBar _healthBar;
 
     public void UpdateUI()
     {
-        healthBar.UpdateHealthBar(maxHealth, currentHealth);
+        _healthBar.UpdateHealthBar(maxHealth, currentHealth);
         //cooldowns.UpdateCooldowns(attackTimer);
     }
 
@@ -865,7 +852,7 @@ public class Player : MonoBehaviour
     {
         float extraHeightText = .1f;
 
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.down, extraHeightText, jumpableGround);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size - new Vector3(0.1f, 0f, 0f), 0f, Vector2.down, extraHeightText, jumpableGround);
 
         // draw gizmos
         /*

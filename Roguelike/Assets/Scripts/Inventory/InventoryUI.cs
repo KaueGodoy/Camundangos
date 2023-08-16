@@ -16,6 +16,11 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
+
+        ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
+        ItemContainer.transform.localScale = Vector3.one;
+
+        UIEventHandler.OnItemAddedToInventory += ItemAdded;
     }
     private void OnEnable()
     {
@@ -29,8 +34,6 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
-        UIEventHandler.OnItemAddedToInventory += ItemAdded;
         inventoryPanel.gameObject.SetActive(false);
     }
 

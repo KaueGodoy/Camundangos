@@ -61,7 +61,7 @@ public class PlayerCooldowns : MonoBehaviour
 
     #region Skill
 
-    [Header("Skil")]
+    [Header("Skill")]
     [SerializeField] private TextMeshProUGUI cooldownText;
     [SerializeField] private Image foregroundImage;
     [SerializeField] private Image iconImage;
