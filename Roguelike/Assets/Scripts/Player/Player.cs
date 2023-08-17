@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     private BoxCollider2D _boxCollider;
     private PlayerControls _playerControls;
-    [SerializeField] private InputActionReference playerInputAction;
+    [SerializeField] private InputActionReference _playerInputAction;
 
     private PlayerDamage playerDamage;
 
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
 
-        _playerCooldowns = GetComponent<PlayerCooldowns>();
+        _playerCooldowns  = GetComponent<PlayerCooldowns>();
         _healthBar = GetComponent<PlayerHealthBar>();
 
         //playerDamage = GetComponent<PlayerDamage>();
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        isAlive = true;
+        _isAlive = true;
 
         //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
         UpdateUI();
@@ -85,13 +85,13 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         _playerControls.Enable();
-        playerInputAction.action.Enable();
+        _playerInputAction.action.Enable();
     }
 
     private void OnDisable()
     {
         _playerControls.Disable();
-        playerInputAction.action.Disable();
+        _playerInputAction.action.Disable();
     }
 
     void Update()
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
 
         if (isDashing) return;
 
-        if (isAlive)
+        if (_isAlive)
         {
             ProcessInput();
             Attack();
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
         if (isDashing) return;
 
-        if (isAlive)
+        if (_isAlive)
         {
             Move();
             Jump();
@@ -218,13 +218,13 @@ public class Player : MonoBehaviour
     #region Timers
     private void UpdateTimers()
     {
-        if (isHit)
-            hitTimer += Time.deltaTime;
+        if (_isHit)
+            _hitTimer += Time.deltaTime;
 
-        if (hitTimer > hitCooldown)
+        if (_hitTimer > hitCooldown)
         {
-            isHit = false;
-            hitTimer = 0f;
+            _isHit = false;
+            _hitTimer = 0f;
         }
 
         if (attackAnimation)
@@ -276,13 +276,13 @@ public class Player : MonoBehaviour
     public float damageAmount = 1f;
     public float healAmount = 1f;
 
-    private bool isAlive;
+    private bool _isAlive;
     private readonly float deathAnimationTime = 0.8f;
 
     [Space]
     public float hitCooldown = 0.3f;
-    private float hitTimer = 0.0f;
-    private bool isHit = false;
+    private float _hitTimer = 0.0f;
+    private bool _isHit = false;
 
     public void TakeDamage(float damageAmount)
     {
@@ -290,7 +290,7 @@ public class Player : MonoBehaviour
 
         FindObjectOfType<AudioManager>().PlaySound("Hit");
         currentHealth -= Mathf.FloorToInt(damageAmount);
-        isHit = true;
+        _isHit = true;
 
         //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
 
@@ -410,7 +410,7 @@ public class Player : MonoBehaviour
             _rb.gravityScale = fallMultiplier;
         }
 
-        playerInputAction.action.canceled += context =>
+        _playerInputAction.action.canceled += context =>
         {
             if (_rb == null) return;
 
@@ -420,7 +420,7 @@ public class Player : MonoBehaviour
             }
 
         };
-        playerInputAction.action.performed += context =>
+        _playerInputAction.action.performed += context =>
         {
             if (_rb == null) return;
             _rb.gravityScale = holdJumpMultiplier;
@@ -728,14 +728,14 @@ public class Player : MonoBehaviour
 
     private void RestartLevel()
     {
-        isAlive = true;
+        _isAlive = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Die()
     {
         FindObjectOfType<AudioManager>().PlaySound("GameOver");
-        isAlive = false;
+        _isAlive = false;
         _rb.bodyType = RigidbodyType2D.Static;
     }
     #endregion 
@@ -769,12 +769,12 @@ public class Player : MonoBehaviour
     private void UpdateAnimationState()
     {
         // death
-        if (!isAlive)
+        if (!_isAlive)
         {
             ChangeAnimationState(DerildoDeath);
         }
         // hit
-        else if (isHit)
+        else if (_isHit)
         {
             ChangeAnimationState(DerildoHit);
         }
