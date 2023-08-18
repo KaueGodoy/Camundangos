@@ -18,7 +18,7 @@ public class InventoryUI : MonoBehaviour
         playerControls = new PlayerControls();
 
         ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
-        ItemContainer.transform.localScale = Vector3.one;
+   
 
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
     }

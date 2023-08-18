@@ -30,13 +30,24 @@ public class CharacterPanel : MonoBehaviour
     private PlayerWeaponController PlayerWeaponController;
     private List<TextMeshProUGUI> weaponStatTexts = new List<TextMeshProUGUI>();
 
-    private void Start()
+    private void Awake()
     {
         PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
         UIEventHandler.OnStatsChanged += UpdateStats;
         UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
+    }
+
+    private void Start()
+    {
         InitializeStats();
+
+    }
+
+    private void OnDestroy()
+    {
+        UIEventHandler.OnStatsChanged -= UpdateStats;
+        UIEventHandler.OnItemEquipped -= UpdateEquippedWeapon;
     }
 
     //private void UpdateHealth(float currentHealth, float maxHealth)
