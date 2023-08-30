@@ -13,9 +13,13 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb;
     private BoxCollider2D _boxCollider;
     private PlayerControls _playerControls;
+
+    private PlayerSkill _playerSkill;
+    private PlayerUlt _playerUlt;
+    private PlayerDash _playerDash;
+
     [SerializeField] private InputActionReference _playerInputAction;
 
-    private PlayerDamage playerDamage;
 
     [Header("Ground")]
     [SerializeField] private LayerMask jumpableGround;
@@ -35,16 +39,18 @@ public class Player : MonoBehaviour
 
     #endregion
 
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
 
-        _playerCooldowns  = GetComponent<PlayerCooldowns>();
-        _healthBar = GetComponent<PlayerHealthBar>();
+        _playerSkill = GetComponent<PlayerSkill>();
+        _playerUlt = GetComponent<PlayerUlt>();
+        _playerDash = GetComponent<PlayerDash>();
 
-        //playerDamage = GetComponent<PlayerDamage>();
+        _healthBar = GetComponent<PlayerHealthBar>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
         characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
@@ -98,31 +104,28 @@ public class Player : MonoBehaviour
     {
         if (PauseMenu.GameIsPaused) return;
 
-        if (isDashing) return;
+        //if (isDashing) return;
 
         if (_isAlive)
         {
             ProcessInput();
             Attack();
-            PerformSkill();
-            Ult();
+            _playerSkill.PerformSkill();
+            _playerUlt.PerformUlt();
             UpdateUI();
         }
     }
 
     private void FixedUpdate()
     {
-
-        if (PauseMenu.GameIsPaused) return;
-
-        if (isDashing) return;
+        if (_playerDash.isDashing) return;
 
         if (_isAlive)
         {
             Move();
             Jump();
             BetterJump();
-            DashTrigger();
+            _playerDash.DashTrigger();
             Flip();
         }
 
@@ -185,19 +188,19 @@ public class Player : MonoBehaviour
         // skill
         if (_playerControls.Player.Skill.triggered)
         {
-            skillAttackRequest = true;
+            _playerSkill.skillAttackRequest = true;
         }
 
         // ult
         if (_playerControls.Player.Ult.triggered)
         {
-            ultAttackRequest = true;
+            _playerUlt.ultAttackRequest = true;
         }
 
         // dash
-        if (_playerControls.Player.Dash.triggered && canDash)
+        if (_playerControls.Player.Dash.triggered && _playerDash.canDash)
         {
-            dashRequest = true;
+            _playerDash.dashRequest = true;
         }
 
         // damage test DELETE
@@ -245,24 +248,8 @@ public class Player : MonoBehaviour
             currentAttack = 0;
         }
 
-        if (skillAttackAnimation)
-            skillAttackTimer += Time.deltaTime;
-
-        if (skillAttackTimer > skillAttackDelay)
-        {
-            skillAttackAnimation = false;
-            skillAttackTimer = 0f;
-        }
-
-        if (ultAttackAnimation)
-            ultAttackTimer += Time.deltaTime;
-
-        if (ultAttackTimer > ultAttackDelay)
-        {
-            ultAttackAnimation = false;
-            ultAttackTimer = 0f;
-        }
-
+        _playerSkill.UpdateSkillTimer();
+        _playerUlt.UpdateUltimer();
     }
     #endregion
 
@@ -539,173 +526,6 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region Skill
-
-    [Header("Skill")]
-    public Transform firePoint;
-    public Transform spawnPoint;
-    public GameObject pfProjectile;
-
-    private float skillAttackTimer = 0.0f;
-
-    public float skillAttackDelay = 0.4f;
-    public float skillTimeSinceAttack = 0.0f;
-
-    public bool skillAttackRequest = false;
-
-    private bool skillAttackAnimation = false;
-    private bool skillIsAttacking = false;
-
-    private PlayerCooldowns _playerCooldowns;
-
-    private void PerformSkill()
-    {
-        //if (skillCooldowns == null) return;
-
-        if (_playerCooldowns.offCooldown)
-        {
-            if (skillAttackRequest)
-            {
-                skillAttackRequest = false;
-                skillAttackAnimation = true;
-
-                if (!skillIsAttacking)
-                {
-                    skillIsAttacking = true;
-
-                    Invoke("InstantiateSkill", skillAttackDelay - 0.1f);
-                    Invoke("SkillComplete", skillAttackDelay);
-                }
-            }
-        }
-        else
-        {
-            skillAttackRequest = false; // Reset the ult attack request if the ult is on cooldown
-        }
-    }
-
-    private void InstantiateSkill()
-    {
-        Instantiate(pfProjectile, firePoint.position, firePoint.rotation);
-        FindObjectOfType<AudioManager>().PlaySound("Attack");
-    }
-
-    private void SkillComplete()
-    {
-        skillIsAttacking = false;
-    }
-
-    #endregion
-
-    #region Ult
-
-    [Header("Ult")]
-    public Transform UltSpawnPoint;
-    public GameObject pfUltProjectile;
-
-    public float ultAttackDelay = 0.4f;
-    private float ultAttackTimer = 0.0f;
-    public float ultTimeSinceAttack = 0.0f;
-
-    public bool ultAttackRequest = false;
-    private bool ultAttackAnimation = false;
-    private bool isUlting = false;
-
-    private void Ult()
-    {
-        if (_playerCooldowns == null) return;
-
-        if (_playerCooldowns.ultOffCooldown)
-        {
-            if (ultAttackRequest)
-            {
-                ultAttackRequest = false;
-                ultAttackAnimation = true;
-
-                if (!isUlting)
-                {
-                    isUlting = true;
-
-                    Invoke("InstantiateUlt", ultAttackDelay - 0.1f);
-                    Invoke("UltComplete", ultAttackDelay);
-                }
-            }
-        }
-        else
-        {
-            ultAttackRequest = false; // Reset the ult attack request if the ult is on cooldown
-        }
-    }
-
-    private void InstantiateUlt()
-    {
-        Instantiate(pfUltProjectile, UltSpawnPoint.position, UltSpawnPoint.rotation);
-        FindObjectOfType<AudioManager>().PlaySound("Attack");
-    }
-
-    private void UltComplete()
-    {
-        isUlting = false;
-    }
-
-
-    #endregion
-
-    #region Dash
-
-    [Header("Dash")]
-    public float dashSpeed = 5f;
-    public float dashingTime = 0.2f;
-    public float dashingCooldown = 1f;
-
-    private bool canDash = true;
-    private bool dashRequest = false;
-    private bool isDashing;
-
-    [SerializeField] private TrailRenderer tr;
-
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        IsJumpingMidAir = false;
-
-        // NEEDS IMPROVEMENT
-        if (!IsGrounded() && jumpCounter != 0)
-        {
-            IsJumpingMidAir = true;
-            jumpCounter--;
-        }
-
-        FindObjectOfType<AudioManager>().PlaySound("PlayerDash");
-
-        float originalGravity = _rb.gravityScale;
-        _rb.gravityScale = 0f;
-
-        _rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
-        tr.emitting = true;
-
-
-        yield return new WaitForSeconds(dashingTime);
-
-        tr.emitting = false;
-        _rb.gravityScale = originalGravity;
-        isDashing = false;
-
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-    }
-
-    private void DashTrigger()
-    {
-        if (dashRequest)
-        {
-            StartCoroutine(Dash());
-            dashRequest = false;
-        }
-    }
-    #endregion
-
     private void Flip()
     {
         if (isFacingRight && moveH.x < 0f || !isFacingRight && moveH.x > 0f)
@@ -717,9 +537,9 @@ public class Player : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
 
-            firePoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
-            spawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
-            UltSpawnPoint.Rotate(firePoint.rotation.x, 180f, firePoint.rotation.z);
+            _playerSkill.Firepoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
+            _playerSkill.SpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
+            _playerUlt.UltSpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
         }
 
     }
@@ -801,13 +621,13 @@ public class Player : MonoBehaviour
             }
         }
         // skill
-        else if (skillAttackAnimation)
+        else if (_playerSkill.skillAttackAnimation)
         {
             ChangeAnimationState(DerildoSkill);
 
         }
         // ult
-        else if (ultAttackAnimation)
+        else if (_playerUlt.ultAttackAnimation)
         {
             ChangeAnimationState(DerildoUlt);
         }
