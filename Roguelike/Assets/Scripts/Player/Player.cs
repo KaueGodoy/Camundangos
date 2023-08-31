@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -8,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    // REFACTOR > input, movement, animation
+
     public CharacterStats characterStats;
 
     private Rigidbody2D _rb;
@@ -17,6 +16,8 @@ public class Player : MonoBehaviour
     private PlayerSkill _playerSkill;
     private PlayerUlt _playerUlt;
     private PlayerDash _playerDash;
+    private PlayerHealth _playerHealth;
+    private PlayerAttack _playerAttack;
 
     [SerializeField] private InputActionReference _playerInputAction;
 
@@ -49,8 +50,8 @@ public class Player : MonoBehaviour
         _playerSkill = GetComponent<PlayerSkill>();
         _playerUlt = GetComponent<PlayerUlt>();
         _playerDash = GetComponent<PlayerDash>();
-
-        _healthBar = GetComponent<PlayerHealthBar>();
+        _playerHealth = GetComponent<PlayerHealth>();
+        _playerAttack = GetComponent<PlayerAttack>();
 
         //audioManager = GetComponent<AudioManager>(); // doesnt work because component is not applied to this game object
         characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
@@ -61,11 +62,10 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        currentHealth = maxHealth;
-        _isAlive = true;
+
 
         //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
-        UpdateUI();
+        _playerHealth.UpdateUI();
 
         // handling input through events
         //playerControls.Player.Jump.performed += _ => Jump2();
@@ -106,13 +106,13 @@ public class Player : MonoBehaviour
 
         //if (isDashing) return;
 
-        if (_isAlive)
+        if (_playerHealth.IsAlive)
         {
             ProcessInput();
-            Attack();
+            _playerAttack.PerformAttack();
             _playerSkill.PerformSkill();
             _playerUlt.PerformUlt();
-            UpdateUI();
+            _playerHealth.UpdateUI();
         }
     }
 
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
     {
         if (_playerDash.isDashing) return;
 
-        if (_isAlive)
+        if (_playerHealth.IsAlive)
         {
             Move();
             Jump();
@@ -135,6 +135,9 @@ public class Player : MonoBehaviour
     }
 
     #region Input
+
+    public float damageAmount;
+    public float healAmount;
 
     private void ProcessInput()
     {
@@ -182,7 +185,7 @@ public class Player : MonoBehaviour
         // attack
         if (_playerControls.Player.Attack.triggered)
         {
-            attackRequest = true;
+            _playerAttack.attackRequest = true;
         }
 
         // skill
@@ -206,13 +209,13 @@ public class Player : MonoBehaviour
         // damage test DELETE
         if (Input.GetKeyDown(KeyCode.U))
         {
-            TakeDamage(damageAmount);
+            _playerHealth.TakeDamage(damageAmount);
         }
 
         // heal test DELETE
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Heal(healAmount);
+            _playerHealth.Heal(healAmount);
         }
     }
 
@@ -221,87 +224,16 @@ public class Player : MonoBehaviour
     #region Timers
     private void UpdateTimers()
     {
-        if (_isHit)
-            _hitTimer += Time.deltaTime;
 
-        if (_hitTimer > hitCooldown)
-        {
-            _isHit = false;
-            _hitTimer = 0f;
-        }
+        _playerHealth.UpdateHitTimer();
 
-        if (attackAnimation)
-            attackTimer += Time.deltaTime;
-
-        if (attackTimer > attackDelay)
-        {
-            attackAnimation = false;
-            attackTimer = 0f;
-        }
-
-        if (attackString)
-            timeSinceAttack += Time.deltaTime;
-
-        if (timeSinceAttack > attackStringReset)
-        {
-            attackString = false;
-            currentAttack = 0;
-        }
+        _playerAttack.UpdateAttackTimer();
 
         _playerSkill.UpdateSkillTimer();
         _playerUlt.UpdateUltimer();
     }
     #endregion
 
-    #region Health
-
-    [Header("Health")]
-    public float currentHealth = 0;
-    public float maxHealth = 3;
-
-    [Header("Damage and Heal")]
-    public float damageAmount = 1f;
-    public float healAmount = 1f;
-
-    private bool _isAlive;
-    private readonly float deathAnimationTime = 0.8f;
-
-    [Space]
-    public float hitCooldown = 0.3f;
-    private float _hitTimer = 0.0f;
-    private bool _isHit = false;
-
-    public void TakeDamage(float damageAmount)
-    {
-        Debug.Log($"Player takes: {damageAmount} damage");
-
-        FindObjectOfType<AudioManager>().PlaySound("Hit");
-        currentHealth -= Mathf.FloorToInt(damageAmount);
-        _isHit = true;
-
-        //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
-
-        if (currentHealth <= 0)
-        {
-            UpdateUI();
-            Die();
-            //UIEventHandler.HealthChanged(0, this.maxHealth);
-            Invoke("RestartLevel", deathAnimationTime);
-        }
-    }
-
-    private void Heal(float healAmount)
-    {
-        FindObjectOfType<AudioManager>().PlaySound("Hit");
-        currentHealth += Mathf.FloorToInt(healAmount);
-
-        if (currentHealth >= maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-    }
-
-    #endregion
 
 
     #region Movement
@@ -388,6 +320,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float damage)
+    {
+        Debug.Log("Player taking damage is broke in the enemy scripts");
+    }
+
     private void BetterJump()
     {
         // changing gravity directly
@@ -464,67 +401,6 @@ public class Player : MonoBehaviour
 
     #endregion Jump
 
-    #region Attack
-
-    [Header("Attack")]
-    private float attackTimer = 0.0f;
-
-    public float attackDelay = 0.4f;
-    public float timeSinceAttack = 0.0f;
-    public float attackStringReset = 0.8f;
-
-    public int currentAttack = 0;
-
-    public bool attackRequest = false;
-    public bool attackString = false;
-
-    private bool attackAnimation = false;
-    private bool isAttacking = false;
-
-    private void Attack()
-    {
-        if (attackRequest)
-        {
-            attackRequest = false;
-            attackAnimation = true;
-            attackString = true;
-
-            if (!isAttacking)
-            {
-                isAttacking = true;
-
-                UpdateAttackString();
-
-                Invoke("AttackComplete", attackDelay);
-
-                ResetAttackString();
-            }
-        }
-    }
-
-    public void UpdateAttackString()
-    {
-        currentAttack++;
-        //Debug.Log("Attacking");
-
-        // loops attack string
-        if (currentAttack > 3)
-        {
-            currentAttack = 1;
-        }
-    }
-
-    public void ResetAttackString()
-    {
-        timeSinceAttack = 0.0f;
-    }
-
-    private void AttackComplete()
-    {
-        isAttacking = false;
-    }
-
-    #endregion
 
     private void Flip()
     {
@@ -537,29 +413,17 @@ public class Player : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
 
-            _playerSkill.Firepoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
-            _playerSkill.SpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
-            _playerUlt.UltSpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
+            FlipPlayerFirePoints();
         }
 
     }
 
-    #region Level
-
-    private void RestartLevel()
+    private void FlipPlayerFirePoints()
     {
-        _isAlive = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        _playerSkill.Firepoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
+        _playerSkill.SpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
+        _playerUlt.UltSpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
     }
-
-    private void Die()
-    {
-        FindObjectOfType<AudioManager>().PlaySound("GameOver");
-        _isAlive = false;
-        _rb.bodyType = RigidbodyType2D.Static;
-    }
-    #endregion 
-
 
     #region Animation
 
@@ -589,34 +453,34 @@ public class Player : MonoBehaviour
     private void UpdateAnimationState()
     {
         // death
-        if (!_isAlive)
+        if (!_playerHealth.IsAlive)
         {
             ChangeAnimationState(DerildoDeath);
         }
         // hit
-        else if (_isHit)
+        else if (_playerHealth.IsHit)
         {
             ChangeAnimationState(DerildoHit);
         }
         // attack
-        else if (attackAnimation)
+        else if (_playerAttack.AttackAnimation)
         {
-            if (currentAttack == 1)
+            if (_playerAttack.CurrentAttack == 1)
             {
                 ChangeAnimationState(DerildoAttackString01);
-                Debug.Log("Attack string number: " + currentAttack);
+                Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
-            else if (currentAttack == 2)
+            else if (_playerAttack.CurrentAttack == 2)
             {
                 ChangeAnimationState(DerildoAttackString02);
-                Debug.Log("Attack string number: " + currentAttack);
+                Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
-            else if (currentAttack == 3)
+            else if (_playerAttack.CurrentAttack == 3)
             {
                 ChangeAnimationState(DerildoAttackString03);
-                Debug.Log("Attack string number: " + currentAttack);
+                Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
         }
@@ -655,18 +519,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region UI
-    [Header("UI Elements")]
 
-    private PlayerHealthBar _healthBar;
-
-    public void UpdateUI()
-    {
-        _healthBar.UpdateHealthBar(maxHealth, currentHealth);
-        //cooldowns.UpdateCooldowns(attackTimer);
-    }
-
-    #endregion
 
     private bool IsGrounded()
     {

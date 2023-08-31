@@ -230,26 +230,26 @@ public class PlayerDamage : MonoBehaviour
                 //Debug.Log("Normal attack");
                 if (basicAttackTalentLevel == 1)
                 {
-                    if(player.currentAttack != 0)
-                    {
-                        if (player.currentAttack == 1)
-                        {
-                            talentMultiplier = basicAttack_TalentLevel1_String01;
+                    //if(player.currentAttack != 0)
+                    //{
+                    //    if (player.currentAttack == 1)
+                    //    {
+                    //        talentMultiplier = basicAttack_TalentLevel1_String01;
 
-                        }
+                    //    }
 
-                        else if (player.currentAttack == 2)
-                        {
-                            talentMultiplier = basicAttack_TalentLevel1_String02;
+                    //    else if (player.currentAttack == 2)
+                    //    {
+                    //        talentMultiplier = basicAttack_TalentLevel1_String02;
 
-                        }
+                    //    }
 
-                        else if (player.currentAttack == 3)
-                        {
-                            talentMultiplier = basicAttack_TalentLevel1_String03;
+                    //    else if (player.currentAttack == 3)
+                    //    {
+                    //        talentMultiplier = basicAttack_TalentLevel1_String03;
 
-                        }
-                    }
+                    //    }
+                    //}
                     
 
 

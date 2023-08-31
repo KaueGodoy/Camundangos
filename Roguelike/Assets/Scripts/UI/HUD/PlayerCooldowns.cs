@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerCooldowns : MonoBehaviour
 {
-    private Player _player;
+    private PlayerAttack _playerAttack;
     private float fillAmountFull = 1f;
     private PlayerControls playerControls;
 
@@ -16,7 +16,7 @@ public class PlayerCooldowns : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
-        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        _playerAttack = GetComponent<PlayerAttack>();
         offCooldown = true;
 
     }
@@ -99,7 +99,7 @@ public class PlayerCooldowns : MonoBehaviour
             cooldownText.gameObject.SetActive(true);
             cooldownText.text = convertedCooldownTimer + "";
 
-            _player.attackRequest = false;
+            _playerAttack.attackRequest = false;
 
             if (cooldownTimer <= 0)
             {
