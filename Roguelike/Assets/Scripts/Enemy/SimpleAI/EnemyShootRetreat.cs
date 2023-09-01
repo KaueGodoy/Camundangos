@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class EnemyShootRetreat : MonoBehaviour
 {
-    private Player player;
+    private PlayerController player;
     private Transform target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -25,7 +25,7 @@ public class EnemyShootRetreat : MonoBehaviour
         if (playerObject != null)
         {
             // Get the Player component from the player object
-            player = playerObject.GetComponent<Player>();
+            player = playerObject.GetComponent<PlayerController>();
             target = playerObject.transform;
 
             if (player == null)

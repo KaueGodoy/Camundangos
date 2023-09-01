@@ -59,7 +59,7 @@ public class PlayerDash : MonoBehaviour
         canDash = true;
     }
 
-    public void DashTrigger()
+    public void TriggerDash()
     {
         if (dashRequest)
         {

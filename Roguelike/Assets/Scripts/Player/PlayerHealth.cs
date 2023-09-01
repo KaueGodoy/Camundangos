@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            UpdateUI();
+            UpdatePlayerHealthBar();
             Die();
             //UIEventHandler.HealthChanged(0, this.maxHealth);
             Invoke("RestartLevel", deathAnimationTime);
@@ -81,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
 
     private PlayerHealthBar _healthBar;
 
-    public void UpdateUI()
+    public void UpdatePlayerHealthBar()
     {
         _healthBar.UpdateHealthBar(maxHealth, currentHealth);
         //cooldowns.UpdateCooldowns(attackTimer);

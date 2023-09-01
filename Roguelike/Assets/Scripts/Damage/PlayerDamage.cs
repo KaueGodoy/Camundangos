@@ -8,7 +8,7 @@ using static PlayerDamage;
 public class PlayerDamage : MonoBehaviour
 {
     private Health enemyHealth;
-    public Player player;
+    public PlayerController player;
     public CharacterStats characterStats;
     public BaseStat baseStat;
 

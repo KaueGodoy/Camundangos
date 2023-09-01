@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UltProjectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     [Header("Damage")]
     public float projectileDamage = 6f;
@@ -24,16 +21,21 @@ public class UltProjectile : MonoBehaviour
 
     public CharacterStats characterStats { get; set; }
 
+    private bool _isFacingRight;
+
+    private void Awake()
+    {
+        _isFacingRight = FindObjectOfType<PlayerController>().isFacingRight;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
         //rb.velocity = transform.right * projectileSpeed;
         //rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);
         radians = angle * Mathf.Deg2Rad;
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        Player player = FindObjectOfType<Player>();
-
-        if (player.isFacingRight)
+        if (_isFacingRight)
         {
             //rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);     
             xVelocity = projectileSpeed * Mathf.Cos(radians);
@@ -44,7 +46,7 @@ public class UltProjectile : MonoBehaviour
         else
         {
             // rb.velocity = new Vector2(-projectileSpeed, -projectileSpeed);
-            spriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
             xVelocity = -projectileSpeed * Mathf.Cos(radians);
             yVelocity = -projectileSpeed * Mathf.Sin(radians);
             rb.velocity = new Vector2(xVelocity, yVelocity);

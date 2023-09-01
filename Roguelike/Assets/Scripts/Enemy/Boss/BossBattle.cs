@@ -17,7 +17,7 @@ public class BossBattle : MonoBehaviour
     [Header("Initial Stage")]
     [SerializeField] private ColliderTrigger colliderTrigger;
     [SerializeField] private Slime slime;
-    [SerializeField] private Player player;
+    [SerializeField] private PlayerController player;
 
     // idea
     // count time when battle starts and let the skeleton hp be the slime remaining hp * time passed since battle

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class CharacterPanel : MonoBehaviour
 {
     //[Header("Health")]
-    [SerializeField] private Player player;
+    [SerializeField] private PlayerController player;
     //[SerializeField] private TextMeshProUGUI health;
     //[SerializeField] private Image healthFill;
 

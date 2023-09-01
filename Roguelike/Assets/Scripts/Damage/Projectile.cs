@@ -65,7 +65,7 @@ public class Projectile : MonoBehaviour
         }
 
         // check collision with player - not destryoing the bullet
-        Player player = collision.GetComponent<Player>();
+        PlayerController player = collision.GetComponent<PlayerController>();
         if (!player)
         {
             Destroy(gameObject);

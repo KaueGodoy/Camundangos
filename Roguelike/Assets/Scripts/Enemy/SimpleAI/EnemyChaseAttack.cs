@@ -22,7 +22,7 @@ public class EnemyChaseAttack : MonoBehaviour
         if (playerObject != null)
         {
             // Get the Player component from the player object
-            player = playerObject.GetComponent<Player>();
+            player = playerObject.GetComponent<PlayerController>();
             target = playerObject.transform;
 
             if (player == null)
@@ -142,7 +142,7 @@ public class EnemyChaseAttack : MonoBehaviour
     private float attackTimer = 0.0f;
     private float attackDelay = 0.4f;
 
-    private Player player;
+    private PlayerController player;
 
     private void Attack()
     {

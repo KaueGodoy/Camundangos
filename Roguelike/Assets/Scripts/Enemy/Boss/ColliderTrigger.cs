@@ -9,7 +9,7 @@ public class ColliderTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Player player = collision.GetComponent<Player>();
+        PlayerController player = collision.GetComponent<PlayerController>();
         if (player != null)
         {
             OnPlayerEnterTrigger?.Invoke(this, EventArgs.Empty);

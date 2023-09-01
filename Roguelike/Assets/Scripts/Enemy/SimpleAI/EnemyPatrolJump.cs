@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyPatrolJump : MonoBehaviour
 {
-    public Player player;
+    public PlayerController player;
 
     [Header("Movement")]
     public float moveSpeed = 2f;

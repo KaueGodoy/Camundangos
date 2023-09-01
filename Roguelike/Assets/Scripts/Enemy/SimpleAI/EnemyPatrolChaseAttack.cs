@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyPatrolChaseAttack : MonoBehaviour
 {
-    private Player player;
+    private PlayerController player;
     private Transform target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -22,7 +22,7 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
 
         if (playerObject != null)
         {
-            player = playerObject.GetComponent<Player>();
+            player = playerObject.GetComponent<PlayerController>();
             target = playerObject.transform;
 
             if (player == null)
