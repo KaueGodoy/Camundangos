@@ -4,17 +4,17 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputActionReference _playerInputAction;
+
     private PlayerControls _playerControls;
-    private Rigidbody2D _rb;
-
-    public Rigidbody2D Rigidbody { get { return _rb; } }
-
     private AudioManager _audioManager;
+
+    private Rigidbody2D _rb;
+    public Rigidbody2D Rigidbody { get { return _rb; } }
 
     private void Awake()
     {
-        _boxCollider = GetComponent<BoxCollider2D>();
         _rb = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         _audioManager = FindObjectOfType<AudioManager>();
         _playerControls = new PlayerControls();
     }
@@ -34,24 +34,28 @@ public class PlayerMovement : MonoBehaviour
     #region Movement
 
     [Header("Movement")]
-    public float moveSpeed = 5f;
 
-    public Vector2 moveH;
-    public Vector2 direction;
+    [SerializeField] private float _moveSpeed = 5f;
+    public float MoveSpeed { get { return _moveSpeed; } }
+
+    [SerializeField] private Vector2 _moveH;
+    public Vector2 MoveH { get { return _moveH; } set { _moveH = value; } }
+
+    [SerializeField] private Vector2 _direction;
 
     public void Move()
     {
-        moveH = _playerControls.Player.Move.ReadValue<Vector2>();
+        MoveH = _playerControls.Player.Move.ReadValue<Vector2>();
 
-        direction = new Vector2(moveH.x * moveSpeed, _rb.velocity.y);
+        _direction = new Vector2(MoveH.x * MoveSpeed, Rigidbody.velocity.y);
 
-        if (direction != Vector2.zero)
+        if (_direction != Vector2.zero)
         {
-            _rb.velocity = direction;
+            Rigidbody.velocity = _direction;
         }
         else
         {
-            _rb.velocity = Vector3.zero;
+            Rigidbody.velocity = Vector3.zero;
         }
     }
 
@@ -60,46 +64,68 @@ public class PlayerMovement : MonoBehaviour
     #region Jump
 
     [Header("Jump")]
-    public float jumpForce = 5f;
-    public float tapJumpMultiplier = 1f;
-    public float holdJumpMultiplier = 1f;
-    public float fallMultiplier = 2.5f;
+
+    [SerializeField] private float _jumpForce = 5f;
+    public float JumpForce { get { return _jumpForce; } }
+
+    [SerializeField] private float _tapJumpMultiplier = 1f;
+    public float TapJumpMultiplier { get { return _tapJumpMultiplier; } }
+
+    [SerializeField] private float _holdJumpMultiplier = 1f;
+    public float HoldJumpMultiplier { get { return _holdJumpMultiplier; } }
+
+    [SerializeField] private float _fallMultiplier = 2.5f;
+    public float FallMultiplier { get { return _fallMultiplier; } }
+
     [Space]
     public float jumpCounter = 0f;
-    public float maxJump = 2f;
-    public float defaultMaxJump = 2f;
+    public float _baseJumpAmount = 2f;
+    public float _currentJumpAmount = 1f;
+
+    // IMPLEMENT LATER
+    private float _jumpAmount;
+    public float JumpAmount
+    {
+        get
+        {
+            _jumpAmount += _baseJumpAmount + _baseJumpAmount;
+
+            return _jumpAmount;
+        }
+    }
+
     [Space]
     // coyote jump
-    public float hangTime = 0.2f;
-    public float hangTimeCounter;
+    public float HangTime = 0.2f;
+    public float HangTimeCounter;
     [Space]
     // jump buffer
-    public float jumpBufferLength = 0.2f;
-    public float jumpBufferCounter;
+    public float JumpBufferLength = 0.2f;
+    public float JumpBufferCounter;
     [Space]
     public bool IsJumpingMidAir = false;
 
-    public bool jumpRequest = false;
+    public bool JumpRequest = false;
 
     public void Jump()
     {
-        if (jumpRequest)
+        if (JumpRequest)
         {
             _audioManager.PlaySound("Jump");
 
             if (IsJumpingMidAir)
             {
-                _rb.velocity = Vector2.up * jumpForce;
+                Rigidbody.velocity = Vector2.up * JumpForce;
                 IsJumpingMidAir = false;
             }
             else
             {
-                _rb.velocity = Vector2.up * jumpForce;
+                Rigidbody.velocity = Vector2.up * JumpForce;
             }
 
-            hangTimeCounter = 0f;
-            jumpBufferCounter = 0f;
-            jumpRequest = false;
+            HangTimeCounter = 0f;
+            JumpBufferCounter = 0f;
+            JumpRequest = false;
 
             HandleHoldJump();
 
@@ -108,25 +134,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleHoldJump()
     {
-        if (_rb.velocity.y < 0f)
+        if (Rigidbody.velocity.y < 0f)
         {
-            _rb.gravityScale = fallMultiplier;
+            Rigidbody.gravityScale = FallMultiplier;
         }
 
         _playerInputAction.action.canceled += context =>
         {
-            if (_rb == null) return;
+            if (Rigidbody == null) return;
 
-            if (_rb.velocity.y > 0)
+            if (Rigidbody.velocity.y > 0)
             {
-                _rb.gravityScale = tapJumpMultiplier;
+                Rigidbody.gravityScale = TapJumpMultiplier;
             }
 
         };
         _playerInputAction.action.performed += context =>
         {
-            if (_rb == null) return;
-            _rb.gravityScale = holdJumpMultiplier;
+            if (Rigidbody == null) return;
+            Rigidbody.gravityScale = HoldJumpMultiplier;
         };
 
     }
@@ -152,5 +178,5 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
-   
+
 }

@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HandlePlayerAnimation : MonoBehaviour
 {
     private Animator _animator;
-    private string currentAnimation;
+    private string _currentAnimation;
 
     private PlayerHealth _playerHealth;
     private PlayerAttack _playerAttack;
@@ -39,10 +37,10 @@ public class HandlePlayerAnimation : MonoBehaviour
 
     public void ChangeAnimationState(string newAnimation)
     {
-        if (currentAnimation == newAnimation) return;
+        if (_currentAnimation == newAnimation) return;
 
         _animator.Play(newAnimation);
-        currentAnimation = newAnimation;
+        _currentAnimation = newAnimation;
     }
 
     public void UpdateAnimationState()
@@ -101,7 +99,7 @@ public class HandlePlayerAnimation : MonoBehaviour
             ChangeAnimationState(DerildoFall);
         }
         // move
-        else if (_playerMovement.moveH.x > 0 || _playerMovement.moveH.x < 0)
+        else if (_playerMovement.MoveH.x > 0 || _playerMovement.MoveH.x < 0)
         {
             ChangeAnimationState(DerildoWalk);
         }

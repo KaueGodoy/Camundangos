@@ -3,51 +3,72 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    #region Health
+    private AudioManager _audioManager;
 
     private void Awake()
     {
         _healthBar = GetComponent<PlayerHealthBar>();
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
         IsAlive = true;
     }
 
-    [Header("Health")]
-    public float currentHealth = 0;
-    public float maxHealth = 3;
+    #region Health
 
-    [Header("Damage and Heal")]
-    public float damageAmount = 1f;
-    public float healAmount = 1f;
+    [Header("Health")]
 
     public bool IsAlive;
-    private readonly float deathAnimationTime = 0.8f;
+
+    [SerializeField] private float _currentHealth = 0;
+    [SerializeField] private float _maxHealth = 3;
+
+    private PlayerHealthBar _healthBar;
+
+    public float MaxHealth { get { return _maxHealth; } }
+    public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
+
+    public void UpdatePlayerHealthBar()
+    {
+        _healthBar.UpdateHealthBar(MaxHealth, CurrentHealth);
+    }
 
     [Header("Hit")]
+
     public float HitCooldown = 0.3f;
     public float HitTimer = 0.0f;
     public bool IsHit = false;
+    private readonly float deathAnimationTime = 0.8f;
 
     public void TakeDamage(float damageAmount)
     {
         Debug.Log($"Player takes: {damageAmount} damage");
 
-        FindObjectOfType<AudioManager>().PlaySound("Hit");
-        currentHealth -= Mathf.FloorToInt(damageAmount);
+        _audioManager.PlaySound("Hit");
+        CurrentHealth -= Mathf.FloorToInt(damageAmount);
         IsHit = true;
 
         //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             UpdatePlayerHealthBar();
             Die();
             //UIEventHandler.HealthChanged(0, this.maxHealth);
             Invoke("RestartLevel", deathAnimationTime);
+        }
+    }
+    public void Heal(float healAmount)
+    {
+        _audioManager.PlaySound("Hit");
+        CurrentHealth += Mathf.FloorToInt(healAmount);
+
+        if (CurrentHealth >= MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
         }
     }
 
@@ -63,30 +84,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void Heal(float healAmount)
-    {
-        FindObjectOfType<AudioManager>().PlaySound("Hit");
-        currentHealth += Mathf.FloorToInt(healAmount);
-
-        if (currentHealth >= maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-    }
-
-    #endregion
-
-    #region UI
-    [Header("UI Elements")]
-
-    private PlayerHealthBar _healthBar;
-
-    public void UpdatePlayerHealthBar()
-    {
-        _healthBar.UpdateHealthBar(maxHealth, currentHealth);
-        //cooldowns.UpdateCooldowns(attackTimer);
-    }
-
     #endregion
 
     #region Level
@@ -99,7 +96,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        FindObjectOfType<AudioManager>().PlaySound("GameOver");
+        _audioManager.PlaySound("GameOver");
         IsAlive = false;
         //_rb.bodyType = RigidbodyType2D.Static;
     }

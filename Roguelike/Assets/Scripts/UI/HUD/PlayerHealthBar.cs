@@ -1,58 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class PlayerHealthBar : MonoBehaviour
 {
-    [SerializeField] private Image healthBarSprite;
-    [SerializeField] private float reduceSpeed = 2f;
-    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private Image _healthBarSprite;
+    [SerializeField] private float _reduceSpeed = 2f;
+    [SerializeField] private TextMeshProUGUI _hpText;
 
-    private Color healthColor;
-    private float target = 1f;
+    private float _target = 1f;
 
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
-        target = currentHealth / maxHealth;
-        hpText.text = currentHealth + " / " + maxHealth;
+        _target = currentHealth / maxHealth;
+        _hpText.text = currentHealth + " / " + maxHealth;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            hpText.text = 0.ToString() + " / " + maxHealth;
+            _hpText.text = 0.ToString() + " / " + maxHealth;
         }
 
-        // dynamic color change
-        //healthColor = Color.Lerp(Color.red, Color.green, target);
-        //healthBarSprite.color = healthColor;
         ChangeColor();
     }
 
     private void ChangeColor()
     {
-        if (target == 1)
+        if (_target == 1)
         {
-            healthBarSprite.color = Color.cyan;
+            _healthBarSprite.color = Color.cyan;
         }
-        else if (target >= 0.6)
+        else if (_target >= 0.6)
         {
-            healthBarSprite.color = Color.green;
+            _healthBarSprite.color = Color.green;
         }
-        else if (target >= 0.4)
+        else if (_target >= 0.4)
         {
-            healthBarSprite.color = Color.yellow;
+            _healthBarSprite.color = Color.yellow;
         }
-        else if (target >= 0.2)
+        else if (_target >= 0.2)
         {
-            healthBarSprite.color = Color.red;
+            _healthBarSprite.color = Color.red;
         }
-        
     }
 
     private void Update()
     {
-        healthBarSprite.fillAmount = Mathf.MoveTowards(healthBarSprite.fillAmount, target, reduceSpeed * Time.deltaTime);
+        _healthBarSprite.fillAmount = Mathf.MoveTowards(_healthBarSprite.fillAmount, _target, _reduceSpeed * Time.deltaTime);
     }
 
 }

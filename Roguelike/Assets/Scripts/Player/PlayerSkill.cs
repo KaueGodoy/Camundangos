@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
+    private PlayerCooldowns _playerCooldowns;
+
+    private void Awake()
+    {
+        _playerCooldowns = GetComponent<PlayerCooldowns>();
+    }
 
     #region Skill
 
@@ -12,27 +16,15 @@ public class PlayerSkill : MonoBehaviour
     public Transform SpawnPoint;
     public GameObject pfProjectile;
 
-    private float skillAttackTimer = 0.0f;
-
-    public float skillAttackDelay = 0.4f;
-    public float skillTimeSinceAttack = 0.0f;
+    private float _skillAttackTimer = 0.0f;
+    private float _skillAttackDelay = 0.4f;
+    private bool _isSkillPerforming = false;
 
     public bool skillAttackRequest = false;
-
     public bool skillAttackAnimation = false;
-    private bool skillIsAttacking = false;
-
-    private PlayerCooldowns _playerCooldowns;
-
-    private void Awake()
-    {
-        _playerCooldowns = GetComponent<PlayerCooldowns>();
-    }
 
     public void PerformSkill()
     {
-        //if (skillCooldowns == null) return;
-
         if (_playerCooldowns.offCooldown)
         {
             if (skillAttackRequest)
@@ -40,12 +32,12 @@ public class PlayerSkill : MonoBehaviour
                 skillAttackRequest = false;
                 skillAttackAnimation = true;
 
-                if (!skillIsAttacking)
+                if (!_isSkillPerforming)
                 {
-                    skillIsAttacking = true;
+                    _isSkillPerforming = true;
 
-                    Invoke("InstantiateSkill", skillAttackDelay - 0.1f);
-                    Invoke("SkillComplete", skillAttackDelay);
+                    Invoke("InstantiateSkill", _skillAttackDelay - 0.1f);
+                    Invoke("SkillComplete", _skillAttackDelay);
                 }
             }
         }
@@ -63,18 +55,18 @@ public class PlayerSkill : MonoBehaviour
 
     private void SkillComplete()
     {
-        skillIsAttacking = false;
+        _isSkillPerforming = false;
     }
 
     public void UpdateSkillTimer()
     {
         if (skillAttackAnimation)
-            skillAttackTimer += Time.deltaTime;
+            _skillAttackTimer += Time.deltaTime;
 
-        if (skillAttackTimer > skillAttackDelay)
+        if (_skillAttackTimer > _skillAttackDelay)
         {
             skillAttackAnimation = false;
-            skillAttackTimer = 0f;
+            _skillAttackTimer = 0f;
         }
     }
 

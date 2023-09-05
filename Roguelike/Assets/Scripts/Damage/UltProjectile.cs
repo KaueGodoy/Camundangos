@@ -25,7 +25,7 @@ public class UltProjectile : MonoBehaviour
 
     private void Awake()
     {
-        _isFacingRight = FindObjectOfType<PlayerController>().isFacingRight;
+        _isFacingRight = FindObjectOfType<PlayerController>().IsFacingRight;
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

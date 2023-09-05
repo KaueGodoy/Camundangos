@@ -103,8 +103,8 @@ public class PlayerController : MonoBehaviour
 
     #region Input
 
-    public float damageAmount;
-    public float healAmount;
+    public float DamageAmount = 1f;
+    public float HealAmount = 1f;
 
     private void ProcessInput()
     {
@@ -113,33 +113,33 @@ public class PlayerController : MonoBehaviour
         {
             _playerMovement.jumpCounter = 0f;
             _playerMovement.IsJumpingMidAir = false;
-            _playerMovement.maxJump = _playerMovement.defaultMaxJump;
+            _playerMovement._currentJumpAmount = _playerMovement._baseJumpAmount;
         }
 
         if (_playerMovement.IsGrounded())
         {
-            _playerMovement.hangTimeCounter = _playerMovement.hangTime;
+            _playerMovement.HangTimeCounter = _playerMovement.HangTime;
         }
         else
         {
-            _playerMovement.hangTimeCounter -= Time.deltaTime;
+            _playerMovement.HangTimeCounter -= Time.deltaTime;
         }
 
         if (_playerControls.Player.Jump.triggered)
         {
-            _playerMovement.jumpBufferCounter = _playerMovement.jumpBufferLength;
+            _playerMovement.JumpBufferCounter = _playerMovement.JumpBufferLength;
 
-            if (_playerMovement.jumpBufferCounter > 0f && (_playerMovement.hangTimeCounter > 0f || _playerMovement.jumpCounter < _playerMovement.maxJump))
+            if (_playerMovement.JumpBufferCounter > 0f && (_playerMovement.HangTimeCounter > 0f || _playerMovement.jumpCounter < _playerMovement._currentJumpAmount))
             {
-                _playerMovement.jumpRequest = true;
+                _playerMovement.JumpRequest = true;
                 _playerMovement.jumpCounter++;
             }
         }
         else
         {
-            if (_playerMovement.jumpBufferCounter > -2f)
+            if (_playerMovement.JumpBufferCounter > -2f)
             {
-                _playerMovement.jumpBufferCounter -= Time.deltaTime;
+                _playerMovement.JumpBufferCounter -= Time.deltaTime;
 
             }
         }
@@ -167,13 +167,13 @@ public class PlayerController : MonoBehaviour
         // damage test DELETE
         if (Input.GetKeyDown(KeyCode.U))
         {
-            _playerHealth.TakeDamage(damageAmount);
+            _playerHealth.TakeDamage(DamageAmount);
         }
 
         // heal test DELETE
         if (Input.GetKeyDown(KeyCode.I))
         {
-            _playerHealth.Heal(healAmount);
+            _playerHealth.Heal(HealAmount);
         }
     }
 
@@ -190,16 +190,16 @@ public class PlayerController : MonoBehaviour
     #endregion
 
 
-    public bool isFacingRight = true;
+    public bool IsFacingRight = true;
 
     public void FlipSprite()
     {
-        if (isFacingRight && _playerMovement.moveH.x < 0f || !isFacingRight && _playerMovement.moveH.x > 0f)
+        if (IsFacingRight && _playerMovement.MoveH.x < 0f || !IsFacingRight && _playerMovement.MoveH.x > 0f)
         {
             // flipping the player using scale
 
             Vector3 localScale = transform.localScale;
-            isFacingRight = !isFacingRight;
+            IsFacingRight = !IsFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
 
