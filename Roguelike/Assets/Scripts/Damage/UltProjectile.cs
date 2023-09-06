@@ -2,54 +2,50 @@ using UnityEngine;
 
 public class UltProjectile : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
+    private AudioManager _audioManager;
 
     [Header("Damage")]
     public float projectileDamage = 6f;
+
+    [Header("Distance")]
+    public float projectileDistance = 2f;
 
     [Header("Speed/Angle")]
     public float projectileSpeed = 5f;
     public float angle = 45f;
 
-    private float radians;
-    private float xVelocity;
-    private float yVelocity;
-
-    [Header("Distance")]
-    public float projectileDistance = 2f;
-
-    public CharacterStats characterStats { get; set; }
-
+    private float _radians;
+    private float _horizontalVelocity;
+    private float _verticalVelocity;
     private bool _isFacingRight;
 
     private void Awake()
     {
         _isFacingRight = FindObjectOfType<PlayerController>().IsFacingRight;
+        _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
     {
-        //rb.velocity = transform.right * projectileSpeed;
-        //rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);
-        radians = angle * Mathf.Deg2Rad;
+        _radians = angle * Mathf.Deg2Rad;
 
         if (_isFacingRight)
         {
-            //rb.velocity = new Vector2(projectileSpeed, -projectileSpeed);     
-            xVelocity = projectileSpeed * Mathf.Cos(radians);
-            yVelocity = -projectileSpeed * Mathf.Sin(radians);
-            rb.velocity = new Vector2(xVelocity, yVelocity);
+            _horizontalVelocity = projectileSpeed * Mathf.Cos(_radians);
+            _verticalVelocity = -projectileSpeed * Mathf.Sin(_radians);
+            _rb.velocity = new Vector2(_horizontalVelocity, _verticalVelocity);
 
         }
         else
         {
-            // rb.velocity = new Vector2(-projectileSpeed, -projectileSpeed);
             _spriteRenderer.flipX = false;
-            xVelocity = -projectileSpeed * Mathf.Cos(radians);
-            yVelocity = -projectileSpeed * Mathf.Sin(radians);
-            rb.velocity = new Vector2(xVelocity, yVelocity);
+            _horizontalVelocity = -projectileSpeed * Mathf.Cos(_radians);
+            _verticalVelocity = -projectileSpeed * Mathf.Sin(_radians);
+            _rb.velocity = new Vector2(_horizontalVelocity, _verticalVelocity);
         }
 
     }
@@ -65,7 +61,7 @@ public class UltProjectile : MonoBehaviour
         {
             collision.GetComponent<IEnemy>().TakeDamage(projectileDamage);
             DamagePopup.Create(transform.position, (int)projectileDamage);
-            FindObjectOfType<AudioManager>().PlaySound("Hitmarker");
+            _audioManager.PlaySound("Hitmarker");
             //Destroy(gameObject);
         }
     }

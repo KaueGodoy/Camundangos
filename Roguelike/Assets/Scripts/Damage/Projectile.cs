@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D _rb;
+    private AudioManager _audioManager;
 
     [Header("Damage")]
     public float projectileDamage = 6f;
@@ -20,12 +18,15 @@ public class Projectile : MonoBehaviour
     public float projectileDistance = 2f;
     public bool isCritical;
 
-
-    public CharacterStats characterStats { get; set; }
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
 
     private void Start()
     {
-        rb.velocity = transform.right * projectileSpeed;
+        _rb.velocity = transform.right * projectileSpeed;
     }
 
     private void Update()
@@ -36,51 +37,36 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // check for collision
-        StatusEffectManager enemy = collision.GetComponent<StatusEffectManager>();
-        PlayerDamage playerDamage = collision.GetComponent<PlayerDamage>();
-        if (enemy != null)
-        {
-
-
-            FindObjectOfType<AudioManager>().PlaySound("Hitmarker");
-
-
-            enemy.ApplyProjectileDamage(projectileDamage);
-            //Debug.Log("Initial damage " + projectileDamage);
-            enemy.ApplyBurn(burnAmount);
-            //Debug.Log("Burning " + burnAmount);
-            //playerDamage.CalculateDamageFormulaCRIT();
-            Debug.Log("NEW DAMAGE FORMULA");
-
-        }
+        //StatusEffectManager enemy = collision.GetComponent<StatusEffectManager>();
+        //if (enemy != null)
+        //{
+        //    enemy.ApplyProjectileDamage(projectileDamage);
+        //    enemy.ApplyBurn(burnAmount);
+        //}
 
         // check for enemy HP
-        Health health = collision.GetComponent<Health>();
-        if (health != null)
-        {
-            if (health.currentHealth <= 0)
-            {
-                Destroy(collision.gameObject);
-            }
-        }
+        //Health health = collision.GetComponent<Health>();
+        //if (health != null)
+        //{
+        //    if (health.currentHealth <= 0)
+        //    {
+        //        Destroy(collision.gameObject);
+        //    }
+        //}
 
         // check collision with player - not destryoing the bullet
         PlayerController player = collision.GetComponent<PlayerController>();
         if (!player)
         {
             Destroy(gameObject);
-
         }
 
-        if(collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
-            //Debug.Log("Enemy hit");
             collision.GetComponent<IEnemy>().TakeDamage(projectileDamage);
             DamagePopup.Create(transform.position, (int)projectileDamage, isCritical);
-
-            //collision.GetComponent<IEnemy>().TakeDamage(CharacterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue());
+            _audioManager.PlaySound("Hitmarker");
         }
-
     }
 
     private void OnBecameInvisible()

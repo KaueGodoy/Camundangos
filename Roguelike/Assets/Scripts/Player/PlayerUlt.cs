@@ -1,29 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerUlt : MonoBehaviour
 {
-    #region Ult
-
-    [Header("Ult")]
-    public Transform UltSpawnPoint;
-    public GameObject pfUltProjectile;
-
-    public float ultAttackDelay = 0.4f;
-    private float ultAttackTimer = 0.0f;
-    public float ultTimeSinceAttack = 0.0f;
-
-    public bool ultAttackRequest = false;
-    public bool ultAttackAnimation = false;
-    private bool isUlting = false;
-
     private PlayerCooldowns _playerCooldowns;
+    private AudioManager _audioManager;
 
     private void Awake()
     {
         _playerCooldowns = GetComponent<PlayerCooldowns>();
+        _audioManager = FindObjectOfType<AudioManager>();
     }
+
+    [Header("Ult")]
+    public Transform UltSpawnPoint;
+    public GameObject Projectile;
+
+    private float _ultAttackDelay = 0.4f;
+    private float _ultAttackTimer = 0.0f;
+
+    private bool _isUltPerformed = false;
+
+    public bool ultAttackRequest = false;
+    public bool ultAttackAnimation = false;   
 
     public void PerformUlt()
     {
@@ -34,12 +32,12 @@ public class PlayerUlt : MonoBehaviour
                 ultAttackRequest = false;
                 ultAttackAnimation = true;
 
-                if (!isUlting)
+                if (!_isUltPerformed)
                 {
-                    isUlting = true;
+                    _isUltPerformed = true;
 
-                    Invoke("InstantiateUlt", ultAttackDelay - 0.1f);
-                    Invoke("UltComplete", ultAttackDelay);
+                    Invoke("InstantiateUlt", _ultAttackDelay - 0.1f);
+                    Invoke("UltComplete", _ultAttackDelay);
                 }
             }
         }
@@ -51,26 +49,24 @@ public class PlayerUlt : MonoBehaviour
 
     private void InstantiateUlt()
     {
-        Instantiate(pfUltProjectile, UltSpawnPoint.position, UltSpawnPoint.rotation);
-        FindObjectOfType<AudioManager>().PlaySound("Attack");
+        Instantiate(Projectile, UltSpawnPoint.position, UltSpawnPoint.rotation);
+        _audioManager.PlaySound("Attack");
     }
 
     private void UltComplete()
     {
-        isUlting = false;
+        _isUltPerformed = false;
     }
 
     public void UpdateUltimer()
     {
         if (ultAttackAnimation)
-            ultAttackTimer += Time.deltaTime;
+            _ultAttackTimer += Time.deltaTime;
 
-        if (ultAttackTimer > ultAttackDelay)
+        if (_ultAttackTimer > _ultAttackDelay)
         {
             ultAttackAnimation = false;
-            ultAttackTimer = 0f;
+            _ultAttackTimer = 0f;
         }
     }
-
-    #endregion
 }

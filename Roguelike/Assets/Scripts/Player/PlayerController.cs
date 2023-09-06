@@ -208,9 +208,9 @@ public class PlayerController : MonoBehaviour
     }
     private void FlipPlayerFirePoints()
     {
-        _playerSkill.Firepoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
-        _playerSkill.SpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
-        _playerUlt.UltSpawnPoint.Rotate(_playerSkill.Firepoint.rotation.x, 180f, _playerSkill.Firepoint.rotation.z);
+        _playerSkill.SkillSpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
+        _playerSkill.SpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
+        _playerUlt.UltSpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
     }
 
 

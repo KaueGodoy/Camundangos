@@ -3,22 +3,24 @@ using UnityEngine;
 public class PlayerSkill : MonoBehaviour
 {
     private PlayerCooldowns _playerCooldowns;
+    private AudioManager _audioManager;
 
     private void Awake()
     {
         _playerCooldowns = GetComponent<PlayerCooldowns>();
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
-    #region Skill
-
     [Header("Skill")]
-    public Transform Firepoint;
+    public Transform SkillSpawnPoint;
+    public GameObject Projectile;
+
+    // DELETE 
     public Transform SpawnPoint;
-    public GameObject pfProjectile;
 
     private float _skillAttackTimer = 0.0f;
     private float _skillAttackDelay = 0.4f;
-    private bool _isSkillPerforming = false;
+    private bool _isSkillPerformed = false;
 
     public bool skillAttackRequest = false;
     public bool skillAttackAnimation = false;
@@ -32,9 +34,9 @@ public class PlayerSkill : MonoBehaviour
                 skillAttackRequest = false;
                 skillAttackAnimation = true;
 
-                if (!_isSkillPerforming)
+                if (!_isSkillPerformed)
                 {
-                    _isSkillPerforming = true;
+                    _isSkillPerformed = true;
 
                     Invoke("InstantiateSkill", _skillAttackDelay - 0.1f);
                     Invoke("SkillComplete", _skillAttackDelay);
@@ -49,13 +51,13 @@ public class PlayerSkill : MonoBehaviour
 
     private void InstantiateSkill()
     {
-        Instantiate(pfProjectile, Firepoint.position, Firepoint.rotation);
-        FindObjectOfType<AudioManager>().PlaySound("Attack");
+        Instantiate(Projectile, SkillSpawnPoint.position, SkillSpawnPoint.rotation);
+        _audioManager.PlaySound("Attack");
     }
 
     private void SkillComplete()
     {
-        _isSkillPerforming = false;
+        _isSkillPerformed = false;
     }
 
     public void UpdateSkillTimer()
@@ -69,6 +71,4 @@ public class PlayerSkill : MonoBehaviour
             _skillAttackTimer = 0f;
         }
     }
-
-    #endregion
 }
