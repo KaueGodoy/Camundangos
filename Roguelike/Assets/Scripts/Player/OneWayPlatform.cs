@@ -1,44 +1,43 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class OneWayPlatform : MonoBehaviour
 {
-    private GameObject currentOneWayPlatform;
-    private PlayerControls playerControls;
+    private BoxCollider2D _playerCollider;
+    private BoxCollider2D _platformCollider;
+    private PlayerControls _playerControls;
+
+    private GameObject _currentOneWayPlatform;
 
     [SerializeField] private GameObject downButton;
-    [SerializeField] private BoxCollider2D playerCollider;
-    [SerializeField] private float collisionDisableTime = 0.5f;
+    [SerializeField] private float _collisionDisableTime = 0.5f;
 
     private void Awake()
     {
-        playerControls = new PlayerControls();
+        _playerCollider = GetComponent<BoxCollider2D>();
+        _playerControls = new PlayerControls();
     }
 
     private void Start()
     {
-
         downButton.SetActive(false);
     }
 
     private void OnEnable()
     {
-        playerControls.Enable();
+        _playerControls.Enable();
     }
 
     private void OnDisable()
     {
-        playerControls.Disable();
+        _playerControls.Disable();
     }
 
     private void Update()
     {
-        if (playerControls.Player.Down.triggered)
+        if (_playerControls.Player.Down.triggered)
         {
-            if (currentOneWayPlatform != null)
+            if (_currentOneWayPlatform != null)
             {
                 StartCoroutine(DisableCollision());
             }
@@ -49,7 +48,7 @@ public class OneWayPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("OneWayPlatform"))
         {
-            currentOneWayPlatform = collision.gameObject;
+            _currentOneWayPlatform = collision.gameObject;
             downButton.SetActive(true);
         }
     }
@@ -58,18 +57,18 @@ public class OneWayPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("OneWayPlatform"))
         {
-            currentOneWayPlatform = null;
+            _currentOneWayPlatform = null;
             downButton.SetActive(false);
         }
     }
 
     private IEnumerator DisableCollision()
     {
-        BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
+        _platformCollider = _currentOneWayPlatform.GetComponent<BoxCollider2D>();
 
-        Physics2D.IgnoreCollision(playerCollider, platformCollider);
-        yield return new WaitForSeconds(collisionDisableTime);
-        Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
+        Physics2D.IgnoreCollision(_playerCollider, _platformCollider);
+        yield return new WaitForSeconds(_collisionDisableTime);
+        Physics2D.IgnoreCollision(_playerCollider, _platformCollider, false);
 
     }
 

@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     // REFACTOR > input, movement, animation, stats
-
     public CharacterStats characterStats;
+
+    [Header("Camera")]
+    [SerializeField] private CameraFollowObject _cameraFollowObject;
 
     private PlayerControls _playerControls;
 
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_playerDash.isDashing) return;
+        if (_playerDash.IsDashing) return;
 
         if (_playerHealth.IsAlive)
         {
@@ -159,9 +161,9 @@ public class PlayerController : MonoBehaviour
             _playerUlt.ultAttackRequest = true;
         }
 
-        if (_playerControls.Player.Dash.triggered && _playerDash.canDash)
+        if (_playerControls.Player.Dash.triggered && _playerDash.CanDash)
         {
-            _playerDash.dashRequest = true;
+            _playerDash.DashRequest = true;
         }
 
         // damage test DELETE
@@ -175,6 +177,8 @@ public class PlayerController : MonoBehaviour
         {
             _playerHealth.Heal(HealAmount);
         }
+
+        Debug.Log(CurrentRotation);
     }
 
     #endregion
@@ -191,19 +195,26 @@ public class PlayerController : MonoBehaviour
 
 
     public bool IsFacingRight = true;
+    public float CurrentRotation { get { return IsFacingRight ? 180f : 0f; } set { } }
 
     public void FlipSprite()
     {
         if (IsFacingRight && _playerMovement.MoveH.x < 0f || !IsFacingRight && _playerMovement.MoveH.x > 0f)
         {
-            // flipping the player using scale
+            // flipping using scale
 
-            Vector3 localScale = transform.localScale;
+            //Vector3 localScale = transform.localScale;
+            //IsFacingRight = !IsFacingRight;
+            //localScale.x *= -1f;
+            //transform.localScale = localScale;
+
+            // flipping using rotation
+            Vector3 rotator = new Vector3(transform.rotation.x, CurrentRotation, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            _cameraFollowObject.TurnCamera();
             IsFacingRight = !IsFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
 
-            FlipPlayerFirePoints();
+            //FlipPlayerFirePoints();
         }
     }
     private void FlipPlayerFirePoints()

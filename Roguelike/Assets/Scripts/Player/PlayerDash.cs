@@ -1,25 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
 {
-    #region Dash
-
-    [Header("Dash")]
-    public float dashSpeed = 5f;
-    public float dashingTime = 0.2f;
-    public float dashingCooldown = 1f;
-
-    public bool canDash = true;
-    public bool dashRequest = false;
-    public bool isDashing;
-
     private Rigidbody2D _rb;
+    private AudioManager _audioManager;
 
     [SerializeField] private TrailRenderer tr;
 
-    private AudioManager _audioManager;
+    [Header("Dash")]
+    [SerializeField] private float _dashSpeed = 5f;
+    [SerializeField] private float _dashingTime = 0.2f;
+    [SerializeField] private float _dashingCooldown = 1f;
+
+    private Coroutine _dashCoroutine;
+
+    public bool CanDash = true;
+    public bool DashRequest = false;
+    public bool IsDashing;
+
+    public float CurrentRotation { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
 
     private void Awake()
     {
@@ -29,8 +29,8 @@ public class PlayerDash : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        canDash = false;
-        isDashing = true;
+        CanDash = false;
+        IsDashing = true;
 
         //IsJumpingMidAir = false;
 
@@ -46,26 +46,31 @@ public class PlayerDash : MonoBehaviour
         float originalGravity = _rb.gravityScale;
         _rb.gravityScale = 0f;
 
-        _rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0f);
+        //_rb.velocity = new Vector2(transform.localScale.x * _dashSpeed, 0f);
+        _rb.velocity = new Vector2(CurrentRotation * _dashSpeed, 0f);
         tr.emitting = true;
 
-        yield return new WaitForSeconds(dashingTime);
+        yield return new WaitForSeconds(_dashingTime);
 
         tr.emitting = false;
         _rb.gravityScale = originalGravity;
-        isDashing = false;
+        IsDashing = false;
 
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
+        yield return new WaitForSeconds(_dashingCooldown);
+        CanDash = true;
+    }
+
+    public void CallDashCoroutine()
+    {
+        _dashCoroutine = StartCoroutine(Dash());
     }
 
     public void TriggerDash()
     {
-        if (dashRequest)
+        if (DashRequest)
         {
-            StartCoroutine(Dash());
-            dashRequest = false;
+            CallDashCoroutine();
+            DashRequest = false;
         }
     }
-    #endregion
 }

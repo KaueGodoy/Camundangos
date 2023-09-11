@@ -28,13 +28,13 @@ public class CameraFollow : MonoBehaviour
         Vector3 cameraMoveDir = (cameraFollowPosition - transform.position).normalized;
         float distance = Vector3.Distance(cameraFollowPosition, transform.position);
 
-        if(distance > 0f)
+        if (distance > 0f)
         {
             Vector3 newCameraPosition = transform.position + cameraMoveDir * distance * cameraMoveSpeed * Time.deltaTime;
 
             float distanceAfterMoving = Vector3.Distance(newCameraPosition, cameraFollowPosition);
 
-            if(distanceAfterMoving > distance)
+            if (distanceAfterMoving > distance)
             {
                 newCameraPosition = cameraFollowPosition;
             }
