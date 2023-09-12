@@ -43,11 +43,11 @@ public class Fireball : MonoBehaviour
             Debug.Log("Hit: " + collision.name);
         }
 
-        PlayerController player = collision.GetComponent<PlayerController>();
-        if (!player)
-        {
-            Extinguish();
-        }
+        //PlayerController player = collision.GetComponent<PlayerController>();
+        //if (!player)
+        //{
+        //    Extinguish();
+        //}
 
     }
 

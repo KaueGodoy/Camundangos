@@ -55,17 +55,18 @@ public class Projectile : MonoBehaviour
         //}
 
         // check collision with player - not destryoing the bullet
-        PlayerController player = collision.GetComponent<PlayerController>();
-        if (!player)
-        {
-            Destroy(gameObject);
-        }
+        //PlayerController player = collision.GetComponent<PlayerController>();
+        //if (!player)
+        //{
+        //    Destroy(gameObject);
+        //}
 
         if (collision.tag == "Enemy")
         {
             collision.GetComponent<IEnemy>().TakeDamage(projectileDamage);
             DamagePopup.Create(transform.position, (int)projectileDamage, isCritical);
             _audioManager.PlaySound("Hitmarker");
+            Destroy(gameObject);
         }
     }
 

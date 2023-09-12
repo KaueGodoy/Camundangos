@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Camera")]
     [SerializeField] private CameraFollowObject _cameraFollowObject;
+    private float _fallSpeedYDampingChangeThreshold;
 
     private PlayerControls _playerControls;
 
@@ -60,6 +61,8 @@ public class PlayerController : MonoBehaviour
         // handling input through events
         //playerControls.Player.Jump.performed += _ => Jump2();
         //ReadInput();
+
+        _fallSpeedYDampingChangeThreshold = CameraManager.Instance.FallSpeedYDampingChangeThreshold;
     }
 
     private void OnEnable()
@@ -84,6 +87,26 @@ public class PlayerController : MonoBehaviour
             _playerUlt.PerformUlt();
             _playerHealth.UpdatePlayerHealthBar();
         }
+
+        if (_playerMovement.Rigidbody.velocity.y < _fallSpeedYDampingChangeThreshold
+            && !CameraManager.Instance.IsLerpingYDamping
+            && !CameraManager.Instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.Instance.LerpYDamping(true);
+            Debug.Log("Lerp true");
+
+        }
+
+        if (_playerMovement.Rigidbody.velocity.y >= 0f
+            && !CameraManager.Instance.IsLerpingYDamping
+            && CameraManager.Instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.Instance.LerpedFromPlayerFalling = false;
+            CameraManager.Instance.LerpYDamping(false);
+            Debug.Log("Lerp false");
+
+        }
+
     }
 
     private void FixedUpdate()
