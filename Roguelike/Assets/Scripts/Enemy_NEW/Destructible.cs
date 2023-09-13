@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Destructible : MonoBehaviour, IDamageable
+public abstract class Destructible : MonoBehaviour, IDamageable
 {
     public void TakeDamage(float amount)
     {

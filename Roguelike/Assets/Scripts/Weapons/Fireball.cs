@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
@@ -10,13 +7,11 @@ public class Fireball : MonoBehaviour
     public float Speed { get; set; }
     public float Damage { get; set; }
 
-    public bool isCritical;
-
-    Vector2 spawnPosition;
+    private Vector2 _spawnPosition;
 
     private void Start()
     {
-        spawnPosition = transform.position;
+        _spawnPosition = transform.position;
         Range = 10f;
         Speed = 70f;
         Damage = 250f;
@@ -26,19 +21,19 @@ public class Fireball : MonoBehaviour
 
     private void Update()
     {
-        if (Vector2.Distance(spawnPosition, transform.position) >= Range)
+        if (Vector2.Distance(_spawnPosition, transform.position) >= Range)
         {
             Extinguish();
         }
-
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<IEnemy>().TakeDamage(Damage);
-            DamagePopup.Create(transform.position, (int)Damage, isCritical);
+            DamagePopup.Create(transform.position, (int)Damage);
 
             Debug.Log("Hit: " + collision.name);
         }

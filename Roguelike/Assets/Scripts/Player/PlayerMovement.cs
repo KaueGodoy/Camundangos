@@ -59,6 +59,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void MoveNew(Vector2 moveH)
+    {
+        _direction = new Vector2(moveH.x * MoveSpeed, Rigidbody.velocity.y);
+
+        if (_direction != Vector2.zero)
+        {
+            Rigidbody.velocity = _direction;
+        }
+        else
+        {
+            Rigidbody.velocity = Vector3.zero;
+        }
+    }
+
     #endregion
 
     #region Jump
@@ -93,6 +107,9 @@ public class PlayerMovement : MonoBehaviour
             return _jumpAmount;
         }
     }
+
+    private int _value;
+    public int DoubleValue { get { return _value * 2; } }
 
     [Space]
     // coyote jump

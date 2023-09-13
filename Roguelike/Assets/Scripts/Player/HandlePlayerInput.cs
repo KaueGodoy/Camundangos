@@ -6,9 +6,16 @@ public class HandlePlayerInput : MonoBehaviour
     private PlayerControls _playerControls;
     [SerializeField] private InputActionReference _playerInputAction;
 
+    private PlayerMovement _playerMovement;
+
+
+    [SerializeField] private Vector2 _moveH;
+    public Vector2 MoveH { get { return _moveH; } set { _moveH = value; } }
+
     private void Awake()
     {
-        _playerControls = GetComponent<PlayerControls>();
+        _playerControls = new PlayerControls();
+        _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnEnable()
@@ -26,6 +33,13 @@ public class HandlePlayerInput : MonoBehaviour
     private void Update()
     {
         //ProcessInput();
+        _moveH = _playerControls.Player.Move.ReadValue<Vector2>();
+
+    }
+
+    private void FixedUpdate()
+    {
+        _playerMovement.MoveNew(_moveH);
     }
 
     #region Input
