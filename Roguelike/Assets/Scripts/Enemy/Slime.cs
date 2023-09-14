@@ -121,7 +121,7 @@ public class Slime : MonoBehaviour, IEnemy
 
         healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, Quaternion.identity, transform);
 
-        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+        EnemyHealthBar healthBar = healthBarTransform.GetComponent<EnemyHealthBar>();
         healthBar.Setup(healthSystem);
 
     }

@@ -51,7 +51,7 @@ public class Magma : MonoBehaviour, IEnemy
 
         healthBarTransform = Instantiate(pfHealthBar, transform.position + offset, Quaternion.identity, transform);
 
-        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+        EnemyHealthBar healthBar = healthBarTransform.GetComponent<EnemyHealthBar>();
         healthBar.Setup(healthSystem);
 
         Debug.Log("Health: " + healthSystem.GetHealthPercent());
