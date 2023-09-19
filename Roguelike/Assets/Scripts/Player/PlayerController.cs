@@ -271,7 +271,9 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        _playerHealth.TakeDamage(damage);
         Debug.Log("Player taking damage is broken in the enemy scripts");
+        DamagePopup.Create(transform.position + Vector3.right + Vector3.up, (int)damage);
     }
 
     private void ReadInput()
