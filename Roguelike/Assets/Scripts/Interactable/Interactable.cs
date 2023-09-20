@@ -1,33 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour, IInteractable
 {
-    //private bool hasInteracted = false;
-
     public virtual void Interact()
     {
-        Debug.Log("Interacting with base class");
+        Debug.Log("Interacting with the base class");
     }
 
-    //private void Update()
-    //{
-    //    Debug.Log("Condition: " + hasInteracted);
-    //}
+    public virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerController player = collision.GetComponent<PlayerController>();
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (!hasInteracted)
-    //    {
-    //        Interact();
-    //        hasInteracted = true;
-    //    }
-    //}
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    hasInteracted = false;
-    //}
-
+        if (player != null)
+        {
+            Interact();
+        }
+    }
 }
