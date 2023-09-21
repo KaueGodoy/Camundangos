@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActionItem : Interactable
 {
-    public override void Interact()
+    public override void InitiateInteraction()
     {
         Debug.Log("Interacting with base ActionItem class");
     }

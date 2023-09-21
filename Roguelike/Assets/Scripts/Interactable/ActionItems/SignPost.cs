@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SignPost : ActionItem
 {
-    public override void Interact()
+    public override void InitiateInteraction()
     {
-        base.Interact();
+        base.InitiateInteraction();
 
         Debug.Log("Interacting with sign post");
     }

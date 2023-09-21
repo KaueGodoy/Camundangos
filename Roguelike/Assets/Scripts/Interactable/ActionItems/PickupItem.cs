@@ -12,11 +12,11 @@ public class PickupItem : Interactable
     {
         if (collision.CompareTag("Player"))
         {
-            Interact();
+            InitiateInteraction();
         }
     }
 
-    public override void Interact()
+    public override void InitiateInteraction()
     {
         InventoryController.Instance.GiveItem(ItemDrop);
         Debug.Log(ItemDrop.ItemName);
