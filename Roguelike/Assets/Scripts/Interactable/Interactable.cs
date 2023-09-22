@@ -3,6 +3,12 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour, IInteractable
 {
     private InteractableController _interactableController;
+    private PlayerControls _playerControls;
+
+    public string Name { get; set; }
+
+    private bool _canInteract;
+    public bool CanInteract { get { return _canInteract; } set { } }
 
     public virtual void Awake()
     {
@@ -12,18 +18,58 @@ public abstract class Interactable : MonoBehaviour, IInteractable
             Debug.LogError("InteractableController not found in the scene.");
         else
             Debug.Log("InteractableController found in the scene.");
+
+        _playerControls = new PlayerControls();
+
+        SetName("Default name");
+    }
+
+    private void OnEnable()
+    {
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
     }
 
     public virtual void InitiateInteraction()
     {
         Debug.Log("Interacting with the base class");
-        _interactableController.ShowInteractionUI(gameObject.name);
+        _interactableController.ShowInteractionUI(Name);
+        _canInteract = true;
     }
 
     public virtual void DisableInteraction()
     {
         Debug.Log("Disabling interaction");
         _interactableController.HideInteractionUI();
+        _canInteract = false;
+    }
+
+    public virtual void EnableInteraction()
+    {
+        if (_playerControls.UI.Interact.triggered)
+        {
+            ExecuteInteraction();
+        }   
+    }
+
+    public virtual void ExecuteInteraction()
+    {
+        Debug.Log("Interaction executed");
+        _canInteract = false;
+    }
+
+    private void Update()
+    {
+        if (_canInteract) EnableInteraction();
+    }
+
+    public string SetName(string name)
+    {
+        return Name = name;
     }
 
     public virtual void OnTriggerEnter2D(Collider2D collision)

@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
             _playerHealth.Heal(HealAmount);
         }
 
-        Debug.Log(CurrentRotation);
+        //Debug.Log(CurrentRotation);
     }
 
     #endregion
