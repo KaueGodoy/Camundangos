@@ -134,7 +134,7 @@ public class Slime : MonoBehaviour, IEnemy
     }
 
     [Header("Drop")]
-    public PickupItem pickupItem;
+    public Item_HandlePickUp pickupItem;
     public DropTable DropTable { get; set; }
     public bool IsDead { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
@@ -143,7 +143,7 @@ public class Slime : MonoBehaviour, IEnemy
         Item item = DropTable.GetDrop();
         if (item != null)
         {
-            PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
+            Item_HandlePickUp instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
             instance.ItemDrop = item;
         }
     }

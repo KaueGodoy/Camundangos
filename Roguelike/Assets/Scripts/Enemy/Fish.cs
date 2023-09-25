@@ -13,7 +13,7 @@ public class Fish : MonoBehaviour, IEnemy
     public Vector3 offset = new Vector3(0, 1f);
 
     [Header("Drop")]
-    public PickupItem pickupItem;
+    public Item_HandlePickUp pickupItem;
     public DropTable DropTable { get; set; }
 
     HealthSystem healthSystem;
@@ -81,7 +81,7 @@ public class Fish : MonoBehaviour, IEnemy
         Item item = DropTable.GetDrop();
         if (item != null)
         {
-            PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
+            Item_HandlePickUp instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
             instance.ItemDrop = item;
         }
     }
