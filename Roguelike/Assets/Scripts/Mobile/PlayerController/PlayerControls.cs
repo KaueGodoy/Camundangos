@@ -342,6 +342,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mobile"",
+                    ""type"": ""Button"",
+                    ""id"": ""da0cb618-6edb-4980-aa0f-a2147196a172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -425,11 +434,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d5ced1f0-1d3b-4770-8912-d346d741c40a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a2d41c1-0aa9-43e9-8bad-8bed0d75861e"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f85a2bfc-2817-462e-b1c3-5c41ba5c0b5c"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mobile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -453,6 +484,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
         m_UI_Stats = m_UI.FindAction("Stats", throwIfNotFound: true);
         m_UI_Interact = m_UI.FindAction("Interact", throwIfNotFound: true);
+        m_UI_Mobile = m_UI.FindAction("Mobile", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -612,6 +644,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Inventory;
     private readonly InputAction m_UI_Stats;
     private readonly InputAction m_UI_Interact;
+    private readonly InputAction m_UI_Mobile;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -620,6 +653,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputAction @Stats => m_Wrapper.m_UI_Stats;
         public InputAction @Interact => m_Wrapper.m_UI_Interact;
+        public InputAction @Mobile => m_Wrapper.m_UI_Mobile;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -641,6 +675,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Mobile.started += instance.OnMobile;
+            @Mobile.performed += instance.OnMobile;
+            @Mobile.canceled += instance.OnMobile;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -657,6 +694,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Mobile.started -= instance.OnMobile;
+            @Mobile.performed -= instance.OnMobile;
+            @Mobile.canceled -= instance.OnMobile;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -690,5 +730,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnStats(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnMobile(InputAction.CallbackContext context);
     }
 }

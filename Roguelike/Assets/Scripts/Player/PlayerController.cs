@@ -6,6 +6,10 @@ public class PlayerController : MonoBehaviour
     // REFACTOR > input, movement, animation, stats
     public CharacterStats characterStats;
 
+    [Header("Mobile")]
+    [SerializeField] private GameObject _mobileUI;
+    private bool isMobileUIActive;
+
     [Header("Camera")]
     [SerializeField] private CameraFollowObject _cameraFollowObject;
     private float _fallSpeedYDampingChangeThreshold;
@@ -199,6 +203,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             _playerHealth.Heal(HealAmount);
+        }
+
+        if (_playerControls.UI.Mobile.triggered)
+        {
+            isMobileUIActive = !isMobileUIActive;
+            _mobileUI.SetActive(isMobileUIActive);
         }
 
         //Debug.Log(CurrentRotation);

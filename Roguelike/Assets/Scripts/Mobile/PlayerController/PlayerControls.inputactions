@@ -320,6 +320,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Mobile",
+                    "type": "Button",
+                    "id": "da0cb618-6edb-4980-aa0f-a2147196a172",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -403,11 +412,33 @@
                 {
                     "name": "",
                     "id": "d5ced1f0-1d3b-4770-8912-d346d741c40a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a2d41c1-0aa9-43e9-8bad-8bed0d75861e",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f85a2bfc-2817-462e-b1c3-5c41ba5c0b5c",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mobile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
