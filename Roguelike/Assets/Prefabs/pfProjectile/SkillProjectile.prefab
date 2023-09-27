@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7885014923513423813}
   - component: {fileID: 6486536768056531318}
   - component: {fileID: 3260098985307320203}
-  - component: {fileID: 2072705226259704195}
   - component: {fileID: -6407014167967339395}
+  - component: {fileID: 2072705226259704195}
   m_Layer: 0
   m_Name: SkillProjectile
   m_TagString: Untagged
@@ -135,24 +135,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.457448, y: 0.3750366}
   m_EdgeRadius: 0
---- !u!114 &2072705226259704195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7381527331254552205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc27cd69b0194fc4198b903c90547e32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6486536768056531318}
-  projectileDamage: 10000
-  burnAmount: 4
-  projectileSpeed: 25
-  projectileDistance: 1.5
-  isCritical: 0
 --- !u!95 &-6407014167967339395
 Animator:
   serializedVersion: 5
@@ -174,3 +156,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2072705226259704195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7381527331254552205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc27cd69b0194fc4198b903c90547e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 20
+  _travelSpeed: 18
+  _travelDistance: 2

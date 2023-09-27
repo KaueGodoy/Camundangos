@@ -13,12 +13,6 @@ public abstract class Interactable : MonoBehaviour, IInteractable
     public virtual void Awake()
     {
         _interactableController = FindObjectOfType<InteractableController>();
-
-        if (_interactableController == null)
-            Debug.LogError("InteractableController not found in the scene.");
-        else
-            Debug.Log("InteractableController found in the scene.");
-
         _playerControls = new PlayerControls();
 
         SetName("Default name");

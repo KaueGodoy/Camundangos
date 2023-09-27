@@ -48,9 +48,7 @@ public class PlayerWeaponController : MonoBehaviour
         weaponEquipped = EquippedWeapon.GetComponent<IWeapon>();
 
         if (EquippedWeapon.GetComponent<IProjectileWeapon>() != null)
-        {
             EquippedWeapon.GetComponent<IProjectileWeapon>().ProjectileSpawn = spawnProjectile;
-        }
 
         EquippedWeapon.transform.SetParent(playerHand.transform);
 
@@ -81,19 +79,8 @@ public class PlayerWeaponController : MonoBehaviour
             if (EquippedWeapon != null)
             {
                 PerformWeaponAttack();
-
             }
         }
-        /*
-        if (Input.GetButtonDown("Skill"))
-        {
-            PerformWeaponSkillAttack();
-        }
-
-        if (Input.GetButtonDown("Ult"))
-        {
-            PerformWeaponUltAttack();
-        }*/
     }
 
     public void PerformWeaponAttack()
@@ -103,8 +90,8 @@ public class PlayerWeaponController : MonoBehaviour
 
     private float CalculateDamage()
     {
-        float baseDamage =   (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue())
-                             * (1 + (characterStats.GetStat(BaseStat.BaseStatType.AttackBonus).GetCalculatedStatValue() / 100)) 
+        float baseDamage = (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue())
+                             * (1 + (characterStats.GetStat(BaseStat.BaseStatType.AttackBonus).GetCalculatedStatValue() / 100))
                              + (characterStats.GetStat(BaseStat.BaseStatType.FlatAttack).GetCalculatedStatValue());
 
         float damageToDeal = baseDamage * (1 + characterStats.GetStat(BaseStat.BaseStatType.DamageBonus).GetCalculatedStatValue() / 100);

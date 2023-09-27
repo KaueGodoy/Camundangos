@@ -61,19 +61,19 @@ public class HandlePlayerAnimation : MonoBehaviour
             if (_playerAttack.CurrentAttack == 1)
             {
                 ChangeAnimationState(DerildoAttackString01);
-                Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
+                //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
             else if (_playerAttack.CurrentAttack == 2)
             {
                 ChangeAnimationState(DerildoAttackString02);
-                Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
+                //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
             else if (_playerAttack.CurrentAttack == 3)
             {
                 ChangeAnimationState(DerildoAttackString03);
-                Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
+                //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
         }

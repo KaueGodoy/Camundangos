@@ -115,3 +115,10 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: a5fbd5fa24f07854d885cac005490363, type: 3}
+    name: PlayerWeaponAttack
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
