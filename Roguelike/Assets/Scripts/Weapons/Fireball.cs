@@ -16,37 +16,27 @@ public class Fireball : MonoBehaviour
         Speed = 70f;
         Damage = 250f;
         GetComponent<Rigidbody2D>().AddForce(Direction * Speed);
-
     }
 
     private void Update()
     {
         if (Vector2.Distance(_spawnPosition, transform.position) >= Range)
-        {
             Extinguish();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        IDamageable damageable = collision.GetComponent<IDamageable>();
 
-        if (collision.CompareTag("Enemy"))
+        if (damageable != null)
         {
-            collision.GetComponent<IEnemy>().TakeDamage(Damage);
-            DamagePopup.Create(transform.position, (int)Damage);
-
-            Debug.Log("Hit: " + collision.name);
+            damageable.TakeDamage(Damage);
+            Debug.Log($"Dealing {Damage} damage to {collision.name}");
+            Extinguish();
         }
-
-        //PlayerController player = collision.GetComponent<PlayerController>();
-        //if (!player)
-        //{
-        //    Extinguish();
-        //}
-
     }
 
-    void Extinguish()
+    private void Extinguish()
     {
         Destroy(gameObject);
     }

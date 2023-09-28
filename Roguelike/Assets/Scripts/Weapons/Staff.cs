@@ -1,43 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Staff : MonoBehaviour, IWeapon, IProjectileWeapon
+public class Staff : Weapon, IProjectileWeapon
 {
-    private Animator animator;
-    public List<BaseStat> Stats { get; set; }
     public Transform ProjectileSpawn { get; set; }
-    public CharacterStats CharacterStats { get; set; }
-    public float CurrentDamage { get; set; }
+    private Fireball _fireball;
 
-    Fireball fireball;
-
-    private void Awake()
+    public override void Awake()
     {
-        fireball = Resources.Load<Fireball>("Projectiles/Fireball");
-        animator = GetComponent<Animator>();
+        base.Awake();
+        _fireball = Resources.Load<Fireball>("Projectiles/Fireball");
     }
 
-    public void PerformAttack(float damage)
+    public override void PerformAttack(float damage)
     {
-        CurrentDamage = damage;
-        animator.SetTrigger("Base_Attack");
-    }
-
-    public void PerformSkillAttack()
-    {
-        //animator.SetTrigger("Skill_Attack");
-    }
-
-    public void PerformUltAttack()
-    {
-        //animator.SetTrigger("Ult_Attack");
+        base.PerformAttack(damage);
+        Animator.SetTrigger("Base_Attack");
     }
 
     public void CastProjectile()
     {
-        Fireball fireballInstance = (Fireball)Instantiate(fireball, ProjectileSpawn.position, ProjectileSpawn.rotation);
+        Fireball fireballInstance = (Fireball)Instantiate(_fireball, ProjectileSpawn.position, ProjectileSpawn.rotation);
         fireballInstance.Direction = ProjectileSpawn.right;
     }
-
 }
