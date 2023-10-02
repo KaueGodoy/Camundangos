@@ -95,4 +95,24 @@ public abstract class Interactable : MonoBehaviour, IInteractable
             DisableInteraction();
         }
     }
+
+    public virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
+            InitiateInteraction();
+        }
+    }
+
+    public virtual void OnCollisionExit2D(Collision2D collision)
+    {
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
+            DisableInteraction();
+        }
+    }
 }

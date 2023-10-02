@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using static UnityEditor.Progress;
-
 public class TestInventory
 {
     Dictionary<EquipSlots, TestItem> _equippedItems = new Dictionary<EquipSlots, TestItem>();

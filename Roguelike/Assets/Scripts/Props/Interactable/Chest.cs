@@ -24,7 +24,7 @@ public class Chest : Interactable
         DestroyGameObject();
     }
 
-    private void OpenChest()
+    public virtual void OpenChest()
     {
         if (Drops == null) return;
 
