@@ -4,6 +4,6 @@ public class MobileUI : MonoBehaviour
 {
     private void Start()
     {
-        //gameObject.SetActive(Application.isMobilePlatform);
+        gameObject.SetActive(Application.isMobilePlatform);
     }
 }
