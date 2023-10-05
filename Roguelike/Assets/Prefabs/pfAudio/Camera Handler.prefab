@@ -171,3 +171,24 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 2ca0841f5d6a6ad4aa2f3c8160eac17c, type: 3}
+    name: OnInteractionEnabled
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ce2ff54f5e5da764dafe64044b1ffa06, type: 3}
+    name: OnItemPickup
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 74c837ff616b28f4eb679a2c1cb2bc19, type: 3}
+    name: OnChestOpen
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}

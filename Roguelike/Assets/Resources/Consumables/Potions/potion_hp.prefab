@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4147484336456020576}
   - component: {fileID: 3779429795415728590}
-  - component: {fileID: 2743185903555412379}
+  - component: {fileID: -1129430528514388915}
   m_Layer: 0
   m_Name: potion_hp
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2743185903555412379
+--- !u!114 &-1129430528514388915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,6 +94,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2028363318245573237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9b60fcd4e4e14e41a99ba22f4e07628, type: 3}
+  m_Script: {fileID: 11500000, guid: 485d441226361af4d8d85c74cc244358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
