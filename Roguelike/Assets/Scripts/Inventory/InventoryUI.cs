@@ -13,12 +13,17 @@ public class InventoryUI : MonoBehaviour
 
     private PlayerControls playerControls;
 
+    private AudioManager _audioManager;
+
+
     private void Awake()
     {
         playerControls = new PlayerControls();
 
         ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
-   
+
+        _audioManager = FindObjectOfType<AudioManager>();
+
 
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
     }
@@ -41,9 +46,23 @@ public class InventoryUI : MonoBehaviour
     {
         if (playerControls.UI.Inventory.triggered)
         {
-            MenuIsActive = !MenuIsActive;
-            inventoryPanel.gameObject.SetActive(MenuIsActive);
+            ActivateMenu();
         }
+    }
+
+    private void ActivateMenu()
+    {
+        MenuIsActive = !MenuIsActive;
+        inventoryPanel.gameObject.SetActive(MenuIsActive);
+        OpenMenu(MenuIsActive);
+    }
+
+    private bool OpenMenu(bool menuOpened)
+    {
+        if (menuOpened)
+            _audioManager.PlaySound("OnInventoryOpened");
+
+        return menuOpened;
     }
 
     public void ItemAdded(Item item)

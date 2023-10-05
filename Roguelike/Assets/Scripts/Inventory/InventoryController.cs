@@ -1,22 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
     public static InventoryController Instance { get; set; }
-    
+
     public PlayerWeaponController playerWeaponController;
     public ConsumableController consumableController;
     public InventoryUIDetails inventoryDetailsPanel;
 
     public List<Item> playerItems = new List<Item>();
 
+    private AudioManager _audioManager;
+
+    private void Awake()
+    {
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
+
     private void Start()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -42,6 +47,7 @@ public class InventoryController : MonoBehaviour
         Debug.Log(playerItems.Count + " items in inventory. Added: " + itemSlug);
         UIEventHandler.ItemAddedToInventory(item);
     }
+
     public void GiveItem(Item item)
     {
         playerItems.Add(item);
@@ -56,11 +62,13 @@ public class InventoryController : MonoBehaviour
     public void EquipItem(Item itemToEquip)
     {
         playerWeaponController.EquipWeapon(itemToEquip);
+        _audioManager.PlaySound("OnItemEquipped");
     }
 
     public void ConsumeItem(Item itemToConsume)
     {
-        consumableController.ConsumeItem(itemToConsume);    
+        consumableController.ConsumeItem(itemToConsume);
+        _audioManager.PlaySound("OnItemConsumed");
     }
 
 }

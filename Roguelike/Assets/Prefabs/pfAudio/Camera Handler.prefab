@@ -122,3 +122,52 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 0e1a57bfd06945748ab017c789898fee, type: 3}
+    name: OnUIPressed
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: bd94d003e394a3e47a4addcf8b299ce1, type: 3}
+    name: OnItemEquipped
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 366343a69aefd1d438bb6b2690710fc6, type: 3}
+    name: OnItemPressed
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 611c6cf097d734b4d8bd3fccdb2bfed2, type: 3}
+    name: OnItemUnequipped
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: c96c3ec49afd729489de8fc664334348, type: 3}
+    name: OnInventoryOpened
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 73e0d346441ba5a48b33c80e1f9839a3, type: 3}
+    name: OnItemConsumed
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 74d3bbb8f65eaa6428e32583dbe48607, type: 3}
+    name: OnStatsOpened
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}

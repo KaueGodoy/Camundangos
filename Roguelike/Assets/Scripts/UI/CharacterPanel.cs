@@ -30,8 +30,12 @@ public class CharacterPanel : MonoBehaviour
     private PlayerWeaponController PlayerWeaponController;
     private List<TextMeshProUGUI> weaponStatTexts = new List<TextMeshProUGUI>();
 
+    private AudioManager _audioManager;
+
     private void Awake()
     {
+        _audioManager = FindObjectOfType<AudioManager>();   
+
         PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
         UIEventHandler.OnStatsChanged += UpdateStats;
@@ -41,7 +45,6 @@ public class CharacterPanel : MonoBehaviour
     private void Start()
     {
         InitializeStats();
-
     }
 
     private void OnDestroy()
@@ -104,6 +107,8 @@ public class CharacterPanel : MonoBehaviour
             weaponStatTexts.Clear();
             PlayerWeaponController.UnequipWeapon();
         }
+
+        _audioManager.PlaySound("OnItemUnequipped");
     }
 
 }
