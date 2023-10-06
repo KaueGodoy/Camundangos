@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerWeaponController : MonoBehaviour
 {
     public GameObject playerHand;
     public GameObject EquippedWeapon { get; set; }
+
+    public CharacterPanel characterPanel;
 
     Transform spawnProjectile;
     CharacterStats characterStats;
@@ -38,9 +37,7 @@ public class PlayerWeaponController : MonoBehaviour
     public void EquipWeapon(Item itemToEquip)
     {
         if (EquippedWeapon != null)
-        {
             UnequipWeapon();
-        }
 
         EquippedWeapon = Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
        playerHand.transform.position, playerHand.transform.rotation);
@@ -48,7 +45,9 @@ public class PlayerWeaponController : MonoBehaviour
         weaponEquipped = EquippedWeapon.GetComponent<IWeapon>();
 
         if (EquippedWeapon.GetComponent<IProjectileWeapon>() != null)
+        {
             EquippedWeapon.GetComponent<IProjectileWeapon>().ProjectileSpawn = spawnProjectile;
+        }
 
         EquippedWeapon.transform.SetParent(playerHand.transform);
 
@@ -66,10 +65,14 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void UnequipWeapon()
     {
-        InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
-        characterStats.RemoveStatBonus(weaponEquipped.Stats);
-        Destroy(EquippedWeapon.transform.gameObject);
-        UIEventHandler.StatsChanged();
+        if (EquippedWeapon != null)
+        {
+            InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
+            characterStats.RemoveStatBonus(weaponEquipped.Stats);
+            characterPanel.UnequipWeapon();
+            UIEventHandler.StatsChanged();
+            Destroy(EquippedWeapon.transform.gameObject);
+        }
     }
 
     private void Update()

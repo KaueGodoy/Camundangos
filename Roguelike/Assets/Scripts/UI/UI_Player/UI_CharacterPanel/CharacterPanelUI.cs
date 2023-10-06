@@ -1,41 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CharacterPanelUI : MonoBehaviour
 {
-    public RectTransform characterPanel;
-    bool PanelIsActive { get; set; }
+    [Header("Character Stats")]
+    [SerializeField] private RectTransform _characterPanel;
 
-    private PlayerControls playerControls;
+    public bool PanelIsActive { get; set; }
 
+    private PlayerControls _playerControls;
     private AudioManager _audioManager;
-
 
     private void Awake()
     {
-        playerControls = new PlayerControls();
+        _playerControls = new PlayerControls();
         _audioManager = FindObjectOfType<AudioManager>();
-    }
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Disable();
     }
 
     void Start()
     {
-        characterPanel.gameObject.SetActive(false);
+        _characterPanel.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
     }
 
     void Update()
     {
-        if (playerControls.UI.Stats.triggered)
+        if (_playerControls.UI.Stats.triggered)
         {
             ActivateMenu();
         }
@@ -44,8 +42,9 @@ public class CharacterPanelUI : MonoBehaviour
     private void ActivateMenu()
     {
         PanelIsActive = !PanelIsActive;
-        characterPanel.gameObject.SetActive(PanelIsActive);
+        _characterPanel.gameObject.SetActive(PanelIsActive);
         OpenMenu(PanelIsActive);
+        CloseMenu(!PanelIsActive);
     }
 
     private bool OpenMenu(bool menuOpened)
@@ -54,5 +53,13 @@ public class CharacterPanelUI : MonoBehaviour
             _audioManager.PlaySound("OnStatsOpened");
 
         return menuOpened;
+    }
+
+    private bool CloseMenu(bool menuClosed)
+    {
+        if (menuClosed)
+            _audioManager.PlaySound("OnStatsClosed");
+
+        return menuClosed;
     }
 }

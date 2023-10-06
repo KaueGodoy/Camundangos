@@ -34,7 +34,7 @@ public class CharacterPanel : MonoBehaviour
 
     private void Awake()
     {
-        _audioManager = FindObjectOfType<AudioManager>();   
+        _audioManager = FindObjectOfType<AudioManager>();
 
         PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
@@ -105,7 +105,6 @@ public class CharacterPanel : MonoBehaviour
                 Destroy(weaponStatTexts[i].gameObject);
             }
             weaponStatTexts.Clear();
-            PlayerWeaponController.UnequipWeapon();
         }
 
         _audioManager.PlaySound("OnItemUnequipped");

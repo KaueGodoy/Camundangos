@@ -1,60 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour
 {
-    public RectTransform inventoryPanel;
-    public RectTransform scrollViewContent;
-    InventoryUIItem ItemContainer { get; set; }
-    bool MenuIsActive { get; set; }
-    Item CurrentSelectedItem { get; set; }
+    [Header("Inventory")]
+    [SerializeField] private RectTransform _inventoryPanel;
 
-    private PlayerControls playerControls;
+    [Header("Sections")]
+    [SerializeField] private RectTransform _sectionPanelWeapon;
+    [SerializeField] private RectTransform _sectionPanelConsumable;
 
+    [Header("Content")]
+    [SerializeField] private RectTransform _weaponScrollViewContent;
+    [SerializeField] private RectTransform _consumableScrollViewContent;
+
+    public InventoryUIItem ItemContainer { get; set; }
+    public Item CurrentSelectedItem { get; set; }
+    public bool MenuIsActive { get; set; }
+
+    private PlayerControls _playerControls;
     private AudioManager _audioManager;
-
 
     private void Awake()
     {
-        playerControls = new PlayerControls();
-
+        _playerControls = new PlayerControls();
         ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
-
         _audioManager = FindObjectOfType<AudioManager>();
-
-
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
-    }
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Disable();
     }
 
     private void Start()
     {
-        inventoryPanel.gameObject.SetActive(false);
+        _inventoryPanel.gameObject.SetActive(false);
+        _sectionPanelWeapon.gameObject.SetActive(true);
+        _sectionPanelConsumable.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
+        UIEventHandler.OnItemAddedToInventory -= ItemAdded;
     }
 
     private void Update()
     {
-        if (playerControls.UI.Inventory.triggered)
+        if (_playerControls.UI.Inventory.triggered)
         {
             ActivateMenu();
         }
     }
 
-    private void ActivateMenu()
+    public void ActivateMenu()
     {
         MenuIsActive = !MenuIsActive;
-        inventoryPanel.gameObject.SetActive(MenuIsActive);
+        _inventoryPanel.gameObject.SetActive(MenuIsActive);
         OpenMenu(MenuIsActive);
+        CloseMenu(!MenuIsActive);
     }
 
     private bool OpenMenu(bool menuOpened)
@@ -65,10 +70,50 @@ public class InventoryUI : MonoBehaviour
         return menuOpened;
     }
 
+    private bool CloseMenu(bool menuClosed)
+    {
+        if (menuClosed)
+            _audioManager.PlaySound("OnInventoryClosed");
+
+        return menuClosed;
+    }
+
+    private void EnableSection()
+    {
+        _audioManager.PlaySound("OnInventorySectionSelected");
+    }
+
+    public void EnableSectionWeapon()
+    {
+        _sectionPanelWeapon.gameObject.SetActive(true);
+        _sectionPanelConsumable.gameObject.SetActive(false);
+        EnableSection();
+    }
+
+    public void EnableSectionConsumable()
+    {
+        _sectionPanelWeapon.gameObject.SetActive(false);
+        _sectionPanelConsumable.gameObject.SetActive(true);
+        EnableSection();
+    }
+
     public void ItemAdded(Item item)
     {
         InventoryUIItem emptyItem = Instantiate(ItemContainer);
         emptyItem.SetItem(item);
-        emptyItem.transform.SetParent(scrollViewContent);
+
+        if (item.ItemType == Item.ItemTypes.Weapon)
+        {
+            emptyItem.transform.SetParent(_weaponScrollViewContent);
+        }
+        else if (item.ItemType == Item.ItemTypes.Consumable)
+        {
+            emptyItem.transform.SetParent(_consumableScrollViewContent);
+        }
+        else
+        {
+            emptyItem.transform.SetParent(_weaponScrollViewContent);
+            Debug.LogWarning($"{emptyItem.gameObject.name} does not belong to defined types of item");
+        }
     }
 }
