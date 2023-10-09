@@ -22,7 +22,7 @@ public class TestInventory
         return null;
     }
 
-    public float GetTotalArmor()
+    public int GetTotalArmor()
     {
         int totalArmor = _equippedItems.Values.Sum(t => t.Armor);
         return totalArmor;
