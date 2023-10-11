@@ -1,9 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
+
 public class TestInventory
 {
     Dictionary<EquipSlots, TestItem> _equippedItems = new Dictionary<EquipSlots, TestItem>();
     List<TestItem> _unequippedItems = new List<TestItem>();
+
+    private readonly ITestCharacter _character;
+
+    public TestInventory(ITestCharacter character)
+    {
+        _character = character;
+    }
 
     public void EquipItem(TestItem item)
     {
@@ -12,6 +20,8 @@ public class TestInventory
 
         // this key = that value
         _equippedItems[item.EquipSlots] = item;
+
+        _character.OnItemEquipped(item);
     }
 
     public TestItem GetItem(EquipSlots equipSlot)

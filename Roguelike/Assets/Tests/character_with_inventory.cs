@@ -8,7 +8,7 @@ public class character_with_inventory
     {
         // ARRANGE
         ITestCharacter character = Substitute.For<ITestCharacter>();
-        TestInventory inventory = new TestInventory();
+        TestInventory inventory = new TestInventory(character);
         TestItem pants = new TestItem() { EquipSlots = EquipSlots.Legs, Armor = 40 };
         TestItem shield = new TestItem() { EquipSlots = EquipSlots.RightHand, Armor = 50 };
 
