@@ -1,45 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused;
-    public GameObject pauseMenuUI;
-    [SerializeField] RectTransform fader;
 
-    private PlayerControls playerControls;
+    [SerializeField] private GameObject _pauseMenuUI;
+    [SerializeField] private RectTransform _fader;
+
+    private PlayerControls _playerControls;
 
     private void Awake()
     {
-        playerControls = new PlayerControls();
+        _playerControls = new PlayerControls();
         GameIsPaused = false;
     }
 
     private void Start()
     {
-        fader.gameObject.SetActive(false);
-        LeanTween.scale(fader, new Vector3(1, 1, 1), 0);
-        LeanTween.scale(fader, Vector3.zero, 0.5f).setOnComplete(() =>
+        _fader.gameObject.SetActive(false);
+        LeanTween.scale(_fader, new Vector3(1, 1, 1), 0);
+        LeanTween.scale(_fader, Vector3.zero, 0.5f).setOnComplete(() =>
         {
-            fader.gameObject.SetActive(false);
+            _fader.gameObject.SetActive(false);
         });
     }
 
     private void OnEnable()
     {
-        playerControls.Enable();
+        _playerControls.Enable();
     }
 
     private void OnDisable()
     {
-        playerControls.Disable();
+        _playerControls.Disable();
     }
+
     private void Update()
     {
-        if (playerControls.UI.Pause.triggered)
+        if (_playerControls.UI.Pause.triggered)
         {
             if (GameIsPaused)
             {
@@ -54,14 +53,14 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        _pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
 
@@ -78,7 +77,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        fader.gameObject.SetActive(true);
+        _fader.gameObject.SetActive(true);
 
         //LeanTween.scale(fader, Vector3.zero, 0f);
         //LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setOnComplete(() =>
@@ -86,9 +85,9 @@ public class PauseMenu : MonoBehaviour
         //    SceneManager.LoadScene(0);
         //});
 
-        pauseMenuUI.gameObject.SetActive(false);
+        _pauseMenuUI.gameObject.SetActive(false);
 
-        LeanTween.scale(fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
+        LeanTween.scale(_fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
         {
             SceneManager.LoadScene(0);
         });
@@ -97,13 +96,11 @@ public class PauseMenu : MonoBehaviour
 
         //Invoke("TransitionToMainMenu", 1f);
 
-
-
     }
 
     private void TransitionToMainMenu()
     {
-        LeanTween.scale(fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
+        LeanTween.scale(_fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
         {
             SceneManager.LoadScene(0);
         });
