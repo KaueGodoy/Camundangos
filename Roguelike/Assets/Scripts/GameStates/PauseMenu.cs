@@ -18,12 +18,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        _fader.gameObject.SetActive(false);
-        LeanTween.scale(_fader, new Vector3(1, 1, 1), 0);
-        LeanTween.scale(_fader, Vector3.zero, 0.5f).setOnComplete(() =>
-        {
-            _fader.gameObject.SetActive(false);
-        });
+        SetFader();
     }
 
     private void OnEnable()
@@ -49,6 +44,16 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+    }
+
+    private void SetFader()
+    {
+        _fader.gameObject.SetActive(false);
+        LeanTween.scale(_fader, new Vector3(1, 1, 1), 0);
+        LeanTween.scale(_fader, Vector3.zero, 0.5f).setOnComplete(() =>
+        {
+            _fader.gameObject.SetActive(false);
+        });
     }
 
     public void Resume()
@@ -97,15 +102,6 @@ public class PauseMenu : MonoBehaviour
         //Invoke("TransitionToMainMenu", 1f);
 
     }
-
-    private void TransitionToMainMenu()
-    {
-        LeanTween.scale(_fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
-        {
-            SceneManager.LoadScene(0);
-        });
-    }
-
     public void QuitGame()
     {
         Debug.Log("Quitting...");
