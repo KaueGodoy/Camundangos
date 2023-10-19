@@ -16,6 +16,8 @@ public abstract class AnimationController : MonoBehaviour, IAnimationController
     {
         if (CurrentAnimation == newAnimation) return;
 
+        if (newAnimation == null) return;
+
         Animator.Play(newAnimation);
         CurrentAnimation = newAnimation;
     }
