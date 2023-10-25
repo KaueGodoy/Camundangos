@@ -11,12 +11,12 @@ public class PlayerAttack : MonoBehaviour
     public float timeSinceAttack = 0.0f;
     public float attackStringReset = 0.8f;
 
-    public int CurrentAttack = 0;
+    public static int CurrentAttack = 0;
 
     public bool attackRequest = false;
     public bool attackString = false;
 
-    public bool AttackAnimation = false;
+    public static bool AttackAnimation = false;
     private bool isAttacking = false;
 
     public void PerformAttack()

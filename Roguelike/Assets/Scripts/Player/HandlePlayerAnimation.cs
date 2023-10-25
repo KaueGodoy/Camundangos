@@ -5,10 +5,10 @@ public class HandlePlayerAnimation : MonoBehaviour
     private Animator _animator;
     private string _currentAnimation;
 
-    private PlayerHealth _playerHealth;
-    private PlayerAttack _playerAttack;
-    private PlayerSkill _playerSkill;
-    private PlayerUlt _playerUlt;
+    //private PlayerHealth _playerHealth;
+    //private PlayerAttack _playerAttack;
+    //private PlayerSkill _playerSkill;
+    //private PlayerUlt _playerUlt;
     private PlayerMovement _playerMovement;
 
     private const string DerildoDeath = "derildo_death";
@@ -27,10 +27,10 @@ public class HandlePlayerAnimation : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
 
-        _playerHealth = GetComponent<PlayerHealth>();
-        _playerAttack = GetComponent<PlayerAttack>();
-        _playerSkill = GetComponent<PlayerSkill>();
-        _playerUlt = GetComponent<PlayerUlt>();
+        //_playerHealth = GetComponent<PlayerHealth>();
+        //_playerAttack = GetComponent<PlayerAttack>();
+        //_playerSkill = GetComponent<PlayerSkill>();
+        //_playerUlt = GetComponent<PlayerUlt>();
         _playerMovement = GetComponent<PlayerMovement>();
 
     }
@@ -46,31 +46,31 @@ public class HandlePlayerAnimation : MonoBehaviour
     public void UpdateAnimationState()
     {
         // death
-        if (!_playerHealth.IsAlive)
+        if (!PlayerHealth.IsAlive)
         {
             ChangeAnimationState(DerildoDeath);
         }
         // hit
-        else if (_playerHealth.IsHit)
+        else if (PlayerHealth.IsHit)
         {
             ChangeAnimationState(DerildoHit);
         }
         // attack
-        else if (_playerAttack.AttackAnimation)
+        else if (PlayerAttack.AttackAnimation)
         {
-            if (_playerAttack.CurrentAttack == 1)
+            if (PlayerAttack.CurrentAttack == 1)
             {
                 ChangeAnimationState(DerildoAttackString01);
                 //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
-            else if (_playerAttack.CurrentAttack == 2)
+            else if (PlayerAttack.CurrentAttack == 2)
             {
                 ChangeAnimationState(DerildoAttackString02);
                 //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
-            else if (_playerAttack.CurrentAttack == 3)
+            else if (PlayerAttack.CurrentAttack == 3)
             {
                 ChangeAnimationState(DerildoAttackString03);
                 //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
@@ -78,13 +78,13 @@ public class HandlePlayerAnimation : MonoBehaviour
             }
         }
         // skill
-        else if (_playerSkill.skillAttackAnimation)
+        else if (PlayerSkill.skillAttackAnimation)
         {
             ChangeAnimationState(DerildoSkill);
 
         }
         // ult
-        else if (_playerUlt.ultAttackAnimation)
+        else if (PlayerUlt.ultAttackAnimation)
         {
             ChangeAnimationState(DerildoUlt);
         }

@@ -1,15 +1,33 @@
+using System;
 using UnityEngine;
 
 public class HandleAnimationStates : AnimationController
 {
-    [Header("Animations")]
-    [SerializeField] private string _idle;
-    [SerializeField] private string _walk;
+    [Header("Dependencies")]
+    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private TextAsset _file;
+    [SerializeField] private string[] _animation;
 
-    private void Start()
+    //[SerializeField] private string _death;
+    //[SerializeField] private string _hit;
+    //[SerializeField] private string _attackString01;
+    //[SerializeField] private string _attackString02;
+    //[SerializeField] private string _attackString03;
+    //[SerializeField] private string _skill;
+    //[SerializeField] private string _ult;
+    //[SerializeField] private string _jump;
+    //[SerializeField] private string _fall;
+    //[SerializeField] private string _walk;
+    //[SerializeField] private string _idle;
+
+    private void OnValidate()
     {
-        //IdleState = true;
-        WalkingState = true;
+        LoadAnimationFile();
+    }
+
+    private void LoadAnimationFile()
+    {
+        _animation = _file ? _file.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
     }
 
     private void Update()
@@ -20,13 +38,70 @@ public class HandleAnimationStates : AnimationController
 
     private void UpdateAnimationState()
     {
-        if (WalkingState)
+        if (_file == null) return;
+
+        // death
+        if (!PlayerHealth.IsAlive)
         {
-            ChangeAnimationState(_walk);
+            ChangeAnimationState(_animation[0]);
         }
-        else if (IdleState)
+        // hit
+        else if (PlayerHealth.IsHit)
         {
-            ChangeAnimationState(_idle);
+            ChangeAnimationState(_animation[1]);
+        }
+        // attack
+        else if (PlayerAttack.AttackAnimation)
+        {
+            if (PlayerAttack.CurrentAttack == 1)
+            {
+                ChangeAnimationState(_animation[2]);
+                //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
+
+            }
+            else if (PlayerAttack.CurrentAttack == 2)
+            {
+                ChangeAnimationState(_animation[3]);
+                //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
+
+            }
+            else if (PlayerAttack.CurrentAttack == 3)
+            {
+                ChangeAnimationState(_animation[4]);
+                //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
+
+            }
+        }
+        // skill
+        else if (PlayerSkill.skillAttackAnimation)
+        {
+            ChangeAnimationState(_animation[5]);
+
+        }
+        // ult
+        else if (PlayerUlt.ultAttackAnimation)
+        {
+            ChangeAnimationState(_animation[6]);
+        }
+        // jump
+        else if (_playerMovement.Rigidbody.velocity.y > .1f && !_playerMovement.IsGrounded())
+        {
+            ChangeAnimationState(_animation[7]);
+        }
+        // fall
+        else if (_playerMovement.Rigidbody.velocity.y < .1f && !_playerMovement.IsGrounded())
+        {
+            ChangeAnimationState(_animation[8]);
+        }
+        // move
+        else if (_playerMovement.MoveH.x > 0 || _playerMovement.MoveH.x < 0)
+        {
+            ChangeAnimationState(_animation[9]);
+        }
+        // idle
+        else
+        {
+            ChangeAnimationState(_animation[10]);
         }
     }
 

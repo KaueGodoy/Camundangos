@@ -21,7 +21,7 @@ public class PlayerUlt : MonoBehaviour
     private bool _isUltPerformed = false;
 
     public bool ultAttackRequest = false;
-    public bool ultAttackAnimation = false;   
+    public static bool ultAttackAnimation = false;   
 
     public void PerformUlt()
     {

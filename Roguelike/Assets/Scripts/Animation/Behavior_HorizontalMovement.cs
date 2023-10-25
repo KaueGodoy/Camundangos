@@ -15,14 +15,14 @@ public class Behavior_HorizontalMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_states.WalkingState)
-        {
-            Move();
-        }
-        else
-        {
-            StopMoving();
-        }
+        //if (_states.WalkingState)
+        //{
+        //    Move();
+        //}
+        //else
+        //{
+        //    StopMoving();
+        //}
     }
 
     private void StopMoving()

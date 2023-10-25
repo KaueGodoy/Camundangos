@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Health")]
 
-    public bool IsAlive;
+    public static bool IsAlive;
 
     [SerializeField] private float _currentHealth = 0;
     [SerializeField] private float _maxHealth = 3;
@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float HitCooldown = 0.3f;
     public float HitTimer = 0.0f;
-    public bool IsHit = false;
+    public static bool IsHit = false;
     private readonly float deathAnimationTime = 0.8f;
 
     public void TakeDamage(float damageAmount)

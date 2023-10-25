@@ -23,7 +23,7 @@ public class PlayerSkill : MonoBehaviour
     private bool _isSkillPerformed = false;
 
     public bool skillAttackRequest = false;
-    public bool skillAttackAnimation = false;
+    public static bool skillAttackAnimation = false;
 
     public void PerformSkill()
     {

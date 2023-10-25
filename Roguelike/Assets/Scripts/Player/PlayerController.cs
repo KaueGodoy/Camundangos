@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PauseMenu.GameIsPaused) return;
 
-        if (_playerHealth.IsAlive)
+        if (PlayerHealth.IsAlive)
         {
             ProcessInput();
             _playerAttack.PerformAttack();
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerDash.IsDashing) return;
 
-        if (_playerHealth.IsAlive)
+        if (PlayerHealth.IsAlive)
         {
             _playerMovement.Move();
             _playerMovement.Jump();
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         }
 
         UpdateTimers();
-        _playerAnimation.UpdateAnimationState();
+        //_playerAnimation.UpdateAnimationState();
 
     }
 

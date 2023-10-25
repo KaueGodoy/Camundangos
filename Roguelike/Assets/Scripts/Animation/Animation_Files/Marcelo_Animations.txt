@@ -1,0 +1,11 @@
+Marcelo_Death
+Marcelo_Hit
+Marcelo_Attack1
+Marcelo_Attack2
+Marcelo_Attack3
+Marcelo_Skill
+Marcelo_Ult
+Marcelo_Jump
+Marcelo_Fall
+Marcelo_Walk
+Marcelo_Idle

@@ -1,0 +1,11 @@
+derildo_death
+derildo_hit
+derildo_attack1
+derildo_attack2
+derildo_attack3
+derildo_skill
+derildo_ult
+derildo_jump
+derildo_fall
+derildo_walk
+derildo_idle
