@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
             && !CameraManager.Instance.LerpedFromPlayerFalling)
         {
             CameraManager.Instance.LerpYDamping(true);
-            Debug.Log("Lerp true");
+            //Debug.Log("Lerp true");
 
         }
 
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             CameraManager.Instance.LerpedFromPlayerFalling = false;
             CameraManager.Instance.LerpYDamping(false);
-            Debug.Log("Lerp false");
+            //Debug.Log("Lerp false");
 
         }
 
