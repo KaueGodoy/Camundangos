@@ -335,6 +335,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Character1"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ad0dcec-63d8-4e3a-a5ca-846bfaa11459"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Character2"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b3745c0-18c0-470d-9624-cacf4cc31c26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Character3"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca7e3828-8bb0-4f86-8ae0-1b7a21fcc124"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Character4"",
+                    ""type"": ""Button"",
+                    ""id"": ""65e4f2ba-1b7f-4e80-93e3-e816b233bf7b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""08c73f5a-c19d-48c6-bc7b-e9e8802ee4bf"",
@@ -379,7 +415,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bf7f009c-e582-451a-81f0-db9a5cfd8c83"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -401,7 +437,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e8d67b47-2a2b-4f5b-8a5f-1a5c97ec433c"",
-                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -463,6 +499,94 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Mobile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30ea853d-0e7d-4ea7-bf35-80a6926a22d1"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17f58980-afbf-4459-823e-6bddd3248724"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d10846c-eb25-4d75-95c8-8c1f3148f450"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""807ecea3-07f9-4c03-bea5-097b279e95e0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""149777d3-fbfd-4084-bcb7-997fe6f3bb62"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a87b6158-d586-42be-9e95-390a711bb1b8"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c2e10f5-e7e5-4c9f-a581-bbc2778e8f30"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e676f915-a754-487e-afe7-3895fcdef0d2"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Character4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -483,6 +607,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
         m_UI_Stats = m_UI.FindAction("Stats", throwIfNotFound: true);
+        m_UI_Character1 = m_UI.FindAction("Character1", throwIfNotFound: true);
+        m_UI_Character2 = m_UI.FindAction("Character2", throwIfNotFound: true);
+        m_UI_Character3 = m_UI.FindAction("Character3", throwIfNotFound: true);
+        m_UI_Character4 = m_UI.FindAction("Character4", throwIfNotFound: true);
         m_UI_Interact = m_UI.FindAction("Interact", throwIfNotFound: true);
         m_UI_Mobile = m_UI.FindAction("Mobile", throwIfNotFound: true);
     }
@@ -643,6 +771,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_Inventory;
     private readonly InputAction m_UI_Stats;
+    private readonly InputAction m_UI_Character1;
+    private readonly InputAction m_UI_Character2;
+    private readonly InputAction m_UI_Character3;
+    private readonly InputAction m_UI_Character4;
     private readonly InputAction m_UI_Interact;
     private readonly InputAction m_UI_Mobile;
     public struct UIActions
@@ -652,6 +784,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputAction @Stats => m_Wrapper.m_UI_Stats;
+        public InputAction @Character1 => m_Wrapper.m_UI_Character1;
+        public InputAction @Character2 => m_Wrapper.m_UI_Character2;
+        public InputAction @Character3 => m_Wrapper.m_UI_Character3;
+        public InputAction @Character4 => m_Wrapper.m_UI_Character4;
         public InputAction @Interact => m_Wrapper.m_UI_Interact;
         public InputAction @Mobile => m_Wrapper.m_UI_Mobile;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
@@ -672,6 +808,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Stats.started += instance.OnStats;
             @Stats.performed += instance.OnStats;
             @Stats.canceled += instance.OnStats;
+            @Character1.started += instance.OnCharacter1;
+            @Character1.performed += instance.OnCharacter1;
+            @Character1.canceled += instance.OnCharacter1;
+            @Character2.started += instance.OnCharacter2;
+            @Character2.performed += instance.OnCharacter2;
+            @Character2.canceled += instance.OnCharacter2;
+            @Character3.started += instance.OnCharacter3;
+            @Character3.performed += instance.OnCharacter3;
+            @Character3.canceled += instance.OnCharacter3;
+            @Character4.started += instance.OnCharacter4;
+            @Character4.performed += instance.OnCharacter4;
+            @Character4.canceled += instance.OnCharacter4;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -691,6 +839,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Stats.started -= instance.OnStats;
             @Stats.performed -= instance.OnStats;
             @Stats.canceled -= instance.OnStats;
+            @Character1.started -= instance.OnCharacter1;
+            @Character1.performed -= instance.OnCharacter1;
+            @Character1.canceled -= instance.OnCharacter1;
+            @Character2.started -= instance.OnCharacter2;
+            @Character2.performed -= instance.OnCharacter2;
+            @Character2.canceled -= instance.OnCharacter2;
+            @Character3.started -= instance.OnCharacter3;
+            @Character3.performed -= instance.OnCharacter3;
+            @Character3.canceled -= instance.OnCharacter3;
+            @Character4.started -= instance.OnCharacter4;
+            @Character4.performed -= instance.OnCharacter4;
+            @Character4.canceled -= instance.OnCharacter4;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -729,6 +889,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnStats(InputAction.CallbackContext context);
+        void OnCharacter1(InputAction.CallbackContext context);
+        void OnCharacter2(InputAction.CallbackContext context);
+        void OnCharacter3(InputAction.CallbackContext context);
+        void OnCharacter4(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMobile(InputAction.CallbackContext context);
     }

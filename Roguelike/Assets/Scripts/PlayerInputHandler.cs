@@ -53,4 +53,25 @@ public class PlayerInputHandler : MonoBehaviour
     {
         return _playerControls.Player.Ult.triggered;
     }
+
+    public bool HasCurrentCharacterChangedToOne()
+    {
+        return _playerControls.UI.Character1.triggered;
+    }
+
+    public bool HasCurrentCharacterChangedToTwo()
+    {
+        return _playerControls.UI.Character2.triggered;
+    }
+
+    public bool HasCurrentCharacterChangedToThree()
+    {
+        return _playerControls.UI.Character3.triggered;
+    }
+
+    public bool HasCurrentCharacterChangedToFour()
+    {
+        return _playerControls.UI.Character4.triggered;
+    }
+
 }

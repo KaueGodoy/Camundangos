@@ -7,6 +7,13 @@ public class CharacterSwitcher : MonoBehaviour
     private int _currentCharacterIndex = 0;
     private Vector3 _savedPosition;
 
+    private PlayerInputHandler _inputHandler;
+
+    private void Awake()
+    {
+        _inputHandler = GetComponent<PlayerInputHandler>();
+    }
+
     private void Start()
     {
         EnableFirstCharacter();
@@ -21,27 +28,27 @@ public class CharacterSwitcher : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (_inputHandler.HasCurrentCharacterChangedToOne())
         {
             SwitchCharacter(0);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (_inputHandler.HasCurrentCharacterChangedToTwo())
         {
             SwitchCharacter(1);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (_inputHandler.HasCurrentCharacterChangedToThree())
         {
             SwitchCharacter(2);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (_inputHandler.HasCurrentCharacterChangedToFour())
         {
             SwitchCharacter(3);
         }
     }
 
-    void SwitchCharacter(int newIndex)
+    private void SwitchCharacter(int newIndex)
     {
         if (newIndex >= 0 && newIndex < _characters.Length)
         {
@@ -52,6 +59,10 @@ public class CharacterSwitcher : MonoBehaviour
             _characters[newIndex].transform.position = _savedPosition;
 
             _currentCharacterIndex = newIndex;
+        }
+        else if (newIndex >= _characters.Length)
+        {
+            Debug.LogWarning("Character locked!");
         }
     }
 }
