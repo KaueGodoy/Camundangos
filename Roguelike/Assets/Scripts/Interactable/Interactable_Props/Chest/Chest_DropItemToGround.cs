@@ -39,5 +39,4 @@ public class Chest_DropItemToGround : Chest
         base.OpenChest();
         DropLoot();
     }
-
 }
