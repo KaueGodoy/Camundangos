@@ -64,6 +64,21 @@
       }
     ]
   },
+   {
+    "objectSlug": "Sword_Untuned",
+    "itemName": "A Desafinada",
+    "description": "Transforma notas certas em erradas",
+    "itemType": "Weapon",
+    "actionName": "Equip",
+    "itemModifier": 0,
+    "Stats": [
+      {
+        "StatType": "Attack",
+        "BaseValue": 185,
+        "StatName": "ATK"
+      }
+    ]
+  },
   {
     "objectSlug": "potion_log",
     "itemName": "Log Potion",
