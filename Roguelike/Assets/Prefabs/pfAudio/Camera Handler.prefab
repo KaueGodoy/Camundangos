@@ -47,7 +47,7 @@ MonoBehaviour:
   sounds:
   - clip: {fileID: 8300000, guid: d8c475ed0175b184591ce0cca2096fc8, type: 3}
     name: Jump
-    volume: 0.05
+    volume: 0.03
     pitch: 1
     loop: 0
     spatialBlend: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: 8121e5844b59f7c4ba6e59ef4a3d8c0d, type: 3}
+  - clip: {fileID: 8300000, guid: afac029848299ea469c50c19b25e357c, type: 3}
     name: Theme
     volume: 0.1
     pitch: 1
@@ -110,7 +110,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 22299ba1efe9e7f4ea5548fd9f76500e, type: 3}
     name: PlayerDash
-    volume: 0.1
+    volume: 0.05
     pitch: 1
     loop: 0
     spatialBlend: 0
@@ -213,10 +213,52 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
-  - clip: {fileID: 8300000, guid: da884172994a711498e02219ea1effe1, type: 3}
+  - clip: {fileID: 8300000, guid: 82dc360dc195bbc4bacbbdc2a78e1341, type: 3}
     name: OnEventTrigger
     volume: 0.25
     pitch: 1
     loop: 0
     spatialBlend: 0.5
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 79ae684c14ab0ed48b8f087a8bc6bc4a, type: 3}
+    name: OnCharacterSwitch
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 49384aef017d96b47bc25d2fa2f668da, type: 3}
+    name: BGM_Cave
+    volume: 0.25
+    pitch: 1
+    loop: 1
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 0836c971e79effa4f9ebea7156c89aa3, type: 3}
+    name: SFX_Birds
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ac5d8911f0a15334b9829118dad2ca04, type: 3}
+    name: SFX_Crow01
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 5654ff42f0cfaf947ac6bf34538b61e8, type: 3}
+    name: SFX_Crow02
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 558d22f9b9ced4142b2f945879ec2f44, type: 3}
+    name: SFX_Crow03
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
     source: {fileID: 0}

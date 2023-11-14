@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -7,13 +5,13 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-    public static AudioManager instance;
+    public static AudioManager Instance;
 
     private void Awake()
     {
-        if(instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -39,10 +37,10 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        
+
 
         PlaySound("Theme");
-        
+
         // ignore listener pause 
         // audiosource.ignoreListenerPause = true;
     }
