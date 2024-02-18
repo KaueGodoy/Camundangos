@@ -5,7 +5,7 @@ public abstract class AnimationController : MonoBehaviour, IAnimationController
     public string CurrentAnimation { get; set; }
     public Animator Animator { get; set; }
 
-    private void Awake()
+    public virtual void Awake()
     {
         Animator = GetComponent<Animator>();
     }

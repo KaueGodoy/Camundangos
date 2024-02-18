@@ -7,6 +7,7 @@ public class HandleAnimationStates : AnimationController
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private TextAsset _file;
     [SerializeField] private string[] _animation;
+    [SerializeField] private Animator _animator;
 
     //[SerializeField] private string _death;
     //[SerializeField] private string _hit;
@@ -19,6 +20,16 @@ public class HandleAnimationStates : AnimationController
     //[SerializeField] private string _fall;
     //[SerializeField] private string _walk;
     //[SerializeField] private string _idle;
+
+    public override void Awake()
+    {
+        _animator.GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        Animator = _animator;
+    }
 
     private void OnValidate()
     {
