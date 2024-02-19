@@ -21,11 +21,6 @@ public class HandleAnimationStates : AnimationController
     //[SerializeField] private string _walk;
     //[SerializeField] private string _idle;
 
-    public override void Awake()
-    {
-        _animator.GetComponent<Animator>();
-    }
-
     private void Start()
     {
         Animator = _animator;

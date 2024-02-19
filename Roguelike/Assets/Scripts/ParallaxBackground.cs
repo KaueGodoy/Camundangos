@@ -44,7 +44,7 @@ public class ParallaxBackground : MonoBehaviour
                
                 transform.position = new Vector3(_cameraTransform.position.x + offsetPositionX, transform.position.y);
 
-                Debug.Log($"Camera: {_cameraTransform.position}, Layer: {transform.position}, OffsetX: {offsetPositionX}");
+                //Debug.Log($"Camera: {_cameraTransform.position}, Layer: {transform.position}, OffsetX: {offsetPositionX}");
             }
         }
 
