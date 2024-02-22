@@ -5,7 +5,7 @@ public class GameInput : MonoBehaviour
 {
     public static GameInput Instance { get; private set; }
 
-    //public event EventHandler OnInteractAction;
+    public event EventHandler OnPlayerJump;
 
     private PlayerControls _playerControls;
 
@@ -16,7 +16,12 @@ public class GameInput : MonoBehaviour
         _playerControls = new PlayerControls();
         _playerControls.Player.Enable();
 
-        //_playerInputActions.Player.Interact.performed += Interact_performed;
+        _playerControls.Player.Jump.performed += Jump_performed;
+    }
+
+    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPlayerJump?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalized()
@@ -30,7 +35,7 @@ public class GameInput : MonoBehaviour
 
     private void OnDestroy()
     {
-        //_playerInputActions.Player.Interact.performed -= Interact_performed;
+        _playerControls.Player.Jump.performed -= Jump_performed;
     }
 
 }
