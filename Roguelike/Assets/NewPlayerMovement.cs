@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NewPlayerMovement : MonoBehaviour
 {
@@ -8,7 +9,33 @@ public class NewPlayerMovement : MonoBehaviour
 
 
     [Header("Jump")]
+    [SerializeField] private InputActionReference _playerInputAction;
     [SerializeField] private float _jumpForce = 5f;
+    public float JumpForce { get { return _jumpForce; } }
+
+    [SerializeField] private float _tapJumpMultiplier = 1f;
+    public float TapJumpMultiplier { get { return _tapJumpMultiplier; } }
+
+    [SerializeField] private float _holdJumpMultiplier = 1f;
+    public float HoldJumpMultiplier { get { return _holdJumpMultiplier; } }
+
+    [SerializeField] private float _fallMultiplier = 2.5f;
+    public float FallMultiplier { get { return _fallMultiplier; } }
+    [Space]
+    public float jumpCounter = 0f;
+    public float _baseJumpAmount = 2f;
+    public float _currentJumpAmount = 1f;
+    [Space]
+    // coyote jump
+    public float HangTime = 0.2f;
+    public float HangTimeCounter;
+    [Space]
+    // jump buffer
+    public float JumpBufferLength = 0.2f;
+    public float JumpBufferCounter;
+    [Space]
+    public bool IsJumpingMidAir = false;
+    public bool JumpRequest = false;
 
     [Header("Dash")]
     [SerializeField] private TrailRenderer tr;
@@ -69,7 +96,53 @@ public class NewPlayerMovement : MonoBehaviour
         }
     }
 
-    private void Jump()
+
+    public void Jump()
+    {
+        if (!IsGrounded()) return;
+
+        if (IsJumpingMidAir)
+        {
+            _rb.velocity = Vector2.up * JumpForce;
+            IsJumpingMidAir = false;
+        }
+        else
+        {
+            _rb.velocity = Vector2.up * JumpForce;
+        }
+
+        HangTimeCounter = 0f;
+        JumpBufferCounter = 0f;
+
+        HandleHoldJump();
+    }
+
+    private void HandleHoldJump()
+    {
+        if (_rb.velocity.y < 0f)
+        {
+            _rb.gravityScale = FallMultiplier;
+        }
+
+        _playerInputAction.action.canceled += context =>
+        {
+            if (_rb == null) return;
+
+            if (_rb.velocity.y > 0)
+            {
+                _rb.gravityScale = TapJumpMultiplier;
+            }
+
+        };
+        _playerInputAction.action.performed += context =>
+        {
+            if (_rb == null) return;
+            _rb.gravityScale = HoldJumpMultiplier;
+        };
+
+    }
+
+    private void JumpOld()
     {
         if (!IsGrounded()) return;
 
@@ -115,7 +188,7 @@ public class NewPlayerMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    private void HandleMovement()
+    private void HandleMovementOld()
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
