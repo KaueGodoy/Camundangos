@@ -4,9 +4,11 @@ using UnityEngine.InputSystem;
 
 public class NewPlayerMovement : MonoBehaviour
 {
+    public static NewPlayerMovement Instance { get; private set; }
+
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
-
+    public Vector2 MoveDir;
 
     [Header("Jump")]
     [SerializeField] private InputActionReference _playerInputAction;
@@ -42,6 +44,7 @@ public class NewPlayerMovement : MonoBehaviour
     [SerializeField] private float _dashSpeed = 5f;
     [SerializeField] private float _dashingTime = 0.2f;
     [SerializeField] private float _dashingCooldown = 1f;
+    [SerializeField] private bool _isDashing;
 
     private Coroutine _dashCoroutine;
 
@@ -49,13 +52,15 @@ public class NewPlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _jumpableGround;
 
     private BoxCollider2D _boxCollider;
-    private Rigidbody2D _rb;
+    public Rigidbody2D Rb;
 
     public float CurrentRotation { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        Instance = this;
+
+        Rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -77,6 +82,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_isDashing) return;
+
         Move();
     }
 
@@ -84,15 +91,15 @@ public class NewPlayerMovement : MonoBehaviour
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
-        Vector2 moveDir = new Vector2(inputVector.x * _moveSpeed, _rb.velocity.y);
+        MoveDir = new Vector2(inputVector.x * _moveSpeed, Rb.velocity.y);
 
-        if (moveDir != Vector2.zero)
+        if (MoveDir != Vector2.zero)
         {
-            _rb.velocity = moveDir;
+            Rb.velocity = MoveDir;
         }
         else
         {
-            _rb.velocity = Vector3.zero;
+            Rb.velocity = Vector3.zero;
         }
     }
 
@@ -103,12 +110,12 @@ public class NewPlayerMovement : MonoBehaviour
 
         if (IsJumpingMidAir)
         {
-            _rb.velocity = Vector2.up * JumpForce;
+            Rb.velocity = Vector2.up * JumpForce;
             IsJumpingMidAir = false;
         }
         else
         {
-            _rb.velocity = Vector2.up * JumpForce;
+            Rb.velocity = Vector2.up * JumpForce;
         }
 
         HangTimeCounter = 0f;
@@ -119,25 +126,25 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void HandleHoldJump()
     {
-        if (_rb.velocity.y < 0f)
+        if (Rb.velocity.y < 0f)
         {
-            _rb.gravityScale = FallMultiplier;
+            Rb.gravityScale = FallMultiplier;
         }
 
         _playerInputAction.action.canceled += context =>
         {
-            if (_rb == null) return;
+            if (Rb == null) return;
 
-            if (_rb.velocity.y > 0)
+            if (Rb.velocity.y > 0)
             {
-                _rb.gravityScale = TapJumpMultiplier;
+                Rb.gravityScale = TapJumpMultiplier;
             }
 
         };
         _playerInputAction.action.performed += context =>
         {
-            if (_rb == null) return;
-            _rb.gravityScale = HoldJumpMultiplier;
+            if (Rb == null) return;
+            Rb.gravityScale = HoldJumpMultiplier;
         };
 
     }
@@ -146,7 +153,7 @@ public class NewPlayerMovement : MonoBehaviour
     {
         if (!IsGrounded()) return;
 
-        _rb.velocity = Vector2.up * _jumpForce;
+        Rb.velocity = Vector2.up * _jumpForce;
     }
 
     private void Dash()
@@ -158,16 +165,20 @@ public class NewPlayerMovement : MonoBehaviour
     {
         // audio
 
-        float originalGravity = _rb.gravityScale;
-        _rb.gravityScale = 0f;
+        _isDashing = true;
 
-        _rb.velocity = new Vector2(CurrentRotation * _dashSpeed, 0f);
+        float originalGravity = Rb.gravityScale;
+        Rb.gravityScale = 0f;
+
+        Rb.velocity = new Vector2(CurrentRotation * _dashSpeed, 0f);
         tr.emitting = true;
 
         yield return new WaitForSeconds(_dashingTime);
 
         tr.emitting = false;
-        _rb.gravityScale = originalGravity;
+        Rb.gravityScale = originalGravity;
+
+        _isDashing = false;
 
         yield return new WaitForSeconds(_dashingCooldown);
     }
@@ -177,7 +188,7 @@ public class NewPlayerMovement : MonoBehaviour
         _dashCoroutine = StartCoroutine(DashCoroutine());
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         float extraHeightText = .1f;
 
