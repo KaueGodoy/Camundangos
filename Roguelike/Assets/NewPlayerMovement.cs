@@ -8,39 +8,37 @@ public class NewPlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
-    public Vector2 MoveDir;
+    [SerializeField] private Vector2 _moveDir;
 
     [Header("Jump")]
     [SerializeField] private InputActionReference _playerInputAction;
     [SerializeField] private float _jumpForce = 5f;
-    public float JumpForce { get { return _jumpForce; } }
-
     [SerializeField] private float _tapJumpMultiplier = 1f;
-    public float TapJumpMultiplier { get { return _tapJumpMultiplier; } }
-
     [SerializeField] private float _holdJumpMultiplier = 1f;
+    [SerializeField] private float _fallMultiplier = 2.5f;
+    [Space]
+    [SerializeField] private float _jumpCounter = 0f;
+    [SerializeField] private float _baseJumpAmount = 2f;
+    [SerializeField] private float _currentJumpAmount = 1f;
+    [Space]
+    [Tooltip("Coyote Jump")]
+    [SerializeField] private float _hangTime = 0.2f;
+    [SerializeField] private float _hangTimeCounter;
+    [Space]
+    [Tooltip("Jump buffer")]
+    [SerializeField] private float _jumpBufferLength = 0.2f;
+    [SerializeField] private float _jumpBufferCounter;
+    [Space]
+    [SerializeField] private bool _isJumpingMidAir = false;
+    [SerializeField] private bool _jumpRequest = false;
+
+    public float FallMultiplier { get { return _fallMultiplier; } }
+    public float JumpForce { get { return _jumpForce; } }
+    public float TapJumpMultiplier { get { return _tapJumpMultiplier; } }
     public float HoldJumpMultiplier { get { return _holdJumpMultiplier; } }
 
-    [SerializeField] private float _fallMultiplier = 2.5f;
-    public float FallMultiplier { get { return _fallMultiplier; } }
-    [Space]
-    public float jumpCounter = 0f;
-    public float _baseJumpAmount = 2f;
-    public float _currentJumpAmount = 1f;
-    [Space]
-    // coyote jump
-    public float HangTime = 0.2f;
-    public float HangTimeCounter;
-    [Space]
-    // jump buffer
-    public float JumpBufferLength = 0.2f;
-    public float JumpBufferCounter;
-    [Space]
-    public bool IsJumpingMidAir = false;
-    public bool JumpRequest = false;
-
     [Header("Dash")]
-    [SerializeField] private TrailRenderer tr;
+    [SerializeField] private TrailRenderer _trailRenderer;
     [SerializeField] private float _dashSpeed = 5f;
     [SerializeField] private float _dashingTime = 0.2f;
     [SerializeField] private float _dashingCooldown = 1f;
@@ -51,10 +49,14 @@ public class NewPlayerMovement : MonoBehaviour
     [Header("Ground")]
     [SerializeField] private LayerMask _jumpableGround;
 
-    private BoxCollider2D _boxCollider;
-    public Rigidbody2D Rb;
+    [Header("Sprite")]
+    [SerializeField] private bool _isFacingRight = true;
 
-    public float CurrentRotation { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
+    public float CurrentRotation { get { return _isFacingRight ? 180f : 0f; } set { } }
+    public float CurrentRotationDash { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
+
+    private BoxCollider2D _boxCollider;
+    public Rigidbody2D Rb { get; private set; }
 
     private void Awake()
     {
@@ -85,17 +87,19 @@ public class NewPlayerMovement : MonoBehaviour
         if (_isDashing) return;
 
         Move();
+        //FlipSprite();
     }
 
     public void Move()
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 
-        MoveDir = new Vector2(inputVector.x * _moveSpeed, Rb.velocity.y);
+        _moveDir = new Vector2(inputVector.x * _moveSpeed, Rb.velocity.y);
 
-        if (MoveDir != Vector2.zero)
+        if (_moveDir != Vector2.zero)
         {
-            Rb.velocity = MoveDir;
+            Rb.velocity = _moveDir;
+            FlipSprite();
         }
         else
         {
@@ -108,18 +112,18 @@ public class NewPlayerMovement : MonoBehaviour
     {
         if (!IsGrounded()) return;
 
-        if (IsJumpingMidAir)
+        if (_isJumpingMidAir)
         {
             Rb.velocity = Vector2.up * JumpForce;
-            IsJumpingMidAir = false;
+            _isJumpingMidAir = false;
         }
         else
         {
             Rb.velocity = Vector2.up * JumpForce;
         }
 
-        HangTimeCounter = 0f;
-        JumpBufferCounter = 0f;
+        _hangTimeCounter = 0f;
+        _jumpBufferCounter = 0f;
 
         HandleHoldJump();
     }
@@ -170,12 +174,12 @@ public class NewPlayerMovement : MonoBehaviour
         float originalGravity = Rb.gravityScale;
         Rb.gravityScale = 0f;
 
-        Rb.velocity = new Vector2(CurrentRotation * _dashSpeed, 0f);
-        tr.emitting = true;
+        Rb.velocity = new Vector2(CurrentRotationDash * _dashSpeed, 0f);
+        _trailRenderer.emitting = true;
 
         yield return new WaitForSeconds(_dashingTime);
 
-        tr.emitting = false;
+        _trailRenderer.emitting = false;
         Rb.gravityScale = originalGravity;
 
         _isDashing = false;
@@ -197,6 +201,18 @@ public class NewPlayerMovement : MonoBehaviour
                                                     extraHeightText, _jumpableGround);
 
         return raycastHit.collider != null;
+    }
+
+    public void FlipSprite()
+    {
+        if (_isFacingRight && _moveDir.x < 0f ||
+           !_isFacingRight && _moveDir.x > 0f)
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, CurrentRotation, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            //_cameraFollowObject.TurnCamera();
+            _isFacingRight = !_isFacingRight;
+        }
     }
 
     private void HandleMovementOld()
