@@ -8,6 +8,11 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnPlayerJump;
     public event EventHandler OnPlayerDash;
 
+    public event EventHandler OnCharacterChanged_Slot01;
+    public event EventHandler OnCharacterChanged_Slot02;
+    public event EventHandler OnCharacterChanged_Slot03;
+    public event EventHandler OnCharacterChanged_Slot04;
+
     private PlayerControls _playerControls;
 
     private void Awake()
@@ -19,6 +24,33 @@ public class GameInput : MonoBehaviour
 
         _playerControls.Player.Jump.performed += Jump_performed;
         _playerControls.Player.Dash.performed += Dash_performed;
+
+        _playerControls.UI.Enable();
+        _playerControls.UI.Character1.performed += Character1_performed;
+        _playerControls.UI.Character2.performed += Character2_performed;
+        _playerControls.UI.Character3.performed += Character3_performed;
+        _playerControls.UI.Character4.performed += Character4_performed;
+
+    }
+
+    private void Character4_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCharacterChanged_Slot04?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Character3_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCharacterChanged_Slot03?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Character2_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCharacterChanged_Slot02?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Character1_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCharacterChanged_Slot01?.Invoke(this, EventArgs.Empty);
     }
 
     private void Dash_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -44,6 +76,11 @@ public class GameInput : MonoBehaviour
     {
         _playerControls.Player.Jump.performed -= Jump_performed;
         _playerControls.Player.Dash.performed -= Dash_performed;
+
+        _playerControls.UI.Character1.performed -= Character1_performed;
+        _playerControls.UI.Character2.performed -= Character2_performed;
+        _playerControls.UI.Character3.performed -= Character3_performed;
+        _playerControls.UI.Character4.performed -= Character4_performed;
     }
 
 }
