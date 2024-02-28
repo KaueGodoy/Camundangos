@@ -1,0 +1,11 @@
+Isa_Death
+Isa_Hit
+Isa_Attack1
+Isa_Attack2
+Isa_Attack3
+Isa_Skill
+Isa_Ult
+Isa_Jump
+Isa_Fall
+Isa_Walk
+Isa_Idle

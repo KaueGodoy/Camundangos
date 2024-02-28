@@ -1,0 +1,11 @@
+Matias_Death
+Matias_Hit
+Matias_Attack1
+Matias_Attack2
+Matias_Attack3
+Matias_Skill
+Matias_Ult
+Matias_Jump
+Matias_Fall
+Matias_Walk
+Matias_Idle

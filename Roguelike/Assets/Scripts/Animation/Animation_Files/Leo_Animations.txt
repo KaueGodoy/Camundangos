@@ -1,0 +1,11 @@
+Leo_Death
+Leo_Hit
+Leo_Attack1
+Leo_Attack2
+Leo_Attack3
+Leo_Skill
+Leo_Ult
+Leo_Jump
+Leo_Fall
+Leo_Walk
+Leo_Idle
