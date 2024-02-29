@@ -17,12 +17,10 @@ public class InventoryUI : MonoBehaviour
     public Item CurrentSelectedItem { get; set; }
     public bool MenuIsActive { get; set; }
 
-    private PlayerControls _playerControls;
     private AudioManager _audioManager;
 
     private void Awake()
     {
-        _playerControls = new PlayerControls();
         ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
         _audioManager = FindObjectOfType<AudioManager>();
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
@@ -33,25 +31,18 @@ public class InventoryUI : MonoBehaviour
         _inventoryPanel.gameObject.SetActive(false);
         _sectionPanelWeapon.gameObject.SetActive(true);
         _sectionPanelConsumable.gameObject.SetActive(false);
+
+        GameInput.Instance.OnInventoryPressed += GameInput_OnInventoryPressed;
     }
 
-    private void OnEnable()
+    private void GameInput_OnInventoryPressed(object sender, System.EventArgs e)
     {
-        _playerControls.Enable();
+        ActivateMenu();
     }
 
     private void OnDisable()
     {
-        _playerControls.Disable();
         UIEventHandler.OnItemAddedToInventory -= ItemAdded;
-    }
-
-    private void Update()
-    {
-        if (_playerControls.UI.Inventory.triggered)
-        {
-            ActivateMenu();
-        }
     }
 
     public void ActivateMenu()

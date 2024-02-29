@@ -13,6 +13,10 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnCharacterChanged_Slot03;
     public event EventHandler OnCharacterChanged_Slot04;
 
+    public event EventHandler OnInventoryPressed;
+    public event EventHandler OnCharacterStatsPressed;
+    public event EventHandler OnPausePressed;
+
     private PlayerControls _playerControls;
 
     private void Awake()
@@ -31,6 +35,25 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Character3.performed += Character3_performed;
         _playerControls.UI.Character4.performed += Character4_performed;
 
+        _playerControls.UI.Inventory.performed += Inventory_performed;
+        _playerControls.UI.Stats.performed += Stats_performed;
+        _playerControls.UI.Pause.performed += Pause_performed;
+
+    }
+
+    private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPausePressed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Stats_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCharacterStatsPressed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Inventory_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInventoryPressed?.Invoke(this, EventArgs.Empty);  
     }
 
     private void Character4_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -81,6 +104,12 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Character2.performed -= Character2_performed;
         _playerControls.UI.Character3.performed -= Character3_performed;
         _playerControls.UI.Character4.performed -= Character4_performed;
+
+        _playerControls.UI.Inventory.performed -= Inventory_performed;
+        _playerControls.UI.Stats.performed -= Stats_performed;
+        _playerControls.UI.Pause.performed -= Pause_performed;
+
+
     }
 
 }

@@ -8,41 +8,32 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject _pauseMenuUI;
     [SerializeField] private RectTransform _fader;
 
-    private PlayerControls _playerControls;
-
     private void Awake()
     {
-        _playerControls = new PlayerControls();
         GameIsPaused = false;
     }
 
     private void Start()
     {
         SetFader();
+
+        GameInput.Instance.OnPausePressed += GameInput_OnPausePressed;
     }
 
-    private void OnEnable()
+    private void GameInput_OnPausePressed(object sender, System.EventArgs e)
     {
-        _playerControls.Enable();
+        HandlePauseState();
     }
 
-    private void OnDisable()
+    private void HandlePauseState()
     {
-        _playerControls.Disable();
-    }
-
-    private void Update()
-    {
-        if (_playerControls.UI.Pause.triggered)
+        if (GameIsPaused)
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            Resume();
+        }
+        else
+        {
+            Pause();
         }
     }
 

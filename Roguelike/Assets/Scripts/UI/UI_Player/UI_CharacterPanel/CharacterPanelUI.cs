@@ -7,36 +7,23 @@ public class CharacterPanelUI : MonoBehaviour
 
     public bool PanelIsActive { get; set; }
 
-    private PlayerControls _playerControls;
     private AudioManager _audioManager;
 
     private void Awake()
     {
-        _playerControls = new PlayerControls();
         _audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Start()
     {
         _characterPanel.gameObject.SetActive(false);
+
+        GameInput.Instance.OnCharacterStatsPressed += GameInput_OnCharacterStatsPressed;
     }
 
-    private void OnEnable()
+    private void GameInput_OnCharacterStatsPressed(object sender, System.EventArgs e)
     {
-        _playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _playerControls.Disable();
-    }
-
-    void Update()
-    {
-        if (_playerControls.UI.Stats.triggered)
-        {
-            ActivateMenu();
-        }
+        ActivateMenu();
     }
 
     private void ActivateMenu()
