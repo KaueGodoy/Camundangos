@@ -12,26 +12,17 @@ public class PlayerWeaponController : MonoBehaviour
     Item currentlyEquippedItem;
     IWeapon weaponEquipped;
 
-    private PlayerControls playerControls;
-
-    private void Awake()
-    {
-        playerControls = new PlayerControls();
-    }
-
     private void Start()
     {
         spawnProjectile = transform.Find("ProjectileSpawn");
         characterStats = GetComponent<PlayerController>().characterStats;
-    }
-    private void OnEnable()
-    {
-        playerControls.Enable();
+
+        GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
     }
 
-    private void OnDisable()
+    private void GameInput_OnPlayerAttack(object sender, System.EventArgs e)
     {
-        playerControls.Disable();
+        PerformWeaponAttack();
     }
 
     public void EquipWeapon(Item itemToEquip)
@@ -75,20 +66,12 @@ public class PlayerWeaponController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (playerControls.Player.Attack.triggered)
-        {
-            if (EquippedWeapon != null)
-            {
-                PerformWeaponAttack();
-            }
-        }
-    }
-
     public void PerformWeaponAttack()
     {
-        weaponEquipped.PerformAttack(CalculateDamage());
+        if (EquippedWeapon != null)
+        {
+            weaponEquipped.PerformAttack(CalculateDamage());
+        }
     }
 
     private float CalculateDamage()
