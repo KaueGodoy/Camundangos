@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
-    public GameObject playerHand;
-    public GameObject EquippedWeapon { get; set; }
+    [SerializeField] private PlayerBaseStats _playerBaseStats;
+    [SerializeField] private GameObject _playerHand;
+    [SerializeField] private CharacterPanel _characterPanel;
 
-    public CharacterPanel characterPanel;
+    public GameObject EquippedWeapon { get; set; }
+    public CharacterStats CharacterStats { get; set; }
 
     Transform spawnProjectile;
-    CharacterStats characterStats;
     Item currentlyEquippedItem;
     IWeapon weaponEquipped;
 
     private void Start()
     {
         spawnProjectile = transform.Find("ProjectileSpawn");
-        characterStats = GetComponent<PlayerController>().characterStats;
+        CharacterStats = _playerBaseStats.CharacterStats;
 
         GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
     }
@@ -31,7 +32,7 @@ public class PlayerWeaponController : MonoBehaviour
             UnequipWeapon();
 
         EquippedWeapon = Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
-       playerHand.transform.position, playerHand.transform.rotation);
+       _playerHand.transform.position, _playerHand.transform.rotation);
 
         weaponEquipped = EquippedWeapon.GetComponent<IWeapon>();
 
@@ -40,12 +41,12 @@ public class PlayerWeaponController : MonoBehaviour
             EquippedWeapon.GetComponent<IProjectileWeapon>().ProjectileSpawn = spawnProjectile;
         }
 
-        EquippedWeapon.transform.SetParent(playerHand.transform);
+        EquippedWeapon.transform.SetParent(_playerHand.transform);
 
         weaponEquipped.Stats = itemToEquip.Stats;
         currentlyEquippedItem = itemToEquip;
 
-        characterStats.AddStatBonus(itemToEquip.Stats);
+        CharacterStats.AddStatBonus(itemToEquip.Stats);
 
         UIEventHandler.ItemEquipped(itemToEquip);
         UIEventHandler.StatsChanged();
@@ -59,8 +60,8 @@ public class PlayerWeaponController : MonoBehaviour
         if (EquippedWeapon != null)
         {
             InventoryController.Instance.GiveItem(currentlyEquippedItem.ObjectSlug);
-            characterStats.RemoveStatBonus(weaponEquipped.Stats);
-            characterPanel.UnequipWeapon();
+            CharacterStats.RemoveStatBonus(weaponEquipped.Stats);
+            _characterPanel.UnequipWeapon();
             UIEventHandler.StatsChanged();
             Destroy(EquippedWeapon.transform.gameObject);
         }
@@ -76,11 +77,11 @@ public class PlayerWeaponController : MonoBehaviour
 
     private float CalculateDamage()
     {
-        float baseDamage = (characterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue())
-                             * (1 + (characterStats.GetStat(BaseStat.BaseStatType.AttackBonus).GetCalculatedStatValue() / 100))
-                             + (characterStats.GetStat(BaseStat.BaseStatType.FlatAttack).GetCalculatedStatValue());
+        float baseDamage = (CharacterStats.GetStat(BaseStat.BaseStatType.Attack).GetCalculatedStatValue())
+                             * (1 + (CharacterStats.GetStat(BaseStat.BaseStatType.AttackBonus).GetCalculatedStatValue() / 100))
+                             + (CharacterStats.GetStat(BaseStat.BaseStatType.FlatAttack).GetCalculatedStatValue());
 
-        float damageToDeal = baseDamage * (1 + characterStats.GetStat(BaseStat.BaseStatType.DamageBonus).GetCalculatedStatValue() / 100);
+        float damageToDeal = baseDamage * (1 + CharacterStats.GetStat(BaseStat.BaseStatType.DamageBonus).GetCalculatedStatValue() / 100);
 
         damageToDeal += CalculateCrit(damageToDeal);
         Debug.Log("Damage dealt: " + damageToDeal);
@@ -89,9 +90,9 @@ public class PlayerWeaponController : MonoBehaviour
 
     private float CalculateCrit(float damage)
     {
-        if (Random.value <= (characterStats.GetStat(BaseStat.BaseStatType.CritRate).GetCalculatedStatValue() / 100))
+        if (Random.value <= (CharacterStats.GetStat(BaseStat.BaseStatType.CritRate).GetCalculatedStatValue() / 100))
         {
-            float critDamage = (damage * ((characterStats.GetStat(BaseStat.BaseStatType.CritDamage).GetCalculatedStatValue()) / 100));
+            float critDamage = (damage * ((CharacterStats.GetStat(BaseStat.BaseStatType.CritDamage).GetCalculatedStatValue()) / 100));
             return critDamage;
         }
         return 0;

@@ -5,9 +5,11 @@ public class ConsumableController : MonoBehaviour
     private IConsumable _itemToConsume;
     private CharacterStats _stats;
 
+    [SerializeField] private PlayerBaseStats _playerBaseStats;
+
     private void Start()
     {
-        _stats = GetComponent<PlayerController>().characterStats;
+        _stats = _playerBaseStats.CharacterStats;
     }
 
     public void ConsumeItem(Item item)

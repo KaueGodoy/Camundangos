@@ -19,10 +19,13 @@ public class PlayerController : MonoBehaviour
     private PlayerSkill _playerSkill;
     private PlayerUlt _playerUlt;
     private PlayerDash _playerDash;
-    private PlayerHealth _playerHealth;
     private PlayerAttack _playerAttack;
     private PlayerMovement _playerMovement;
     private HandlePlayerAnimation _playerAnimation;
+
+    [Header("Dependencies")]
+    [SerializeField] private PlayerHealth _playerHealth;
+
 
     #region BaseStats
 
@@ -43,7 +46,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
-        _playerHealth = GetComponent<PlayerHealth>();
         _playerAttack = GetComponent<PlayerAttack>();
         _playerSkill = GetComponent<PlayerSkill>();
         _playerUlt = GetComponent<PlayerUlt>();

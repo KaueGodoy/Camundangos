@@ -3,11 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private PlayerHealthBar _healthBar;
+
     private AudioManager _audioManager;
+
+    [Header("Health")]
+    [SerializeField] private float _currentHealth = 0;
+    [SerializeField] private float _maxHealth = 3;
+
+    public static bool IsAlive { get; set; }
+    public float MaxHealth { get { return _maxHealth; } }
+    public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
+
+    [Header("Hit")]
+    public float HitCooldown = 0.3f;
+    public float HitTimer = 0.0f;
+    public static bool IsHit = false;
+    private readonly float deathAnimationTime = 0.8f;
 
     private void Awake()
     {
-        _healthBar = GetComponent<PlayerHealthBar>();
         _audioManager = FindObjectOfType<AudioManager>();
     }
 
@@ -17,31 +32,10 @@ public class PlayerHealth : MonoBehaviour
         IsAlive = true;
     }
 
-    #region Health
-
-    [Header("Health")]
-
-    public static bool IsAlive;
-
-    [SerializeField] private float _currentHealth = 0;
-    [SerializeField] private float _maxHealth = 3;
-
-    private PlayerHealthBar _healthBar;
-
-    public float MaxHealth { get { return _maxHealth; } }
-    public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
-
     public void UpdatePlayerHealthBar()
     {
         _healthBar.UpdateHealthBar(MaxHealth, CurrentHealth);
     }
-
-    [Header("Hit")]
-
-    public float HitCooldown = 0.3f;
-    public float HitTimer = 0.0f;
-    public static bool IsHit = false;
-    private readonly float deathAnimationTime = 0.8f;
 
     public void TakeDamage(float damageAmount)
     {
@@ -61,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
             Invoke("RestartLevel", deathAnimationTime);
         }
     }
+
     public void Heal(float healAmount)
     {
         _audioManager.PlaySound("Hit");
@@ -83,8 +78,6 @@ public class PlayerHealth : MonoBehaviour
             HitTimer = 0f;
         }
     }
-
-    #endregion
 
     #region Level
 

@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class CharacterPanel : MonoBehaviour
 {
     //[Header("Health")]
-    [SerializeField] private PlayerController player;
+    [SerializeField] private PlayerWeaponController _playerWeaponController;
+    [SerializeField] private PlayerBaseStats _playerBaseStats;
+
+    //[SerializeField] private PlayerController player;
     //[SerializeField] private TextMeshProUGUI health;
     //[SerializeField] private Image healthFill;
 
@@ -27,7 +30,6 @@ public class CharacterPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI weaponNameText;
     [SerializeField] private TextMeshProUGUI weaponStatPrefab;
 
-    private PlayerWeaponController PlayerWeaponController;
     private List<TextMeshProUGUI> weaponStatTexts = new List<TextMeshProUGUI>();
 
     private AudioManager _audioManager;
@@ -35,8 +37,6 @@ public class CharacterPanel : MonoBehaviour
     private void Awake()
     {
         _audioManager = FindObjectOfType<AudioManager>();
-
-        PlayerWeaponController = player.GetComponent<PlayerWeaponController>();
         //UIEventHandler.OnPlayerHealthChanged += UpdateHealth;
         UIEventHandler.OnStatsChanged += UpdateStats;
         UIEventHandler.OnItemEquipped += UpdateEquippedWeapon;
@@ -62,7 +62,7 @@ public class CharacterPanel : MonoBehaviour
     private void InitializeStats()
     {
         Debug.Log("Stats init");
-        for (int i = 0; i < player.characterStats.stats.Count; i++)
+        for (int i = 0; i < _playerBaseStats.CharacterStats.stats.Count; i++)
         {
             playerStatTexts.Add(Instantiate(playerStatPrefab));
             playerStatTexts[i].transform.SetParent(playerStatPanel);
@@ -73,10 +73,10 @@ public class CharacterPanel : MonoBehaviour
 
     private void UpdateStats()
     {
-        for (int i = 0; i < player.characterStats.stats.Count; i++)
+        for (int i = 0; i < _playerBaseStats.CharacterStats.stats.Count; i++)
         {
-            playerStatTexts[i].text = player.characterStats.stats[i].StatName + ": " +
-                player.characterStats.stats[i].GetCalculatedStatValue().ToString();
+            playerStatTexts[i].text = _playerBaseStats.CharacterStats.stats[i].StatName + ": " +
+                _playerBaseStats.CharacterStats.stats[i].GetCalculatedStatValue().ToString();
         }
     }
 
@@ -95,7 +95,7 @@ public class CharacterPanel : MonoBehaviour
 
     public void UnequipWeapon()
     {
-        if (PlayerWeaponController.EquippedWeapon != null)
+        if (_playerWeaponController.EquippedWeapon != null)
         {
             weaponNameText.text = " ";
             weaponIcon.sprite = defaultWeaponSprite;
