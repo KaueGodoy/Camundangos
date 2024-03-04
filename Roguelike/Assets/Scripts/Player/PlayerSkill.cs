@@ -5,12 +5,6 @@ public class PlayerSkill : MonoBehaviour
     private PlayerCooldowns _playerCooldowns;
     private AudioManager _audioManager;
 
-    private void Awake()
-    {
-        _playerCooldowns = GetComponent<PlayerCooldowns>();
-        _audioManager = FindObjectOfType<AudioManager>();
-    }
-
     [Header("Skill")]
     public Transform SkillSpawnPoint;
     public GameObject Projectile;
@@ -22,16 +16,40 @@ public class PlayerSkill : MonoBehaviour
     private float _skillAttackDelay = 0.4f;
     private bool _isSkillPerformed = false;
 
-    public bool skillAttackRequest = false;
+    public bool SkillAttackRequest { get; set; }
+
     public static bool skillAttackAnimation = false;
+
+    private void Awake()
+    {
+        _playerCooldowns = GetComponent<PlayerCooldowns>();
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    private void Start()
+    {
+        GameInput.Instance.OnPlayerSkill += GameInput_OnPlayerSkill;
+        SkillAttackRequest = false;
+    }
+
+    private void GameInput_OnPlayerSkill(object sender, System.EventArgs e)
+    {
+        SkillAttackRequest = true;
+        PerformSkill();
+    }
+
+    private void Update()
+    {
+        UpdateSkillTimer();
+    }
 
     public void PerformSkill()
     {
         if (_playerCooldowns.offCooldown)
         {
-            if (skillAttackRequest)
+            if (SkillAttackRequest)
             {
-                skillAttackRequest = false;
+                SkillAttackRequest = false;
                 skillAttackAnimation = true;
 
                 if (!_isSkillPerformed)
@@ -40,12 +58,14 @@ public class PlayerSkill : MonoBehaviour
 
                     Invoke("InstantiateSkill", _skillAttackDelay - 0.1f);
                     Invoke("SkillComplete", _skillAttackDelay);
+
+                    Debug.Log("Skill performed");
                 }
             }
         }
         else
         {
-            skillAttackRequest = false;
+            SkillAttackRequest = false;
         }
     }
 

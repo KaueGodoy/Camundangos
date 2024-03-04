@@ -1,63 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.InputSystem;
 
 public class PlayerCooldowns : MonoBehaviour
 {
-    private PlayerAttack _playerAttack;
-    private float fillAmountFull = 1f;
-    private PlayerControls playerControls;
+    [SerializeField] private PlayerAttack _playerAttack;
+    private PlayerControls _playerControls;
 
-    Color ultCooldownColor = new Color32(164, 164, 164, 255);
-    //Color ultDefaultColor = new Color32(255, 255, 255, 168);
-    Color ultDefaultColor = new Color32(255, 150, 150, 168);
-
-    private void Awake()
-    {
-        playerControls = new PlayerControls();
-        _playerAttack = GetComponent<PlayerAttack>();
-        offCooldown = true;
-
-    }
-
-    private void Start()
-    {
-        ResetCooldown();
-        UltResetCooldown();
-    }
-
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Disable();
-    }
-
-    private void Update()
-    {
-
-        if (playerControls.Player.Skill.triggered)
-        {
-            triggerCooldown = true;
-        }
-
-
-        if (playerControls.Player.Ult.triggered)
-        {
-            ultTriggerCooldown = true;
-        }
-
-    }
-
-    private void FixedUpdate()
-    {
-        TriggerCooldown();
-        UltTriggerCooldown();
-    }
+    private float _fillAmountFull = 1f;
 
     #region Skill
 
@@ -76,6 +26,54 @@ public class PlayerCooldowns : MonoBehaviour
 
     Color cooldownColor = new Color32(164, 164, 164, 255);
     Color defaultColor = new Color32(255, 255, 255, 168);
+
+    private Color _ultCooldownColor = new Color32(164, 164, 164, 255);
+    private Color _ultDefaultColor = new Color32(255, 150, 150, 168);
+
+    private void Awake()
+    {
+        _playerControls = new PlayerControls();
+        offCooldown = true;
+    }
+
+    private void Start()
+    {
+        ResetCooldown();
+        UltResetCooldown();
+
+        GameInput.Instance.OnPlayerSkill += GameInput_OnPlayerSkill;
+    }
+
+    private void GameInput_OnPlayerSkill(object sender, System.EventArgs e)
+    {
+        triggerCooldown = true;
+    }
+
+    private void OnEnable()
+    {
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
+    }
+
+    private void Update()
+    {
+
+        if (_playerControls.Player.Ult.triggered)
+        {
+            ultTriggerCooldown = true;
+        }
+
+    }
+
+    private void FixedUpdate()
+    {
+        TriggerCooldown();
+        UltTriggerCooldown();
+    }
 
     public void TriggerCooldown()
     {
@@ -119,7 +117,7 @@ public class PlayerCooldowns : MonoBehaviour
         cooldownTimer = cooldownValue;
         target = cooldownTimer / cooldownValue;
         cooldownText.gameObject.SetActive(false);
-        foregroundImage.fillAmount = fillAmountFull;
+        foregroundImage.fillAmount = _fillAmountFull;
         foregroundImage.gameObject.SetActive(true);
     }
 
@@ -152,7 +150,7 @@ public class PlayerCooldowns : MonoBehaviour
 
             float convertedCooldownTimer = Mathf.Round(ultCooldownTimer * Mathf.Pow(10, numberOfDecimals)) / Mathf.Pow(10, numberOfDecimals);
 
-            ultIconImage.color = ultCooldownColor;
+            ultIconImage.color = _ultCooldownColor;
 
             //iconImage.gameObject.SetActive(false);
             //foregroundImage.gameObject.SetActive(false);
@@ -171,13 +169,13 @@ public class PlayerCooldowns : MonoBehaviour
 
     public void UltResetCooldown()
     {
-        ultIconImage.color = ultDefaultColor;
+        ultIconImage.color = _ultDefaultColor;
         ultIconImage.gameObject.SetActive(true);
         ultTriggerCooldown = false;
         ultCooldownTimer = ultCooldownValue;
         ultTarget = ultCooldownTimer / ultCooldownValue;
         ultCooldownText.gameObject.SetActive(false);
-        ultForegroundImage.fillAmount = fillAmountFull;
+        ultForegroundImage.fillAmount = _fillAmountFull;
         ultForegroundImage.gameObject.SetActive(true);
     }
 

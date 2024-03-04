@@ -8,6 +8,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnPlayerJump;
     public event EventHandler OnPlayerDash;
     public event EventHandler OnPlayerAttack;
+    public event EventHandler OnPlayerSkill;
 
     public event EventHandler OnCharacterChanged_Slot01;
     public event EventHandler OnCharacterChanged_Slot02;
@@ -30,6 +31,7 @@ public class GameInput : MonoBehaviour
         _playerControls.Player.Jump.performed += Jump_performed;
         _playerControls.Player.Dash.performed += Dash_performed;
         _playerControls.Player.Attack.performed += Attack_performed;
+        _playerControls.Player.Skill.performed += Skill_performed;
 
         _playerControls.UI.Enable();
         _playerControls.UI.Character1.performed += Character1_performed;
@@ -41,6 +43,11 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Stats.performed += Stats_performed;
         _playerControls.UI.Pause.performed += Pause_performed;
 
+    }
+
+    private void Skill_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPlayerSkill?.Invoke(this, EventArgs.Empty);
     }
 
     private void Attack_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -60,7 +67,7 @@ public class GameInput : MonoBehaviour
 
     private void Inventory_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnInventoryPressed?.Invoke(this, EventArgs.Empty);  
+        OnInventoryPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void Character4_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -107,6 +114,7 @@ public class GameInput : MonoBehaviour
         _playerControls.Player.Jump.performed -= Jump_performed;
         _playerControls.Player.Dash.performed -= Dash_performed;
         _playerControls.Player.Attack.performed -= Attack_performed;
+        _playerControls.Player.Skill.performed -= Skill_performed;
 
         _playerControls.UI.Character1.performed -= Character1_performed;
         _playerControls.UI.Character2.performed -= Character2_performed;

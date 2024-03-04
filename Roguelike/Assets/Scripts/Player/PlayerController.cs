@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private PlayerControls _playerControls;
 
-    private PlayerSkill _playerSkill;
-    private PlayerUlt _playerUlt;
+    //private PlayerSkill _playerSkill;
+    //private PlayerUlt _playerUlt;
     private PlayerDash _playerDash;
     private PlayerAttack _playerAttack;
     private PlayerMovement _playerMovement;
@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerAttack = GetComponent<PlayerAttack>();
-        _playerSkill = GetComponent<PlayerSkill>();
-        _playerUlt = GetComponent<PlayerUlt>();
+        //_playerSkill = GetComponent<PlayerSkill>();
+        //_playerUlt = GetComponent<PlayerUlt>();
         _playerDash = GetComponent<PlayerDash>();
         _playerAnimation = GetComponent<HandlePlayerAnimation>();
 
@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour
         {
             ProcessInput();
             _playerAttack.PerformAttack();
-            _playerSkill.PerformSkill();
-            _playerUlt.PerformUlt();
+            //_playerSkill.PerformSkill();
+            //_playerUlt.PerformUlt();
             _playerHealth.UpdatePlayerHealthBar();
         }
 
@@ -182,12 +182,12 @@ public class PlayerController : MonoBehaviour
 
         if (_playerControls.Player.Skill.triggered)
         {
-            _playerSkill.skillAttackRequest = true;
+            //_playerSkill.skillAttackRequest = true;
         }
 
         if (_playerControls.Player.Ult.triggered)
         {
-            _playerUlt.ultAttackRequest = true;
+            //_playerUlt.ultAttackRequest = true;
         }
 
         if (_playerControls.Player.Dash.triggered && _playerDash.CanDash)
@@ -223,8 +223,8 @@ public class PlayerController : MonoBehaviour
     {
         _playerHealth.UpdateHitTimer();
         _playerAttack.UpdateAttackTimer();
-        _playerSkill.UpdateSkillTimer();
-        _playerUlt.UpdateUltimer();
+        //_playerSkill.UpdateSkillTimer();
+        //_playerUlt.UpdateUltimer();
     }
     #endregion
 
@@ -252,12 +252,13 @@ public class PlayerController : MonoBehaviour
             //FlipPlayerFirePoints();
         }
     }
-    private void FlipPlayerFirePoints()
-    {
-        _playerSkill.SkillSpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
-        _playerSkill.SpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
-        _playerUlt.UltSpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
-    }
+
+    //private void FlipPlayerFirePoints()
+    //{
+    //    _playerSkill.SkillSpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
+    //    _playerSkill.SpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
+    //    _playerUlt.UltSpawnPoint.Rotate(_playerSkill.SkillSpawnPoint.rotation.x, 180f, _playerSkill.SkillSpawnPoint.rotation.z);
+    //}
 
 
 
