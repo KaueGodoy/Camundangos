@@ -78,13 +78,13 @@ public class HandlePlayerAnimation : MonoBehaviour
             }
         }
         // skill
-        else if (PlayerSkill.skillAttackAnimation)
+        else if (PlayerSkill.SkillAttackAnimation)
         {
             ChangeAnimationState(DerildoSkill);
 
         }
         // ult
-        else if (PlayerUlt.ultAttackAnimation)
+        else if (PlayerUlt.UltAttackAnimation)
         {
             ChangeAnimationState(DerildoUlt);
         }

@@ -9,6 +9,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnPlayerDash;
     public event EventHandler OnPlayerAttack;
     public event EventHandler OnPlayerSkill;
+    public event EventHandler OnPlayerUlt;
 
     public event EventHandler OnCharacterChanged_Slot01;
     public event EventHandler OnCharacterChanged_Slot02;
@@ -32,6 +33,7 @@ public class GameInput : MonoBehaviour
         _playerControls.Player.Dash.performed += Dash_performed;
         _playerControls.Player.Attack.performed += Attack_performed;
         _playerControls.Player.Skill.performed += Skill_performed;
+        _playerControls.Player.Ult.performed += Ult_performed;
 
         _playerControls.UI.Enable();
         _playerControls.UI.Character1.performed += Character1_performed;
@@ -43,6 +45,11 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Stats.performed += Stats_performed;
         _playerControls.UI.Pause.performed += Pause_performed;
 
+    }
+
+    private void Ult_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPlayerUlt?.Invoke(this, EventArgs.Empty);
     }
 
     private void Skill_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -115,6 +122,8 @@ public class GameInput : MonoBehaviour
         _playerControls.Player.Dash.performed -= Dash_performed;
         _playerControls.Player.Attack.performed -= Attack_performed;
         _playerControls.Player.Skill.performed -= Skill_performed;
+        _playerControls.Player.Ult.performed -= Ult_performed;
+
 
         _playerControls.UI.Character1.performed -= Character1_performed;
         _playerControls.UI.Character2.performed -= Character2_performed;

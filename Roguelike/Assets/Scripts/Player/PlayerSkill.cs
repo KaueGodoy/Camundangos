@@ -17,8 +17,7 @@ public class PlayerSkill : MonoBehaviour
     private bool _isSkillPerformed = false;
 
     public bool SkillAttackRequest { get; set; }
-
-    public static bool skillAttackAnimation = false;
+    public static bool SkillAttackAnimation { get; set; }
 
     private void Awake()
     {
@@ -50,7 +49,7 @@ public class PlayerSkill : MonoBehaviour
             if (SkillAttackRequest)
             {
                 SkillAttackRequest = false;
-                skillAttackAnimation = true;
+                SkillAttackAnimation = true;
 
                 if (!_isSkillPerformed)
                 {
@@ -82,12 +81,12 @@ public class PlayerSkill : MonoBehaviour
 
     public void UpdateSkillTimer()
     {
-        if (skillAttackAnimation)
+        if (SkillAttackAnimation)
             _skillAttackTimer += Time.deltaTime;
 
         if (_skillAttackTimer > _skillAttackDelay)
         {
-            skillAttackAnimation = false;
+            SkillAttackAnimation = false;
             _skillAttackTimer = 0f;
         }
     }

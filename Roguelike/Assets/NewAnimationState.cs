@@ -65,13 +65,13 @@ public class NewAnimationState : AnimationController
             }
         }
         // skill
-        else if (PlayerSkill.skillAttackAnimation)
+        else if (PlayerSkill.SkillAttackAnimation)
         {
             ChangeAnimationState(_animation[5]);
 
         }
         // ult
-        else if (PlayerUlt.ultAttackAnimation)
+        else if (PlayerUlt.UltAttackAnimation)
         {
             ChangeAnimationState(_animation[6]);
         }

@@ -5,32 +5,49 @@ public class PlayerUlt : MonoBehaviour
     private PlayerCooldowns _playerCooldowns;
     private AudioManager _audioManager;
 
-    private void Awake()
-    {
-        _playerCooldowns = GetComponent<PlayerCooldowns>();
-        _audioManager = FindObjectOfType<AudioManager>();
-    }
-
     [Header("Ult")]
-    public Transform UltSpawnPoint;
-    public GameObject Projectile;
+    [SerializeField] private Transform UltSpawnPoint;
+    [SerializeField] private GameObject Projectile;
 
     private float _ultAttackDelay = 0.4f;
     private float _ultAttackTimer = 0.0f;
 
     private bool _isUltPerformed = false;
 
-    public bool ultAttackRequest = false;
-    public static bool ultAttackAnimation = false;   
+    public bool UltAttackRequest { get; set; }
+    public static bool UltAttackAnimation { get; set; }
+
+    private void Awake()
+    {
+        _playerCooldowns = GetComponent<PlayerCooldowns>();
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    private void Start()
+    {
+        GameInput.Instance.OnPlayerUlt += GameInput_OnPlayerUlt;
+        UltAttackRequest = false;
+    }
+
+    private void GameInput_OnPlayerUlt(object sender, System.EventArgs e)
+    {
+        UltAttackRequest = true;
+        PerformUlt();
+    }
+
+    private void Update()
+    {
+        UpdateUltTimer();
+    }
 
     public void PerformUlt()
     {
         if (_playerCooldowns.ultOffCooldown)
         {
-            if (ultAttackRequest)
+            if (UltAttackRequest)
             {
-                ultAttackRequest = false;
-                ultAttackAnimation = true;
+                UltAttackRequest = false;
+                UltAttackAnimation = true;
 
                 if (!_isUltPerformed)
                 {
@@ -43,7 +60,7 @@ public class PlayerUlt : MonoBehaviour
         }
         else
         {
-            ultAttackRequest = false;
+            UltAttackRequest = false;
         }
     }
 
@@ -58,14 +75,14 @@ public class PlayerUlt : MonoBehaviour
         _isUltPerformed = false;
     }
 
-    public void UpdateUltimer()
+    public void UpdateUltTimer()
     {
-        if (ultAttackAnimation)
+        if (UltAttackAnimation)
             _ultAttackTimer += Time.deltaTime;
 
         if (_ultAttackTimer > _ultAttackDelay)
         {
-            ultAttackAnimation = false;
+            UltAttackAnimation = false;
             _ultAttackTimer = 0f;
         }
     }
