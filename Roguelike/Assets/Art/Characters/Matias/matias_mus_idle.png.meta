@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a047728da39d3e4cb3b3f0d9540a54f
-      internalID: -1743292385
+      spriteID: 5301c7949f32cfd4a8522a28c11f12ac
+      internalID: 900159526
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f57c7b60f06d8348a892765f827bdd9
-      internalID: -32728633
+      spriteID: 8d67ed474f463a541b76953e6f8a653c
+      internalID: -447826369
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b93575351a3bc85419df391b19789d5c
-      internalID: -1996689638
+      spriteID: 38f892d381075e34f8c605979eeceb16
+      internalID: 1525007077
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3a34afc19c1e4c45ba643cbed315706
-      internalID: 14512212
+      spriteID: 6b17300749b47cf419e65124c014cbd7
+      internalID: -1480718053
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa78441d93d35a1438abf271fbac9513
-      internalID: -1364149022
+      spriteID: 71bd4d225ad667f47a14e28c1bd47001
+      internalID: -981126420
       vertices: []
       indices: 
       edges: []
@@ -236,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a55518d33e1ddc847a08554897a20227
-      internalID: 349818027
+      spriteID: a92a66a2400f7884da453f1795167031
+      internalID: 1753299982
       vertices: []
       indices: 
       edges: []
@@ -253,12 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      matias_mus_idle_0: -1743292385
-      matias_mus_idle_1: -32728633
-      matias_mus_idle_2: -1996689638
-      matias_mus_idle_3: 14512212
-      matias_mus_idle_4: -1364149022
-      matias_mus_idle_5: 349818027
+      matias_mus_idle_0: 900159526
+      matias_mus_idle_1: -447826369
+      matias_mus_idle_2: 1525007077
+      matias_mus_idle_3: -1480718053
+      matias_mus_idle_4: -981126420
+      matias_mus_idle_5: 1753299982
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

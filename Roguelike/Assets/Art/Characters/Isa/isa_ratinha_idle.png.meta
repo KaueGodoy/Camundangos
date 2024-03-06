@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c183d33f908e01b4e9bc2258319935a8
-      internalID: 77510816
+      spriteID: a064a06316a727746b36397688f69f80
+      internalID: -1648835083
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2447e71be1b237149820149f0b53b7fd
-      internalID: 186087913
+      spriteID: 047154f15640f5a438cf3650b5e40bea
+      internalID: -409389279
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c66added7a181b94c96d910707ee4b1a
-      internalID: -1567981609
+      spriteID: 025617707ffe0db40b8d35298e5b27fd
+      internalID: 509779447
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cda57cddc95e7e94dafd2c3f17b37656
-      internalID: 279820872
+      spriteID: bbdf31ba397b8a14db26d7626a8c1244
+      internalID: -44646933
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 933cd43979e010e4091df06c3da40d06
-      internalID: -701433407
+      spriteID: 961e9b7af17a2d04ab02d24e7d0b8564
+      internalID: 193551695
       vertices: []
       indices: 
       edges: []
@@ -236,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f224fd4d2c08904eaada93a6c1a1db9
-      internalID: -645773671
+      spriteID: a876a78ca84a7564885baf653ac61f3b
+      internalID: -1589526973
       vertices: []
       indices: 
       edges: []
@@ -253,12 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      isa_ratinha_idle_0: 77510816
-      isa_ratinha_idle_1: 186087913
-      isa_ratinha_idle_2: -1567981609
-      isa_ratinha_idle_3: 279820872
-      isa_ratinha_idle_4: -701433407
-      isa_ratinha_idle_5: -645773671
+      isa_ratinha_idle_0: -1648835083
+      isa_ratinha_idle_1: -409389279
+      isa_ratinha_idle_2: 509779447
+      isa_ratinha_idle_3: -44646933
+      isa_ratinha_idle_4: 193551695
+      isa_ratinha_idle_5: -1589526973
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

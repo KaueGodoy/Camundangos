@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1944f92c929d1904196a91e2a8c2ba6c
+guid: d19d7edda7b554d45889f9a64769f948
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffb54b4977616b445b8502c180ebb1a8
-      internalID: 1306440709
+      spriteID: 0db411e3a36574247b6482234a579e1f
+      internalID: -367083211
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ce45062b5dbc4744b65de650080bc25
-      internalID: -495833542
+      spriteID: 3e41830e8f4554547a77a9fa2e3fbf68
+      internalID: -952395994
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32b92fd12c92eef409f0d12b22d9e311
-      internalID: 608733247
+      spriteID: 1bcfd9ec9a061844eb2d53b15b7fa4be
+      internalID: 664813191
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f5dc7e212d2a8644b41662543b1eea3
-      internalID: -1697240021
+      spriteID: 9f7ccc6df81dee948ad81e117d2ffde3
+      internalID: 1785124693
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 197d9c71fc9fac344874d698bedc4925
-      internalID: 578316669
+      spriteID: 57df5812828b2f944b2580d30f51e2db
+      internalID: 143651213
       vertices: []
       indices: 
       edges: []
@@ -236,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b28c2f417376b54eb6efbad7809d8b9
-      internalID: -11533528
+      spriteID: 3a8a43ac599e9e343a91f5238ae8da8a
+      internalID: -1062060067
       vertices: []
       indices: 
       edges: []
@@ -257,8 +257,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 357a0b26d6937464eb7f88434eb3f03a
-      internalID: -1975905704
+      spriteID: 09c7f7467bf9c3443a07a81b344eee80
+      internalID: -1419216389
       vertices: []
       indices: 
       edges: []
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7f43376c1973a342b3f7a5ccc589854
-      internalID: -1138871845
+      spriteID: 87765925d8926334c997a0d5da276e9e
+      internalID: 590204420
       vertices: []
       indices: 
       edges: []
@@ -299,8 +299,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67af7630c8e0a284cac925f19d01142e
-      internalID: 176089335
+      spriteID: bb24f5b1ac215cd439e7c0bdb29ea3fa
+      internalID: 426240273
       vertices: []
       indices: 
       edges: []
@@ -320,8 +320,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b82bb3a86b8a2841a16d42d52b33dd4
-      internalID: -880838944
+      spriteID: 8d76b40661d98b048810eb387fed0cd3
+      internalID: 1798014961
       vertices: []
       indices: 
       edges: []
@@ -337,16 +337,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      marcelo_rato_walk_0: 1306440709
-      marcelo_rato_walk_1: -495833542
-      marcelo_rato_walk_2: 608733247
-      marcelo_rato_walk_3: -1697240021
-      marcelo_rato_walk_4: 578316669
-      marcelo_rato_walk_5: -11533528
-      marcelo_rato_walk_6: -1975905704
-      marcelo_rato_walk_7: -1138871845
-      marcelo_rato_walk_8: 176089335
-      marcelo_rato_walk_9: -880838944
+      marcelo_rato_walk_0: -367083211
+      marcelo_rato_walk_1: -952395994
+      marcelo_rato_walk_2: 664813191
+      marcelo_rato_walk_3: 1785124693
+      marcelo_rato_walk_4: 143651213
+      marcelo_rato_walk_5: -1062060067
+      marcelo_rato_walk_6: -1419216389
+      marcelo_rato_walk_7: 590204420
+      marcelo_rato_walk_8: 426240273
+      marcelo_rato_walk_9: 1798014961
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
