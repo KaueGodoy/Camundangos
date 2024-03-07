@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3ae9f720eae33243bf77ffd0f4b32a4
-      internalID: -13670162
+      spriteID: 09d06a7b5ffc80f42b4d9184b1dca792
+      internalID: 189316012
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b351461ca4b22584f9cddb7e9e611f90
-      internalID: -607052737
+      spriteID: a00e9adc4c791a04389c69520a0f5777
+      internalID: -1429205623
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7362486c336690547919b22391082b18
-      internalID: 831479770
+      spriteID: 3b80f74e3b168b84f8acce21d4e18efe
+      internalID: 456031314
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 434692accbd53fc45b73c126cbc1f2a7
-      internalID: 1908666133
+      spriteID: 4d10b72400b2e084c9560f8de57bf870
+      internalID: -1046747626
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa266b741f9529f4488967f5c4f4d0bd
-      internalID: 817470554
+      spriteID: fd27a2b0fd859aa47a4723fb3879c225
+      internalID: 2110630908
       vertices: []
       indices: 
       edges: []
@@ -236,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b605e3c6798ab594ab47fe236a14bc90
-      internalID: -628762724
+      spriteID: 8a7362b078b22234aba14298c4503e2c
+      internalID: 53836393
       vertices: []
       indices: 
       edges: []
@@ -253,12 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      leo_chumbinho_idle_0: -13670162
-      leo_chumbinho_idle_1: -607052737
-      leo_chumbinho_idle_2: 831479770
-      leo_chumbinho_idle_3: 1908666133
-      leo_chumbinho_idle_4: 817470554
-      leo_chumbinho_idle_5: -628762724
+      leo_chumbinho_idle_0: 189316012
+      leo_chumbinho_idle_1: -1429205623
+      leo_chumbinho_idle_2: 456031314
+      leo_chumbinho_idle_3: -1046747626
+      leo_chumbinho_idle_4: 2110630908
+      leo_chumbinho_idle_5: 53836393
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

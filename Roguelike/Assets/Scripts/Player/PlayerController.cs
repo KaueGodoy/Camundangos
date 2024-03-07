@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     // REFACTOR > input, movement, animation, stats
-    public CharacterStats characterStats;
-
     [Header("Mobile")]
     [SerializeField] private GameObject _mobileUI;
     private bool isMobileUIActive;
@@ -16,43 +14,23 @@ public class PlayerController : MonoBehaviour
 
     private PlayerControls _playerControls;
 
-    //private PlayerSkill _playerSkill;
-    //private PlayerUlt _playerUlt;
     private PlayerDash _playerDash;
-    private PlayerAttack _playerAttack;
     private PlayerMovement _playerMovement;
     private HandlePlayerAnimation _playerAnimation;
 
     [Header("Dependencies")]
     [SerializeField] private PlayerHealth _playerHealth;
-
-
-    #region BaseStats
-
-    [Header("Base Stats")]
-    public float baseHealth = 22000f;
-    public float baseAttack = 10;
-    public float baseAttackPercent = 0;
-    public float baseAttackFlat = 0;
-    public float baseDamageBonus = 0;
-    public float baseCritRate = 5;
-    public float baseCritDamage = 50;
-    public float baseDefense = 15;
-    public float baseAttackSpeed = 5;
-
-    #endregion
-
+    [SerializeField] private PlayerAttack _playerAttack;
 
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
-        _playerAttack = GetComponent<PlayerAttack>();
+        //_playerAttack = GetComponent<PlayerAttack>();
         //_playerSkill = GetComponent<PlayerSkill>();
         //_playerUlt = GetComponent<PlayerUlt>();
         _playerDash = GetComponent<PlayerDash>();
         _playerAnimation = GetComponent<HandlePlayerAnimation>();
 
-        characterStats = new CharacterStats(baseHealth, baseAttack, baseAttackPercent, baseAttackFlat, baseDamageBonus, baseCritRate, baseCritDamage, baseDefense, baseAttackSpeed);
         Debug.Log("Player init");
 
         _playerControls = new PlayerControls();
