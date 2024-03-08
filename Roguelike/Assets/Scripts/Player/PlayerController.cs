@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     // REFACTOR > input, movement, animation, stats
-    [Header("Mobile")]
-    [SerializeField] private GameObject _mobileUI;
-    private bool isMobileUIActive;
+    //[Header("Mobile")]
+    //[SerializeField] private GameObject _mobileUI;
+    //private bool isMobileUIActive;
 
     [Header("Camera")]
     [SerializeField] private CameraFollowObject _cameraFollowObject;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
-        _playerHealth.UpdatePlayerHealthBar();
+        //_playerHealth.UpdatePlayerHealthBar();
 
         // handling input through events
         //playerControls.Player.Jump.performed += _ => Jump2();
@@ -66,10 +66,10 @@ public class PlayerController : MonoBehaviour
         if (PlayerHealth.IsAlive)
         {
             ProcessInput();
-            _playerAttack.PerformAttack();
+            //_playerAttack.PerformAttack();
             //_playerSkill.PerformSkill();
             //_playerUlt.PerformUlt();
-            _playerHealth.UpdatePlayerHealthBar();
+            //_playerHealth.UpdatePlayerHealthBar();
         }
 
         if (_playerMovement.Rigidbody.velocity.y < _fallSpeedYDampingChangeThreshold
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
         if (_playerControls.Player.Attack.triggered)
         {
-            _playerAttack.attackRequest = true;
+            //_playerAttack.attackRequest = true;
         }
 
         if (_playerControls.Player.Skill.triggered)
@@ -173,23 +173,23 @@ public class PlayerController : MonoBehaviour
             _playerDash.DashRequest = true;
         }
 
-        // damage test DELETE
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            _playerHealth.TakeDamage(DamageAmount);
-        }
+        //// damage test DELETE
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    _playerHealth.TakeDamage(DamageAmount);
+        //}
 
-        // heal test DELETE
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            _playerHealth.Heal(HealAmount);
-        }
+        //// heal test DELETE
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    _playerHealth.Heal(HealAmount);
+        //}
 
-        if (_playerControls.UI.Mobile.triggered)
-        {
-            isMobileUIActive = !isMobileUIActive;
-            _mobileUI.SetActive(isMobileUIActive);
-        }
+        //if (_playerControls.UI.Mobile.triggered)
+        //{
+        //    isMobileUIActive = !isMobileUIActive;
+        //    _mobileUI.SetActive(isMobileUIActive);
+        //}
 
         //Debug.Log(CurrentRotation);
     }
@@ -199,8 +199,8 @@ public class PlayerController : MonoBehaviour
     #region Timers
     private void UpdateTimers()
     {
-        _playerHealth.UpdateHitTimer();
-        _playerAttack.UpdateAttackTimer();
+        //_playerHealth.UpdateHitTimer();
+        //_playerAttack.UpdateAttackTimer();
         //_playerSkill.UpdateSkillTimer();
         //_playerUlt.UpdateUltimer();
     }
@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _playerHealth.TakeDamage(damage);
+        //_playerHealth.TakeDamage(damage);
         Debug.Log("Player taking damage is broken in the enemy scripts");
         DamagePopup.Create(transform.position + Vector3.right + Vector3.up, (int)damage);
     }

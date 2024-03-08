@@ -3,44 +3,35 @@ using UnityEngine;
 
 public class OneWayPlatform : MonoBehaviour
 {
-    private BoxCollider2D _playerCollider;
-    private BoxCollider2D _platformCollider;
-    private PlayerControls _playerControls;
-
-    private GameObject _currentOneWayPlatform;
-
     [SerializeField] private GameObject downButton;
     [SerializeField] private float _collisionDisableTime = 0.5f;
+
+    private BoxCollider2D _playerCollider;
+    private BoxCollider2D _platformCollider;
+
+    private GameObject _currentOneWayPlatform;
 
     private void Awake()
     {
         _playerCollider = GetComponent<BoxCollider2D>();
-        _playerControls = new PlayerControls();
     }
 
     private void Start()
     {
+        GameInput.Instance.OnPlayerDescendPlatform += GameInput_OnPlayerDescendPlatform;
         downButton.SetActive(false);
     }
 
-    private void OnEnable()
+    private void GameInput_OnPlayerDescendPlatform(object sender, System.EventArgs e)
     {
-        _playerControls.Enable();
+        DescendPlatform();
     }
 
-    private void OnDisable()
+    private void DescendPlatform()
     {
-        _playerControls.Disable();
-    }
-
-    private void Update()
-    {
-        if (_playerControls.Player.Down.triggered)
+        if (_currentOneWayPlatform != null)
         {
-            if (_currentOneWayPlatform != null)
-            {
-                StartCoroutine(DisableCollision());
-            }
+            StartCoroutine(DisableCollision());
         }
     }
 
@@ -69,7 +60,6 @@ public class OneWayPlatform : MonoBehaviour
         Physics2D.IgnoreCollision(_playerCollider, _platformCollider);
         yield return new WaitForSeconds(_collisionDisableTime);
         Physics2D.IgnoreCollision(_playerCollider, _platformCollider, false);
-
     }
 
 }
