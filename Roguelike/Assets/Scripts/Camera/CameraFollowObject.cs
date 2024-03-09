@@ -3,15 +3,15 @@ using UnityEngine;
 public class CameraFollowObject : MonoBehaviour
 {
     [SerializeField] private Transform _playerTransform;
-    private PlayerController _player;
-
     [SerializeField] private float _flipYRotationTime = 0.5f;
+
+    private NewPlayerMovement _playerMovement;
     private bool _isFacingRight;
 
     private void Awake()
     {
-        _player = _playerTransform.gameObject.GetComponent<PlayerController>();
-        _isFacingRight = _player.IsFacingRight;
+        _playerMovement = _playerTransform.GetComponent<NewPlayerMovement>();
+        _isFacingRight = _playerMovement.IsFacingRight;
     }
 
     private void Update()

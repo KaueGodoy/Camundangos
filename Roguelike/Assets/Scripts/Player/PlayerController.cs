@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private GameObject _mobileUI;
     //private bool isMobileUIActive;
 
-    [Header("Camera")]
-    [SerializeField] private CameraFollowObject _cameraFollowObject;
-    private float _fallSpeedYDampingChangeThreshold;
+    //[Header("Camera")]
+    //[SerializeField] private CameraFollowObject _cameraFollowObject;
+    //private float _fallSpeedYDampingChangeThreshold;
 
     private PlayerControls _playerControls;
 
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         //playerControls.Player.Jump.performed += _ => Jump2();
         //ReadInput();
 
-        _fallSpeedYDampingChangeThreshold = CameraManager.Instance.FallSpeedYDampingChangeThreshold;
+        //_fallSpeedYDampingChangeThreshold = CameraManager.Instance.FallSpeedYDampingChangeThreshold;
     }
 
     private void OnEnable()
@@ -72,24 +72,24 @@ public class PlayerController : MonoBehaviour
             //_playerHealth.UpdatePlayerHealthBar();
         }
 
-        if (_playerMovement.Rigidbody.velocity.y < _fallSpeedYDampingChangeThreshold
-            && !CameraManager.Instance.IsLerpingYDamping
-            && !CameraManager.Instance.LerpedFromPlayerFalling)
-        {
-            CameraManager.Instance.LerpYDamping(true);
-            //Debug.Log("Lerp true");
+        //if (_playerMovement.Rigidbody.velocity.y < _fallSpeedYDampingChangeThreshold
+        //    && !CameraManager.Instance.IsLerpingYDamping
+        //    && !CameraManager.Instance.LerpedFromPlayerFalling)
+        //{
+        //    CameraManager.Instance.LerpYDamping(true);
+        //    //Debug.Log("Lerp true");
 
-        }
+        //}
 
-        if (_playerMovement.Rigidbody.velocity.y >= 0f
-            && !CameraManager.Instance.IsLerpingYDamping
-            && CameraManager.Instance.LerpedFromPlayerFalling)
-        {
-            CameraManager.Instance.LerpedFromPlayerFalling = false;
-            CameraManager.Instance.LerpYDamping(false);
-            //Debug.Log("Lerp false");
+        //if (_playerMovement.Rigidbody.velocity.y >= 0f
+        //    && !CameraManager.Instance.IsLerpingYDamping
+        //    && CameraManager.Instance.LerpedFromPlayerFalling)
+        //{
+        //    CameraManager.Instance.LerpedFromPlayerFalling = false;
+        //    CameraManager.Instance.LerpYDamping(false);
+        //    //Debug.Log("Lerp false");
 
-        }
+        //}
 
     }
 
@@ -153,20 +153,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (_playerControls.Player.Attack.triggered)
-        {
-            //_playerAttack.attackRequest = true;
-        }
-
-        if (_playerControls.Player.Skill.triggered)
-        {
-            //_playerSkill.skillAttackRequest = true;
-        }
-
-        if (_playerControls.Player.Ult.triggered)
-        {
-            //_playerUlt.ultAttackRequest = true;
-        }
+     
 
         if (_playerControls.Player.Dash.triggered && _playerDash.CanDash)
         {
@@ -224,7 +211,7 @@ public class PlayerController : MonoBehaviour
             // flipping using rotation
             Vector3 rotator = new Vector3(transform.rotation.x, CurrentRotation, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
-            _cameraFollowObject.TurnCamera();
+            //_cameraFollowObject.TurnCamera();
             IsFacingRight = !IsFacingRight;
 
             //FlipPlayerFirePoints();

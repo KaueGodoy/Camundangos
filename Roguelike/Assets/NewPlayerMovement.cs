@@ -6,6 +6,10 @@ public class NewPlayerMovement : MonoBehaviour
 {
     public static NewPlayerMovement Instance { get; private set; }
 
+    [Header("Camera")]
+    [SerializeField] private CameraFollowObject _cameraFollowObject;
+    private float _fallSpeedYDampingChangeThreshold;
+
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private Vector2 _moveDir;
@@ -51,11 +55,12 @@ public class NewPlayerMovement : MonoBehaviour
 
     [Header("Sprite")]
     [SerializeField] private bool _isFacingRight = true;
-
+    public bool IsFacingRight { get { return _isFacingRight; } private set { } }
     public float CurrentRotation { get { return _isFacingRight ? 180f : 0f; } set { } }
     public float CurrentRotationDash { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
 
     private BoxCollider2D _boxCollider;
+
     public Rigidbody2D Rb { get; private set; }
 
     private void Awake()
@@ -64,6 +69,8 @@ public class NewPlayerMovement : MonoBehaviour
 
         Rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
+
+        _fallSpeedYDampingChangeThreshold = CameraManager.Instance.FallSpeedYDampingChangeThreshold;
     }
 
     private void Start()
@@ -82,12 +89,77 @@ public class NewPlayerMovement : MonoBehaviour
         Jump();
     }
 
+    private void Update()
+    {
+        ProcessMovementStates();
+    }
+
     private void FixedUpdate()
     {
         if (_isDashing) return;
 
         Move();
-        //FlipSprite();
+        HandleCameraLerp();
+    }
+
+    private void ProcessMovementStates()
+    {
+        if (IsGrounded() && !_playerInputAction.action.triggered)
+        {
+            _jumpCounter = 0f;
+            _isJumpingMidAir = false;
+            _currentJumpAmount = _baseJumpAmount;
+        }
+
+        if (IsGrounded())
+        {
+            _hangTimeCounter = _hangTime;
+        }
+        else
+        {
+            _hangTimeCounter -= Time.deltaTime;
+        }
+
+        if (_playerInputAction.action.triggered)
+        {
+            _jumpBufferCounter = _jumpBufferLength;
+
+            if (_jumpBufferCounter > 0f && (_hangTimeCounter > 0f || _jumpCounter < _currentJumpAmount))
+            {
+                _jumpRequest = true;
+                _jumpCounter++;
+            }
+        }
+        else
+        {
+            if (_jumpBufferCounter > -2f)
+            {
+                _jumpBufferCounter -= Time.deltaTime;
+
+            }
+        }
+    }
+
+    private void HandleCameraLerp()
+    {
+
+        if (Rb.velocity.y < _fallSpeedYDampingChangeThreshold
+            && !CameraManager.Instance.IsLerpingYDamping
+            && !CameraManager.Instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.Instance.LerpYDamping(true);
+            //Debug.Log("Lerp true");
+
+        }
+
+        if (Rb.velocity.y >= 0f
+            && !CameraManager.Instance.IsLerpingYDamping
+            && CameraManager.Instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.Instance.LerpedFromPlayerFalling = false;
+            CameraManager.Instance.LerpYDamping(false);
+            //Debug.Log("Lerp false");
+        }
     }
 
     public void Move()
@@ -107,25 +179,27 @@ public class NewPlayerMovement : MonoBehaviour
         }
     }
 
-
     public void Jump()
     {
-        if (!IsGrounded()) return;
-
-        if (_isJumpingMidAir)
+        if (_jumpRequest)
         {
-            Rb.velocity = Vector2.up * JumpForce;
-            _isJumpingMidAir = false;
-        }
-        else
-        {
-            Rb.velocity = Vector2.up * JumpForce;
-        }
+            if (_isJumpingMidAir)
+            {
+                Rb.velocity = Vector2.up * JumpForce;
+                _isJumpingMidAir = false;
+            }
+            else
+            {
+                Rb.velocity = Vector2.up * JumpForce;
+            }
 
-        _hangTimeCounter = 0f;
-        _jumpBufferCounter = 0f;
+            _hangTimeCounter = 0f;
+            _jumpBufferCounter = 0f;
 
-        HandleHoldJump();
+            _jumpRequest = false;
+
+            HandleHoldJump();
+        }
     }
 
     private void HandleHoldJump()
@@ -151,13 +225,6 @@ public class NewPlayerMovement : MonoBehaviour
             Rb.gravityScale = HoldJumpMultiplier;
         };
 
-    }
-
-    private void JumpOld()
-    {
-        if (!IsGrounded()) return;
-
-        Rb.velocity = Vector2.up * _jumpForce;
     }
 
     private void Dash()
@@ -210,18 +277,8 @@ public class NewPlayerMovement : MonoBehaviour
         {
             Vector3 rotator = new Vector3(transform.rotation.x, CurrentRotation, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
-            //_cameraFollowObject.TurnCamera();
+            _cameraFollowObject.TurnCamera();
             _isFacingRight = !_isFacingRight;
         }
     }
-
-    private void HandleMovementOld()
-    {
-        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, 0f);
-
-        transform.position += moveDir * _moveSpeed;
-    }
-
 }
