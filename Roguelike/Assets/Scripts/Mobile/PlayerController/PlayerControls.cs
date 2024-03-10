@@ -281,6 +281,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a780a3c1-8895-48eb-94c2-70222e56c562"",
+                    ""path"": ""<VirtualMouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a6dd0999-e95d-41c1-b7d7-54d5fb3b3f0f"",
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
