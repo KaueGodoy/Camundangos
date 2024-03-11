@@ -60,6 +60,7 @@ public class NewPlayerMovement : MonoBehaviour
     public float CurrentRotationDash { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
 
     private BoxCollider2D _boxCollider;
+    private bool _canJump;
 
     public Rigidbody2D Rb { get; private set; }
 
@@ -104,13 +105,12 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void ProcessMovementStates()
     {
-        if (IsGrounded() && !_playerInputAction.action.triggered)
-        {
-            _jumpCounter = 0f;
-            _isJumpingMidAir = false;
-            _currentJumpAmount = _baseJumpAmount;
-        }
+        ProcessHangTime();
+        ResetJump();
+    }
 
+    private void ProcessHangTime()
+    {
         if (IsGrounded())
         {
             _hangTimeCounter = _hangTime;
@@ -118,25 +118,6 @@ public class NewPlayerMovement : MonoBehaviour
         else
         {
             _hangTimeCounter -= Time.deltaTime;
-        }
-
-        if (_playerInputAction.action.triggered)
-        {
-            _jumpBufferCounter = _jumpBufferLength;
-
-            if (_jumpBufferCounter > 0f && (_hangTimeCounter > 0f || _jumpCounter < _currentJumpAmount))
-            {
-                _jumpRequest = true;
-                _jumpCounter++;
-            }
-        }
-        else
-        {
-            if (_jumpBufferCounter > -2f)
-            {
-                _jumpBufferCounter -= Time.deltaTime;
-
-            }
         }
     }
 
@@ -165,8 +146,10 @@ public class NewPlayerMovement : MonoBehaviour
     public void Move()
     {
         Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-
         _moveDir = new Vector2(inputVector.x * _moveSpeed, Rb.velocity.y);
+
+        // NORMALIZED FIXED
+        //_moveDir = _moveDir.normalized;
 
         if (_moveDir != Vector2.zero)
         {
@@ -181,7 +164,40 @@ public class NewPlayerMovement : MonoBehaviour
 
     public void Jump()
     {
+        _jumpRequest = true;
+
+        ProcessJump();
+        PerformJump();
+    }
+
+    private void ProcessJump()
+    {
         if (_jumpRequest)
+        {
+            _jumpBufferCounter = _jumpBufferLength;
+
+            if (_jumpBufferCounter > 0f && (_hangTimeCounter > 0f || _jumpCounter < _currentJumpAmount))
+            {
+                _canJump = true;
+                _jumpCounter++;
+            }
+            else
+            {
+                _canJump = false;
+            }
+        }
+        else
+        {
+            if (_jumpBufferCounter > -2f)
+            {
+                _jumpBufferCounter -= Time.deltaTime;
+            }
+        }
+    }
+
+    private void PerformJump()
+    {
+        if (_canJump)
         {
             if (_isJumpingMidAir)
             {
@@ -193,12 +209,12 @@ public class NewPlayerMovement : MonoBehaviour
                 Rb.velocity = Vector2.up * JumpForce;
             }
 
+            HandleHoldJump();
+
             _hangTimeCounter = 0f;
             _jumpBufferCounter = 0f;
 
             _jumpRequest = false;
-
-            HandleHoldJump();
         }
     }
 
@@ -224,7 +240,14 @@ public class NewPlayerMovement : MonoBehaviour
             if (Rb == null) return;
             Rb.gravityScale = HoldJumpMultiplier;
         };
+    }
+    private void ResetJump()
+    {
+        if (!IsGrounded()) return;
 
+        _jumpCounter = 0f;
+        _isJumpingMidAir = false;
+        _currentJumpAmount = _baseJumpAmount;
     }
 
     private void Dash()

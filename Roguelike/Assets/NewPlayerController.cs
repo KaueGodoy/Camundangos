@@ -36,6 +36,7 @@ public class NewPlayerController : MonoBehaviour
             _playerHealth.Heal(2);
         }
 
+        // DELETE
         if (Input.GetKeyDown(KeyCode.T))
         {
             isMobileUIActive = !isMobileUIActive;
@@ -43,6 +44,51 @@ public class NewPlayerController : MonoBehaviour
         }
 
     }
+
+    //private void ProcessMechanics()
+    //{
+    //    if (_playerMovement.IsGrounded() && !_playerControls.Player.Jump.triggered)
+    //    {
+    //        _playerMovement.jumpCounter = 0f;
+    //        _playerMovement.IsJumpingMidAir = false;
+    //        _playerMovement._currentJumpAmount = _playerMovement._baseJumpAmount;
+    //    }
+
+    //    if (_playerMovement.IsGrounded())
+    //    {
+    //        _playerMovement.HangTimeCounter = _playerMovement.HangTime;
+    //    }
+    //    else
+    //    {
+    //        _playerMovement.HangTimeCounter -= Time.deltaTime;
+    //    }
+
+    //    if (_playerControls.Player.Jump.triggered)
+    //    {
+    //        _playerMovement.JumpBufferCounter = _playerMovement.JumpBufferLength;
+
+    //        if (_playerMovement.JumpBufferCounter > 0f && (_playerMovement.HangTimeCounter > 0f || _playerMovement.jumpCounter < _playerMovement._currentJumpAmount))
+    //        {
+    //            _playerMovement.JumpRequest = true;
+    //            _playerMovement.jumpCounter++;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (_playerMovement.JumpBufferCounter > -2f)
+    //        {
+    //            _playerMovement.JumpBufferCounter -= Time.deltaTime;
+
+    //        }
+    //    }
+
+
+
+    //    if (_playerControls.Player.Dash.triggered && _playerDash.CanDash)
+    //    {
+    //        _playerDash.DashRequest = true;
+    //    }
+    //}
 
     private void FixedUpdate()
     {
