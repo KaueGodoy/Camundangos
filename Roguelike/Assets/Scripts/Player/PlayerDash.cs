@@ -15,7 +15,7 @@ public class PlayerDash : MonoBehaviour
 
     private Coroutine _dashCoroutine;
 
-    public bool CanDash = true;
+    public bool CanDash { get; set; }
     public bool DashRequest = false;
     public bool IsDashing;
 
@@ -25,6 +25,7 @@ public class PlayerDash : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _audioManager = FindObjectOfType<AudioManager>();
+        CanDash = true;
     }
 
     private IEnumerator Dash()

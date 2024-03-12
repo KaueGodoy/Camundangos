@@ -14,7 +14,7 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void Start()
     {
-        _currentCharacter = _derildoVisual;
+        _currentCharacter = _marceloVisual;
         _currentCharacter.SetActive(true);
 
         GameInput.Instance.OnCharacterChanged_Slot01 += GameInput_OnCharacterChanged_Slot01;

@@ -12,11 +12,13 @@ public class NewPlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
-    [SerializeField] private Vector2 _moveDir;
+    public Vector2 MoveDirection { get; private set; }
 
     [Header("Jump")]
-    [SerializeField] private InputActionReference _playerInputAction;
+    [SerializeField] private InputActionReference _jumpInputAction;
     [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float _defaultJumpForce = 12f;
+    [SerializeField] private float _jumpMultiplier = 1.2f;
     [SerializeField] private float _tapJumpMultiplier = 1f;
     [SerializeField] private float _holdJumpMultiplier = 1f;
     [SerializeField] private float _fallMultiplier = 2.5f;
@@ -35,9 +37,10 @@ public class NewPlayerMovement : MonoBehaviour
     [Space]
     [SerializeField] private bool _isJumpingMidAir = false;
     [SerializeField] private bool _jumpRequest = false;
+    [SerializeField] private bool _canJump;
 
     public float FallMultiplier { get { return _fallMultiplier; } }
-    public float JumpForce { get { return _jumpForce; } }
+    public float JumpForce { get { return _jumpForce; } private set { _jumpForce = value; } }
     public float TapJumpMultiplier { get { return _tapJumpMultiplier; } }
     public float HoldJumpMultiplier { get { return _holdJumpMultiplier; } }
 
@@ -47,6 +50,8 @@ public class NewPlayerMovement : MonoBehaviour
     [SerializeField] private float _dashingTime = 0.2f;
     [SerializeField] private float _dashingCooldown = 1f;
     [SerializeField] private bool _isDashing;
+    [SerializeField] private bool _dashRequest;
+    [SerializeField] private bool _canDash = true;
 
     private Coroutine _dashCoroutine;
 
@@ -60,7 +65,6 @@ public class NewPlayerMovement : MonoBehaviour
     public float CurrentRotationDash { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
 
     private BoxCollider2D _boxCollider;
-    private bool _canJump;
 
     public Rigidbody2D Rb { get; private set; }
 
@@ -78,6 +82,8 @@ public class NewPlayerMovement : MonoBehaviour
     {
         GameInput.Instance.OnPlayerJump += GameInput_OnPlayerJump;
         GameInput.Instance.OnPlayerDash += GameInput_OnPlayerDash;
+
+        _canDash = true;
     }
 
     private void GameInput_OnPlayerDash(object sender, System.EventArgs e)
@@ -97,16 +103,17 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isDashing) return;
-
-        Move();
         HandleCameraLerp();
+
+        if (_isDashing) return;
+        Move();
     }
 
     private void ProcessMovementStates()
     {
         ProcessHangTime();
         ResetJump();
+        HandleFalling();
     }
 
     private void ProcessHangTime()
@@ -118,6 +125,18 @@ public class NewPlayerMovement : MonoBehaviour
         else
         {
             _hangTimeCounter -= Time.deltaTime;
+        }
+    }
+
+    private void SetJumpSpeed()
+    {
+        if (_jumpCounter == 0f)
+        {
+            JumpForce = _defaultJumpForce * _jumpMultiplier;
+        }
+        else
+        {
+            JumpForce = _defaultJumpForce;
         }
     }
 
@@ -143,17 +162,19 @@ public class NewPlayerMovement : MonoBehaviour
         }
     }
 
+    public Vector2 InputVector;
+
     public void Move()
     {
-        Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
-        _moveDir = new Vector2(inputVector.x * _moveSpeed, Rb.velocity.y);
+        InputVector = GameInput.Instance.GetMovementVectorNormalized();
+        MoveDirection = new Vector2(InputVector.x * _moveSpeed, Rb.velocity.y);
 
-        // NORMALIZED FIXED
+        //NORMALIZED FIXED
         //_moveDir = _moveDir.normalized;
 
-        if (_moveDir != Vector2.zero)
+        if (MoveDirection != Vector2.zero)
         {
-            Rb.velocity = _moveDir;
+            Rb.velocity = MoveDirection;
             FlipSprite();
         }
         else
@@ -175,6 +196,8 @@ public class NewPlayerMovement : MonoBehaviour
         if (_jumpRequest)
         {
             _jumpBufferCounter = _jumpBufferLength;
+
+            SetJumpSpeed();
 
             if (_jumpBufferCounter > 0f && (_hangTimeCounter > 0f || _jumpCounter < _currentJumpAmount))
             {
@@ -209,8 +232,6 @@ public class NewPlayerMovement : MonoBehaviour
                 Rb.velocity = Vector2.up * JumpForce;
             }
 
-            HandleHoldJump();
-
             _hangTimeCounter = 0f;
             _jumpBufferCounter = 0f;
 
@@ -220,12 +241,7 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void HandleHoldJump()
     {
-        if (Rb.velocity.y < 0f)
-        {
-            Rb.gravityScale = FallMultiplier;
-        }
-
-        _playerInputAction.action.canceled += context =>
+        _jumpInputAction.action.canceled += context =>
         {
             if (Rb == null) return;
 
@@ -235,12 +251,21 @@ public class NewPlayerMovement : MonoBehaviour
             }
 
         };
-        _playerInputAction.action.performed += context =>
+        _jumpInputAction.action.performed += context =>
         {
             if (Rb == null) return;
             Rb.gravityScale = HoldJumpMultiplier;
         };
     }
+
+    private void HandleFalling()
+    {
+        if (Rb.velocity.y < 0f)
+        {
+            Rb.gravityScale = FallMultiplier;
+        }
+    }
+
     private void ResetJump()
     {
         if (!IsGrounded()) return;
@@ -252,13 +277,26 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        CallDashCoroutine();
+        if (_canDash)
+        {
+            _dashRequest = true;
+            PerformDash();
+        }
+    }
+
+    private void PerformDash()
+    {
+        if (_dashRequest)
+        {
+            CallDashCoroutine();
+            _dashRequest = false;
+        }
     }
 
     private IEnumerator DashCoroutine()
     {
         // audio
-
+        _canDash = false;
         _isDashing = true;
 
         float originalGravity = Rb.gravityScale;
@@ -275,6 +313,7 @@ public class NewPlayerMovement : MonoBehaviour
         _isDashing = false;
 
         yield return new WaitForSeconds(_dashingCooldown);
+        _canDash = true;
     }
 
     private void CallDashCoroutine()
@@ -295,8 +334,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     public void FlipSprite()
     {
-        if (_isFacingRight && _moveDir.x < 0f ||
-           !_isFacingRight && _moveDir.x > 0f)
+        if (_isFacingRight && MoveDirection.x < 0f ||
+           !_isFacingRight && MoveDirection.x > 0f)
         {
             Vector3 rotator = new Vector3(transform.rotation.x, CurrentRotation, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);

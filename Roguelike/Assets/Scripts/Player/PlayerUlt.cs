@@ -53,7 +53,7 @@ public class PlayerUlt : MonoBehaviour
                 {
                     _isUltPerformed = true;
 
-                    Invoke("InstantiateUlt", _ultAttackDelay - 0.1f);
+                    InstantiateUlt();
                     Invoke("UltComplete", _ultAttackDelay);
                 }
             }

@@ -151,10 +151,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleHoldJump()
     {
-        if (Rigidbody.velocity.y < 0f)
-        {
-            Rigidbody.gravityScale = FallMultiplier;
-        }
+        //if (Rigidbody.velocity.y < 0f)
+        //{
+        //    Rigidbody.gravityScale = FallMultiplier;
+        //}
 
         _playerInputAction.action.canceled += context =>
         {

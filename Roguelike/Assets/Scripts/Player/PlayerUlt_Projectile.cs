@@ -19,7 +19,7 @@ public class PlayerUlt_Projectile : MonoBehaviour
 
     private void Awake()
     {
-        _isFacingRight = FindObjectOfType<PlayerController>().IsFacingRight;
+        _isFacingRight = NewPlayerMovement.Instance.IsFacingRight;
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _audioManager = FindObjectOfType<AudioManager>();

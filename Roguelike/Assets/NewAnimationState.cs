@@ -7,6 +7,8 @@ public class NewAnimationState : AnimationController
     [SerializeField] private Animator _animator;
     [SerializeField] private TextAsset _file;
     [SerializeField] private string[] _animation;
+    [SerializeField] private Vector2 _playerMoveDirection;
+
 
     private void Start()
     {
@@ -25,6 +27,7 @@ public class NewAnimationState : AnimationController
 
     private void Update()
     {
+        _playerMoveDirection.x = NewPlayerMovement.Instance.InputVector.x;
         UpdateAnimationState();
     }
 
@@ -86,7 +89,7 @@ public class NewAnimationState : AnimationController
             ChangeAnimationState(_animation[8]);
         }
         // move
-        else if (GameInput.Instance.GetMovementVectorNormalized().x > 0f || GameInput.Instance.GetMovementVectorNormalized().x < 0f)
+        else if (_playerMoveDirection.x > 0f || _playerMoveDirection.x < 0f)
         {
             ChangeAnimationState(_animation[9]);
         }
@@ -97,5 +100,7 @@ public class NewAnimationState : AnimationController
         }
     }
 
+
+    
    
 }
