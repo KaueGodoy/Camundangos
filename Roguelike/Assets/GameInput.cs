@@ -12,6 +12,8 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnPlayerUlt;
     public event EventHandler OnPlayerDescendPlatform;
 
+    public event EventHandler OnPlayerInteract;
+
     public event EventHandler OnCharacterChanged_Slot01;
     public event EventHandler OnCharacterChanged_Slot02;
     public event EventHandler OnCharacterChanged_Slot03;
@@ -37,7 +39,6 @@ public class GameInput : MonoBehaviour
         _playerControls.Player.Ult.performed += Ult_performed;
         _playerControls.Player.Down.performed += Down_performed;
 
-
         _playerControls.UI.Enable();
         _playerControls.UI.Character1.performed += Character1_performed;
         _playerControls.UI.Character2.performed += Character2_performed;
@@ -48,6 +49,12 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Stats.performed += Stats_performed;
         _playerControls.UI.Pause.performed += Pause_performed;
 
+        _playerControls.UI.Interact.performed += Interact_performed;
+    }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnPlayerInteract?.Invoke(this, EventArgs.Empty);
     }
 
     private void Down_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -141,6 +148,7 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Inventory.performed -= Inventory_performed;
         _playerControls.UI.Stats.performed -= Stats_performed;
         _playerControls.UI.Pause.performed -= Pause_performed;
+        _playerControls.UI.Interact.performed -= Interact_performed;
 
 
     }

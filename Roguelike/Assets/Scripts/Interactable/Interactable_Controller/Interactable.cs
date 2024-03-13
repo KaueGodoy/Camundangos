@@ -3,37 +3,37 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour, IInteractable
 {
     private InteractableController _interactableController;
-    private PlayerControls _playerControls;
 
     public AudioManager AudioManager { get; set; }
 
     public string Name { get; set; }
 
     private bool _canInteract;
+    private bool _interactionRequest;
+
     public bool CanInteract { get { return _canInteract; } set { } }
 
     public virtual void Awake()
     {
         _interactableController = FindObjectOfType<InteractableController>();
         AudioManager = FindObjectOfType<AudioManager>();
-        _playerControls = new PlayerControls();
 
         SetName("Default name");
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        _playerControls.Enable();
+        GameInput.Instance.OnPlayerInteract += GameInput_OnPlayerInteract;
     }
 
-    private void OnDisable()
+    private void GameInput_OnPlayerInteract(object sender, System.EventArgs e)
     {
-        _playerControls.Disable();
+        EnableInteraction();
     }
 
     private void Update()
     {
-        if (_canInteract) EnableInteraction();
+        if (_canInteract) InitiateInteraction();
     }
 
     public virtual void InitiateInteraction()
@@ -53,7 +53,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
 
     public virtual void EnableInteraction()
     {
-        if (_playerControls.UI.Interact.triggered)
+        if (_canInteract)
         {
             ExecuteInteraction();
         }
@@ -82,7 +82,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController player = collision.GetComponent<PlayerController>();
+        NewPlayerController player = collision.GetComponent<NewPlayerController>();
 
         if (player != null)
         {
@@ -92,7 +92,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
 
     public virtual void OnTriggerExit2D(Collider2D collision)
     {
-        PlayerController player = collision.GetComponent<PlayerController>();
+        NewPlayerController player = collision.GetComponent<NewPlayerController>();
 
         if (player != null)
         {
@@ -102,7 +102,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
 
     public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+        NewPlayerController player = collision.gameObject.GetComponent<NewPlayerController>();
 
         if (player != null)
         {
@@ -112,7 +112,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
 
     public virtual void OnCollisionExit2D(Collision2D collision)
     {
-        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+        NewPlayerController player = collision.gameObject.GetComponent<NewPlayerController>();
 
         if (player != null)
         {
