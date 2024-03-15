@@ -299,6 +299,8 @@ public class NewPlayerMovement : MonoBehaviour
         _canDash = false;
         _isDashing = true;
 
+        AudioManager.Instance.PlaySound("PlayerDash");
+
         float originalGravity = Rb.gravityScale;
         Rb.gravityScale = 0f;
 

@@ -3,12 +3,13 @@ using UnityEngine;
 public class Staff : Weapon, IProjectileWeapon
 {
     public Transform ProjectileSpawn { get; set; }
-    private Fireball _fireball;
+    public Fireball Fireball { get; set; }
 
     public override void Awake()
     {
         base.Awake();
-        _fireball = Resources.Load<Fireball>("Projectiles/Fireball");
+        
+        Fireball = Resources.Load<Fireball>("Projectiles/Fireball");
     }
 
     public override void PerformAttack(float damage)
@@ -19,7 +20,7 @@ public class Staff : Weapon, IProjectileWeapon
 
     public void CastProjectile()
     {
-        Fireball fireballInstance = (Fireball)Instantiate(_fireball, ProjectileSpawn.position, ProjectileSpawn.rotation);
+        Fireball fireballInstance = Instantiate(Fireball, ProjectileSpawn.position, ProjectileSpawn.rotation);
         fireballInstance.Direction = ProjectileSpawn.right;
     }
 }

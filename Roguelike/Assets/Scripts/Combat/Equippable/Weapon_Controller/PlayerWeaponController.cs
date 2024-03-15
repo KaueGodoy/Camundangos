@@ -4,18 +4,18 @@ public class PlayerWeaponController : MonoBehaviour
 {
     [SerializeField] private PlayerBaseStats _playerBaseStats;
     [SerializeField] private GameObject _playerHand;
+    [SerializeField] private Transform _projectileSpawn;
     [SerializeField] private CharacterPanel _characterPanel;
 
     public GameObject EquippedWeapon { get; set; }
     public CharacterStats CharacterStats { get; set; }
 
-    Transform spawnProjectile;
     Item currentlyEquippedItem;
     IWeapon weaponEquipped;
 
     private void Start()
     {
-        spawnProjectile = transform.Find("ProjectileSpawn");
+        //_projectileSpawn = transform.Find("ProjectileSpawn");
         CharacterStats = _playerBaseStats.CharacterStats;
 
         GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
@@ -38,7 +38,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (EquippedWeapon.GetComponent<IProjectileWeapon>() != null)
         {
-            EquippedWeapon.GetComponent<IProjectileWeapon>().ProjectileSpawn = spawnProjectile;
+            EquippedWeapon.GetComponent<IProjectileWeapon>().ProjectileSpawn = _projectileSpawn;
         }
 
         EquippedWeapon.transform.SetParent(_playerHand.transform);

@@ -31,10 +31,10 @@ public abstract class Interactable : MonoBehaviour, IInteractable
         EnableInteraction();
     }
 
-    private void Update()
-    {
-        if (_canInteract) InitiateInteraction();
-    }
+    //private void Update()
+    //{
+    //    if (_canInteract) InitiateInteraction();
+    //}
 
     public virtual void InitiateInteraction()
     {
