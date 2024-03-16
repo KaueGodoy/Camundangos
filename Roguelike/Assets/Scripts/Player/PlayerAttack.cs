@@ -11,25 +11,36 @@ public class PlayerAttack : MonoBehaviour
     public float timeSinceAttack = 0.0f;
     public float attackStringReset = 0.8f;
 
-    public static int CurrentAttack = 0;
+    public static int CurrentAttack { get; set; }
 
-    public bool attackRequest = false;
+    public bool AttackRequest { get; set; }
     public bool attackString = false;
 
     public static bool AttackAnimation = false;
-    private bool isAttacking = false;
+    private bool IsAttacking { get; set; }
+
+    private void Start()
+    {
+        GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
+    }
+
+    private void GameInput_OnPlayerAttack(object sender, System.EventArgs e)
+    {
+        AttackRequest = true;
+        PerformAttack();
+    }
 
     public void PerformAttack()
     {
-        if (attackRequest)
+        if (AttackRequest)
         {
-            attackRequest = false;
+            AttackRequest = false;
             AttackAnimation = true;
             attackString = true;
 
-            if (!isAttacking)
+            if (!IsAttacking)
             {
-                isAttacking = true;
+                IsAttacking = true;
 
                 UpdateAttackString();
 
@@ -38,6 +49,11 @@ public class PlayerAttack : MonoBehaviour
                 ResetAttackString();
             }
         }
+    }
+
+    private void Update()
+    {
+        UpdateAttackTimer();
     }
 
     public void UpdateAttackTimer()
@@ -64,9 +80,8 @@ public class PlayerAttack : MonoBehaviour
     public void UpdateAttackString()
     {
         CurrentAttack++;
-        //Debug.Log("Attacking");
+        Debug.Log("Attack string: " + CurrentAttack);
 
-        // loops attack string
         if (CurrentAttack > 3)
         {
             CurrentAttack = 1;
@@ -80,7 +95,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackComplete()
     {
-        isAttacking = false;
+        IsAttacking = false;
     }
 
     #endregion

@@ -97,7 +97,7 @@ public class PlayerCooldowns : MonoBehaviour
             cooldownText.gameObject.SetActive(true);
             cooldownText.text = convertedCooldownTimer + "";
 
-            _playerAttack.attackRequest = false;
+            _playerAttack.AttackRequest = false;
 
             if (cooldownTimer <= 0)
             {

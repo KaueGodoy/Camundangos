@@ -9,7 +9,6 @@ public class NewAnimationState : AnimationController
     [SerializeField] private string[] _animation;
     [SerializeField] private Vector2 _playerMoveDirection;
 
-
     private void Start()
     {
         Animator = _animator;

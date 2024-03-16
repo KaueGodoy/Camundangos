@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a9724f9cd3fb5a940aafcfff377923f0
+guid: df981c2735baf5c4299e37b49983e1ea
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: matias_mus_idle_0
+      name: matias_mus_ataque_3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82b5c764680364f43a5932c028a20e31
-      internalID: 186760595
+      spriteID: cd9a1f1166e7e44439e9fbb386bab7a1
+      internalID: -233443595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: matias_mus_idle_1
+      name: matias_mus_ataque_3_1
       rect:
         serializedVersion: 2
         x: 42
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad7399dd83a2157479d01ae6262f324a
-      internalID: 1683380179
+      spriteID: fab5d87303de01248a3ec9981691fd60
+      internalID: 1290304882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: matias_mus_idle_2
+      name: matias_mus_ataque_3_2
       rect:
         serializedVersion: 2
         x: 84
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b89fc06459f59444e9be3072ab002d47
-      internalID: 1061777638
+      spriteID: 7b6e9764e6058ca4a985c5ed2be1bc4b
+      internalID: 1299919885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: matias_mus_idle_3
+      name: matias_mus_ataque_3_3
       rect:
         serializedVersion: 2
         x: 126
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c76253f0f2979744aa16aa61b27af751
-      internalID: -1418575390
+      spriteID: 8b999879a85ce254595d25ef24e3054c
+      internalID: 2043301105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: matias_mus_idle_4
+      name: matias_mus_ataque_3_4
       rect:
         serializedVersion: 2
         x: 168
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19f7ea6123831d44e8e61cf715a2adca
-      internalID: 1949180568
+      spriteID: f793ed385c39e954c9f7f190f5a16419
+      internalID: -9650971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: matias_mus_idle_5
+      name: matias_mus_ataque_3_5
       rect:
         serializedVersion: 2
         x: 210
@@ -236,8 +236,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e89064068051ae45914b65007875b02
-      internalID: -1769517758
+      spriteID: 201c1079bf50e7a4899d89ed5cb3adc9
+      internalID: 508568244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_6
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a3b0b57ff075d34cb467b1ad5d08380
+      internalID: 1551695664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_7
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bdccb9834061be488ed637c47e75e67
+      internalID: 551597933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_8
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cc498881cde58d4f969ace166d7db0c
+      internalID: -1423773146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_9
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4271262b5a9a62428aee7b4c790a1ac
+      internalID: -1711160839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_10
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c70a5a6fc7a7e47b87ee8e5caf6f2c
+      internalID: -1299655697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_11
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2e5ddf2dd37fce43aa9302dfd7ddca7
+      internalID: 1115095081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_12
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dea2f2172ce6bb478cee1baad308915
+      internalID: 330717018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: matias_mus_ataque_3_13
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 0
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d663aeb1584cba941a1b1ad1b4c37219
+      internalID: -1969111470
       vertices: []
       indices: 
       edges: []
@@ -253,12 +421,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      matias_mus_idle_0: 186760595
-      matias_mus_idle_1: 1683380179
-      matias_mus_idle_2: 1061777638
-      matias_mus_idle_3: -1418575390
-      matias_mus_idle_4: 1949180568
-      matias_mus_idle_5: -1769517758
+      matias_mus_ataque_3_0: -233443595
+      matias_mus_ataque_3_1: 1290304882
+      matias_mus_ataque_3_10: -1299655697
+      matias_mus_ataque_3_11: 1115095081
+      matias_mus_ataque_3_12: 330717018
+      matias_mus_ataque_3_13: -1969111470
+      matias_mus_ataque_3_2: 1299919885
+      matias_mus_ataque_3_3: 2043301105
+      matias_mus_ataque_3_4: -9650971
+      matias_mus_ataque_3_5: 508568244
+      matias_mus_ataque_3_6: 1551695664
+      matias_mus_ataque_3_7: 551597933
+      matias_mus_ataque_3_8: -1423773146
+      matias_mus_ataque_3_9: -1711160839
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

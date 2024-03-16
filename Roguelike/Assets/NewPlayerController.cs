@@ -21,7 +21,7 @@ public class NewPlayerController : MonoBehaviour
     {
         if (!PlayerHealth.IsAlive) return;
 
-        _playerAttack.PerformAttack();
+        //_playerAttack.PerformAttack();
         _playerHealth.UpdatePlayerHealthBar();
 
         // damage test DELETE
@@ -53,7 +53,7 @@ public class NewPlayerController : MonoBehaviour
     private void UpdateTimers()
     {
         _playerHealth.UpdateHitTimer();
-        _playerAttack.UpdateAttackTimer();
+        //_playerAttack.UpdateAttackTimer();
     }
 
     public void TakeDamage(float damage)

@@ -19,7 +19,7 @@ public abstract class Weapon : MonoBehaviour, IWeapon
     {
         CurrentDamage = damage;
         _audioManager.PlaySound("PlayerWeaponAttack");
-        Debug.Log(this.name + " basic attack!");
+        //Debug.Log(this.name + " basic attack!");
     }
 
     public virtual void PerformSkillAttack()
