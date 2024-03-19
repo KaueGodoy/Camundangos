@@ -13,8 +13,8 @@ public class NPC : Interactable
         Debug.Log("Interacting with NPC class");
     }
 
-    public override void OnTriggerEnter2D(Collider2D collision)
-    {
-        InitiateInteraction();
-    }
+    //public override void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    InitiateInteraction();
+    //}
 }

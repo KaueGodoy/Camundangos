@@ -9,14 +9,14 @@ public class PortalController : MonoBehaviour
     [SerializeField]
     private Button button;
     private Portal[] portal;
-    private PlayerController player;
+    private NewPlayerController player;
     private GameObject panel;
     [SerializeField]
     private RectTransform faderTeleport;
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<NewPlayerController>();
         panel = transform.Find("Panel_Portals").gameObject;
     }
 

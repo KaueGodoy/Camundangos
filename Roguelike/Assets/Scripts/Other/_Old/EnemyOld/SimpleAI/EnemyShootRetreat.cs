@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class EnemyShootRetreat : MonoBehaviour
 {
-    private PlayerController player;
+    private NewPlayerController player;
     private Transform target;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -25,7 +25,7 @@ public class EnemyShootRetreat : MonoBehaviour
         if (playerObject != null)
         {
             // Get the Player component from the player object
-            player = playerObject.GetComponent<PlayerController>();
+            player = playerObject.GetComponent<NewPlayerController>();
             target = playerObject.transform;
 
             if (player == null)
@@ -183,6 +183,7 @@ public class EnemyShootRetreat : MonoBehaviour
             InvokeRepeating("InstatiateShot", attackDuration, shotRate);
         }
     }
+
     private void InstatiateShot()
     {
         Instantiate(projectile, transform.position, Quaternion.identity);

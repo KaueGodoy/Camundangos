@@ -1,11 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropLootOnDestroy : MonoBehaviour
+public class BoxDropLootOnDestroy : MonoBehaviour
 {
     [Header("Drop")]
     public Item_HandlePickUp pickupItem;
     public DropTable DropTable { get; set; }
+
+    private void Start()
+    {
+        Box.Instance.DropLootOnDestroy += Box_DropLootOnDestroy;
+    }
+
+    private void Box_DropLootOnDestroy(object sender, System.EventArgs e)
+    {
+        DropLoot();
+    }
 
     private void Awake()
     {
@@ -28,6 +38,6 @@ public class DropLootOnDestroy : MonoBehaviour
 
     private void OnDestroy()
     {
-        DropLoot();
+        Box.Instance.DropLootOnDestroy -= Box_DropLootOnDestroy;
     }
 }

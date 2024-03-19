@@ -8,7 +8,7 @@ public class EnemyPatrolAttack : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector2 direction;
-    private PlayerController player;
+    private NewPlayerController player;
 
     public bool patrolEnabled = true;
 
@@ -25,7 +25,7 @@ public class EnemyPatrolAttack : MonoBehaviour
         if (playerObject != null)
         {
             // Get the Player component from the player object
-            player = playerObject.GetComponent<PlayerController>();
+            player = playerObject.GetComponent<NewPlayerController>();
             target = playerObject.transform;
 
             if (player == null)

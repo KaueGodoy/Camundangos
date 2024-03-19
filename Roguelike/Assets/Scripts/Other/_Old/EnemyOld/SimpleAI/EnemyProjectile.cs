@@ -14,7 +14,7 @@ public class EnemyProjectile : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerTransform = FindObjectOfType<PlayerController>().transform;
+        _playerTransform = FindObjectOfType<NewPlayerController>().transform;
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController player = collision.GetComponent<PlayerController>();
+        NewPlayerController player = collision.GetComponent<NewPlayerController>();
 
         if (player != null)
         {
