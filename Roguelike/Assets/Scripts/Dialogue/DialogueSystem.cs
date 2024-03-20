@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
@@ -14,21 +13,19 @@ public class DialogueSystem : MonoBehaviour
     public string npcName;
     public List<string> dialogueLines;
 
-    Button continueButton;
-    TMP_Text dialogueText, nameText, buttonText;
+    [SerializeField] private Button _continueButton;
+    [SerializeField] private TextMeshProUGUI _dialogueText;
+    [SerializeField] private TextMeshProUGUI _nameText;
+
+    //buttonText;
     int dialogueIndex;
 
     private void Awake()
     {
-        continueButton = dialoguePanel.transform.Find("Button").GetComponent<Button>();
         //buttonText = dialoguePanel.transform.Find("Button/Continue").GetComponent<TMP_Text>();
-        dialogueText = dialoguePanel.transform.Find("TextBox").GetComponent<TMP_Text>();
-        nameText = dialoguePanel.transform.Find("Name/Text").GetComponent<TMP_Text>();
-
-        continueButton.onClick.AddListener(delegate { ContinueDialogue(); });
+        _continueButton.onClick.AddListener(delegate { ContinueDialogue(); });
 
         dialoguePanel.SetActive(false);
-
 
         if (Instance != null && Instance != this)
         {
@@ -56,8 +53,8 @@ public class DialogueSystem : MonoBehaviour
 
     public void CreateDialogue()
     {
-        dialogueText.text = dialogueLines[dialogueIndex];
-        nameText.text = npcName;
+        _dialogueText.text = dialogueLines[dialogueIndex];
+        _nameText.text = npcName;
         //buttonText.text = "Continue";
         dialoguePanel.SetActive(true);
     }
@@ -67,7 +64,7 @@ public class DialogueSystem : MonoBehaviour
         if (dialogueIndex < dialogueLines.Count - 1)
         {
             dialogueIndex++;
-            dialogueText.text = dialogueLines[dialogueIndex];
+            _dialogueText.text = dialogueLines[dialogueIndex];
         }
         else
         {
