@@ -1,77 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
     [Header("Movement")]
-    public float speed = 2f; // The speed of the platform
-    public float distance = 5f; // The distance the platform moves
-    public float yOffset = 0f;
+    [SerializeField] private float _speed = 2f; 
+    [SerializeField] private float _distance = 5f;
+    [SerializeField] private float _yOffset = 0f;
 
     [Header("Direction")]
-    public bool moveVertically = false; // Toggle for vertical movement
-    public bool moveDiagonally = false; // Toggle for vertical movement
+    [SerializeField] private bool _moveVertically = false; 
+    [SerializeField] private bool _moveDiagonally = false;
 
-    private Vector3 startPosition;
-    private float sinValue;
+    private Vector3 _startPosition;
+    private float _sinValue;
 
-    // Start is called before the first frame update
     void Start()
     {
-        startPosition = transform.position;
+        _startPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Calculate the new position of the platform
+        _sinValue += Time.deltaTime * _speed;
 
-        sinValue += Time.deltaTime * speed;
-        float x = startPosition.x + distance * Mathf.Sin(sinValue);
-        float y = startPosition.y + yOffset;
-        float z = startPosition.z;
+        float x = _startPosition.x + _distance * Mathf.Sin(_sinValue);
+        float y = _startPosition.y + _yOffset;
+        float z = _startPosition.z;
 
         Vector3 newPos = new Vector3(x, y, z);
 
-        if (moveVertically)
+        if (_moveVertically)
         {
-            newPos.x = startPosition.x;
-            newPos.y = startPosition.y + distance * Mathf.Sin(sinValue);
+            newPos.x = _startPosition.x;
+            newPos.y = _startPosition.y + _distance * Mathf.Sin(_sinValue);
         }
 
-        if (moveDiagonally)
+        if (_moveDiagonally)
         {
-            newPos.x = startPosition.x + distance * Mathf.Sin(sinValue);
-            newPos.y = startPosition.y + distance * Mathf.Sin(sinValue);
+            newPos.x = _startPosition.x + _distance * Mathf.Sin(_sinValue);
+            newPos.y = _startPosition.y + _distance * Mathf.Sin(_sinValue);
         }
 
-        // Move the platform
         transform.position = newPos;
     }
 
-    // Draw gizmos to show the platform's movement range in the Unity Editor
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(distance, 0, 0));
-        Gizmos.DrawLine(transform.position, transform.position - new Vector3(distance, 0, 0));
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(_distance, 0, 0));
+        Gizmos.DrawLine(transform.position, transform.position - new Vector3(_distance, 0, 0));
 
-        if (moveVertically)
+        if (_moveVertically)
         {
-            Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, distance, 0));
-            Gizmos.DrawLine(transform.position, transform.position - new Vector3(0, distance, 0));
+            Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, _distance, 0));
+            Gizmos.DrawLine(transform.position, transform.position - new Vector3(0, _distance, 0));
         }
     }
-
-    private void OnBecameVisible()
-    {
-
-    }
 }
-
-/*
-     Vector3 newPos2 = new Vector3(startPosition.x + distance * Mathf.Sin(timer * speed),
-                                  startPosition.y,
-                                  startPosition.z);
-     */
