@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewAnimationState : AnimationController
@@ -26,6 +27,8 @@ public class NewAnimationState : AnimationController
 
     private void Update()
     {
+        if (!gameObject.activeSelf) return;
+
         _playerMoveDirection.x = NewPlayerMovement.Instance.InputVector.x;
         UpdateAnimationState();
     }
@@ -98,8 +101,4 @@ public class NewAnimationState : AnimationController
             ChangeAnimationState(_animation[10]);
         }
     }
-
-
-    
-   
 }

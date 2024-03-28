@@ -19652,7 +19652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1505502165548171976, guid: 2575cb39b0800fa4f9675855dce8880b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 1505502165548171976, guid: 2575cb39b0800fa4f9675855dce8880b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19693,6 +19693,14 @@ PrefabInstance:
     - target: {fileID: 1505502165548171977, guid: 2575cb39b0800fa4f9675855dce8880b, type: 3}
       propertyPath: m_Name
       value: PlayerMovingParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505502165548171982, guid: 2575cb39b0800fa4f9675855dce8880b, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505502165548171983, guid: 2575cb39b0800fa4f9675855dce8880b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2575cb39b0800fa4f9675855dce8880b, type: 3}

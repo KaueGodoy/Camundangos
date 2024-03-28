@@ -53,6 +53,8 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void UpdateCurrentCharacter(GameObject previousCharacter, GameObject newCharacter)
     {
+        if (previousCharacter == newCharacter) return;
+
         previousCharacter.SetActive(false);
         _currentCharacter = newCharacter;
         _currentCharacter.SetActive(true);
