@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Particles")]
+    [SerializeField] private GameObject _walkParticle;
+
+    private void FixedUpdate()
     {
-        
+        ToggleWalkParticle();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ToggleWalkParticle()
     {
-        
+        if (!NewPlayerMovement.Instance.IsGrounded())
+        {
+            _walkParticle.gameObject.SetActive(false);
+        }
+        else
+        {
+            _walkParticle.gameObject.SetActive(true);
+        }
     }
 }

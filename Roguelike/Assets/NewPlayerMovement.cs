@@ -12,6 +12,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
+    public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
+
     public Vector2 MoveDirection { get; private set; }
 
     [Header("Jump")]
@@ -19,6 +21,7 @@ public class NewPlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _defaultJumpForce = 12f;
     [SerializeField] private float _jumpMultiplier = 1.2f;
+    public float JumpMultiplier { get { return _jumpMultiplier; } set { _jumpMultiplier = value; } }
     [SerializeField] private float _tapJumpMultiplier = 1f;
     [SerializeField] private float _holdJumpMultiplier = 1f;
     [SerializeField] private float _fallMultiplier = 2.5f;
@@ -47,6 +50,7 @@ public class NewPlayerMovement : MonoBehaviour
     [Header("Dash")]
     [SerializeField] private TrailRenderer _trailRenderer;
     [SerializeField] private float _dashSpeed = 5f;
+    public float DashSpeed { get { return _dashSpeed; } set { _dashSpeed = value; } }
     [SerializeField] private float _dashingTime = 0.2f;
     [SerializeField] private float _dashingCooldown = 1f;
     [SerializeField] private bool _isDashing;
@@ -345,4 +349,21 @@ public class NewPlayerMovement : MonoBehaviour
             _isFacingRight = !_isFacingRight;
         }
     }
+
+    public float GetMoveSpeed()
+    {
+        return _moveSpeed;
+    }
+
+    public float GetDashSpeed()
+    {
+        return _dashSpeed;
+    }
+
+    public float GetJumpMultiplier()
+    {
+        return _jumpMultiplier;
+    }
+
+
 }

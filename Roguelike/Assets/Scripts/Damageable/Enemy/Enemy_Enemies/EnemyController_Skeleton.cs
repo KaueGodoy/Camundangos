@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController_Skeleton : MonoBehaviour
@@ -12,7 +11,7 @@ public class EnemyController_Skeleton : MonoBehaviour
 
     private void Awake()
     {
-        _playerTransform = FindObjectOfType<PlayerController>().transform;
+        _playerTransform = FindObjectOfType<NewPlayerController>().transform;
 
         _fireProjectileBehavior = GetComponent<EnemyBehavior_FireProjectile>();
     }
