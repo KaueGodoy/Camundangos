@@ -13,7 +13,7 @@ public class NewPlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
-
+    public Vector2 InputVector { get; private set; }
     public Vector2 MoveDirection { get; private set; }
 
     [Header("Jump")]
@@ -41,6 +41,7 @@ public class NewPlayerMovement : MonoBehaviour
     [SerializeField] private bool _isJumpingMidAir = false;
     [SerializeField] private bool _jumpRequest = false;
     [SerializeField] private bool _canJump;
+    private string _onPlayerJumpSFX = "Jump";
 
     public float FallMultiplier { get { return _fallMultiplier; } }
     public float JumpForce { get { return _jumpForce; } private set { _jumpForce = value; } }
@@ -56,6 +57,8 @@ public class NewPlayerMovement : MonoBehaviour
     [SerializeField] private bool _isDashing;
     [SerializeField] private bool _dashRequest;
     [SerializeField] private bool _canDash = true;
+
+    private string _onPlayerDashSFX = "PlayerDash";
 
     private Coroutine _dashCoroutine;
 
@@ -166,8 +169,6 @@ public class NewPlayerMovement : MonoBehaviour
         }
     }
 
-    public Vector2 InputVector;
-
     public void Move()
     {
         InputVector = GameInput.Instance.GetMovementVectorNormalized();
@@ -226,6 +227,8 @@ public class NewPlayerMovement : MonoBehaviour
     {
         if (_canJump)
         {
+            AudioManager.Instance.PlaySound(_onPlayerJumpSFX);
+
             if (_isJumpingMidAir)
             {
                 Rb.velocity = Vector2.up * JumpForce;
@@ -299,11 +302,10 @@ public class NewPlayerMovement : MonoBehaviour
 
     private IEnumerator DashCoroutine()
     {
-        // audio
         _canDash = false;
         _isDashing = true;
 
-        AudioManager.Instance.PlaySound("PlayerDash");
+        AudioManager.Instance.PlaySound(_onPlayerDashSFX);
 
         float originalGravity = Rb.gravityScale;
         Rb.gravityScale = 0f;

@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class ChangeCharacterController : MonoBehaviour
 {
+    public event EventHandler OnCharacterChangedParticles;
+
     [SerializeField] private GameObject _derildoVisual;
 
     [Header("Characters")]
@@ -11,6 +14,8 @@ public class ChangeCharacterController : MonoBehaviour
     [SerializeField] private GameObject _leoVisual;
 
     [SerializeField] private GameObject _currentCharacter;
+
+    private string _onCharacterChangedSFX = "OnCharacterSwitch";
 
     private void Start()
     {
@@ -58,6 +63,9 @@ public class ChangeCharacterController : MonoBehaviour
         previousCharacter.SetActive(false);
         _currentCharacter = newCharacter;
         _currentCharacter.SetActive(true);
+
+        OnCharacterChangedParticles?.Invoke(this, EventArgs.Empty);
+        AudioManager.Instance.PlaySound(_onCharacterChangedSFX);
     }
 
     private GameObject GetCurrentCharacter()

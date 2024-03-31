@@ -2,8 +2,29 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
+    [Header("Dependency")]
+    [SerializeField] private ChangeCharacterController _changeCharacterController;
+
     [Header("Particles")]
     [SerializeField] private GameObject _walkParticle;
+
+    [SerializeField] private ParticleSystem _onCharacterChangedParticle;
+
+    private void Start()
+    {
+        _changeCharacterController.OnCharacterChangedParticles += _changeCharacterController_OnCharacterChangedParticles;
+    }
+
+    private void _changeCharacterController_OnCharacterChangedParticles(object sender, System.EventArgs e)
+    {
+        PlayParticleOneShot(_onCharacterChangedParticle);
+        Debug.Log("Changed character... playing particle");
+    }
+
+    private void PlayParticleOneShot(ParticleSystem particle)
+    {
+        particle.Play();
+    }
 
     private void FixedUpdate()
     {
@@ -21,4 +42,6 @@ public class ParticleManager : MonoBehaviour
             _walkParticle.gameObject.SetActive(true);
         }
     }
+
+
 }
