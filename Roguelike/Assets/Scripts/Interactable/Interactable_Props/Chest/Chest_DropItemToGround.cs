@@ -10,7 +10,7 @@ public class Chest_DropItemToGround : Chest
     public override void Awake()
     {
         base.Awake();
-        SetName("Common Chest");
+        SetName("Baú Comum");
 
         CreateLoot();
     }
