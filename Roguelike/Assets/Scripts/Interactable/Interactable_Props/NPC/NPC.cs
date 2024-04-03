@@ -13,6 +13,11 @@ public class NPC : Interactable
         Debug.Log("Interacting with NPC class");
     }
 
+    public override void DisableInteraction()
+    {
+        DialogueSystem.Instance.HideDialogue();
+    }
+
     //public override void OnTriggerEnter2D(Collider2D collision)
     //{
     //    InitiateInteraction();

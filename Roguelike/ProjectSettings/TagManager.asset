@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - OneWayPlatform
   - InteractableObject
+  - FxTemporaire
+  - DestructibleTile
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - Player
   - TestGround
   - EnemyLayer
-  - 
+  - DestructibleTile
   - 
   - 
   - 

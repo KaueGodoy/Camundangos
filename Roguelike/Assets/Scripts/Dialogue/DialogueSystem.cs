@@ -37,6 +37,16 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameInput.Instance.OnPlayerInteract += GameInput_OnPlayerInteract;
+    }
+
+    private void GameInput_OnPlayerInteract(object sender, System.EventArgs e)
+    {
+        ContinueDialogue();
+    }
+
     public void AddNewDialogue(string[] lines, string npcName)
     {
         dialogueIndex = 0;
@@ -59,6 +69,11 @@ public class DialogueSystem : MonoBehaviour
         dialoguePanel.SetActive(true);
     }
 
+    public void HideDialogue()
+    {
+        dialoguePanel.SetActive(false);
+    }
+
     public void ContinueDialogue()
     {
         if (dialogueIndex < dialogueLines.Count - 1)
@@ -69,7 +84,7 @@ public class DialogueSystem : MonoBehaviour
         else
         {
             //buttonText.text = "End";
-            dialoguePanel.SetActive(false);
+            HideDialogue();
         }
     }
 

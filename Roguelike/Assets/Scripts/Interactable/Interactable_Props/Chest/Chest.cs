@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : Interactable
 {
+    public event EventHandler OnChestOpenedParticles;
+
     [SerializeField] private List<string> drops = new List<string>();
 
     public override void Awake()
@@ -21,7 +24,7 @@ public class Chest : Interactable
     {
         base.ExecuteInteraction();
         OpenChest();
-        DestroyGameObject();
+        DestroyGameObjectWithDelay(0.4f);
     }
 
     public virtual void OpenChest()
@@ -34,5 +37,6 @@ public class Chest : Interactable
         }
 
         AudioManager.PlaySound("OnChestOpen");
+        OnChestOpenedParticles?.Invoke(this, EventArgs.Empty);
     }
 }

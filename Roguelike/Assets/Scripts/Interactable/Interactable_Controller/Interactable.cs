@@ -70,6 +70,11 @@ public abstract class Interactable : MonoBehaviour, IInteractable
         InventoryController.Instance.GiveItem(itemName);
     }
 
+    public virtual void DestroyGameObjectWithDelay(float delayInSeconds)
+    {
+        Invoke("DestroyGameObject", delayInSeconds);
+    }
+
     public virtual void DestroyGameObject()
     {
         Destroy(gameObject);
