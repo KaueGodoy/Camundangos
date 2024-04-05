@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour, IInteractable
 {
+    public event EventHandler OnInteractionParticles;
+
     private InteractableController _interactableController;
 
     public AudioManager AudioManager { get; set; }
@@ -63,6 +66,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
     {
         Debug.Log("Interaction executed");
         _canInteract = false;
+        OnInteractionParticles?.Invoke(this, EventArgs.Empty);
     }
 
     public virtual void GiveItemToPlayer(string itemName)

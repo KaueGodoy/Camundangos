@@ -10,6 +10,8 @@ public class NPC : Interactable
     public override void InitiateInteraction()
     {
         DialogueSystem.Instance.AddNewDialogue(dialogue, this._name);
+
+        AudioManager.Instance.PlaySound("OnTutorialShowUp");
         Debug.Log("Interacting with NPC class");
     }
 

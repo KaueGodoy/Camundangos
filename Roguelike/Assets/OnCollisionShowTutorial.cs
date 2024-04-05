@@ -15,6 +15,7 @@ public class OnCollisionShowTutorial : MonoBehaviour
         {
             if (_tutorialText != null)
             {
+                AudioManager.Instance.PlaySound("OnTutorialShowUp");
                 _tutorialText.SetActive(true);
             }
         }

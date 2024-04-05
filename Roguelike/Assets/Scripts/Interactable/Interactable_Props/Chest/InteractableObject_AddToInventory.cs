@@ -22,7 +22,7 @@ public class InteractableObject_AddToInventory : Interactable
     {
         base.ExecuteInteraction();
         OpenChest();
-        DestroyGameObject();
+        DestroyGameObjectWithDelay(0.3f);
     }
 
     public virtual void OpenChest()

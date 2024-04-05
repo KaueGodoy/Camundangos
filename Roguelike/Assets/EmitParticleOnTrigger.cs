@@ -8,11 +8,13 @@ public class EmitParticleOnTrigger : MonoBehaviour
     private void Start()
     {
         chest.OnChestOpenedParticles += Chest_OnChestOpenedParticles;
+
+        ParticleManager.Instance.HideParticle(_particle);
     }
 
     private void Chest_OnChestOpenedParticles(object sender, System.EventArgs e)
     {
-        _particle.Play();
+        ParticleManager.Instance.ExecuteParticle(_particle);
     }
 
     private void OnDestroy()

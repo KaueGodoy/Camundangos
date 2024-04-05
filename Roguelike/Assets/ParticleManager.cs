@@ -2,28 +2,51 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
+    public static ParticleManager Instance { get; private set; }
+
     [Header("Dependency")]
     [SerializeField] private ChangeCharacterController _changeCharacterController;
 
     [Header("Particles")]
     [SerializeField] private GameObject _walkParticle;
-
     [SerializeField] private ParticleSystem _onCharacterChangedParticle;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         _changeCharacterController.OnCharacterChangedParticles += _changeCharacterController_OnCharacterChangedParticles;
+
+        HideParticle(_onCharacterChangedParticle);
     }
 
     private void _changeCharacterController_OnCharacterChangedParticles(object sender, System.EventArgs e)
     {
-        PlayParticleOneShot(_onCharacterChangedParticle);
-        Debug.Log("Changed character... playing particle");
+        ExecuteParticle(_onCharacterChangedParticle);
     }
 
-    private void PlayParticleOneShot(ParticleSystem particle)
+    public void ExecuteParticle(ParticleSystem particle)
+    {
+        ShowParticle(particle);
+        PlayParticleOneShot(particle);
+    }
+
+    public void PlayParticleOneShot(ParticleSystem particle)
     {
         particle.Play();
+    }
+
+    public void HideParticle(ParticleSystem particle)
+    {
+        particle.gameObject.SetActive(false);
+    }
+
+    public void ShowParticle(ParticleSystem particle)
+    {
+        particle.gameObject.SetActive(true);
     }
 
     private void FixedUpdate()
@@ -43,5 +66,8 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-
+    private void OnDestroy()
+    {
+        _changeCharacterController.OnCharacterChangedParticles -= _changeCharacterController_OnCharacterChangedParticles;
+    }
 }
