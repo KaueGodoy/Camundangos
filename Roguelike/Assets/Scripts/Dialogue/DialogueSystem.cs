@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class DialogueSystem : MonoBehaviour
 {
     public static DialogueSystem Instance { get; set; }
+
+    public event EventHandler OnDialogueFinished;
 
     public GameObject dialoguePanel;
 
@@ -85,6 +88,7 @@ public class DialogueSystem : MonoBehaviour
         {
             //buttonText.text = "End";
             HideDialogue();
+            OnDialogueFinished?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -26609,6 +26609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 897922022}
+  - component: {fileID: 897922023}
   m_Layer: 5
   m_Name: Party_Panel
   m_TagString: Untagged
@@ -26637,6 +26638,22 @@ RectTransform:
   m_AnchoredPosition: {x: -1007, y: 0}
   m_SizeDelta: {x: 2014, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &897922023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897922021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203d736809f417641b87465e15862c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterIcon0: {fileID: 2064458192}
+  _characterIcon1: {fileID: 840269000}
+  _characterIcon2: {fileID: 570071768}
+  _characterIcon3: {fileID: 329004269}
 --- !u!4 &900151006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427889818574462445, guid: fdfcc95b030c2bc4383da89ec2e99216, type: 3}
@@ -34311,6 +34328,7 @@ GameObject:
   - component: {fileID: 1262530708}
   - component: {fileID: 1262530707}
   - component: {fileID: 1262530709}
+  - component: {fileID: 1262530710}
   m_Layer: 0
   m_Name: NPC_Isa
   m_TagString: InteractableObject
@@ -34449,6 +34467,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1262530710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262530704}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c548afb394690c4b8eee11ac78c7ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Estou livre
+  _name: Isa
 --- !u!1 &1264824086
 GameObject:
   m_ObjectHideFlags: 0
@@ -45109,7 +45142,7 @@ MonoBehaviour:
   - "Quem \xE9 voc\xEA?"
   - "Pegue o que est\xE1 na pedra"
   - "Voc\xEA vai precisar"
-  _name: 
+  _name: Slime
 --- !u!95 &1591600410
 Animator:
   serializedVersion: 5
