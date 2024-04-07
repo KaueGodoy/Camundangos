@@ -35,9 +35,10 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void GameInput_OnCharacterChanged_Slot03(object sender, System.EventArgs e)
     {
-        //if (OnCharacterUnlocked.Instance.IsIsaLocked) return;
-
-        UpdateCurrentCharacter(GetCurrentCharacter(), _isaVisual);
+        if (OnCharacterUnlocked.Instance.IsIsaUnlocked)
+            UpdateCurrentCharacter(GetCurrentCharacter(), _isaVisual);
+        else
+            Debug.Log("Continue exploring to unlock this character");
     }
 
     private void GameInput_OnCharacterChanged_Slot02(object sender, System.EventArgs e)

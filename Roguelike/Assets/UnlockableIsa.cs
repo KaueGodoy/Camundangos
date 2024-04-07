@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UnlockableIsa : NPC
@@ -12,16 +10,21 @@ public class UnlockableIsa : NPC
 
     private void OnCharacterUnlocked_OnIsaUnlocked(object sender, System.EventArgs e)
     {
-        OnCharacterUnlocked.Instance.IsIsaLocked = false;
+        OnCharacterUnlocked.Instance.UnlockIsaUpdatingState();
     }
 
     private void DialogueSystem_OnDialogueFinished(object sender, System.EventArgs e)
     {
-        // unlock her to join the party and be played
-        // is unlocked = true
-        // change player icon from black to her icon 
-        // play audio
-        // animation of unlocking her 
-        OnCharacterUnlocked.Instance.UnlockIsa();
+        if (!OnCharacterUnlocked.Instance.IsIsaUnlocked)
+        {
+            OnCharacterUnlocked.Instance.UnlockIsaInvokingEvent();
+            Debug.Log("Isa has been unlocked");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        DialogueSystem.Instance.OnDialogueFinished -= DialogueSystem_OnDialogueFinished;
+        OnCharacterUnlocked.Instance.OnIsaUnlocked -= OnCharacterUnlocked_OnIsaUnlocked;
     }
 }

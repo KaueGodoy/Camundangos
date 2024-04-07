@@ -10,20 +10,23 @@ public class PartyPanelUI : MonoBehaviour
     [SerializeField] private Image _characterIcon2;
     [SerializeField] private Image _characterIcon3;
 
+    private string _pathToUnlockedSprite = "UI/Icons/CharacterUnlocked/";
+    private Sprite _isaUnlockedSprite;
+
     private void Start()
     {
-        //_characterIcon1.sprite = 
+        _isaUnlockedSprite = Resources.Load<Sprite>(_pathToUnlockedSprite + "isa_ratinha_icone");
 
         OnCharacterUnlocked.Instance.OnIsaUnlocked += OnCharacterUnlocked_OnIsaUnlocked;
     }
 
     private void OnCharacterUnlocked_OnIsaUnlocked(object sender, System.EventArgs e)
     {
-        UpdateCharacterIcon();
+        UpdateIsaCharacterIcon();
     }
 
-    private void UpdateCharacterIcon()
+    private void UpdateIsaCharacterIcon()
     {
-        //_characterIcon1.sprite = 
+        _characterIcon2.sprite = _isaUnlockedSprite;
     }
 }

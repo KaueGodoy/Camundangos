@@ -13100,7 +13100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8bc45ffecfcea8241ac86d6317eba865, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f67c5cb107c50374099535bca9d38bcf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16533,7 +16533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 093ea83f51661124b9ee1498d4d5c812, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24c74087095cc7344b64e865301941b2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25061,7 +25061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d8c0ae702384be4197e12f7575e78bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f67c5cb107c50374099535bca9d38bcf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26610,6 +26610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897922022}
   - component: {fileID: 897922023}
+  - component: {fileID: 897922024}
   m_Layer: 5
   m_Name: Party_Panel
   m_TagString: Untagged
@@ -26654,6 +26655,18 @@ MonoBehaviour:
   _characterIcon1: {fileID: 840269000}
   _characterIcon2: {fileID: 570071768}
   _characterIcon3: {fileID: 329004269}
+--- !u!114 &897922024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897922021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5ccc0da4d997b4bb3cda8a7ed5832c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &900151006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427889818574462445, guid: fdfcc95b030c2bc4383da89ec2e99216, type: 3}
@@ -34344,7 +34357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262530704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -47.7, y: -39.76, z: 0}
+  m_LocalPosition: {x: -79.26, y: -0.72, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34410,7 +34423,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262530704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 212265b3977fdb943a21efe1746d74e5, type: 3}
   m_Name: 
@@ -34474,7 +34487,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262530704}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c548afb394690c4b8eee11ac78c7ec4, type: 3}
   m_Name: 

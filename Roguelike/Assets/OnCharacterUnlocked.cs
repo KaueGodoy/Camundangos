@@ -5,24 +5,28 @@ public class OnCharacterUnlocked : MonoBehaviour
 {
     public static OnCharacterUnlocked Instance { get; private set; }
 
-    public event EventHandler OnMarceloUnlocked;
     public event EventHandler OnIsaUnlocked;
 
-    public bool IsMarceloLocked { get; set; }
-    public bool IsIsaLocked { get; set; }
+    public bool IsIsaUnlocked { get; set; }
 
     private void Awake()
     {
         Instance = this;    
     }
 
-    public void UnlockIsa()
+    private void Start()
+    {
+        IsIsaUnlocked = false;
+    }
+
+    public void UnlockIsaInvokingEvent()
     {
         OnIsaUnlocked?.Invoke(this, EventArgs.Empty);
     }
 
-    public bool GetMarceloLockedState()
+    public bool UnlockIsaUpdatingState()
     {
-        return IsMarceloLocked;
+        return IsIsaUnlocked = true;
     }
+
 }
