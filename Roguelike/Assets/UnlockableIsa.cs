@@ -15,6 +15,8 @@ public class UnlockableIsa : NPC
 
     private void DialogueSystem_OnDialogueFinished(object sender, System.EventArgs e)
     {
+        if (!IsInDialogue) return;
+
         if (!OnCharacterUnlocked.Instance.IsIsaUnlocked)
         {
             OnCharacterUnlocked.Instance.UnlockIsaInvokingEvent();

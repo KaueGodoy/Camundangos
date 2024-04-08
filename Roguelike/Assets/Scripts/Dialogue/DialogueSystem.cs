@@ -20,12 +20,11 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dialogueText;
     [SerializeField] private TextMeshProUGUI _nameText;
 
-    //buttonText;
     int dialogueIndex;
+    private bool _isInDialogue = false;
 
     private void Awake()
     {
-        //buttonText = dialoguePanel.transform.Find("Button/Continue").GetComponent<TMP_Text>();
         _continueButton.onClick.AddListener(delegate { ContinueDialogue(); });
 
         dialoguePanel.SetActive(false);
@@ -47,6 +46,8 @@ public class DialogueSystem : MonoBehaviour
 
     private void GameInput_OnPlayerInteract(object sender, System.EventArgs e)
     {
+        if (!_isInDialogue) return;
+
         ContinueDialogue();
     }
 
@@ -68,8 +69,8 @@ public class DialogueSystem : MonoBehaviour
     {
         _dialogueText.text = dialogueLines[dialogueIndex];
         _nameText.text = npcName;
-        //buttonText.text = "Continue";
         dialoguePanel.SetActive(true);
+        _isInDialogue = true;
     }
 
     public void HideDialogue()
@@ -86,9 +87,9 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
-            //buttonText.text = "End";
             HideDialogue();
             OnDialogueFinished?.Invoke(this, EventArgs.Empty);
+            _isInDialogue = false;
         }
     }
 
