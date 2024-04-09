@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
@@ -65,6 +66,30 @@ public class ParticleManager : MonoBehaviour
             _walkParticle.gameObject.SetActive(true);
         }
     }
+
+    private IEnumerator LerpSpriteRendererAlpha(float targetAlpha, float duration, SpriteRenderer spriteRenderer)
+    {
+        Color currentColor = spriteRenderer.color;
+        float startAlpha = currentColor.a;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, timer / duration);
+            spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, newAlpha);
+            yield return null;
+        }
+
+        if (spriteRenderer != null)
+            spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, targetAlpha);
+    }
+
+    public void CallLerpSpriteRendererAlphaCoroutine(float targetAlpha, float duration, SpriteRenderer spriteRenderer)
+    {
+        StartCoroutine(LerpSpriteRendererAlpha(targetAlpha, duration, spriteRenderer));
+    }
+
 
     private void OnDestroy()
     {

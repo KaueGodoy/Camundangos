@@ -30,7 +30,10 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void GameInput_OnCharacterChanged_Slot04(object sender, System.EventArgs e)
     {
-        UpdateCurrentCharacter(GetCurrentCharacter(), _leoVisual);
+        if (OnCharacterUnlocked.Instance.IsLeoUnlocked)
+            UpdateCurrentCharacter(GetCurrentCharacter(), _leoVisual);
+        else
+            Debug.Log("Continue exploring to unlock this character");
     }
 
     private void GameInput_OnCharacterChanged_Slot03(object sender, System.EventArgs e)
@@ -38,12 +41,16 @@ public class ChangeCharacterController : MonoBehaviour
         if (OnCharacterUnlocked.Instance.IsIsaUnlocked)
             UpdateCurrentCharacter(GetCurrentCharacter(), _isaVisual);
         else
-            Debug.Log("Continue exploring to unlock this character");
+            Debug.Log("Continue exploring to unlock this character... UI MESSAGE");
     }
 
     private void GameInput_OnCharacterChanged_Slot02(object sender, System.EventArgs e)
     {
-        UpdateCurrentCharacter(GetCurrentCharacter(), _matiasVisual);
+        if (OnCharacterUnlocked.Instance.IsMatiasUnlocked)
+            UpdateCurrentCharacter(GetCurrentCharacter(), _matiasVisual);
+        else
+            Debug.Log("Continue exploring to unlock this character");
+
     }
 
     private void GameInput_OnCharacterChanged_Slot01(object sender, System.EventArgs e)

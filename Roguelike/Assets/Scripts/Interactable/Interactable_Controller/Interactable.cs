@@ -81,7 +81,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
 
     public virtual void DestroyGameObject()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     public string SetName(string name)

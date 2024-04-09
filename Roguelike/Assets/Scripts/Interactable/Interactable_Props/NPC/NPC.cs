@@ -21,9 +21,4 @@ public class NPC : Interactable
         IsInDialogue = false;
         DialogueSystem.Instance.HideDialogue();
     }
-
-    //public override void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    InitiateInteraction();
-    //}
 }
