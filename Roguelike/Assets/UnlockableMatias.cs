@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UnlockableMatias : NPC
+public class UnlockableMatias : UnlockableCharacter
 {
     [SerializeField] private float _timeToDestroy = 0.3f;
 

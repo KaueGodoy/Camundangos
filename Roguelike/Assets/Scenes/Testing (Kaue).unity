@@ -13233,6 +13233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5c99e848c657a4281f0638db091b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isa: {fileID: 0}
   _onDestroyParticle: {fileID: 1059402519}
   _targetAlpha: 0
   _lerpDuration: 1.5
@@ -22771,6 +22772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5c99e848c657a4281f0638db091b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isa: {fileID: 0}
   _onDestroyParticle: {fileID: 924704382}
   _targetAlpha: 0
   _lerpDuration: 1.5

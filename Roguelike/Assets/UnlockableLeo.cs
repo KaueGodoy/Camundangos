@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class UnlockableLeo : NPC
+public class UnlockableLeo : UnlockableCharacter
 {
     [SerializeField] private float _timeToDestroy = 0.3f;
+
+    public event EventHandler OnLeoUnlockedVisual;
 
     private void Start()
     {
@@ -14,6 +17,7 @@ public class UnlockableLeo : NPC
     private void OnCharacterUnlocked_OnLeoUnlocked(object sender, System.EventArgs e)
     {
         OnCharacterUnlocked.Instance.UnlockLeoUpdatingState();
+        OnLeoUnlockedVisual?.Invoke(this, EventArgs.Empty);
     }
 
     private void DialogueSystem_OnDialogueFinished(object sender, System.EventArgs e)

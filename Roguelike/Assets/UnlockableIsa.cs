@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UnlockableIsa : NPC
+public class UnlockableIsa : UnlockableCharacter
 {
     private void Start()
     {
@@ -11,6 +11,7 @@ public class UnlockableIsa : NPC
     private void OnCharacterUnlocked_OnIsaUnlocked(object sender, System.EventArgs e)
     {
         OnCharacterUnlocked.Instance.UnlockIsaUpdatingState();
+        InvokeIsaUnlockedVisual();  
     }
 
     private void DialogueSystem_OnDialogueFinished(object sender, System.EventArgs e)
