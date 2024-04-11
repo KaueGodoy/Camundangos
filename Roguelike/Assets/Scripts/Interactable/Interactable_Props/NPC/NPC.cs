@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class NPC : Interactable
 {
-    public string[] dialogue;
     public string _name;
+    public string[] dialogue;
 
     public bool IsInDialogue { get; private set; }  
 

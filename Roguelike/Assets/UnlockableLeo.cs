@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class UnlockableLeo : UnlockableCharacter
 {
-    [SerializeField] private float _timeToDestroy = 0.3f;
-
-    public event EventHandler OnLeoUnlockedVisual;
-
     private void Start()
     {
         DialogueSystem.Instance.OnDialogueFinished += DialogueSystem_OnDialogueFinished;
@@ -17,7 +13,7 @@ public class UnlockableLeo : UnlockableCharacter
     private void OnCharacterUnlocked_OnLeoUnlocked(object sender, System.EventArgs e)
     {
         OnCharacterUnlocked.Instance.UnlockLeoUpdatingState();
-        OnLeoUnlockedVisual?.Invoke(this, EventArgs.Empty);
+        InvokeLeoUnlockedVisual();  
     }
 
     private void DialogueSystem_OnDialogueFinished(object sender, System.EventArgs e)
@@ -29,8 +25,7 @@ public class UnlockableLeo : UnlockableCharacter
             OnCharacterUnlocked.Instance.UnlockLeoInvokingEvent();
             Debug.Log("Leo has been unlocked");
 
-            //OnCharacterUnlocked.Instance.InvokeOnCharacterUnlockedVisualUpdate();
-            DestroyGameObjectWithDelay(_timeToDestroy);
+            DestroyGameObjectWithDelay(TimeToDestroySelf);
         }
     }
 

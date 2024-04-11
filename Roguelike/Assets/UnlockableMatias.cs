@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class UnlockableMatias : UnlockableCharacter
 {
-    [SerializeField] private float _timeToDestroy = 0.3f;
-
     private void Start()
     {
         DialogueSystem.Instance.OnDialogueFinished += DialogueSystem_OnDialogueFinished;
@@ -13,6 +11,7 @@ public class UnlockableMatias : UnlockableCharacter
     private void OnCharacterUnlocked_OnMatiasUnlocked(object sender, System.EventArgs e)
     {
         OnCharacterUnlocked.Instance.UnlockMatiasUpdatingState();
+        InvokeMatiasUnlockedVisual();
     }
 
     private void DialogueSystem_OnDialogueFinished(object sender, System.EventArgs e)
@@ -22,10 +21,9 @@ public class UnlockableMatias : UnlockableCharacter
         if (!OnCharacterUnlocked.Instance.IsMatiasUnlocked)
         {
             OnCharacterUnlocked.Instance.UnlockMatiasInvokingEvent();
-            Debug.Log("Marcelo has been unlocked");
+            Debug.Log("Matias has been unlocked");
 
-            //OnCharacterUnlocked.Instance.InvokeOnCharacterUnlockedVisualUpdate();
-            DestroyGameObjectWithDelay(_timeToDestroy);
+            DestroyGameObjectWithDelay(TimeToDestroySelf);
         }
     }
 

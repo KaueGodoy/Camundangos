@@ -22,6 +22,7 @@ public class UnlockableIsa : UnlockableCharacter
         {
             OnCharacterUnlocked.Instance.UnlockIsaInvokingEvent();
             Debug.Log("Isa has been unlocked");
+            DestroyGameObjectWithDelay(TimeToDestroySelf);
         }
     }
 

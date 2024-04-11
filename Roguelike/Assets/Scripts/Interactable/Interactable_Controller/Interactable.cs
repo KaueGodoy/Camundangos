@@ -34,11 +34,6 @@ public abstract class Interactable : MonoBehaviour, IInteractable
         EnableInteraction();
     }
 
-    //private void Update()
-    //{
-    //    if (_canInteract) InitiateInteraction();
-    //}
-
     public virtual void InitiateInteraction()
     {
         Debug.Log($"Interacting with {gameObject.name}");
