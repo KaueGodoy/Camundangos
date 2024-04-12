@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class ChangeCharacterController : MonoBehaviour
 {
+    public static ChangeCharacterController Instance { get; private set; }     
+
+    public event EventHandler OnCharacterChangedFailed;
+
     public event EventHandler OnCharacterChangedParticles;
 
     [SerializeField] private GameObject _derildoVisual;
@@ -16,6 +20,11 @@ public class ChangeCharacterController : MonoBehaviour
     [SerializeField] private GameObject _currentCharacter;
 
     private string _onCharacterChangedSFX = "OnCharacterSwitch";
+
+    private void Awake()
+    {
+        Instance = this;    
+    }
 
     private void Start()
     {
@@ -33,7 +42,7 @@ public class ChangeCharacterController : MonoBehaviour
         if (OnCharacterUnlocked.Instance.IsLeoUnlocked)
             UpdateCurrentCharacter(GetCurrentCharacter(), _leoVisual);
         else
-            Debug.Log("Continue exploring to unlock this character");
+            OnCharacterChangedFailed?.Invoke(this, EventArgs.Empty);
     }
 
     private void GameInput_OnCharacterChanged_Slot03(object sender, System.EventArgs e)
@@ -41,7 +50,7 @@ public class ChangeCharacterController : MonoBehaviour
         if (OnCharacterUnlocked.Instance.IsIsaUnlocked)
             UpdateCurrentCharacter(GetCurrentCharacter(), _isaVisual);
         else
-            Debug.Log("Continue exploring to unlock this character... UI MESSAGE");
+            OnCharacterChangedFailed?.Invoke(this, EventArgs.Empty);
     }
 
     private void GameInput_OnCharacterChanged_Slot02(object sender, System.EventArgs e)
@@ -49,7 +58,7 @@ public class ChangeCharacterController : MonoBehaviour
         if (OnCharacterUnlocked.Instance.IsMatiasUnlocked)
             UpdateCurrentCharacter(GetCurrentCharacter(), _matiasVisual);
         else
-            Debug.Log("Continue exploring to unlock this character");
+            OnCharacterChangedFailed?.Invoke(this, EventArgs.Empty);
 
     }
 
