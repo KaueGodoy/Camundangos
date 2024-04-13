@@ -12,6 +12,7 @@ public class DialogueSystem : MonoBehaviour
     public event EventHandler OnDialogueFinished;
 
     public GameObject dialoguePanel;
+    [SerializeField] private DialoguePanelVisual _dialoguePanelVisual;
 
     public string npcName;
     public List<string> dialogueLines;
@@ -70,6 +71,7 @@ public class DialogueSystem : MonoBehaviour
         _dialogueText.text = dialogueLines[dialogueIndex];
         _nameText.text = npcName;
         dialoguePanel.SetActive(true);
+        _dialoguePanelVisual.OnDialogueCreatedPlayAnimation();
         _isInDialogue = true;
     }
 

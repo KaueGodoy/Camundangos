@@ -1,37 +1,35 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MessageUI : MonoBehaviour
+public class QuestMessageUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _messageText;
+    [SerializeField] private float _messageShowDelay = 0.5f;
     [SerializeField] private float _messageHideDelay = 0.5f;
 
-    private string _onCharacterChangeFailedMessage = "Continue <color=yellow>explorando </color>para desbloquear este <color=green>personagem </color>";
-    private string _onCharacterChangeFailedSFX = "OnCharacterChangedFailed";
+    private string _onQuestUpdateSFX = "OnQuestUpdateSFX";
+    private string _currentQuest = "Encontre Isa na floresta";
 
     [SerializeField] private Animator _animator;
+
     private string _fadeInAnimation = "FadeInAnimation";
 
     private void Start()
     {
-        ChangeCharacterController.Instance.OnCharacterChangedFailed += ChangeCharacterController_OnCharacterChangedFailed;
+        Hide();
 
-        Hide();     
-    }
-
-    private void ChangeCharacterController_OnCharacterChangedFailed(object sender, System.EventArgs e)
-    {
-        ShowMessage(_onCharacterChangeFailedMessage, _onCharacterChangeFailedSFX);
+        StartCoroutine(ShowAfterDelay(_messageShowDelay));
     }
 
     private void ShowMessage(string message, string audioString)
     {
         Show();
+
         _messageText.text = message;
         _animator.Play(_fadeInAnimation);
         AudioManager.Instance.PlaySoundOneShot(audioString);
-
         StartCoroutine(HideAfterDelay(_messageHideDelay));
     }
 
@@ -47,13 +45,15 @@ public class MessageUI : MonoBehaviour
         Hide();
     }
 
+    private IEnumerator ShowAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        ShowMessage(_currentQuest, _onQuestUpdateSFX);
+    }
+
     private void Hide()
     {
         gameObject.SetActive(false);
-    }
-
-    private void OnDestroy()
-    {
-        ChangeCharacterController.Instance.OnCharacterChangedFailed -= ChangeCharacterController_OnCharacterChangedFailed;
     }
 }
