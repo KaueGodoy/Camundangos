@@ -18,13 +18,16 @@ public class QuestMessageUI : MonoBehaviour
 
     private void Start()
     {
-        Hide();
-
+        //Hide();
+        _animator.Play(_fadeInAnimation);
+        
         StartCoroutine(ShowAfterDelay(_messageShowDelay));
     }
 
     private void ShowMessage(string message, string audioString)
     {
+        StartCoroutine(HideAfterDelay(_messageHideDelay));
+
         Show();
 
         _messageText.text = message;
