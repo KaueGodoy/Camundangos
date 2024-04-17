@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemyPatrolChaseAttack : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private NewPlayerController player;
     private Transform target;
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector2 direction;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 

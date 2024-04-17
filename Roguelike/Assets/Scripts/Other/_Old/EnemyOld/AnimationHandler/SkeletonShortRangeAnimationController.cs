@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class SkeletonShortRangeAnimationController : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private Skeleton skeleton;
-    private EnemyPatrolChaseAttack enemyBehavior;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Skeleton skeleton;
+    [SerializeField] private EnemyPatrolChaseAttack enemyBehavior;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        skeleton = GetComponent<Skeleton>();
         animator = GetComponent<Animator>();
-        enemyBehavior = GetComponent<EnemyPatrolChaseAttack>();
     }
 
     void Update()

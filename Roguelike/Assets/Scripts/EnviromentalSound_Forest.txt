@@ -1,4 +1,0 @@
-SFX_Birds
-SFX_Crow01
-SFX_Crow02
-SFX_Crow03
