@@ -9,8 +9,8 @@ public class PlayerUlt : MonoBehaviour
     [SerializeField] private Transform UltSpawnPoint;
     [SerializeField] private GameObject Projectile;
 
-    private float _ultAttackDelay = 0.4f;
-    private float _ultAttackTimer = 0.0f;
+    [SerializeField] private float _ultAttackDelay = 0.4f;
+    [SerializeField] private float _ultAttackTimer = 0.0f;
 
     private bool _isUltPerformed = false;
 
