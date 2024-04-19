@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NewPlayerController : MonoBehaviour
 {
+    public static NewPlayerController Instance { get; private set; }
+
     [Header("Dependencies")]
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private PlayerAttack _playerAttack;
@@ -11,6 +13,11 @@ public class NewPlayerController : MonoBehaviour
     [Header("Mobile")]
     [SerializeField] private GameObject _mobileUI;
     private bool isMobileUIActive;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

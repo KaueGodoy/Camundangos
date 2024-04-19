@@ -5,6 +5,9 @@ public class EnemyKnockback : MonoBehaviour
     public float knockbackForce = 10f;
     public float knockbackDuration = 0.5f;
 
+    [SerializeField] private float _knockbackDamage = 30f;
+
+
     [SerializeField] private bool _isKnockbackActive = false;
     [SerializeField] private Vector2 _knockbackDirection;
     [SerializeField] private float _knockbackTimer;
@@ -24,7 +27,6 @@ public class EnemyKnockback : MonoBehaviour
         if (_knockbackTimer <= 0f)
         {
             _isKnockbackActive = false;
-            // Handle knockback recovery here (e.g., re-enable enemy behavior)
         }
     }
 
@@ -41,11 +43,12 @@ public class EnemyKnockback : MonoBehaviour
             Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
             playerRb.velocity = _knockbackDirection * knockbackForce;
 
-            // Start knockback effect
             _isKnockbackActive = true;
             _knockbackTimer = knockbackDuration;
 
-            // Disable player input or apply restrictions if needed
+            BaseEnemy.Instance.AttackPlayer(_knockbackDamage);
+
         }
+
     }
 }

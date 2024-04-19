@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPatrolChaseAttack : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private NewPlayerController player;
-    private Transform target;
+    private NewPlayerController _player;
+    private Transform _target;
+
     private Rigidbody2D rb;
     private Vector2 direction;
 
@@ -18,32 +17,18 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
 
     private void Start()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-
-        if (playerObject != null)
-        {
-            player = playerObject.GetComponent<NewPlayerController>();
-            target = playerObject.transform;
-
-            if (player == null)
-            {
-                Debug.LogError("Player component not found on the player object!");
-            }
-        }
-        else
-        {
-            Debug.LogError("Player object not found!");
-        }
+        _player = NewPlayerController.Instance;
+        _target = _player.transform;
     }
 
     private void Update()
     {
         UpdateCooldowns();
 
-        float distance = Vector2.Distance(transform.position, target.position);
-        direction = (target.position - transform.position).normalized;
+        float distance = Vector2.Distance(transform.position, _target.position);
+        direction = (_target.position - transform.position).normalized;
 
-        if (distance < attackRange)
+        if (distance < AttackRange)
         {
             isChasing = false;
             isPatrolling = false;
@@ -69,14 +54,14 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
     private void UpdateCooldowns()
     {
         // attack
-        if (attackAnimation)
+        if (IsAttackAnimationPlaying)
         {
-            attackTimer += Time.deltaTime;
+            _attackTimer += Time.deltaTime;
         }
-        if (attackTimer > attackDelay)
+        if (_attackTimer > _attackDelay)
         {
-            attackAnimation = false;
-            attackTimer = 0f;
+            IsAttackAnimationPlaying = false;
+            _attackTimer = 0f;
         }
     }
 
@@ -142,33 +127,33 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
     #region Attack
 
     [Header("Attack")]
-    public float attackRange = 5f;
-    public float damage = 300f;
 
-    // Timers
-    [HideInInspector] public bool attackAnimation = false;
-
-    private float attackTimer = 0.0f;
-    private float attackDelay = 0.85f;
-
+    [SerializeField] private float _attackRange = 5f;
+    [SerializeField] private float _damage = 20f;
     [SerializeField] private float attackDuration = 0.9f;
     [SerializeField] private float attackRate = 0.9f;
 
+    public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
+    public float Damage { get { return _damage; } set { _damage = value; } }
+
+    public bool IsAttackAnimationPlaying { get; set; }
+
+    private float _attackTimer = 0.0f;
+    private float _attackDelay = 0.85f;
+
     private void Attack()
     {
-        attackAnimation = true;
+        IsAttackAnimationPlaying = true;
 
-        if (!IsInvoking("PerformAttack"))
+        if (!IsInvoking("AttackPlayer"))
         {
-            InvokeRepeating("PerformAttack", attackDuration, attackRate);
+            InvokeRepeating("AttackPlayer", attackDuration, attackRate);
         }
     }
 
-    public void PerformAttack()
+    public void AttackPlayer()
     {
-        player.TakeDamage(damage);
-        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage);
-
+        NewPlayerController.Instance.TakeDamage(Damage);
     }
 
     #endregion

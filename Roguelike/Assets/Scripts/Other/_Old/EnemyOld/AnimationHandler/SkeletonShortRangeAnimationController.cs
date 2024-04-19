@@ -48,7 +48,7 @@ public class SkeletonShortRangeAnimationController : MonoBehaviour
             ChangeAnimationState(SkeletonHit);
         }
         // attack
-        else if (enemyBehavior.attackAnimation)
+        else if (enemyBehavior.IsAttackAnimationPlaying)
         {
             ChangeAnimationState(SkeletonAttack);
         }
