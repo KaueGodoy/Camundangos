@@ -11,6 +11,7 @@ public class ParticleManager : MonoBehaviour
     [Header("Particles")]
     [SerializeField] private GameObject _walkParticle;
     [SerializeField] private ParticleSystem _onCharacterChangedParticle;
+    [SerializeField] private ParticleSystem _onJumpParticle;
 
     private void Awake()
     {
@@ -20,8 +21,16 @@ public class ParticleManager : MonoBehaviour
     private void Start()
     {
         _changeCharacterController.OnCharacterChangedParticles += _changeCharacterController_OnCharacterChangedParticles;
+        NewPlayerMovement.Instance.OnJumpParticlesTriggered += NewPlayerMovement_OnJumpParticlesTriggered;
+
 
         HideParticle(_onCharacterChangedParticle);
+        HideParticle(_onJumpParticle);
+    }
+
+    private void NewPlayerMovement_OnJumpParticlesTriggered(object sender, System.EventArgs e)
+    {
+        ExecuteParticle(_onJumpParticle);
     }
 
     private void _changeCharacterController_OnCharacterChangedParticles(object sender, System.EventArgs e)

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class DamageableWithHealthBar : Damageable
 {
+    private bool _isHit = false;
+    public bool IsHit { get { return _isHit; } set { _isHit = value; } }
+
     public override void TakeDamage(float amount)
     {
         if (CurrentHealth == MaxHealth)
@@ -9,11 +12,12 @@ public abstract class DamageableWithHealthBar : Damageable
             InstantiateHealthBar();
         }
 
+        IsHit = true;
         CurrentHealth -= amount;
         _healthSystem.Damage(amount);
         DamagePopup.Create(transform.position, (int)amount);
 
-        if (CurrentHealth <= 0)
+        if (CurrentHealth <= HealthThreshold)
         {
             DisableHealthBar();
         }
@@ -44,4 +48,26 @@ public abstract class DamageableWithHealthBar : Damageable
         _healthBarTransform.gameObject.SetActive(false);
     }
 
+    [Header("Timers")]
+    private float _hitCooldown = 0.3f;
+    private float _hitTimer = 0.0f;
+
+    private void UpdateTimers()
+    {
+        if (IsHit)
+        {
+            _hitTimer += Time.deltaTime;
+        }
+
+        if (_hitTimer > _hitCooldown)
+        {
+            IsHit = false;
+            _hitTimer = 0f;
+        }
+    }
+
+    private void Update()
+    {
+        UpdateTimers();
+    }
 }

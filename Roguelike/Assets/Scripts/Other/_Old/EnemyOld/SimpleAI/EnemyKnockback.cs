@@ -46,7 +46,7 @@ public class EnemyKnockback : MonoBehaviour
             _isKnockbackActive = true;
             _knockbackTimer = knockbackDuration;
 
-            BaseEnemy.Instance.AttackPlayer(_knockbackDamage);
+            NewPlayerController.Instance.TakeDamage(_knockbackDamage);
 
         }
 

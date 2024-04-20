@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,6 +6,8 @@ using UnityEngine.InputSystem;
 public class NewPlayerMovement : MonoBehaviour
 {
     public static NewPlayerMovement Instance { get; private set; }
+
+    public event EventHandler OnJumpParticlesTriggered;
 
     [Header("Camera")]
     [SerializeField] private CameraFollowObject _cameraFollowObject;
@@ -228,6 +231,7 @@ public class NewPlayerMovement : MonoBehaviour
         if (_canJump)
         {
             AudioManager.Instance.PlaySound(_onPlayerJumpSFX);
+            OnJumpParticlesTriggered?.Invoke(this, EventArgs.Empty);
 
             if (_isJumpingMidAir)
             {

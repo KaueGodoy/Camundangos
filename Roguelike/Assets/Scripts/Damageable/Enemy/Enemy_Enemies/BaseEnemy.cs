@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class BaseEnemy : DamageableWithHealthBar
 {
-    public static BaseEnemy Instance { get; private set; }
+    private Rigidbody2D _rigidbody;
+    private BoxCollider2D _boxCollider;
 
     private void Awake()
     {
-        Instance = this;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();   
     }
 
-    public virtual void AttackPlayer(float damage)
+    public bool isDead()
     {
-        NewPlayerController.Instance.TakeDamage(damage);
+        return CurrentHealth <= HealthThreshold;
     }
+
+    public override void Die()
+    {
+        _rigidbody.bodyType = RigidbodyType2D.Static;
+        _boxCollider.enabled = false;
+
+        Debug.Log("Base enemy dead");
+        base.Die();
+    }
+
 }

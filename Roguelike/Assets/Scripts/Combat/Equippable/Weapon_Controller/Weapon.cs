@@ -3,22 +3,19 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IWeapon
 {
-    private AudioManager _audioManager;
     public Animator Animator { get; set; }
-
     public List<BaseStat> Stats { get; set; }
     public float CurrentDamage { get; set; }
 
     public virtual void Awake()
     {
-        _audioManager = FindObjectOfType<AudioManager>();
         Animator = GetComponent<Animator>();
     }
 
     public virtual void PerformAttack(float damage)
     {
         CurrentDamage = damage;
-        _audioManager.PlaySound("PlayerWeaponAttack");
+        AudioManager.Instance.PlaySound("PlayerWeaponAttack");
         //Debug.Log(this.name + " basic attack!");
     }
 
@@ -40,13 +37,13 @@ public abstract class Weapon : MonoBehaviour, IWeapon
         {
             damageable.TakeDamage(CurrentDamage);
             Debug.Log($"Dealing {CurrentDamage} damage to {collision.name}");
-            _audioManager.PlaySound("Hitmarker");
+            AudioManager.Instance.PlaySound("Hitmarker");
         }
     }
 
     public virtual void PlayWeaponAudio(string sfx)
     {
-        _audioManager.PlaySound(sfx);
+        AudioManager.Instance.PlaySound(sfx);
     }
 
 }

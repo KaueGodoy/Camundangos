@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class SkeletonShortRangeAnimationController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Skeleton skeleton;
-    [SerializeField] private EnemyPatrolChaseAttack enemyBehavior;
+    [SerializeField] private SkeletonV2 _skeleton;
+
+    private EnemyPatrolChaseAttack _enemyBehavior;
+    private Rigidbody2D _rb;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
+
+        _rb = _skeleton.GetComponent<Rigidbody2D>();
+        _enemyBehavior = _skeleton.GetComponent<EnemyPatrolChaseAttack>();
     }
 
     void Update()
@@ -18,7 +22,7 @@ public class SkeletonShortRangeAnimationController : MonoBehaviour
         UpdateAnimationState();
     }
 
-    private Animator animator;
+    private Animator _animator;
     private string currentAnimation;
 
     private const string SkeletonIdle = "skeletonv2_idle";
@@ -31,37 +35,31 @@ public class SkeletonShortRangeAnimationController : MonoBehaviour
     {
         if (currentAnimation == newAnimation) return;
 
-        animator.Play(newAnimation);
+        _animator.Play(newAnimation);
         currentAnimation = newAnimation;
     }
 
     private void UpdateAnimationState()
     {
-        // death
-        if (skeleton.isDead())
+        if (_skeleton.isDead())
         {
             ChangeAnimationState(SkeletonDeath);
         }
-        // hit
-        else if (skeleton.isHit)
+        else if (_skeleton.IsHit)
         {
             ChangeAnimationState(SkeletonHit);
         }
-        // attack
-        else if (enemyBehavior.IsAttackAnimationPlaying)
+        else if (_enemyBehavior.IsAttackAnimationPlaying)
         {
             ChangeAnimationState(SkeletonAttack);
         }
-        // move
-        else if (rb.velocity.x > 0 || rb.velocity.x < 0)
+        else if (_rb.velocity.x > 0 || _rb.velocity.x < 0)
         {
             ChangeAnimationState(SkeletonIdle);
         }
-        // idle
         else
         {
             ChangeAnimationState(SkeletonIdle);
         }
-
     }
 }

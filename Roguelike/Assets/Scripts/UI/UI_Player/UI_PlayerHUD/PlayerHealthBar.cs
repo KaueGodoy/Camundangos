@@ -20,7 +20,7 @@ public class PlayerHealthBar : MonoBehaviour
             _hpText.text = 0.ToString() + " / " + maxHealth;
         }
 
-        ChangeColor();
+        //ChangeColor();
     }
 
     private void ChangeColor()

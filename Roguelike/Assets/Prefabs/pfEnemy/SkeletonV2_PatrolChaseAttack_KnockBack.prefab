@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6294186944425174866}
-  skeleton: {fileID: 3520300614097066047}
+  skeleton: {fileID: 0}
   enemyBehavior: {fileID: 5736744242425253892}
 --- !u!1 &4524385441135660555
 GameObject:
@@ -198,8 +198,9 @@ GameObject:
   - component: {fileID: 266437058321444697}
   - component: {fileID: 6294186944425174866}
   - component: {fileID: 2008666891242067687}
-  - component: {fileID: 3520300614097066047}
+  - component: {fileID: 3020452669714454107}
   - component: {fileID: 5736744242425253892}
+  - component: {fileID: 7009176396382314472}
   m_Layer: 0
   m_Name: SkeletonV2
   m_TagString: Enemy
@@ -270,7 +271,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5630722, y: 2.8527799}
   m_EdgeRadius: 0
---- !u!114 &3520300614097066047
+--- !u!114 &3020452669714454107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,17 +280,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8596552061821336471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ad70b736d235534aa8424d3df1de411, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ab020230b94b1342a771e652b2e45fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 15000
-  isHit: 0
-  deathAnimationTime: 0.4
-  pfDeathEffect: {fileID: 6219346067317580066, guid: b36fb41bf12a24145a16f9711be0cd80, type: 3}
-  pfHealthBar: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
-  offset: {x: 0, y: 1.5, z: 0}
-  pickupItem: {fileID: 2208644363466943341, guid: 7114ae008266a3d4a84455a166d349c1, type: 3}
+  _currentHealth: 0
+  _maxHealth: 400
+  _healthBarPrefab: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
+  _offset: {x: 0, y: 1, z: 0}
+  _isHit: 0
 --- !u!114 &5736744242425253892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,11 +309,28 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 2602747118229976983}
   - {fileID: 4007914940769720396}
-  attackRange: 3
-  damage: 300
-  attackAnimation: 0
+  _attackRange: 5
+  _damage: 20
   attackDuration: 0.9
   attackRate: 0.9
+--- !u!114 &7009176396382314472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596552061821336471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 787fed3513ac19949a13a648d140531c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 10
+  knockbackDuration: 0.5
+  _knockbackDamage: 30
+  _isKnockbackActive: 0
+  _knockbackDirection: {x: 0, y: 0}
+  _knockbackTimer: 0
 --- !u!1 &8836444558920455376
 GameObject:
   m_ObjectHideFlags: 0
