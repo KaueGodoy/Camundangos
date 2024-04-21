@@ -47,12 +47,12 @@ public class DamagePopup : MonoBehaviour
         textMesh.SetText(damageAmount.ToString());
         if (!isCriticalHit)
         {   // non-crit
-            textMesh.fontSize = 6f;
+            textMesh.fontSize = 20f;
             textColor = UtilsClass.GetColorFromString("ff1f00");
         }
         else
         {   // crit hit
-            textMesh.fontSize = 10f;
+            textMesh.fontSize = 30f;
             textColor = UtilsClass.GetColorFromString("9f00ff");
         }
 
