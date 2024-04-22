@@ -39,6 +39,8 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void GameInput_OnCharacterChanged_Slot04(object sender, System.EventArgs e)
     {
+        if (NewPlayerMovement.Instance.IsControlLocked) return;
+
         if (OnCharacterUnlocked.Instance.IsLeoUnlocked)
             UpdateCurrentCharacter(GetCurrentCharacter(), _leoVisual);
         else
@@ -47,6 +49,8 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void GameInput_OnCharacterChanged_Slot03(object sender, System.EventArgs e)
     {
+        if (NewPlayerMovement.Instance.IsControlLocked) return;
+
         if (OnCharacterUnlocked.Instance.IsIsaUnlocked)
             UpdateCurrentCharacter(GetCurrentCharacter(), _isaVisual);
         else
@@ -55,15 +59,18 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void GameInput_OnCharacterChanged_Slot02(object sender, System.EventArgs e)
     {
+        if (NewPlayerMovement.Instance.IsControlLocked) return;
+
         if (OnCharacterUnlocked.Instance.IsMatiasUnlocked)
             UpdateCurrentCharacter(GetCurrentCharacter(), _matiasVisual);
         else
             OnCharacterChangedFailed?.Invoke(this, EventArgs.Empty);
-
     }
 
     private void GameInput_OnCharacterChanged_Slot01(object sender, System.EventArgs e)
     {
+        if (NewPlayerMovement.Instance.IsControlLocked) return;
+
         UpdateCurrentCharacter(GetCurrentCharacter(), _marceloVisual);
     }
 

@@ -73,10 +73,12 @@ public class NewPlayerMovement : MonoBehaviour
     public bool IsFacingRight { get { return _isFacingRight; } private set { } }
     public float CurrentRotation { get { return _isFacingRight ? 180f : 0f; } set { } }
     public float CurrentRotationDash { get { return transform.rotation.y >= 0 ? 1 : -1; } set { } }
+    public Rigidbody2D Rb { get; private set; }
 
     private BoxCollider2D _boxCollider;
 
-    public Rigidbody2D Rb { get; private set; }
+    [SerializeField] private bool _isControlLocked = false;
+    public bool IsControlLocked { get { return _isControlLocked; } set { _isControlLocked = value; } }
 
     private void Awake()
     {
@@ -108,6 +110,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (IsControlLocked) return;
+
         ProcessMovementStates();
     }
 
@@ -115,15 +119,18 @@ public class NewPlayerMovement : MonoBehaviour
     {
         HandleCameraLerp();
 
+        if (IsControlLocked) return;
+
         if (_isDashing) return;
+
         Move();
+        HandleFalling();
     }
 
     private void ProcessMovementStates()
     {
         ProcessHangTime();
         ResetJump();
-        HandleFalling();
     }
 
     private void ProcessHangTime()
@@ -193,6 +200,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     public void Jump()
     {
+        if (IsControlLocked) return;
+
         _jumpRequest = true;
 
         ProcessJump();
@@ -288,6 +297,8 @@ public class NewPlayerMovement : MonoBehaviour
 
     private void Dash()
     {
+        if (IsControlLocked) return;
+
         if (_canDash)
         {
             _dashRequest = true;

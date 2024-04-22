@@ -48,6 +48,7 @@ public class PlayerUlt : MonoBehaviour
             {
                 UltAttackRequest = false;
                 UltAttackAnimation = true;
+                NewPlayerMovement.Instance.IsControlLocked = true;
 
                 if (!_isUltPerformed)
                 {
@@ -73,6 +74,7 @@ public class PlayerUlt : MonoBehaviour
     private void UltComplete()
     {
         _isUltPerformed = false;
+        NewPlayerMovement.Instance.IsControlLocked = false;
     }
 
     public void UpdateUltTimer()

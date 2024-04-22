@@ -33,6 +33,8 @@ public class PlayerSkill : MonoBehaviour
 
     private void GameInput_OnPlayerSkill(object sender, System.EventArgs e)
     {
+        if (NewPlayerMovement.Instance.IsControlLocked) return;
+
         SkillAttackRequest = true;
         PerformSkill();
     }
