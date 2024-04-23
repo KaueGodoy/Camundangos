@@ -4,9 +4,13 @@ public class OnMatiasUnlockedVisual : OnCharacterUnlockedVisual
 {
     [SerializeField] private UnlockableCharacter _matias;
 
-    private void Start()
+    public override void Awake() => base.Awake();
+
+
+    public override void Start()
     {
-        HideParticlesOnStart();
+        base.Start();
+
         _matias.OnMatiasUnlockedVisual += _Character_OnMatiasUnlockedVisual;
     }
 

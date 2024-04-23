@@ -5,11 +5,10 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private PlayerHealthBar _healthBar;
 
-    private AudioManager _audioManager;
-
     [Header("Health")]
     [SerializeField] private float _currentHealth = 0;
     [SerializeField] private float _maxHealth = 3;
+    [SerializeField] private ParticleSystem _onDeathParticle;
 
     public static bool IsAlive { get; set; }
     public float MaxHealth { get { return _maxHealth; } }
@@ -19,17 +18,16 @@ public class PlayerHealth : MonoBehaviour
     public float HitCooldown = 0.3f;
     public float HitTimer = 0.0f;
     public static bool IsHit = false;
-    private readonly float deathAnimationTime = 0.8f;
+    private readonly float deathAnimationTime = 1.2f;
 
-    private void Awake()
-    {
-        _audioManager = FindObjectOfType<AudioManager>();
-    }
-
+   
     private void Start()
     {
         _currentHealth = _maxHealth;
         IsAlive = true;
+
+        ParticleManager.Instance.HideParticle(_onDeathParticle);
+
     }
 
     public void UpdatePlayerHealthBar()
@@ -41,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log($"Player takes: {damageAmount} damage");
 
-        _audioManager.PlaySound("Hit");
+        AudioManager.Instance.PlaySound("Hit");
         CurrentHealth -= Mathf.FloorToInt(damageAmount);
         IsHit = true;
 
@@ -58,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(float healAmount)
     {
-        _audioManager.PlaySound("Hit");
+        AudioManager.Instance.PlaySound("Hit");
         CurrentHealth += Mathf.FloorToInt(healAmount);
 
         if (CurrentHealth >= MaxHealth)
@@ -89,9 +87,11 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        _audioManager.PlaySound("GameOver");
+        ParticleManager.Instance.ExecuteParticle(_onDeathParticle);
+        AudioManager.Instance.PlaySound("GameOver");
+
+        NewPlayerMovement.Instance.IsControlLocked = true;
         IsAlive = false;
-        //_rb.bodyType = RigidbodyType2D.Static;
     }
     #endregion 
 

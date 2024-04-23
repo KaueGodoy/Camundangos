@@ -59,6 +59,22 @@ public class ParticleManager : MonoBehaviour
         particle.gameObject.SetActive(true);
     }
 
+    public void InstantiateParticle(ParticleSystem particle, Vector3 position)
+    {
+        ParticleSystem particleInstance = Instantiate(particle, position, Quaternion.identity);
+
+        particleInstance.Play();
+
+        if (particleInstance != null)
+        {
+            Debug.Log("Particle instantiated and played at position: " + position);
+        }
+        else
+        {
+            Debug.LogWarning("Failed to instantiate particle system!");
+        }
+    }
+
     private void FixedUpdate()
     {
         ToggleWalkParticle();

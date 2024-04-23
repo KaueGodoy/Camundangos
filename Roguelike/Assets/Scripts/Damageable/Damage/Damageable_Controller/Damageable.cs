@@ -6,9 +6,9 @@ public abstract class Damageable : MonoBehaviour, IDamageable
     [Header("HP")]
     [SerializeField] private float _currentHealth;
     [SerializeField] private float _maxHealth;
+    [SerializeField] private ParticleSystem _onDeathParticle;
 
     private readonly float _healthThreshold = 0.0f;
-
     public float CurrentHealth
     {
         get { return _currentHealth; }
@@ -37,8 +37,8 @@ public abstract class Damageable : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float amount)
     {
-        CurrentHealth -= amount;
         DamagePopup.Create(transform.position, (int)amount);
+        CurrentHealth -= amount;
     }
 
     [Header("Death")]
@@ -47,12 +47,17 @@ public abstract class Damageable : MonoBehaviour, IDamageable
 
     private void DeathEffect()
     {
-        if (_deathEffect != null)
+        if (_onDeathParticle != null)
         {
-            this.gameObject.SetActive(false);
-            GameObject effect = Instantiate(_deathEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 0.3f);
+            ParticleManager.Instance.InstantiateParticle(_onDeathParticle, transform.position);
         }
+
+        //if (_deathEffect != null)
+        //{
+        //    this.gameObject.SetActive(false);
+        //    GameObject effect = Instantiate(_deathEffect, transform.position, Quaternion.identity);
+        //    Destroy(effect, 0.3f);
+        //}
     }
 
     [Header("Drop")]

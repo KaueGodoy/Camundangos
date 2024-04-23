@@ -8,7 +8,7 @@ public class Testing_Manager : MonoBehaviour
 
     private void Start()
     {
-        _isActive = true;
+        _isActive = false;
         _testingPlayerMovementPanel.gameObject.SetActive(_isActive);
     }
 

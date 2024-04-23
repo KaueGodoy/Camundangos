@@ -13,6 +13,7 @@ public class NewPlayerController : MonoBehaviour
     [Header("Mobile")]
     [SerializeField] private GameObject _mobileUI;
     private bool isMobileUIActive;
+    //[SerializeField] private ParticleSystem _particle;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class NewPlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             _playerHealth.Heal(2);
+            //ParticleManager.Instance.InstantiateParticle(_particle, transform.position);
         }
 
         // DELETE

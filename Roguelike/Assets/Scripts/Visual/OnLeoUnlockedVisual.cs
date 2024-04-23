@@ -4,9 +4,12 @@ public class OnLeoUnlockedVisual : OnCharacterUnlockedVisual
 {
     [SerializeField] private UnlockableCharacter _leo;
 
-    private void Start()
+    public override void Awake() => base.Awake();
+
+    public override void Start()
     {
-        HideParticlesOnStart();
+        base.Start();
+
         _leo.OnLeoUnlockedVisual += _Character_OnLeoUnlockedVisual;
     }
 

@@ -63,6 +63,11 @@ public class Testing_PlayerMovement : MonoBehaviour
         });
     }
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         _moveSpeedText.text = "Move speed: " + NewPlayerMovement.Instance.MoveSpeed;

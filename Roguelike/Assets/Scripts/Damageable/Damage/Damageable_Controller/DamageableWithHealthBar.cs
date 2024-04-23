@@ -5,6 +5,9 @@ public abstract class DamageableWithHealthBar : Damageable
     private bool _isHit = false;
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
 
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem _particle;
+
     public override void TakeDamage(float amount)
     {
         if (CurrentHealth == MaxHealth)
@@ -16,6 +19,7 @@ public abstract class DamageableWithHealthBar : Damageable
         CurrentHealth -= amount;
         _healthSystem.Damage(amount);
         DamagePopup.Create(transform.position, (int)amount);
+        ParticleManager.Instance.InstantiateParticle(_particle, transform.position);
 
         if (CurrentHealth <= HealthThreshold)
         {

@@ -78,7 +78,28 @@ public class NewPlayerMovement : MonoBehaviour
     private BoxCollider2D _boxCollider;
 
     [SerializeField] private bool _isControlLocked = false;
-    public bool IsControlLocked { get { return _isControlLocked; } set { _isControlLocked = value; } }
+    public bool IsControlLocked
+    {
+        get { return _isControlLocked; }
+        set
+        {
+            _isControlLocked = value;
+
+            if (_isControlLocked)
+            {
+
+                if (Rb != null)
+                {
+                    Rb.velocity = Vector2.zero;
+                    Debug.Log("Velocity set to zero");
+                }
+                else
+                {
+                    Debug.LogWarning("Rigidbody component not found on the player GameObject.");
+                }
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -96,6 +117,8 @@ public class NewPlayerMovement : MonoBehaviour
         GameInput.Instance.OnPlayerDash += GameInput_OnPlayerDash;
 
         _canDash = true;
+
+        IsControlLocked = false;
     }
 
     private void GameInput_OnPlayerDash(object sender, System.EventArgs e)

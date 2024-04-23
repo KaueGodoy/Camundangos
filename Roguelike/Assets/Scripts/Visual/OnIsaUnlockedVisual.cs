@@ -4,9 +4,13 @@ public class OnIsaUnlockedVisual : OnCharacterUnlockedVisual
 {
     [SerializeField] private UnlockableCharacter _isa;
 
-    private void Start()
+    public override void Awake() => base.Awake();
+
+
+    public override void Start()
     {
-        HideParticlesOnStart();
+        base.Start();
+
         _isa.OnIsaUnlockedVisual += Character_OnIsaUnlockedVisual;
     }
 
