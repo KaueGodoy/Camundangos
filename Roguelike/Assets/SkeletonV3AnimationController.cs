@@ -3,7 +3,7 @@ using UnityEngine;
 public class SkeletonV3AnimationController : MonoBehaviour
 {
 
-    [SerializeField] private SkeletonV3 _skeletonV3;
+    [SerializeField] private SkeletonV3_Attack _skeletonV3;
 
     private Animator _animator;
 

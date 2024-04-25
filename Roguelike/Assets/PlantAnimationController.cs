@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlantAnimationController : MonoBehaviour
 {
-    [SerializeField] private Plant _plant;
+    [SerializeField] private Plant_Attack _plant;
 
     private Animator _animator;
 
