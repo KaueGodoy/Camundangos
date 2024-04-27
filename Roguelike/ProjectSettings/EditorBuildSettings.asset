@@ -12,4 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Testing (Kaue).unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 79316d5a9cc0b0947bc5494ddb146f4f, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 370c12c0ee9abfd44bf59aa4f368eeb8, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 847a5c0fa6b991f44a5cc680a5cdcdcf, type: 2}
