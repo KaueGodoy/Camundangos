@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference _playerInputAction;
 
     private PlayerControls _playerControls;
-    private AudioManager _audioManager;
 
     private Rigidbody2D _rb;
     public Rigidbody2D Rigidbody { get { return _rb; } }
@@ -15,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
-        _audioManager = FindObjectOfType<AudioManager>();
         _playerControls = new PlayerControls();
     }
 
@@ -128,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (JumpRequest)
         {
-            _audioManager.PlaySound("Jump");
+            AudioManager.Instance.PlaySound("Jump");
 
             if (IsJumpingMidAir)
             {

@@ -4,7 +4,6 @@ public class PlayerUlt_Projectile : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
-    private AudioManager _audioManager;
 
     [Header("Stats")]
     [SerializeField] private float _damage = 6f;
@@ -22,7 +21,6 @@ public class PlayerUlt_Projectile : MonoBehaviour
         _isFacingRight = NewPlayerMovement.Instance.IsFacingRight;
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -59,7 +57,7 @@ public class PlayerUlt_Projectile : MonoBehaviour
             damageable.TakeDamage(_damage);
             Debug.Log("Dealing damage: " + _damage);
 
-            _audioManager.PlaySound("Hitmarker");
+            AudioManager.Instance.PlaySound("Hitmarker");
             Destroy(gameObject);
         }
     }

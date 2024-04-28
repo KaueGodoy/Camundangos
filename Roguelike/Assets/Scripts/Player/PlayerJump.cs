@@ -18,7 +18,6 @@ public class PlayerJump : MonoBehaviour
     private const float _minJumpBuffer = -2f;
     private bool _isJumpingMidAir;
 
-    private AudioManager _audioManager;
     private Rigidbody2D _rb;
     private PlayerInputHandler _inputHandler;
     private PlayerGroundCheck _playerGroundCheck;
@@ -26,7 +25,6 @@ public class PlayerJump : MonoBehaviour
     private void Awake()
     {
         _inputHandler = GetComponent<PlayerInputHandler>();
-        _audioManager = FindObjectOfType<AudioManager>();
         _rb = GetComponent<Rigidbody2D>();
         _playerGroundCheck = GetComponent<PlayerGroundCheck>();
     }
@@ -70,7 +68,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (_inputHandler.IsJumpPressed())
         {
-            _audioManager.PlaySound("Jump");
+            AudioManager.Instance.PlaySound("Jump");
             
             _jumpCounter++;
 

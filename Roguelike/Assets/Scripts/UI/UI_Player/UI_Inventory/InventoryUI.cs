@@ -17,12 +17,9 @@ public class InventoryUI : MonoBehaviour
     public Item CurrentSelectedItem { get; set; }
     public bool MenuIsActive { get; set; }
 
-    private AudioManager _audioManager;
-
     private void Awake()
     {
         ItemContainer = Resources.Load<InventoryUIItem>("UI/Item_Container");
-        _audioManager = FindObjectOfType<AudioManager>();
         UIEventHandler.OnItemAddedToInventory += ItemAdded;
     }
 
@@ -56,7 +53,7 @@ public class InventoryUI : MonoBehaviour
     private bool OpenMenu(bool menuOpened)
     {
         if (menuOpened)
-            _audioManager.PlaySound("OnInventoryOpened");
+            AudioManager.Instance.PlaySound("OnInventoryOpened");
 
         return menuOpened;
     }
@@ -64,14 +61,14 @@ public class InventoryUI : MonoBehaviour
     private bool CloseMenu(bool menuClosed)
     {
         if (menuClosed)
-            _audioManager.PlaySound("OnInventoryClosed");
+            AudioManager.Instance.PlaySound("OnInventoryClosed");
 
         return menuClosed;
     }
 
     private void EnableSection()
     {
-        _audioManager.PlaySound("OnInventorySectionSelected");
+        AudioManager.Instance.PlaySound("OnInventorySectionSelected");
     }
 
     public void EnableSectionWeapon()

@@ -7,13 +7,6 @@ public class CharacterPanelUI : MonoBehaviour
 
     public bool PanelIsActive { get; set; }
 
-    private AudioManager _audioManager;
-
-    private void Awake()
-    {
-        _audioManager = FindObjectOfType<AudioManager>();
-    }
-
     void Start()
     {
         _characterPanel.gameObject.SetActive(false);
@@ -37,7 +30,7 @@ public class CharacterPanelUI : MonoBehaviour
     private bool OpenMenu(bool menuOpened)
     {
         if (menuOpened)
-            _audioManager.PlaySound("OnStatsOpened");
+            AudioManager.Instance.PlaySound("OnStatsOpened");
 
         return menuOpened;
     }
@@ -45,7 +38,7 @@ public class CharacterPanelUI : MonoBehaviour
     private bool CloseMenu(bool menuClosed)
     {
         if (menuClosed)
-            _audioManager.PlaySound("OnStatsClosed");
+            AudioManager.Instance.PlaySound("OnStatsClosed");
 
         return menuClosed;
     }

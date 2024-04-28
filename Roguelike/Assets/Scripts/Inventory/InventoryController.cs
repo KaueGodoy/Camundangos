@@ -12,13 +12,6 @@ public class InventoryController : MonoBehaviour
 
     public List<Item> playerItems = new List<Item>();
 
-    private AudioManager _audioManager;
-
-    private void Awake()
-    {
-        _audioManager = FindObjectOfType<AudioManager>();
-    }
-
     private void Start()
     {
         if (Instance != null && Instance != this)
@@ -62,13 +55,13 @@ public class InventoryController : MonoBehaviour
     public void EquipItem(Item itemToEquip)
     {
         playerWeaponController.EquipWeapon(itemToEquip);
-        _audioManager.PlaySound("OnItemEquipped");
+        AudioManager.Instance.PlaySound("OnItemEquipped");
     }
 
     public void ConsumeItem(Item itemToConsume)
     {
         consumableController.ConsumeItem(itemToConsume);
-        _audioManager.PlaySound("OnItemConsumed");
+        AudioManager.Instance.PlaySound("OnItemConsumed");
     }
 
 }

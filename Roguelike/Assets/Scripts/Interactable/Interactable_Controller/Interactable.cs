@@ -7,8 +7,6 @@ public abstract class Interactable : MonoBehaviour, IInteractable
 
     private InteractableController _interactableController;
 
-    public AudioManager AudioManager { get; set; }
-
     public string Name { get; set; }
 
     private bool _canInteract;
@@ -19,7 +17,6 @@ public abstract class Interactable : MonoBehaviour, IInteractable
     public virtual void Awake()
     {
         _interactableController = FindObjectOfType<InteractableController>();
-        AudioManager = FindObjectOfType<AudioManager>();
 
         SetName("Default name");
     }
@@ -39,7 +36,7 @@ public abstract class Interactable : MonoBehaviour, IInteractable
         Debug.Log($"Interacting with {gameObject.name}");
         _interactableController.ShowInteractionUI(Name);
         _canInteract = true;
-        AudioManager.PlaySound("OnInteractionEnabled");
+        AudioManager.Instance.PlaySound("OnInteractionEnabled");
     }
 
     public virtual void DisableInteraction()

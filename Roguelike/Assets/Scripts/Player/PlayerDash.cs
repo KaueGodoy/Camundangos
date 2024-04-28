@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerDash : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    private AudioManager _audioManager;
 
     [SerializeField] private TrailRenderer tr;
 
@@ -24,7 +23,6 @@ public class PlayerDash : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _audioManager = FindObjectOfType<AudioManager>();
         CanDash = true;
     }
 
@@ -42,7 +40,7 @@ public class PlayerDash : MonoBehaviour
         //    jumpCounter--;
         //}
 
-        _audioManager.PlaySound("PlayerDash");
+        AudioManager.Instance.PlaySound("PlayerDash");
 
         float originalGravity = _rb.gravityScale;
         _rb.gravityScale = 0f;

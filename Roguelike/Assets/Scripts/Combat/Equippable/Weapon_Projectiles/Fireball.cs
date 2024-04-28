@@ -9,13 +9,6 @@ public class Fireball : MonoBehaviour
 
     private Vector2 _spawnPosition;
 
-    private AudioManager _audioManager;
-
-    private void Awake()
-    {
-        _audioManager = FindObjectOfType<AudioManager>();
-    }
-
     private void Start()
     {
         _spawnPosition = transform.position;
@@ -38,7 +31,7 @@ public class Fireball : MonoBehaviour
         if (damageable != null)
         {
             damageable.TakeDamage(Damage);
-            _audioManager.PlaySound("Hitmarker");
+            AudioManager.Instance.PlaySound("Hitmarker");
             Debug.Log($"Dealing {Damage} damage to {collision.name}");
             Extinguish();
         }

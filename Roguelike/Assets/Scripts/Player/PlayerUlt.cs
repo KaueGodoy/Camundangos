@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerUlt : MonoBehaviour
 {
     private PlayerCooldowns _playerCooldowns;
-    private AudioManager _audioManager;
 
     [Header("Ult")]
     [SerializeField] private Transform UltSpawnPoint;
@@ -20,7 +19,6 @@ public class PlayerUlt : MonoBehaviour
     private void Awake()
     {
         _playerCooldowns = GetComponent<PlayerCooldowns>();
-        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -68,7 +66,7 @@ public class PlayerUlt : MonoBehaviour
     private void InstantiateUlt()
     {
         Instantiate(Projectile, UltSpawnPoint.position, UltSpawnPoint.rotation);
-        _audioManager.PlaySound("Attack");
+        AudioManager.Instance.PlaySound("Attack");
     }
 
     private void UltComplete()

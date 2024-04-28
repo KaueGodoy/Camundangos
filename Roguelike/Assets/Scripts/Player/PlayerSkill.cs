@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerSkill : MonoBehaviour
 {
     private PlayerCooldowns _playerCooldowns;
-    private AudioManager _audioManager;
 
     [Header("Skill")]
     public Transform SkillSpawnPoint;
@@ -22,7 +21,6 @@ public class PlayerSkill : MonoBehaviour
     private void Awake()
     {
         _playerCooldowns = GetComponent<PlayerCooldowns>();
-        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -73,7 +71,7 @@ public class PlayerSkill : MonoBehaviour
     private void InstantiateSkill()
     {
         Instantiate(Projectile, SkillSpawnPoint.position, SkillSpawnPoint.rotation);
-        _audioManager.PlaySound("Attack");
+        AudioManager.Instance.PlaySound("Attack");
     }
 
     private void SkillComplete()

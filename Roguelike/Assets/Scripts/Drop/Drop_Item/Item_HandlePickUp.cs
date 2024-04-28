@@ -14,7 +14,7 @@ public class Item_HandlePickUp : Interactable
         InventoryController.Instance.GiveItem(ItemDrop);
         PrintItemInformation();
         Destroy(gameObject);
-        AudioManager.PlaySound("OnItemPickup");
+        AudioManager.Instance.PlaySound("OnItemPickup");
     }
 
     private void PrintItemInformation()

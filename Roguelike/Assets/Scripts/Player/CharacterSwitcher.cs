@@ -8,12 +8,10 @@ public class CharacterSwitcher : MonoBehaviour
     private Vector3 _savedPosition;
 
     private PlayerInputHandler _inputHandler;
-    private AudioManager _audioManager;
 
     private void Awake()
     {
         _inputHandler = GetComponent<PlayerInputHandler>();
-        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -62,7 +60,7 @@ public class CharacterSwitcher : MonoBehaviour
 
             _currentCharacterIndex = newIndex;
 
-            _audioManager.PlaySound("OnCharacterSwitch");
+            AudioManager.Instance.PlaySound("OnCharacterSwitch");
         }
         else if (newIndex >= _characters.Length)
         {

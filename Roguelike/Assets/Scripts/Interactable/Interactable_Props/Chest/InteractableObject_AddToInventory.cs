@@ -34,6 +34,6 @@ public class InteractableObject_AddToInventory : Interactable
             GiveItemToPlayer(item);
         }
 
-        AudioManager.PlaySound("OnChestOpen");
+        AudioManager.Instance.PlaySound("OnChestOpen");
     }
 }

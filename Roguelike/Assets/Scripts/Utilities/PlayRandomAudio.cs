@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
 
-public class PlayRandomAudio : MonoBehaviour, IHasSound
+public class PlayRandomAudio : MonoBehaviour
 {
-    public AudioManager AudioManagerInstance { get; set; }
-
     [SerializeField] private TextAsset _file;
     [SerializeField] private string[] _environmentSoundNames;
 
@@ -15,7 +13,6 @@ public class PlayRandomAudio : MonoBehaviour, IHasSound
 
     private void Awake()
     {
-        AudioManagerInstance = FindObjectOfType<AudioManager>();
         LoadFile();
     }
 
@@ -48,7 +45,7 @@ public class PlayRandomAudio : MonoBehaviour, IHasSound
 
         string randomSoundName = _environmentSoundNames[UnityEngine.Random.Range(0, _environmentSoundNames.Length)];
 
-        AudioManagerInstance.PlaySound(randomSoundName);
+        AudioManager.Instance.PlaySound(randomSoundName);
         Debug.Log("Playing audio: " + randomSoundName);
     }
 

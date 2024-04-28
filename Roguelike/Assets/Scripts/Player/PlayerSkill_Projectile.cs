@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerSkill_Projectile : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    private AudioManager _audioManager;
 
     [Header("Stats")]
     [SerializeField] private float _damage = 6f;
@@ -15,7 +14,6 @@ public class PlayerSkill_Projectile : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -37,7 +35,7 @@ public class PlayerSkill_Projectile : MonoBehaviour
             damageable.TakeDamage(_damage);
             Debug.Log("Dealing damage: " + _damage);
 
-            _audioManager.PlaySound("Hitmarker");
+            AudioManager.Instance.PlaySound("Hitmarker");
             Destroy(gameObject);
         }
     }

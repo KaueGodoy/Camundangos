@@ -1,3 +1,5 @@
 ﻿Key,Id,English (United States)(en-US),Portuguese (Brazil)(pt-BR),Japanese(ja)
 PlayKey,1,Play,Jogar,プレイ
 SettingsKey,2,Settings,Opções,設定
+QuitKey,3,Quit,Sair,終了
+ReturnKey,4,Return,Voltar,戻る

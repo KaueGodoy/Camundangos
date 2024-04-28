@@ -36,7 +36,7 @@ public class Chest : Interactable
             GiveItemToPlayer(item);
         }
 
-        AudioManager.PlaySound("OnChestOpen");
+        AudioManager.Instance.PlaySound("OnChestOpen");
         OnChestOpenedParticles?.Invoke(this, EventArgs.Empty);
     }
 }
