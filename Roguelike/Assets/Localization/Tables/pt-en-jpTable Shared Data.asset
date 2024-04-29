@@ -31,6 +31,22 @@ MonoBehaviour:
     m_Key: ReturnKey
     m_Metadata:
       m_Items: []
+  - m_Id: 5
+    m_Key: LanguageKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6
+    m_Key: EnglishLanguageKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7
+    m_Key: JapaneseLanguageKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8
+    m_Key: BrazilianPortugueseLanguageKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -3,3 +3,7 @@ PlayKey,1,Play,Jogar,プレイ
 SettingsKey,2,Settings,Opções,設定
 QuitKey,3,Quit,Sair,終了
 ReturnKey,4,Return,Voltar,戻る
+LanguageKey,5,Language,Idioma,言語
+EnglishLanguageKey,6,English,English,English
+JapaneseLanguageKey,7,日本語,日本語,日本語
+BrazilianPortugueseLanguageKey,8,Português,Português,Português

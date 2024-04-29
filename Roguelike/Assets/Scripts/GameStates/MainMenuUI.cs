@@ -8,9 +8,9 @@ public class MainMenuUI : MonoBehaviour
 
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _settingsButton;
+    [SerializeField] private Transform _settingsPanel;
     [SerializeField] private Button _quitButton;
-
-
+    
     private void Awake()
     {
         _playButton.onClick.AddListener(() =>
@@ -20,7 +20,8 @@ public class MainMenuUI : MonoBehaviour
 
         _settingsButton.onClick.AddListener(() =>
         {
-
+            this.gameObject.SetActive(false);
+            _settingsPanel.gameObject.SetActive(true);
         });
 
         _quitButton.onClick.AddListener(() =>
