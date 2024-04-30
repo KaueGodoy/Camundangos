@@ -7,3 +7,6 @@ LanguageKey,5,Language,Idioma,言語
 EnglishLanguageKey,6,English,English,English
 JapaneseLanguageKey,7,日本語,日本語,日本語
 BrazilianPortugueseLanguageKey,8,Português,Português,Português
+MainMenuKey,9,Main Menu,Menu,メニュー
+RestartKey,10,Restart,Reiniciar,リトライ
+ResumeKey,11,Resume,Continuar,続ける

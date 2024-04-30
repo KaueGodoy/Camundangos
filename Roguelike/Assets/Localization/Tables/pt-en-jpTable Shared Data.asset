@@ -47,6 +47,18 @@ MonoBehaviour:
     m_Key: BrazilianPortugueseLanguageKey
     m_Metadata:
       m_Items: []
+  - m_Id: 9
+    m_Key: MainMenuKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10
+    m_Key: RestartKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11
+    m_Key: ResumeKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

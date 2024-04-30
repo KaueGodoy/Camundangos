@@ -50,6 +50,18 @@ MonoBehaviour:
     m_Localized: "Portugu\xEAs"
     m_Metadata:
       m_Items: []
+  - m_Id: 9
+    m_Localized: "\u30E1\u30CB\u30E5\u30FC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10
+    m_Localized: "\u30EA\u30C8\u30E9\u30A4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11
+    m_Localized: "\u7D9A\u3051\u308B"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
