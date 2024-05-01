@@ -16,13 +16,57 @@ public class NPC : Interactable
     private int _brazilianPortugueseLocaleIndex = 1;
     private int _JapaneseLocaleIndex = 2;
 
-    private void OnValidate()
+    //private void OnValidate()
+    //{
+    //    LoadDialogueFile();
+    //}
+
+    //private void LoadDialogueFile()
+    //{
+    //    if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_englishLocaleIndex])
+    //    {
+    //        dialogue = _englishText ? _englishText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
+    //    }
+    //    else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_brazilianPortugueseLocaleIndex])
+    //    {
+    //        dialogue = _brazilianPortugueseText ? _brazilianPortugueseText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
+    //    }
+    //    else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_JapaneseLocaleIndex])
+    //    {
+    //        dialogue = _japaneseText ? _japaneseText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
+    //    }
+    //}
+
+    private void Start()
+    {
+        LoadDialogueFile();
+    }
+
+    // You may also want to listen to events related to language/locale changes and update the dialogue accordingly.
+    private void OnEnable()
+    {
+        LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
+    }
+
+    private void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
+    }
+
+    private void OnSelectedLocaleChanged(Locale newLocale)
     {
         LoadDialogueFile();
     }
 
     private void LoadDialogueFile()
     {
+        if (LocalizationSettings.SelectedLocale == null)
+        {
+            Debug.LogWarning("Selected locale is null.");
+            return;
+        }
+
+        // Load dialogue based on the selected locale
         if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_englishLocaleIndex])
         {
             dialogue = _englishText ? _englishText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
