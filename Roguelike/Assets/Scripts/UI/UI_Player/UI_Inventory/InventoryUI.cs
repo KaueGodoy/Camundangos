@@ -48,6 +48,8 @@ public class InventoryUI : MonoBehaviour
         _inventoryPanel.gameObject.SetActive(MenuIsActive);
         OpenMenu(MenuIsActive);
         CloseMenu(!MenuIsActive);
+
+        MouseManager.Instance.TriggerCursorState();
     }
 
     private bool OpenMenu(bool menuOpened)

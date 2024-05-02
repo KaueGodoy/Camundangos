@@ -37,10 +37,10 @@ public class NPC : Interactable
     //    }
     //}
 
-    private void Start()
-    {
-        LoadDialogueFile();
-    }
+    //private void Start()
+    //{
+    //    LoadDialogueFile();
+    //}
 
     // You may also want to listen to events related to language/locale changes and update the dialogue accordingly.
     private void OnEnable()
@@ -55,7 +55,7 @@ public class NPC : Interactable
 
     private void OnSelectedLocaleChanged(Locale newLocale)
     {
-        LoadDialogueFile();
+
     }
 
     private void LoadDialogueFile()
@@ -88,9 +88,16 @@ public class NPC : Interactable
         IsInDialogue = true;
         AudioManager.Instance.PlaySound("OnTutorialShowUp");
 
+        CreateDialogue();
+        Debug.Log("Interacting with NPC class");
+    }
+
+    private void CreateDialogue()
+    {
+        LoadDialogueFile();
+
         DialogueSystem.Instance.AddNewDialogue(dialogue, this._name);
 
-        Debug.Log("Interacting with NPC class");
     }
 
     public override void DisableInteraction()

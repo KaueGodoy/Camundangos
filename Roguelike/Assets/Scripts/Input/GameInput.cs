@@ -22,6 +22,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnInventoryPressed;
     public event EventHandler OnCharacterStatsPressed;
     public event EventHandler OnPausePressed;
+    public event EventHandler OnShowCursorPressed;
 
     private PlayerControls _playerControls;
 
@@ -50,6 +51,13 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Pause.performed += Pause_performed;
 
         _playerControls.UI.Interact.performed += Interact_performed;
+        _playerControls.UI.ShowCursor.performed += ShowCursor_performed;
+
+    }
+
+    private void ShowCursor_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnShowCursorPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -149,6 +157,7 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Stats.performed -= Stats_performed;
         _playerControls.UI.Pause.performed -= Pause_performed;
         _playerControls.UI.Interact.performed -= Interact_performed;
+        _playerControls.UI.ShowCursor.performed -= ShowCursor_performed;
 
 
     }

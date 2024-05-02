@@ -35,6 +35,8 @@ public class PauseMenu : MonoBehaviour
         {
             Pause();
         }
+
+        MouseManager.Instance.ShowCursor();
     }
 
     private void SetFader()

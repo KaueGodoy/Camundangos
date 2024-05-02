@@ -17,6 +17,8 @@ public class CharacterPanelUI : MonoBehaviour
     private void GameInput_OnCharacterStatsPressed(object sender, System.EventArgs e)
     {
         ActivateMenu();
+
+        MouseManager.Instance.TriggerCursorState();
     }
 
     private void ActivateMenu()

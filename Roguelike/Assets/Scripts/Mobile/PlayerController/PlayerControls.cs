@@ -292,6 +292,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""bf256613-e60a-4e71-9754-506e1e6a8e62"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a6dd0999-e95d-41c1-b7d7-54d5fb3b3f0f"",
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
@@ -394,6 +405,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Mobile"",
                     ""type"": ""Button"",
                     ""id"": ""da0cb618-6edb-4980-aa0f-a2147196a172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""38b6a5ce-8fcd-4f46-ae39-ea511f08799a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -598,6 +618,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Character4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79d44b2d-206b-443c-92d4-82f127968b31"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -624,6 +655,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_Character4 = m_UI.FindAction("Character4", throwIfNotFound: true);
         m_UI_Interact = m_UI.FindAction("Interact", throwIfNotFound: true);
         m_UI_Mobile = m_UI.FindAction("Mobile", throwIfNotFound: true);
+        m_UI_ShowCursor = m_UI.FindAction("ShowCursor", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -788,6 +820,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Character4;
     private readonly InputAction m_UI_Interact;
     private readonly InputAction m_UI_Mobile;
+    private readonly InputAction m_UI_ShowCursor;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
@@ -801,6 +834,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Character4 => m_Wrapper.m_UI_Character4;
         public InputAction @Interact => m_Wrapper.m_UI_Interact;
         public InputAction @Mobile => m_Wrapper.m_UI_Mobile;
+        public InputAction @ShowCursor => m_Wrapper.m_UI_ShowCursor;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -837,6 +871,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Mobile.started += instance.OnMobile;
             @Mobile.performed += instance.OnMobile;
             @Mobile.canceled += instance.OnMobile;
+            @ShowCursor.started += instance.OnShowCursor;
+            @ShowCursor.performed += instance.OnShowCursor;
+            @ShowCursor.canceled += instance.OnShowCursor;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -868,6 +905,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Mobile.started -= instance.OnMobile;
             @Mobile.performed -= instance.OnMobile;
             @Mobile.canceled -= instance.OnMobile;
+            @ShowCursor.started -= instance.OnShowCursor;
+            @ShowCursor.performed -= instance.OnShowCursor;
+            @ShowCursor.canceled -= instance.OnShowCursor;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -906,5 +946,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnCharacter4(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMobile(InputAction.CallbackContext context);
+        void OnShowCursor(InputAction.CallbackContext context);
     }
 }

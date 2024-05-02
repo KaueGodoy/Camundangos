@@ -270,6 +270,17 @@
                 },
                 {
                     "name": "",
+                    "id": "bf256613-e60a-4e71-9754-506e1e6a8e62",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a6dd0999-e95d-41c1-b7d7-54d5fb3b3f0f",
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
@@ -372,6 +383,15 @@
                     "name": "Mobile",
                     "type": "Button",
                     "id": "da0cb618-6edb-4980-aa0f-a2147196a172",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowCursor",
+                    "type": "Button",
+                    "id": "38b6a5ce-8fcd-4f46-ae39-ea511f08799a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -574,6 +594,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Character4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79d44b2d-206b-443c-92d4-82f127968b31",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowCursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
