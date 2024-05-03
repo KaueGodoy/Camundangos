@@ -2,7 +2,7 @@
   {
     "objectSlug": "sword",
     "itemName": "ZeKa Pyrostorm",
-    "description": "The legendary sword",
+    "description": "Reza a lenda que a espada surgiu das chamas incessantes vindas do tornado de fogo do viajante proibido, ZeKa",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
@@ -42,7 +42,7 @@
   {
     "objectSlug": "staff",
     "itemName": "Glacial ZeKa",
-    "description": "Infinity ice",
+    "description": "A chama incessante se torna o gelo nao hesitante, eterno solido",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
@@ -67,7 +67,7 @@
    {
     "objectSlug": "Sword_Untuned",
     "itemName": "A Desafinada",
-    "description": "To play a wrong note is insignificant; to play without passion is inexcusable.",
+    "description": "Transforma notas certas em erradas",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
