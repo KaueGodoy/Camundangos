@@ -26,6 +26,8 @@ public class MessageUI : MonoBehaviour
     private int _brazilianPortugueseLocaleIndex = 1;
     private int _JapaneseLocaleIndex = 2;
 
+    private string _onCharacterChangeFailedMessageKey = "PlayKey";
+
     private void Start()
     {
         ChangeCharacterController.Instance.OnCharacterChangedFailed += ChangeCharacterController_OnCharacterChangedFailed;
@@ -35,18 +37,27 @@ public class MessageUI : MonoBehaviour
 
     private void ChangeCharacterController_OnCharacterChangedFailed(object sender, System.EventArgs e)
     {
-        if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_englishLocaleIndex])
+
+        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_onCharacterChangeFailedMessageKey).Completed += handle =>
         {
-            ShowMessage(_onCharacterChangeFailedMessage_EnUs, _onCharacterChangeFailedSFX);
-        }
-        else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_brazilianPortugueseLocaleIndex])
-        {
-            ShowMessage(_onCharacterChangeFailedMessage_PtBr, _onCharacterChangeFailedSFX);
-        }
-        else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_JapaneseLocaleIndex])
-        {
-            ShowMessage(_onCharacterChangeFailedMessage_Jp, _onCharacterChangeFailedSFX);
-        }
+            string localizedMessage = handle.Result;
+
+            ShowMessage(localizedMessage, _onCharacterChangeFailedSFX);
+        };
+
+        //if (LocalizationManager.Instance.IsLanguageEnglish())
+        //{
+
+        //    ShowMessage(_onCharacterChangeFailedMessage_EnUs, _onCharacterChangeFailedSFX);
+        //}
+        //else if (LocalizationManager.Instance.IsLanguageBrazilianPortuguese())
+        //{
+        //    ShowMessage(_onCharacterChangeFailedMessage_PtBr, _onCharacterChangeFailedSFX);
+        //}
+        //else if (LocalizationManager.Instance.IsLanguageJapanese())
+        //{
+        //    ShowMessage(_onCharacterChangeFailedMessage_Jp, _onCharacterChangeFailedSFX);
+        //}
     }
 
     private void ShowMessage(string message, string audioString)
