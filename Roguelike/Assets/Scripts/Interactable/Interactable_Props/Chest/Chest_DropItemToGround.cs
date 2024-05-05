@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class Chest_DropItemToGround : Chest
 {
@@ -7,10 +8,18 @@ public class Chest_DropItemToGround : Chest
     [SerializeField] private Item_HandlePickUp _pickupItem;
     public DropTable DropTable { get; set; }
 
+    private string _chestKey = "CommonChestKey";
+
     public override void Awake()
     {
         base.Awake();
-        SetName("Baú Comum");
+
+        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_chestKey).Completed += handle =>
+        {
+            string localizedMessage = handle.Result;
+
+            SetName(localizedMessage);
+        };
 
         CreateLoot();
     }

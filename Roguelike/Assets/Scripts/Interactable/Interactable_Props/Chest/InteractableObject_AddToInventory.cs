@@ -1,15 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class InteractableObject_AddToInventory : Interactable
 {
-    [SerializeField] private string _name;
+    [SerializeField] private string _nameKey;
     [SerializeField] private List<string> drops = new List<string>();
 
     public override void Awake()
     {
         base.Awake();
-        Name = _name;
+
+        Name = _nameKey;
+
+        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(Name).Completed += handle =>
+        {
+            string localizedMessage = handle.Result;
+
+            SetName(localizedMessage);
+        };
     }
 
     public List<string> Drops

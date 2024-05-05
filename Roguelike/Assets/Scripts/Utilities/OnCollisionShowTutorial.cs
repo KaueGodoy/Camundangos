@@ -1,33 +1,57 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class OnCollisionShowTutorial : MonoBehaviour
 {
-    private GameObject _tutorialText;
+    [SerializeField] private string _tutorialKey = " ";
+
+    private GameObject _tutorialGameObject;
+    private TextMeshProUGUI _tutorialText;
 
     private void Start()
     {
-        _tutorialText = transform.Find("TutorialText").gameObject;
+        _tutorialGameObject = transform.Find("TutorialText").gameObject;
+        _tutorialText = _tutorialGameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        PopulateText();
+    }
+
+    private void PopulateText()
+    {
+        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_tutorialKey).Completed += handle =>
+        {
+            string localizedMessage = handle.Result;
+
+            ShowMessage(localizedMessage, "OnTutorialShowUp");
+        };
+    }
+
+    private void ShowMessage(string message, string audioString)
+    {
+        _tutorialText.text = message;
+        AudioManager.Instance.PlaySound(audioString);
+        Debug.Log("Message showing");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            if (_tutorialText != null)
+            if (_tutorialGameObject != null)
             {
-                AudioManager.Instance.PlaySound("OnTutorialShowUp");
-                _tutorialText.SetActive(true);
+                _tutorialGameObject.SetActive(true);
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) 
+        if (collision.CompareTag("Player"))
         {
-            if (_tutorialText != null)
+            if (_tutorialGameObject != null)
             {
-                _tutorialText.SetActive(false);
+                _tutorialGameObject.SetActive(false);
             }
         }
     }

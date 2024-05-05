@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class Chest : Interactable
 {
@@ -8,10 +9,18 @@ public class Chest : Interactable
 
     [SerializeField] private List<string> drops = new List<string>();
 
+    private string _chestKey = "ChestKey";
+
     public override void Awake()
     {
         base.Awake();
-        SetName("Chest");
+
+        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_chestKey).Completed += handle =>
+        {
+            string localizedMessage = handle.Result;
+
+            SetName(localizedMessage);
+        };
     }
 
     public List<string> Drops
