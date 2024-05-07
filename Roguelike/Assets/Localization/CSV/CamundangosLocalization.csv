@@ -47,4 +47,5 @@ ChestKey,23,Chest,Baú,宝箱
 SwordKey,24,Sword,Espada,剣
 AudioKey,25,Audio,Áudio,音量
 BGMKey,26,BGM,BGM,BGM
-SFXKey,27,SFX,SFX,SFX
+SFXKey,27,SFX,SFX,SE
+MasterKey,28,Master,Geral,マスター

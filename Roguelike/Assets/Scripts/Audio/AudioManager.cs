@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,8 +15,6 @@ public class AudioManager : MonoBehaviour
     public float CurrentMasterVolume { get { return _masterVolume; } set { _masterVolume = value; } }
     public float CurrentBGMVolume { get { return _bgmVolume; } set { _bgmVolume = value; } }
     public float CurrentSFXVolume { get { return _sfxVolume; } set { _sfxVolume = value; } }
-
-
 
     private void Awake()
     {
@@ -67,7 +64,7 @@ public class AudioManager : MonoBehaviour
             Debug.Log("volume changed");
         }
 
-        s.source.volume = s.volume * _bgmVolume * _masterVolume;
+        s.source.volume = s.volume * CurrentBGMVolume * CurrentMasterVolume;
         s.source.Play();
     }
 
@@ -86,7 +83,7 @@ public class AudioManager : MonoBehaviour
             Debug.Log("volume changed");
         }
 
-        s.source.volume = s.volume * _sfxVolume * _masterVolume;
+        s.source.volume = s.volume * CurrentSFXVolume * CurrentMasterVolume;
         s.source.Play();
     }
 
@@ -99,7 +96,7 @@ public class AudioManager : MonoBehaviour
             return;
 
         }
-        s.source.volume = s.volume * _masterVolume;
+        s.source.volume = s.volume * CurrentMasterVolume;
         s.source.PlayOneShot(s.clip);
 
     }

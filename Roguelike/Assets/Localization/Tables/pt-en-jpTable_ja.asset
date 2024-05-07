@@ -115,6 +115,22 @@ MonoBehaviour:
     m_Localized: "\u5263"
     m_Metadata:
       m_Items: []
+  - m_Id: 25
+    m_Localized: "\u97F3\u91CF"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26
+    m_Localized: BGM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27
+    m_Localized: SE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28
+    m_Localized: "\u30DE\u30B9\u30BF\u30FC"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
