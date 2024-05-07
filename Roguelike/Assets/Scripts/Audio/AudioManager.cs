@@ -1,11 +1,23 @@
 using UnityEngine;
 using System;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
     public static AudioManager Instance;
+
+    [SerializeField] private float _masterVolume = 1.0f;
+    [SerializeField] private float _bgmVolume = 1.0f;
+    [SerializeField] private float _sfxVolume = 1.0f;
+
+    public string CurrentBGM { get; set; }
+    public float CurrentMasterVolume { get { return _masterVolume; } set { _masterVolume = value; } }
+    public float CurrentBGMVolume { get { return _bgmVolume; } set { _bgmVolume = value; } }
+    public float CurrentSFXVolume { get { return _sfxVolume; } set { _sfxVolume = value; } }
+
+
 
     private void Awake()
     {
@@ -35,10 +47,28 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlaySound("Theme");
+        CurrentBGM = "Theme";
 
-        // ignore listener pause 
-        // audiosource.ignoreListenerPause = true;
+        PlayBGM(CurrentBGM);
+    }
+
+    public void PlayBGM(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound " + name + " not found!");
+            return;
+        }
+
+        if (PauseMenu.GameIsPaused)
+        {
+            s.source.pitch = 0f;
+            Debug.Log("volume changed");
+        }
+
+        s.source.volume = s.volume * _bgmVolume * _masterVolume;
+        s.source.Play();
     }
 
     public void PlaySound(string name)
@@ -56,6 +86,7 @@ public class AudioManager : MonoBehaviour
             Debug.Log("volume changed");
         }
 
+        s.source.volume = s.volume * _sfxVolume * _masterVolume;
         s.source.Play();
     }
 
@@ -68,6 +99,7 @@ public class AudioManager : MonoBehaviour
             return;
 
         }
+        s.source.volume = s.volume * _masterVolume;
         s.source.PlayOneShot(s.clip);
 
     }
@@ -82,5 +114,30 @@ public class AudioManager : MonoBehaviour
 
         }
         s.source.Stop();
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        CurrentMasterVolume = volume;
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        CurrentBGMVolume = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        CurrentSFXVolume = volume;
+    }
+
+    public void ChangeGlobalVolume(float masterVolume, float bgmVolume, float sfxVolume)
+    {
+        SetMasterVolume(masterVolume);
+        SetBGMVolume(bgmVolume);
+        SetSFXVolume(sfxVolume);
+
+        PlayBGM(CurrentBGM);
+
     }
 }

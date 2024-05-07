@@ -7,6 +7,10 @@ public class SettingsMenuUI : MonoBehaviour
     [SerializeField] private Button _closeButton;
     [SerializeField] private Transform _languagePanel;
 
+    [SerializeField] private Button _audioButton;
+    [SerializeField] private Button _audioCloseButton;
+    [SerializeField] private Transform _audioPanel;
+
     private void Awake()
     {
         _languageButton.onClick.AddListener(() =>
@@ -17,6 +21,17 @@ public class SettingsMenuUI : MonoBehaviour
         _closeButton.onClick.AddListener(() =>
         {
             ShowAndHide(_languagePanel);
+        }
+        );
+
+        _audioButton.onClick.AddListener(() =>
+        {
+            ShowAndHide(_audioPanel);
+        }
+        );
+        _audioCloseButton.onClick.AddListener(() =>
+        {
+            ShowAndHide(_audioPanel);
         }
         );
     }
@@ -31,6 +46,8 @@ public class SettingsMenuUI : MonoBehaviour
         {
             obj.gameObject.SetActive(true);
         }
+
+        AudioManager.Instance.PlaySound("OnUIPressed");
     }
 
 }

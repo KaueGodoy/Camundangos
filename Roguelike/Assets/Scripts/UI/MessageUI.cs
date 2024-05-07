@@ -42,7 +42,7 @@ public class MessageUI : MonoBehaviour
         Show();
         _messageText.text = message;
         _animator.Play(_fadeInAnimation);
-        AudioManager.Instance.PlaySoundOneShot(audioString);
+        AudioManager.Instance.PlaySound(audioString);
 
         StartCoroutine(HideAfterDelay(_messageHideDelay));
     }

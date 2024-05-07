@@ -12,6 +12,7 @@ public class SettingsPanelUI : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             _menuPanel.gameObject.SetActive(true);
+            AudioManager.Instance.PlaySound("OnUIPressed");
         });
     }
 }
