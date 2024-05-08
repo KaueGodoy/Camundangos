@@ -15,7 +15,6 @@ public class SettingsMenuUI : MonoBehaviour
     {
         _languageButton.onClick.AddListener(() =>
         {
-            //_languagePanel.gameObject.SetActive(true);
             ShowAndHide(_languagePanel);
         });
         _closeButton.onClick.AddListener(() =>

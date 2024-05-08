@@ -39,17 +39,6 @@ public class LanguageManager : MonoBehaviour
             ChangeLocaleId(_japaneseLocaleId);
         });
 
-        //if (Instance == null)
-        //{
-        //    Instance = this;
-        //}
-        //else
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
-        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -63,9 +52,9 @@ public class LanguageManager : MonoBehaviour
     {
         if (_isActive) return;
 
+        AudioManager.Instance.PlaySound("OnUIPressed");
         CallSetLocaleCoroutine(localeId);
         Debug.Log("Locale id: " + _currentLocaleId);
-
     }
 
     private void CallSetLocaleCoroutine(int localeId)

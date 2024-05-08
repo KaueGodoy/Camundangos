@@ -10,7 +10,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Transform _settingsPanel;
     [SerializeField] private Button _quitButton;
-    
+
     private void Awake()
     {
         _playButton.onClick.AddListener(() =>
@@ -20,8 +20,7 @@ public class MainMenuUI : MonoBehaviour
 
         _settingsButton.onClick.AddListener(() =>
         {
-            this.gameObject.SetActive(false);
-            _settingsPanel.gameObject.SetActive(true);
+            OpenSettings();
         });
 
         _quitButton.onClick.AddListener(() =>
@@ -30,9 +29,19 @@ public class MainMenuUI : MonoBehaviour
         });
     }
 
+    private void OpenSettings()
+    {
+        AudioManager.Instance.PlaySound("OnUIPressed");
+
+        this.gameObject.SetActive(false);
+        _settingsPanel.gameObject.SetActive(true);
+    }
+
     public void Play()
     {
         // Alpha
+        AudioManager.Instance.PlaySound("OnUIPressed");
+
         _fader.gameObject.SetActive(true);
         LeanTween.alpha(_fader, 0, 0f);
         LeanTween.alpha(_fader, 1, 0.5f).setOnComplete(() =>
@@ -44,6 +53,8 @@ public class MainMenuUI : MonoBehaviour
     public void Quit()
     {
         Debug.Log("Quitting...");
+        AudioManager.Instance.PlaySound("OnUIPressed");
+
         Application.Quit();
     }
 }
