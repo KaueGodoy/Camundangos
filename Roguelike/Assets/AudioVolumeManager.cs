@@ -11,6 +11,11 @@ public class AudioVolumeManager : MonoBehaviour
 
     private void Awake()
     {
+     
+    }
+
+    private void Start()
+    {
         _masterSlider.value = _sliderDefaultValue;
         _bgmSlider.value = _sliderDefaultValue;
         _sfxSlider.value = _sliderDefaultValue;
@@ -18,19 +23,19 @@ public class AudioVolumeManager : MonoBehaviour
         _masterSlider.onValueChanged.AddListener((volume) =>
         {
             AudioManager.Instance.ChangeGlobalVolume(volume, AudioManager.Instance.CurrentBGMVolume, AudioManager.Instance.CurrentSFXVolume);
-            Debug.Log(volume);
+            Debug.Log("Master: " + volume);
         });
         _bgmSlider.onValueChanged.AddListener((volume) =>
         {
             AudioManager.Instance.ChangeGlobalVolume(AudioManager.Instance.CurrentMasterVolume, volume, AudioManager.Instance.CurrentSFXVolume);
 
-            Debug.Log(volume);
+            Debug.Log("BGM: " + volume);
         });
         _sfxSlider.onValueChanged.AddListener((volume) =>
         {
             AudioManager.Instance.ChangeGlobalVolume(AudioManager.Instance.CurrentMasterVolume, AudioManager.Instance.CurrentBGMVolume, volume);
 
-            Debug.Log(volume);
+            Debug.Log("SFX: " + volume);
         });
     }
 }

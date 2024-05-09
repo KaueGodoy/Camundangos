@@ -75,6 +75,8 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
+        GameIsPaused = false;
+
         _fader.gameObject.SetActive(true);
 
         //LeanTween.scale(fader, Vector3.zero, 0f);

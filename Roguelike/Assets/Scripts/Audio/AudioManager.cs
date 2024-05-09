@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -70,8 +71,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if (sound == null)
         {
             Debug.LogWarning("Sound " + name + " not found!");
             return;
@@ -79,12 +80,13 @@ public class AudioManager : MonoBehaviour
 
         if (PauseMenu.GameIsPaused)
         {
-            s.source.pitch = 0f;
+            sound.source.pitch = 0f;
             Debug.Log("volume changed");
         }
 
-        s.source.volume = s.volume * CurrentSFXVolume * CurrentMasterVolume;
-        s.source.Play();
+        sound.source.volume = sound.volume * CurrentSFXVolume * CurrentMasterVolume;
+        Debug.Log(sound.volume);
+        sound.source.Play();
     }
 
     public void PlaySoundOneShot(string name)
