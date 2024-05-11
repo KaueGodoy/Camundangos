@@ -1,51 +1,51 @@
-﻿Key,Id,English (United States)(en-US),Portuguese (Brazil)(pt-BR),Japanese(ja)
-PlayKey,1,Play,Jogar,プレイ
-SettingsKey,2,Settings,Opções,設定
-QuitKey,3,Quit,Sair,終了
-ReturnKey,4,Return,Voltar,戻る
-LanguageKey,5,Language,Idioma,言語
-EnglishLanguageKey,6,English,English,English
-JapaneseLanguageKey,7,日本語,日本語,日本語
-BrazilianPortugueseLanguageKey,8,Português,Português,Português
-MainMenuKey,9,Main Menu,Menu,メニュー
-RestartKey,10,Restart,Reiniciar,リトライ
-ResumeKey,11,Resume,Continuar,続ける
-SpanishKey,12,Español,Español,Español
-CommonChestKey,12,Common Chest,Baú Comum,普通宝箱
-DashKey,13,"<color=green>Left Shift</color> 
+﻿Key,Id,English (United States)(en-US),Portuguese (Brazil)(pt-BR),Japanese(ja),Spanish(es)
+PlayKey,1,Play,Jogar,プレイ,Jugar
+SettingsKey,2,Settings,Opções,設定,Opciones
+QuitKey,3,Quit,Sair,終了,Salir
+ReturnKey,4,Return,Voltar,戻る,Volver
+LanguageKey,5,Language,Idioma,言語,Idioma
+EnglishLanguageKey,6,English,English,English,English
+JapaneseLanguageKey,7,日本語,日本語,日本語,日本語
+BrazilianPortugueseLanguageKey,8,Português,Português,Português,Português
+MainMenuKey,9,Main Menu,Menu,メニュー,Menú
+RestartKey,10,Restart,Reiniciar,リトライ,Reiniciar
+ResumeKey,11,Resume,Continuar,続ける,Seguir
+SpanishKey,12,Español,Español,Español,Español
+CommonChestKey,13,Common Chest,Baú Comum,普通宝箱,Baúl Común
+DashKey,14,"<color=green>Left Shift</color> 
 to dash","<color=green>Shift esquerdo</color> 
 para usar esquiva","<color=green>Left Shift</color> 
-を押すとダッシュすることができます"
-JumpKey,14,"<color=green>Space bar</color> 
+を押すとダッシュすることができます",sasa
+JumpKey,15,"<color=green>Space bar</color> 
 to jump","<color=green>Espaço</color> 
 para pular","<color=green>Space bar</color> 
-を押すとジャンプすることができます"
-JumpMidAirKey,15,"<color=green>Space bar mid air</color> 
+を押すとジャンプすることができます",sasa
+JumpMidAirKey,16,"<color=green>Space bar mid air</color> 
 to jump again","<color=green>Espaço no ar</color> 
 para pular novamente","<color=green>空中でSpace bar</color> 
-を押すとまたジャンプすることができます"
-InteractKey,16,"<color=green>F</color>
+を押すとまたジャンプすることができます",sasa
+InteractKey,17,"<color=green>F</color>
 to interact","<color=green>F</color>
 para interagir","<color=green>F　を押すと</color>
-"
-MoveKey,17,"<color=green>A</color> <color=green>D</color>
+",sasa
+MoveKey,18,"<color=green>A</color> <color=green>D</color>
 to move around","<color=green>A</color> <color=green>D</color>
 para se mover","<color=green>A</color> <color=green>D</color>
-を押すと移動することができます"
-InventoryKey,18,"<color=green>TAB</color>
+を押すと移動することができます",sasa
+InventoryKey,19,"<color=green>TAB</color>
 to acess the inventory","<color=green>TAB</color>
 para acessar o inventário","<color=green>TAB</color>
-を押すとインベントリーをオープンすることができます"
-AttackKey,19,"<color=green>Left mouse button</color> 
+を押すとインベントリーをオープンすることができます",sasa
+AttackKey,20,"<color=green>Left mouse button</color> 
 to attack","<color=green>Mouse esquerdo</color> 
 para atacar","<color=green>Left mouse button</color> 
-を押すと攻撃することができます"
-UseKey,20,Use,Usar,使用
-UnlockCharacterKey,21,Continue <color=yellow>exploring </color>to unlock this <color=green>character </color>,Continue <color=yellow>explorando </color>para desbloquear este <color=green>personagem </color>,この<color=green>キャラ </color>をアンロックするには<color=yellow>探索 </color>を続けて
-IsaForest_QuestKey,22,Find Isa in the forest,Encontre Isa na floresta,森の中でイサを探して
-ChestKey,23,Chest,Baú,宝箱
-SwordKey,24,Sword,Espada,剣
-AudioKey,25,Audio,Áudio,音量
-BGMKey,26,BGM,BGM,BGM
-SFXKey,27,SFX,SFX,SE
-MasterKey,28,Master,Geral,マスター
+を押すと攻撃することができます",sasa
+UseKey,21,Use,Usar,使用,sasa
+UnlockCharacterKey,22,Continue <color=yellow>exploring </color>to unlock this <color=green>character </color>,Continue <color=yellow>explorando </color>para desbloquear este <color=green>personagem </color>,この<color=green>キャラ </color>をアンロックするには<color=yellow>探索 </color>を続けて,sasa
+IsaForest_QuestKey,23,Find Isa in the forest,Encontre Isa na floresta,森の中でイサを探して,Encontra a Isa em el bosque
+ChestKey,24,Chest,Baú,宝箱,Baúl
+SwordKey,25,Sword,Espada,剣,Espada
+AudioKey,26,Audio,Áudio,音量,Audio
+BGMKey,27,BGM,BGM,BGM,BGM
+SFXKey,28,SFX,SFX,SE,SFX
+MasterKey,29,Master,Geral,マスター,General

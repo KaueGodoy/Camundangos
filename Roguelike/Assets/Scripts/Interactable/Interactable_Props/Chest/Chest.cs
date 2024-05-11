@@ -9,18 +9,18 @@ public class Chest : Interactable
 
     [SerializeField] private List<string> drops = new List<string>();
 
-    private string _chestKey = "ChestKey";
+    //private string _chestKey = "ChestKey";
 
     public override void Awake()
     {
         base.Awake();
 
-        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_chestKey).Completed += handle =>
-        {
-            string localizedMessage = handle.Result;
+        //LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_chestKey).Completed += handle =>
+        //{
+        //    string localizedMessage = handle.Result;
 
-            SetName(localizedMessage);
-        };
+        //    SetName(localizedMessage);
+        //};
     }
 
     public List<string> Drops

@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: pt-en-jpTable_pt-BR
+  m_Name: en-pt-jp-esTable_es
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: pt-BR
-  m_SharedData: {fileID: 11400000, guid: 8450df596332b7b40800e126148ee25a, type: 2}
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: dc1bec52ad4970047835f7745f1bf32b, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
   - m_Id: 1
-    m_Localized: Jogar
+    m_Localized: Jugar
     m_Metadata:
       m_Items: []
   - m_Id: 2
-    m_Localized: "Op\xE7\xF5es"
+    m_Localized: Opciones
     m_Metadata:
       m_Items: []
   - m_Id: 3
-    m_Localized: Sair
+    m_Localized: Salir
     m_Metadata:
       m_Items: []
   - m_Id: 4
-    m_Localized: Voltar
+    m_Localized: Volver
     m_Metadata:
       m_Items: []
   - m_Id: 5
@@ -51,7 +51,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9
-    m_Localized: Menu
+    m_Localized: "Men\xFA"
     m_Metadata:
       m_Items: []
   - m_Id: 10
@@ -59,80 +59,79 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11
-    m_Localized: Continuar
+    m_Localized: Seguir
     m_Metadata:
       m_Items: []
   - m_Id: 12
-    m_Localized: "Ba\xFA Comum"
+    m_Localized: "Espa\xF1ol"
     m_Metadata:
       m_Items: []
   - m_Id: 13
-    m_Localized: "<color=green>Shift esquerdo</color> \npara usar esquiva"
+    m_Localized: "Ba\xFAl Com\xFAn"
     m_Metadata:
       m_Items: []
   - m_Id: 14
-    m_Localized: "<color=green>Espa\xE7o</color> \npara pular"
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 15
-    m_Localized: "<color=green>Espa\xE7o no ar</color> \npara pular novamente"
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 16
-    m_Localized: '<color=green>F</color>
-
-      para interagir'
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 17
-    m_Localized: '<color=green>A</color> <color=green>D</color>
-
-      para se mover'
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 18
-    m_Localized: "<color=green>TAB</color>\npara acessar o invent\xE1rio"
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 19
-    m_Localized: "<color=green>Mouse esquerdo</color> \npara atacar"
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 20
-    m_Localized: Usar
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 21
-    m_Localized: Continue <color=yellow>explorando </color>para desbloquear este
-      <color=green>personagem </color>
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 22
-    m_Localized: Encontre Isa na floresta
+    m_Localized: sasa
     m_Metadata:
       m_Items: []
   - m_Id: 23
-    m_Localized: "Ba\xFA"
+    m_Localized: Encontra a Isa em el bosque
     m_Metadata:
       m_Items: []
   - m_Id: 24
-    m_Localized: Espada
+    m_Localized: "Ba\xFAl"
     m_Metadata:
       m_Items: []
   - m_Id: 25
-    m_Localized: "\xC1udio"
+    m_Localized: Espada
     m_Metadata:
       m_Items: []
   - m_Id: 26
-    m_Localized: BGM
+    m_Localized: Audio
     m_Metadata:
       m_Items: []
   - m_Id: 27
-    m_Localized: SFX
+    m_Localized: BGM
     m_Metadata:
       m_Items: []
   - m_Id: 28
-    m_Localized: Geral
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29
+    m_Localized: General
     m_Metadata:
       m_Items: []
   references:

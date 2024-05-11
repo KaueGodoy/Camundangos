@@ -8,13 +8,13 @@ public class Chest_DropItemToGround : Chest
     [SerializeField] private Item_HandlePickUp _pickupItem;
     public DropTable DropTable { get; set; }
 
-    private string _chestKey = "CommonChestKey";
+    private string _dropChestKey = "CommonChestKey";
 
     public override void Awake()
     {
         base.Awake();
 
-        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_chestKey).Completed += handle =>
+        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_dropChestKey).Completed += handle =>
         {
             string localizedMessage = handle.Result;
 

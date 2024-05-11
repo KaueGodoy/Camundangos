@@ -10,6 +10,7 @@ public class LanguageManager : MonoBehaviour
     [SerializeField] private Button _englishLanguageButton;
     [SerializeField] private Button _brazilianPortugueseLanguageButton;
     [SerializeField] private Button _japaneseLanguageButton;
+    [SerializeField] private Button _spanishLanguageButton;
 
     private bool _isActive = false;
 
@@ -19,6 +20,7 @@ public class LanguageManager : MonoBehaviour
     private int _englishLocaleId = 0;
     private int _brazilianPortugueseLocaleId = 1;
     private int _japaneseLocaleId = 2;
+    private int _spanishLocaleId = 3;
 
     private void Awake()
     {
@@ -37,6 +39,11 @@ public class LanguageManager : MonoBehaviour
         _japaneseLanguageButton.onClick.AddListener(() =>
         {
             ChangeLocaleId(_japaneseLocaleId);
+        });
+
+        _spanishLanguageButton.onClick.AddListener(() =>
+        {
+            ChangeLocaleId(_spanishLocaleId);
         });
 
     }

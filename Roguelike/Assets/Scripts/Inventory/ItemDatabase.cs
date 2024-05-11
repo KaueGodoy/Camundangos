@@ -21,9 +21,7 @@ public class ItemDatabase : MonoBehaviour
             Instance = this;
         }
 
-
     }
-
 
     private void Start()
     {
@@ -44,6 +42,10 @@ public class ItemDatabase : MonoBehaviour
         else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[2])
         {
             Items = JsonConvert.DeserializeObject<List<Item>>(Resources.Load<TextAsset>("JSON/Items_jp").ToString());
+        }
+        else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[3])
+        {
+            Items = JsonConvert.DeserializeObject<List<Item>>(Resources.Load<TextAsset>("JSON/Items_es").ToString());
         }
         else
         {

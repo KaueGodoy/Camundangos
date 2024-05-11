@@ -395,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 2
       m_Key: 
@@ -876,9 +876,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
-      m_KeyId: 28
+      m_KeyId: 29
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -1211,7 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 2
       m_Key: 
@@ -1610,9 +1610,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
-      m_KeyId: 25
+      m_KeyId: 26
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -2410,7 +2410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 7
       m_Key: 
@@ -2586,7 +2586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 8
       m_Key: 
@@ -3615,6 +3615,7 @@ GameObject:
   - component: {fileID: 1117502523}
   - component: {fileID: 1117502525}
   - component: {fileID: 1117502524}
+  - component: {fileID: 1117502526}
   m_Layer: 5
   m_Name: SpanishText (TMP)
   m_TagString: Untagged
@@ -3739,6 +3740,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117502522}
   m_CullTransparentMesh: 1
+--- !u!114 &1117502526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117502522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
+    m_TableEntryReference:
+      m_KeyId: 12
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1117502524}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1180436672
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,9 +4229,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
-      m_KeyId: 26
+      m_KeyId: 27
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -4433,7 +4474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 1
       m_Key: 
@@ -4609,7 +4650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 5
       m_Key: 
@@ -4785,7 +4826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 3
       m_Key: 
@@ -5189,9 +5230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
-      m_KeyId: 27
+      m_KeyId: 28
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -5365,7 +5406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 4
       m_Key: 
@@ -5618,7 +5659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:8450df596332b7b40800e126148ee25a
+      m_TableCollectionName: GUID:dc1bec52ad4970047835f7745f1bf32b
     m_TableEntryReference:
       m_KeyId: 6
       m_Key: 
@@ -7080,6 +7121,10 @@ PrefabInstance:
       propertyPath: _englishLanguageButton
       value: 
       objectReference: {fileID: 1048741813}
+    - target: {fileID: 483388431995023483, guid: 6a8310cdc0cfeb544a20318493e13b6b, type: 3}
+      propertyPath: _spanishLanguageButton
+      value: 
+      objectReference: {fileID: 735906048}
     - target: {fileID: 483388431995023483, guid: 6a8310cdc0cfeb544a20318493e13b6b, type: 3}
       propertyPath: _japaneseLanguageButton
       value: 

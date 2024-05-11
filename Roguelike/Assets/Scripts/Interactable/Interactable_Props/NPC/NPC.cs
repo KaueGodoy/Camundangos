@@ -11,38 +11,13 @@ public class NPC : Interactable
     [SerializeField] private TextAsset _englishText;
     [SerializeField] private TextAsset _brazilianPortugueseText;
     [SerializeField] private TextAsset _japaneseText;
+    [SerializeField] private TextAsset _spanishText;
 
     private int _englishLocaleIndex = 0;
     private int _brazilianPortugueseLocaleIndex = 1;
     private int _JapaneseLocaleIndex = 2;
+    private int _SpanishLocaleIndex = 3;
 
-    //private void OnValidate()
-    //{
-    //    LoadDialogueFile();
-    //}
-
-    //private void LoadDialogueFile()
-    //{
-    //    if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_englishLocaleIndex])
-    //    {
-    //        dialogue = _englishText ? _englishText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
-    //    }
-    //    else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_brazilianPortugueseLocaleIndex])
-    //    {
-    //        dialogue = _brazilianPortugueseText ? _brazilianPortugueseText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
-    //    }
-    //    else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_JapaneseLocaleIndex])
-    //    {
-    //        dialogue = _japaneseText ? _japaneseText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
-    //    }
-    //}
-
-    //private void Start()
-    //{
-    //    LoadDialogueFile();
-    //}
-
-    // You may also want to listen to events related to language/locale changes and update the dialogue accordingly.
     private void OnEnable()
     {
         LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
@@ -78,6 +53,10 @@ public class NPC : Interactable
         else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_JapaneseLocaleIndex])
         {
             dialogue = _japaneseText ? _japaneseText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
+        }
+        else if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[_SpanishLocaleIndex])
+        {
+            dialogue = _spanishText ? _spanishText.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
         }
     }
 
