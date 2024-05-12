@@ -14,9 +14,21 @@ public class Plant_Attack : MonoBehaviour
     [SerializeField] private float _damage = 20f;
     [SerializeField] private float attackDuration = 0.9f;
     [SerializeField] private float attackRate = 0.9f;
+    [SerializeField] private float _minRandomMultiplier = 1f;
+    [SerializeField] private float _maxRandomMultiplier = 1.2f;
 
     public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
-    public float Damage { get { return _damage; } set { _damage = value; } }
+    public float Damage
+    {
+        get
+        {
+            float randomMultiplier = UnityEngine.Random.Range(_minRandomMultiplier, _maxRandomMultiplier);
+
+            return _damage * randomMultiplier;
+        }
+
+        set { _damage = value; }
+    }
 
     private void Start()
     {

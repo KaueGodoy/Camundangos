@@ -5,12 +5,25 @@ public class EnemyKnockback : MonoBehaviour
     public float knockbackForce = 10f;
     public float knockbackDuration = 0.5f;
 
-    [SerializeField] private float _knockbackDamage = 30f;
-
-
     [SerializeField] private bool _isKnockbackActive = false;
     [SerializeField] private Vector2 _knockbackDirection;
     [SerializeField] private float _knockbackTimer;
+
+    [SerializeField] private float _damage = 10f;
+    [SerializeField] private float _minRandomMultiplier = 1f;
+    [SerializeField] private float _maxRandomMultiplier = 2f;
+
+    public float Damage
+    {
+        get
+        {
+            float randomMultiplier = UnityEngine.Random.Range(_minRandomMultiplier, _maxRandomMultiplier);
+
+            return _damage * randomMultiplier;
+        }
+
+        set { _damage = value; }
+    }
 
     private void Update()
     {
@@ -46,7 +59,7 @@ public class EnemyKnockback : MonoBehaviour
             _isKnockbackActive = true;
             _knockbackTimer = knockbackDuration;
 
-            NewPlayerController.Instance.TakeDamage(_knockbackDamage);
+            NewPlayerController.Instance.TakeDamage(Damage);
 
         }
 
