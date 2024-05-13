@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 653121959596068954}
   - component: {fileID: 653121959596068953}
   - component: {fileID: 653121959596068952}
+  - component: {fileID: 2219877746171909824}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -310,3 +311,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plant: {fileID: 653121958750610848}
+--- !u!114 &2219877746171909824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653121959596068956}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: b5c612a61958d0860000000079be3945d7bad61e
+  m_ShapePath:
+  - {x: 1.1004639, y: -0.017949104, z: 0}
+  - {x: 1.885498, y: -0.114583015, z: -0.00000047683716}
+  - {x: 1.948349, y: -0.7965965, z: 0}
+  - {x: 1.0589294, y: -0.6270418, z: 0}
+  - {x: 0.69950867, y: -2.088951, z: 0}
+  - {x: -1.1958923, y: -2.077052, z: -0.00000047683716}
+  - {x: -1.1335754, y: -1.4930773, z: 0}
+  - {x: 0.13807678, y: -0.52837944, z: 0}
+  m_ShapePathHash: 1810271765
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -222184
+  m_LocalBounds:
+    m_Center: {x: 0.37622833, y: -1.0534501, z: 0}
+    m_Extent: {x: 1.5721207, y: 1.035501, z: 0}

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8285343065118821460}
   - component: {fileID: 5778422038647980973}
   - component: {fileID: 2749507275279899441}
+  - component: {fileID: 8760764701557100507}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,6 +155,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skeleton: {fileID: 3020452669714454107}
+--- !u!114 &8760764701557100507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298306859131535668}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: b5c612a61958d0860000000079be3945d7bad61e
+  m_ShapePath:
+  - {x: -0.04798889, y: -1.5201864, z: 0}
+  - {x: -0.037460327, y: -0.29495716, z: -0.00000029802322}
+  - {x: -0.22340393, y: 0.85283184, z: -0.00000029802322}
+  - {x: 0.33602905, y: 0.8335886, z: -0.000000059604645}
+  - {x: 0.8113556, y: 0.6477003, z: 0}
+  - {x: 0.9496002, y: -0.18855953, z: -0.00000029802322}
+  - {x: 0.46139526, y: -0.28190422, z: -0.00000029802322}
+  - {x: 0.47381592, y: -1.5137043, z: 0}
+  m_ShapePathHash: -846203643
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 394484
+  m_LocalBounds:
+    m_Center: {x: 0.36309814, y: -0.3336773, z: 0}
+    m_Extent: {x: 0.5865021, y: 1.1865091, z: 0}
 --- !u!1 &4524385441135660555
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8285343065118821460}
   moveSpeed: 5
-  chaseRange: 15
+  chaseRange: 5
   isChasing: 0
   isFacingRight: 0
   isPatrolling: 0
@@ -331,10 +366,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 12
   knockbackDuration: 0.5
-  _knockbackDamage: 30
   _isKnockbackActive: 0
   _knockbackDirection: {x: 0, y: 0}
   _knockbackTimer: 0
+  _damage: 10
+  _minRandomMultiplier: 1
+  _maxRandomMultiplier: 2
 --- !u!1 &8836444558920455376
 GameObject:
   m_ObjectHideFlags: 0
