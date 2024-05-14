@@ -9,14 +9,9 @@ public class SkeletonV3_Attack : MonoBehaviour
     private Transform _target;
 
     [Header("Attack")]
-
     [SerializeField] private float _attackRange = 5f;
-    [SerializeField] private float _damage = 20f;
-    [SerializeField] private float attackDuration = 0.9f;
-    [SerializeField] private float attackRate = 0.9f;
 
     public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
-    public float Damage { get { return _damage; } set { _damage = value; } }
 
     private void Start()
     {
@@ -37,10 +32,5 @@ public class SkeletonV3_Attack : MonoBehaviour
     private void TriggerAttackAnimation()
     {
         OnSkeletonAttacAnimation?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void AttackPlayer()
-    {
-        NewPlayerController.Instance.TakeDamage(Damage);
     }
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SkeletonV3AnimationController : MonoBehaviour
 {
-
     [SerializeField] private SkeletonV3_Attack _skeletonV3;
 
     private Animator _animator;
@@ -27,10 +26,5 @@ public class SkeletonV3AnimationController : MonoBehaviour
     private void OnDestroy()
     {
         _skeletonV3.OnSkeletonAttacAnimation -= _skeletonV3_OnSkeletonAttacAnimation;
-    }
-
-    public void EnableAttack()
-    {
-        _skeletonV3.AttackPlayer();
     }
 }
