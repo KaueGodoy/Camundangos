@@ -60,7 +60,18 @@ public class NPC : Interactable
         }
     }
 
-    public bool IsInDialogue { get; private set; }
+
+    private bool _isInDialogue;
+
+    public bool IsInDialogue
+    {
+        get { return _isInDialogue; }
+        private set
+        {
+            _isInDialogue = value;
+            //NewPlayerMovement.Instance.IsControlLocked = _isInDialogue;
+        }
+    }
 
     public override void InitiateInteraction()
     {
