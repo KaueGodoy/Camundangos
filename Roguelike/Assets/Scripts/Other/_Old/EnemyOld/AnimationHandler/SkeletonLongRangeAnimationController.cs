@@ -46,7 +46,7 @@ public class SkeletonLongRangeAnimationController : MonoBehaviour
             ChangeAnimationState(SkeletonDeath);
         }
         // hit
-        else if (skeleton.isHit)
+        else if (skeleton.IsHit)
         {
             ChangeAnimationState(SkeletonHit);
         }

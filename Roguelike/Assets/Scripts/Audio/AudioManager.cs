@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public float CurrentBGMVolume { get { return _bgmVolume; } set { _bgmVolume = value; } }
     public float CurrentSFXVolume { get { return _sfxVolume; } set { _sfxVolume = value; } }
 
+    public Sound CurrentBGMPlaying { get; set; }
+
     private void Awake()
     {
         if (Instance == null)
@@ -52,8 +54,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBGM(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if (sound == null)
         {
             Debug.LogWarning("Sound " + name + " not found!");
             return;
@@ -61,12 +63,13 @@ public class AudioManager : MonoBehaviour
 
         if (PauseMenu.GameIsPaused)
         {
-            s.source.pitch = 0f;
+            sound.source.pitch = 0f;
             Debug.Log("volume changed");
         }
-
-        s.source.volume = s.volume * CurrentBGMVolume * CurrentMasterVolume;
-        s.source.Play();
+        sound.source.volume = sound.volume * CurrentBGMVolume * CurrentMasterVolume;
+        CurrentBGMPlaying = sound;
+        CurrentBGM = sound.name;
+        CurrentBGMPlaying.source.Play();
     }
 
     public void PlaySound(string name)
@@ -103,16 +106,18 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void StopSound(string name)
+    public void StopBGM(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if (sound == null)
         {
             Debug.LogWarning("Sound " + name + " not found!");
             return;
-
         }
-        s.source.Stop();
+
+        CurrentBGMPlaying = sound;
+        CurrentBGM = sound.name;
+        CurrentBGMPlaying.source.Stop();
     }
 
     public void SetMasterVolume(float volume)
@@ -136,7 +141,7 @@ public class AudioManager : MonoBehaviour
         SetBGMVolume(bgmVolume);
         SetSFXVolume(sfxVolume);
 
+        StopBGM(CurrentBGM);
         PlayBGM(CurrentBGM);
-
     }
 }

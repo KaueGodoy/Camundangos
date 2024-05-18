@@ -46,7 +46,7 @@ public class SkeletonBossAnimationController : MonoBehaviour
             ChangeAnimationState(SkeletonBossDeath);
         }
         // hit
-        else if (skeleton.isHit)
+        else if (skeleton.IsHit)
         {
             ChangeAnimationState(SkeletonBossHit);
         }

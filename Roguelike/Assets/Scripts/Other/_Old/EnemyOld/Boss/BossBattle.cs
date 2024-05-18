@@ -15,15 +15,15 @@ public class BossBattle : MonoBehaviour
     }
 
     [Header("Initial Stage")]
-    [SerializeField] private ColliderTrigger colliderTrigger;
-    [SerializeField] private Slime slime;
-    [SerializeField] private PlayerController player;
+    [SerializeField] private ColliderTrigger _colliderTrigger;
+    [SerializeField] private Slime _slime;
+    [SerializeField] private NewPlayerController _player;
 
     // idea
     // count time when battle starts and let the skeleton hp be the slime remaining hp * time passed since battle
     // skeletonBoss.maxHealth = slime.currentHealth * timer;
 
-    private Stage stage;
+    private Stage _stage;
 
     public EventHandler BossOnDamaged;
     public EventHandler BossOnDead;
@@ -33,19 +33,19 @@ public class BossBattle : MonoBehaviour
         spawnPositionList = new List<Vector3>();
         enemySpawnList = new List<GameObject>();
 
-        foreach (Transform spawnPosition in slime.transform.Find("SpawnPositions"))
+        foreach (Transform spawnPosition in _slime.transform.Find("SpawnPositions"))
         {
             spawnPositionList.Add(spawnPosition.position);
         }
 
-        stage = Stage.WaitingToStart;
+        _stage = Stage.WaitingToStart;
     }
 
     private void Start()
     {
-        colliderTrigger.OnPlayerEnterTrigger += ColliderTrigger_OnPlayerEnterTrigger;
+        _colliderTrigger.OnPlayerEnterTrigger += ColliderTrigger_OnPlayerEnterTrigger;
 
-        slimePatrol = slime.GetComponent<EnemyPatrolAttack>();
+        slimePatrol = _slime.GetComponent<EnemyPatrolAttack>();
         slimePatrol.enabled = false;
 
         //slime.GetComponent<HealthSystem>().OnDamaged += BossBattle_OnDamaged;
@@ -58,18 +58,18 @@ public class BossBattle : MonoBehaviour
 
     private void Update()
     {
-        if (slime.IsDamaged())
+        if (_slime.IsDamaged())
         {
             BossOnDamaged?.Invoke(this, EventArgs.Empty);
         }
 
-        if (stage == Stage.Stage_1)
+        if (_stage == Stage.Stage_1)
         {
-            if (slime.IsAlive())
+            if (!!_slime.isDead())
             {
                 for (int i = 0; i < spawnPositionList.Count; i++)
                 {
-                    Transform spawnPosition = slime.transform.Find("SpawnPositions").GetChild(i);
+                    Transform spawnPosition = _slime.transform.Find("SpawnPositions").GetChild(i);
                     spawnPositionList[i] = spawnPosition.position;
                 }
             }
@@ -77,15 +77,15 @@ public class BossBattle : MonoBehaviour
 
         // NEEDS TO BE REMOVED FROM UPDATE
 
-        if (stage == Stage.Stage_2)
+        if (_stage == Stage.Stage_2)
         {
             TeleportEnemy();
         }
 
-        if (stage == Stage.Stage_3)
+        if (_stage == Stage.Stage_3)
         {
             //SpawnSkeleton();
-            if (skeletonBoss.currentHealth <= 0)
+            if (skeletonBoss.CurrentHealth <= 0)
             {
                 //EndBattle();
             }
@@ -97,16 +97,16 @@ public class BossBattle : MonoBehaviour
     private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
     {
         StartBattle();
-        colliderTrigger.OnPlayerEnterTrigger -= ColliderTrigger_OnPlayerEnterTrigger;
+        _colliderTrigger.OnPlayerEnterTrigger -= ColliderTrigger_OnPlayerEnterTrigger;
     }
 
     private void BossBattle_OnDamaged(object sender, System.EventArgs e)
     {
         Debug.Log("Boss damaged");
 
-        float healthPercent = slime.currentHealth / slime.maxHealth;
+        float healthPercent = _slime.CurrentHealth / _slime.MaxHealth;
 
-        switch (stage)
+        switch (_stage)
         {
             case Stage.Stage_1:
                 if (healthPercent <= 0.7f)
@@ -124,7 +124,7 @@ public class BossBattle : MonoBehaviour
 
         if (healthPercent <= 0)
         {
-            slime.currentHealth = 0;
+            _slime.CurrentHealth = 0;
             BossOnDamaged -= BossBattle_OnDamaged;
             BossOnDead?.Invoke(this, EventArgs.Empty);
             EndBattle();
@@ -132,7 +132,7 @@ public class BossBattle : MonoBehaviour
 
         if (healthBar != null) UpdateUI();
 
-        Debug.Log("Health: " + slime.currentHealth + " Percent: " + healthPercent);
+        Debug.Log("Health: " + _slime.CurrentHealth + " Percent: " + healthPercent);
     }
 
     private void BossBattle_OnDead(object sender, System.EventArgs e)
@@ -155,22 +155,22 @@ public class BossBattle : MonoBehaviour
 
     private void StartNextStage()
     {
-        switch (stage)
+        switch (_stage)
         {
             case Stage.WaitingToStart:
-                stage = Stage.Stage_1;
+                _stage = Stage.Stage_1;
                 StageOne();
                 break;
             case Stage.Stage_1:
-                stage = Stage.Stage_2;
+                _stage = Stage.Stage_2;
                 StageTwo();
                 break;
             case Stage.Stage_2:
-                stage = Stage.Stage_3;
+                _stage = Stage.Stage_3;
                 StageThree();
                 break;
         }
-        Debug.Log("Starting next stage: " + stage);
+        Debug.Log("Starting next stage: " + _stage);
     }
 
     #region Stage 01
@@ -253,6 +253,8 @@ public class BossBattle : MonoBehaviour
 
     private void TeleportEnemy()
     {
+        if (_slime == null) return;
+
         if (!hasTeleported)
         {
             StartCoroutine(FallDown());
@@ -261,6 +263,7 @@ public class BossBattle : MonoBehaviour
 
     private IEnumerator FallDown()
     {
+
         // resets condition
         hasTeleported = true;
 
@@ -274,11 +277,11 @@ public class BossBattle : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / totalDuration); // Normalize the time
 
             // gets slime current position and place where should fall current position right before falling
-            Vector3 startPosition = slime.transform.position;
-            Vector3 fallPosition = new Vector3(player.transform.position.x, player.transform.position.y + fallYOffset);
+            Vector3 startPosition = _slime.transform.position;
+            Vector3 fallPosition = new Vector3(_player.transform.position.x, _player.transform.position.y + fallYOffset);
 
             // falls down
-            slime.transform.position = Vector3.Lerp(startPosition, fallPosition, t);
+            _slime.transform.position = Vector3.Lerp(startPosition, fallPosition, t);
             yield return null;
         }
 
@@ -287,11 +290,11 @@ public class BossBattle : MonoBehaviour
         // enters cooldown
         yield return new WaitForSeconds(fallingTime + fallingCooldown);
         // gets current position during this frame
-        Vector3 targetPosition = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+        Vector3 targetPosition = new Vector3(_player.transform.position.x, _player.transform.position.y + yOffset);
         // teleports above the player
-        if (slime != null)
+        if (_slime != null)
         {
-            slime.transform.position = targetPosition;
+            _slime.transform.position = targetPosition;
         }
         hasTeleported = false;
     }
@@ -299,19 +302,19 @@ public class BossBattle : MonoBehaviour
 
     private IEnumerator FallDown2()
     {
-        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+        _slime.transform.position = new Vector3(_player.transform.position.x, _player.transform.position.y + yOffset);
         hasTeleported = true;
         yield return new WaitForSeconds(fallingTime);
 
-        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y);
+        _slime.transform.position = new Vector3(_player.transform.position.x, _player.transform.position.y);
         yield return new WaitForSeconds(fallingTime);
         hasTeleported = false;
     }
 
     private IEnumerator CopyPlayerMovement()
     {
-        Vector3 startPosition = slime.transform.position;
-        Vector3 targetPosition = new Vector3(player.transform.position.x, player.transform.position.y + yOffset);
+        Vector3 startPosition = _slime.transform.position;
+        Vector3 targetPosition = new Vector3(_player.transform.position.x, _player.transform.position.y + yOffset);
 
         float elapsedTime = 0f;
         float totalDuration = fallingTime;
@@ -321,11 +324,11 @@ public class BossBattle : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / totalDuration); // Normalize the time
 
-            slime.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            _slime.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
             yield return null;
         }
 
-        slime.transform.position = targetPosition;
+        _slime.transform.position = targetPosition;
         yield return new WaitForSeconds(fallingTime);
         hasTeleported = false;
     }
@@ -350,8 +353,8 @@ public class BossBattle : MonoBehaviour
     private void StageThree()
     {
         Debug.Log("This is the stage 3");
-        skeletonHealthFromSlime = slime.currentHealth;
-        skeletonMaxHealth = skeletonBoss.maxHealth;
+        skeletonHealthFromSlime = _slime.CurrentHealth;
+        skeletonMaxHealth = skeletonBoss.MaxHealth;
 
         MoveSlime();
         SpawnSkeleton();
@@ -360,21 +363,23 @@ public class BossBattle : MonoBehaviour
 
     private void MoveSlime()
     {
-        slime.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 15f, player.transform.position.z);    
+        if (_slime == null) return;
+
+        _slime.transform.position = new Vector3(_player.transform.position.x, _player.transform.position.y + 15f, _player.transform.position.z);
     }
 
     private void SpawnSkeleton()
     {
-        Vector3 skeletonBossSpawnPosition = new Vector3(slime.transform.position.x, slime.transform.position.y + 10f);
+        Vector3 skeletonBossSpawnPosition = new Vector3(_slime.transform.position.x, _slime.transform.position.y + 10f);
         pfskeletonBossInstance = Instantiate(pfskeletonBoss, skeletonBossSpawnPosition, Quaternion.identity);
 
         skeletonBoss = pfskeletonBossInstance.GetComponent<Skeleton>();
-        skeletonBoss.maxHealth = skeletonHealthFromSlime;
+        skeletonBoss.MaxHealth = skeletonHealthFromSlime;
         //skeletonBoss.currentHealth = skeletonHealthFromSlime;
 
 
         Debug.Log("This is the skeleton health value from slime: " + skeletonHealthFromSlime +
-                    " This is the skeleton health value changed: " + skeletonBoss.currentHealth +
+                    " This is the skeleton health value changed: " + skeletonBoss.CurrentHealth +
                     " Old max health from prefab: " + skeletonMaxHealth);
 
     }
@@ -386,7 +391,7 @@ public class BossBattle : MonoBehaviour
     private void EndBattle()
     {
         Destroy(pfskeletonBossInstance.gameObject);
-        Destroy(slime.gameObject);
+        Destroy(_slime.gameObject);
     }
 
     private void DestroyAllEnemies()
@@ -414,9 +419,9 @@ public class BossBattle : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (slime.IsAlive())
+        if (!_slime.isDead())
         {
-            healthBar.UpdateHealthBar(slime.maxHealth, slime.currentHealth, bossName);
+            healthBar.UpdateHealthBar(_slime.MaxHealth, _slime.CurrentHealth, bossName);
         }
 
         //if (stage == Stage.Stage_3)

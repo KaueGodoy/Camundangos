@@ -46,7 +46,7 @@ public class SlimeAnimationController : MonoBehaviour
             ChangeAnimationState(SlimeDeath);
         }
         // hit
-        else if (slime.isHit)
+        else if (slime.IsHit)
         {
             ChangeAnimationState(SlimeHit);
         }
