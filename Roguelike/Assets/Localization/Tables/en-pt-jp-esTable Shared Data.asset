@@ -131,6 +131,22 @@ MonoBehaviour:
     m_Key: MasterKey
     m_Metadata:
       m_Items: []
+  - m_Id: 30
+    m_Key: AnimationKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31
+    m_Key: ArtKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32
+    m_Key: ProgrammingKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33
+    m_Key: SoundKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

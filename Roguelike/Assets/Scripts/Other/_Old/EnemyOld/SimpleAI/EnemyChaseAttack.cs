@@ -9,6 +9,9 @@ public class EnemyChaseAttack : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 direction;
 
+    private NewPlayerController player;
+
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,6 +37,7 @@ public class EnemyChaseAttack : MonoBehaviour
         {
             Debug.LogError("Player object not found!");
         }
+
     }
 
     private void Update()
@@ -142,7 +146,6 @@ public class EnemyChaseAttack : MonoBehaviour
     private float attackTimer = 0.0f;
     private float attackDelay = 0.4f;
 
-    private NewPlayerController player;
 
     private void Attack()
     {

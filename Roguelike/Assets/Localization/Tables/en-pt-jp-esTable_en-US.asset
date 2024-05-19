@@ -141,6 +141,22 @@ MonoBehaviour:
     m_Localized: Master
     m_Metadata:
       m_Items: []
+  - m_Id: 30
+    m_Localized: Animation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31
+    m_Localized: Art
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32
+    m_Localized: Programming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33
+    m_Localized: Sounds
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

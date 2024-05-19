@@ -49,3 +49,7 @@ AudioKey,26,Audio,Áudio,音量,Audio
 BGMKey,27,BGM,BGM,BGM,BGM
 SFXKey,28,SFX,SFX,SE,SFX
 MasterKey,29,Master,Geral,マスター,General
+AnimationKey,30,Animation,Animação,アニメーション,sasa
+ArtKey,31,Art,Arte,グラフィック,sasa
+ProgrammingKey,32,Programming,Programação,プログラミング,sasa
+SoundKey,33,Sounds,Som,サウンド,sasa

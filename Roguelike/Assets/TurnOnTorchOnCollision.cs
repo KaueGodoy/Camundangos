@@ -27,19 +27,26 @@ public class TurnOnTorchOnCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        foreach (GameObject torch in _torchArray)
+
+        NewPlayerController player = collision.GetComponent<NewPlayerController>();
+
+        if (player != null)
         {
-            Transform lamp = torch.transform.Find("Lamp");
-            Transform particle = torch.transform.Find("Particle");
 
-            if (lamp != null)
+            foreach (GameObject torch in _torchArray)
             {
-                lamp.gameObject.SetActive(true);
-            }
+                Transform lamp = torch.transform.Find("Lamp");
+                Transform particle = torch.transform.Find("Particle");
 
-            if (particle != null)
-            {
-                particle.gameObject.SetActive(true);
+                if (lamp != null)
+                {
+                    lamp.gameObject.SetActive(true);
+                }
+
+                if (particle != null)
+                {
+                    particle.gameObject.SetActive(true);
+                }
             }
         }
     }

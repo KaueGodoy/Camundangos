@@ -139,6 +139,22 @@ MonoBehaviour:
     m_Localized: Geral
     m_Metadata:
       m_Items: []
+  - m_Id: 30
+    m_Localized: "Anima\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31
+    m_Localized: Arte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32
+    m_Localized: "Programa\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33
+    m_Localized: Som
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

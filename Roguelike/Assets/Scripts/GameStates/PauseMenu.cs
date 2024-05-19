@@ -97,6 +97,7 @@ public class PauseMenu : MonoBehaviour
         //Invoke("TransitionToMainMenu", 1f);
 
     }
+
     public void QuitGame()
     {
         Debug.Log("Quitting...");

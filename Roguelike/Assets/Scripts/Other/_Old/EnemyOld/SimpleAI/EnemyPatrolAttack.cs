@@ -8,7 +8,7 @@ public class EnemyPatrolAttack : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector2 direction;
-    private NewPlayerController player;
+    //private NewPlayerController player;
 
     public bool patrolEnabled = true;
 
@@ -20,23 +20,23 @@ public class EnemyPatrolAttack : MonoBehaviour
 
     private void Start()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        //GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
-        if (playerObject != null)
-        {
-            // Get the Player component from the player object
-            player = playerObject.GetComponent<NewPlayerController>();
-            target = playerObject.transform;
+        //if (playerObject != null)
+        //{
+        //    // Get the Player component from the player object
+        //    player = playerObject.GetComponent<NewPlayerController>();
+        //    target = playerObject.transform;
 
-            if (player == null)
-            {
-                Debug.LogError("Player component not found on the player object!");
-            }
-        }
-        else
-        {
-            Debug.LogError("Player object not found!");
-        }
+        //    if (player == null)
+        //    {
+        //        Debug.LogError("Player component not found on the player object!");
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogError("Player object not found!");
+        //}
     }
 
     private void Update()
@@ -135,17 +135,19 @@ public class EnemyPatrolAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // rigid body velocity
-        if (collision.gameObject.CompareTag("Player"))
+        NewPlayerController player = collision.gameObject.GetComponent<NewPlayerController>();
+
+        if (player != null)
         {
-            PerformAttack();
-            ApplyKnockback();
+            PerformAttack(collision);
+            ApplyKnockback(collision);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // rigid body impulse (based on mass)
+        NewPlayerController player = collision.gameObject.GetComponent<NewPlayerController>();
+
         if (player != null)
         {
             player.TakeDamage(damage);
@@ -154,13 +156,20 @@ public class EnemyPatrolAttack : MonoBehaviour
             Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
             Vector3 direction = collision.gameObject.transform.position - transform.position;
             playerRb.AddForce(direction.normalized * knockbackForce, ForceMode2D.Impulse);
+
         }
+
     }
 
-    public void PerformAttack()
+    public void PerformAttack(Collider2D collision)
     {
-        player.TakeDamage(damage);
-        DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage);
+        NewPlayerController player = collision.gameObject.GetComponent<NewPlayerController>();
+
+        if (player != null)
+        {
+            player.TakeDamage(damage);
+            DamagePopup.Create(player.transform.position + Vector3.right + Vector3.up, (int)damage);
+        }
     }
 
     private void Attack()
@@ -171,13 +180,18 @@ public class EnemyPatrolAttack : MonoBehaviour
         }
     }
 
-    private void ApplyKnockback()
+    private void ApplyKnockback(Collider2D collision)
     {
-        Rigidbody2D playerRigidbody = player.GetComponent<Rigidbody2D>();
-        Vector2 direction = player.gameObject.transform.position - transform.position;
-        playerRigidbody.velocity = direction.normalized * knockbackForce;
-        isKnockback = true;
-        knockbackTimer = knockbackDuration;
+        NewPlayerController player = collision.gameObject.GetComponent<NewPlayerController>();
+
+        if (player != null)
+        {
+            Rigidbody2D playerRigidbody = player.GetComponent<Rigidbody2D>();
+            Vector2 direction = player.gameObject.transform.position - transform.position;
+            playerRigidbody.velocity = direction.normalized * knockbackForce;
+            isKnockback = true;
+            knockbackTimer = knockbackDuration;
+        }
     }
 
     #endregion
