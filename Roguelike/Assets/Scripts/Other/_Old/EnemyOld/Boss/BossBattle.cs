@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class BossBattle : MonoBehaviour
 {
+    public event EventHandler OnBossDeath;
+
     public enum Stage
     {
         WaitingToStart,
@@ -390,6 +392,8 @@ public class BossBattle : MonoBehaviour
 
     private void EndBattle()
     {
+        OnBossDeath?.Invoke(this, EventArgs.Empty);
+
         Destroy(pfskeletonBossInstance.gameObject);
         Destroy(_slime.gameObject);
     }
