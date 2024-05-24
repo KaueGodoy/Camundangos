@@ -21,6 +21,5 @@ public class DeactivateOnBossDeath : MonoBehaviour
     private void OnDestroy()
     {
         _bossBattle.OnBossDeath -= _bossBattle_OnBossDeath;
-
     }
 }
