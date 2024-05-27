@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossEntrance : MonoBehaviour
 {
 
-    [SerializeField] EnemyKnockback enemyKnockback;
+    //[SerializeField] EnemyKnockback enemyKnockback;
 
     private BoxCollider2D boxCollider;
 
@@ -26,8 +26,8 @@ public class BossEntrance : MonoBehaviour
                 OnCharacterUnlocked.Instance.IsLeoUnlocked)
             {
 
-                enemyKnockback.GetComponent<EnemyKnockback>().enabled = false;
-                boxCollider.GetComponent<EnemyKnockback>().enabled = false;
+                //enemyKnockback.GetComponent<EnemyKnockback>().enabled = false;
+                boxCollider.enabled = false;
                 Debug.Log("All characters unlocked");
             }
             else
