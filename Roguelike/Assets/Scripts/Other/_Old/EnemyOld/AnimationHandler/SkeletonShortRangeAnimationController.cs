@@ -25,11 +25,11 @@ public class SkeletonShortRangeAnimationController : MonoBehaviour
     private Animator _animator;
     private string currentAnimation;
 
-    private const string SkeletonIdle = "skeletonv2_idle";
-    //private const string SkeletonWalk = "skeletonv2_walk";
-    private const string SkeletonAttack = "skeletonv2_attack";
-    private const string SkeletonHit = "skeletonv2_hit";
-    private const string SkeletonDeath = "skeletonv2_death";
+    private const string SkeletonIdle = "Skeleton_V3_Idle";
+    private const string SkeletonWalk = "Skeleton_V3_Walk";
+    private const string SkeletonAttack = "Skeleton_V3_Attack";
+    private const string SkeletonHit = "Skeleton_V3_Hit";
+    private const string SkeletonDeath = "Skeleton_V3_Death";
 
     public void ChangeAnimationState(string newAnimation)
     {
@@ -55,7 +55,7 @@ public class SkeletonShortRangeAnimationController : MonoBehaviour
         }
         else if (_rb.velocity.x > 0 || _rb.velocity.x < 0)
         {
-            ChangeAnimationState(SkeletonIdle);
+            ChangeAnimationState(SkeletonWalk);
         }
         else
         {

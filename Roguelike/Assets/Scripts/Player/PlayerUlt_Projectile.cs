@@ -58,7 +58,7 @@ public class PlayerUlt_Projectile : MonoBehaviour
             Debug.Log("Dealing damage: " + _damage);
 
             AudioManager.Instance.PlaySound("Hitmarker");
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

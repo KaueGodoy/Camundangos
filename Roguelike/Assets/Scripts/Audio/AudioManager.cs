@@ -88,7 +88,7 @@ public class AudioManager : MonoBehaviour
         }
 
         sound.source.volume = sound.volume * CurrentSFXVolume * CurrentMasterVolume;
-        Debug.Log(sound.volume);
+        //Debug.Log(sound.volume);
         sound.source.Play();
     }
 

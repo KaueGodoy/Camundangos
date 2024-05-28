@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyPatrolChaseAttack : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer _boneSpriteRenderer;
 
     private NewPlayerController _player;
     private Transform _target;
@@ -110,8 +111,13 @@ public class EnemyPatrolChaseAttack : MonoBehaviour
     {
         if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
         {
+            //isFacingRight = !isFacingRight;
+            //_boneSpriteRenderer.flipX = isFacingRight;
+
+            Vector3 localScale = transform.localScale;
             isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
 

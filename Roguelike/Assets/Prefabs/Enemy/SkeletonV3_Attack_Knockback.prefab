@@ -461,4 +461,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f83bdcbc89cb154daaf14e179dad4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skeletonV3: {fileID: 6189105178231532736}
+  _skeletonV3Attack: {fileID: 6189105178231532736}
+  _baseSkeleton: {fileID: 6189105178231532737}

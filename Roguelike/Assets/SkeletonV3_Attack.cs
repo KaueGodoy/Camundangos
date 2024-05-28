@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkeletonV3_Attack : MonoBehaviour
@@ -13,6 +14,9 @@ public class SkeletonV3_Attack : MonoBehaviour
 
     public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
 
+    private bool _canAttack = false;
+    public bool CanAttack { get { return _canAttack; } set { _canAttack = value; } }
+
     private void Start()
     {
         _player = NewPlayerController.Instance;
@@ -25,7 +29,12 @@ public class SkeletonV3_Attack : MonoBehaviour
 
         if (distance < AttackRange)
         {
-            TriggerAttackAnimation();
+            CanAttack = true;
+            //TriggerAttackAnimation();
+        }
+        else
+        {
+            CanAttack = false;
         }
     }
 

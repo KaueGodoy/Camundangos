@@ -42,7 +42,7 @@ public abstract class Damageable : MonoBehaviour, IDamageable
     }
 
     [Header("Death")]
-    [SerializeField] private float _deathAnimationTime = 0.55f;
+    [SerializeField] private float _deathAnimationTime = 0.8f;
     [SerializeField] private GameObject _deathEffect;
 
     private void DeathEffect()

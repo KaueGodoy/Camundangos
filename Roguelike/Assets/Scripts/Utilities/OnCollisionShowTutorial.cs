@@ -31,7 +31,7 @@ public class OnCollisionShowTutorial : MonoBehaviour
     {
         _tutorialText.text = message;
         AudioManager.Instance.PlaySound(audioString);
-        Debug.Log("Message showing");
+        //Debug.Log("Message showing");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
