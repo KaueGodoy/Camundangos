@@ -15,33 +15,33 @@ CommonChestKey,13,Common Chest,Baú Comum,普通宝箱,Baúl Común
 DashKey,14,"<color=green>Left Shift</color> 
 to dash","<color=green>Shift esquerdo</color> 
 para usar esquiva","<color=green>Left Shift</color> 
-を押すとダッシュすることができます",sasa
+を押すとダッシュすることができます",<color=green>Shift izquierdo</color> Esquivar-se
 JumpKey,15,"<color=green>Space bar</color> 
 to jump","<color=green>Espaço</color> 
 para pular","<color=green>Space bar</color> 
-を押すとジャンプすることができます",sasa
+を押すとジャンプすることができます",<color=green>Barra de espacio</color> para lanzarse
 JumpMidAirKey,16,"<color=green>Space bar mid air</color> 
 to jump again","<color=green>Espaço no ar</color> 
 para pular novamente","<color=green>空中でSpace bar</color> 
-を押すとまたジャンプすることができます",sasa
+を押すとまたジャンプすることができます",<color=green>Barra de espacio</color>  salto doble
 InteractKey,17,"<color=green>F</color>
 to interact","<color=green>F</color>
-para interagir","<color=green>F　を押すと</color>
-",sasa
+para interagir","<color=green>F</color> を押すと作用することができます
+",<color=green>F</color> para interactuar
 MoveKey,18,"<color=green>A</color> <color=green>D</color>
 to move around","<color=green>A</color> <color=green>D</color>
 para se mover","<color=green>A</color> <color=green>D</color>
-を押すと移動することができます",sasa
+を押すと移動することができます",<color=green>A</color> <color=green>D</color>  para moverte
 InventoryKey,19,"<color=green>TAB</color>
 to acess the inventory","<color=green>TAB</color>
-para acessar o inventário","<color=green>TAB</color>
-を押すとインベントリーをオープンすることができます",sasa
+para acessar o inventário","<color=green>TAB</color> 
+を押すとインベントリーをオープンすることができます",<color=green>TAB</color> para acceder al inventario
 AttackKey,20,"<color=green>Left mouse button</color> 
 to attack","<color=green>Mouse esquerdo</color> 
 para atacar","<color=green>Left mouse button</color> 
-を押すと攻撃することができます",sasa
-UseKey,21,Use,Usar,使用,sasa
-UnlockCharacterKey,22,Continue <color=yellow>exploring </color>to unlock this <color=green>character </color>,Continue <color=yellow>explorando </color>para desbloquear este <color=green>personagem </color>,この<color=green>キャラ </color>をアンロックするには<color=yellow>探索 </color>を続けて,sasa
+を押すと攻撃することができます",<color=green>botón izquierdo del ratón</color>  para golpear
+UseKey,21,Use,Usar,使用,Usar
+UnlockCharacterKey,22,Continue <color=yellow>exploring </color>to unlock this <color=green>character </color>,Continue <color=yellow>explorando </color>para desbloquear este <color=green>personagem </color>,この<color=green>キャラ</color>をアンロックするには<color=yellow>探索</color>を続けて,Sigue <color=yellow>explorando </color>para desbloquear este <color=green>personaje. </color>
 IsaForest_QuestKey,23,Find Isa in the forest,Encontre Isa na floresta,森の中でイサを探して,Encontra a Isa em el bosque
 ChestKey,24,Chest,Baú,宝箱,Baúl
 SwordKey,25,Sword,Espada,剣,Espada
@@ -49,7 +49,7 @@ AudioKey,26,Audio,Áudio,音量,Audio
 BGMKey,27,BGM,BGM,BGM,BGM
 SFXKey,28,SFX,SFX,SE,SFX
 MasterKey,29,Master,Geral,マスター,General
-AnimationKey,30,Animation,Animação,アニメーション,sasa
-ArtKey,31,Art,Arte,グラフィック,sasa
-ProgrammingKey,32,Programming,Programação,プログラミング,sasa
-SoundKey,33,Sounds,Som,サウンド,sasa
+AnimationKey,30,Animation,Animação,アニメーション,Animación
+ArtKey,31,Art,Arte,グラフィック,Arte
+ProgrammingKey,32,Programming,Programação,プログラミング,Programación
+SoundKey,33,Sounds,Som,サウンド,Sonido 

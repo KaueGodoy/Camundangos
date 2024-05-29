@@ -83,7 +83,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17
-    m_Localized: "<color=green>F\u3000\u3092\u62BC\u3059\u3068</color>\n"
+    m_Localized: "<color=green>F</color> \u3092\u62BC\u3059\u3068\u4F5C\u7528\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\n"
     m_Metadata:
       m_Items: []
   - m_Id: 18
@@ -91,7 +91,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 19
-    m_Localized: "<color=green>TAB</color>\n\u3092\u62BC\u3059\u3068\u30A4\u30F3\u30D9\u30F3\u30C8\u30EA\u30FC\u3092\u30AA\u30FC\u30D7\u30F3\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059"
+    m_Localized: "<color=green>TAB</color> \n\u3092\u62BC\u3059\u3068\u30A4\u30F3\u30D9\u30F3\u30C8\u30EA\u30FC\u3092\u30AA\u30FC\u30D7\u30F3\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059"
     m_Metadata:
       m_Items: []
   - m_Id: 20
@@ -103,8 +103,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 22
-    m_Localized: "\u3053\u306E<color=green>\u30AD\u30E3\u30E9 </color>\u3092\u30A2\u30F3\u30ED\u30C3\u30AF\u3059\u308B\u306B\u306F<color=yellow>\u63A2\u7D22
-      </color>\u3092\u7D9A\u3051\u3066"
+    m_Localized: "\u3053\u306E<color=green>\u30AD\u30E3\u30E9</color>\u3092\u30A2\u30F3\u30ED\u30C3\u30AF\u3059\u308B\u306B\u306F<color=yellow>\u63A2\u7D22</color>\u3092\u7D9A\u3051\u3066"
     m_Metadata:
       m_Items: []
   - m_Id: 23

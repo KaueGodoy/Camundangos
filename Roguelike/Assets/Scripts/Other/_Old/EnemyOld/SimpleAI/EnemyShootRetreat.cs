@@ -12,6 +12,8 @@ public class EnemyShootRetreat : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 direction;
 
+    [SerializeField] private Transform _projectileOrigin;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -123,8 +125,13 @@ public class EnemyShootRetreat : MonoBehaviour
     {
         if (isFacingRight && direction.x < 0f || !isFacingRight && direction.x > 0f)
         {
+            //spriteRenderer.flipX = isFacingRight;
+
+
+            Vector3 localScale = transform.localScale;
             isFacingRight = !isFacingRight;
-            spriteRenderer.flipX = isFacingRight;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
     private void Retreat()
@@ -162,8 +169,8 @@ public class EnemyShootRetreat : MonoBehaviour
     public float retreatForce = 0.4f;
 
     [Header("Projectile")]
-    [SerializeField] private float attackDuration = 0.9f;
-    [SerializeField] private float shotRate = 0.9f;
+    [SerializeField] private float attackDuration = 0.6f;
+    [SerializeField] private float shotRate = 0.6f;
     public GameObject projectile;
 
     // Timers
@@ -186,7 +193,7 @@ public class EnemyShootRetreat : MonoBehaviour
 
     private void InstatiateShot()
     {
-        Instantiate(projectile, transform.position, Quaternion.identity);
+        Instantiate(projectile, _projectileOrigin.position, Quaternion.identity);
     }
     #endregion
 }

@@ -17,6 +17,9 @@ public class SkeletonV3_Attack : MonoBehaviour
     private bool _canAttack = false;
     public bool CanAttack { get { return _canAttack; } set { _canAttack = value; } }
 
+    [SerializeField] private bool _isAttackShortRange = true;
+    [SerializeField] private bool _isAttackLongRange = false;
+
     private void Start()
     {
         _player = NewPlayerController.Instance;
@@ -25,16 +28,33 @@ public class SkeletonV3_Attack : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector2.Distance(transform.position, _target.position);
+        MeleeAttack();
+        ProjectileAttack();
+    }
 
-        if (distance < AttackRange)
+    private void ProjectileAttack()
+    {
+        if (_isAttackLongRange)
         {
-            CanAttack = true;
-            //TriggerAttackAnimation();
+            Debug.Log("Projectile attack");
         }
-        else
+    }
+
+    private void MeleeAttack()
+    {
+        if (_isAttackShortRange)
         {
-            CanAttack = false;
+            float distance = Vector2.Distance(transform.position, _target.position);
+
+            if (distance < AttackRange)
+            {
+                CanAttack = true;
+                //TriggerAttackAnimation();
+            }
+            else
+            {
+                CanAttack = false;
+            }
         }
     }
 
