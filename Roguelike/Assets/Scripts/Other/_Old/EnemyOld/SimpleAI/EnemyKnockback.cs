@@ -64,4 +64,25 @@ public class EnemyKnockback : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!_isKnockbackActive && collision.gameObject.CompareTag("Player"))
+        {
+            // Calculate knockback direction
+            Vector2 enemyPosition = transform.position;
+            Vector2 playerPosition = collision.gameObject.transform.position;
+            _knockbackDirection = (playerPosition - enemyPosition).normalized;
+
+            // Apply knockback force to the player
+            Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+            playerRb.velocity = _knockbackDirection * knockbackForce;
+
+            _isKnockbackActive = true;
+            _knockbackTimer = knockbackDuration;
+
+            NewPlayerController.Instance.TakeDamage(Damage);
+
+        }
+    }
 }

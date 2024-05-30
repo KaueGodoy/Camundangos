@@ -422,12 +422,12 @@ MonoBehaviour:
   isChasing: 0
   isFacingRight: 0
   isIdle: 0
-  shootRange: 5
-  retreatRange: 2.5
+  shootRange: 8
+  retreatRange: 0.1
   retreatSpeed: 5
   retreatForce: 0.4
-  attackDuration: 0.1
-  shotRate: 0.1
+  attackDuration: 0.2
+  shotRate: 0.6
   projectile: {fileID: 9121000923334141551, guid: d88f6fc0459f9b84e9239eedaa255537, type: 3}
   attackAnimation: 0
 --- !u!114 &7554784881908515171
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackRange: 5
-  _isAttackShortRange: 1
+  _isAttackShortRange: 0
   _isAttackLongRange: 0
 --- !u!114 &7103068272493560518
 MonoBehaviour:

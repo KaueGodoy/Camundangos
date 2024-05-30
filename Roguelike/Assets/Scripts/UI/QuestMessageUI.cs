@@ -52,7 +52,7 @@ public class QuestMessageUI : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        ShowMessage(_currentQuest, _onQuestUpdateSFX);
+        ShowMessage(_messageText.text, _onQuestUpdateSFX);
     }
 
     private void Hide()

@@ -9,6 +9,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Transform _settingsPanel;
+    [SerializeField] private Button _creditsButton;
     [SerializeField] private Button _quitButton;
 
     private void Awake()
@@ -21,6 +22,12 @@ public class MainMenuUI : MonoBehaviour
         _settingsButton.onClick.AddListener(() =>
         {
             OpenSettings();
+        });
+
+
+        _creditsButton.onClick.AddListener(() =>
+        {
+            GoToCreditsScene();
         });
 
         _quitButton.onClick.AddListener(() =>
@@ -47,6 +54,18 @@ public class MainMenuUI : MonoBehaviour
         LeanTween.alpha(_fader, 1, 0.5f).setOnComplete(() =>
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        });
+    }
+
+    public void GoToCreditsScene()
+    {
+        AudioManager.Instance.PlaySound("OnUIPressed");
+
+        _fader.gameObject.SetActive(true);
+        LeanTween.alpha(_fader, 0, 0f);
+        LeanTween.alpha(_fader, 1, 0.5f).setOnComplete(() =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
         });
     }
 

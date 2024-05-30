@@ -372,7 +372,7 @@ public class BossBattle : MonoBehaviour
 
     private void SpawnSkeleton()
     {
-        Vector3 skeletonBossSpawnPosition = new Vector3(_slime.transform.position.x, _slime.transform.position.y + 10f);
+        Vector3 skeletonBossSpawnPosition = new Vector3(_slime.transform.position.x, _slime.transform.position.y);
         pfskeletonBossInstance = Instantiate(pfskeletonBoss, skeletonBossSpawnPosition, Quaternion.identity);
 
         skeletonBoss = pfskeletonBossInstance.GetComponent<Skeleton>();

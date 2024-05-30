@@ -9,6 +9,7 @@ public class PlayRandomAudio : MonoBehaviour
     [SerializeField] private float _minTimeBetweenPlays = 5f;
     [SerializeField] private float _maxTimeBetweenPlays = 15f;
 
+    private bool _isInForest;
     private float _nextPlayTime;
 
     private void Awake()
@@ -18,6 +19,7 @@ public class PlayRandomAudio : MonoBehaviour
 
     private void Start()
     {
+        _isInForest = true;
         SetNextPlayTime();
     }
 
@@ -30,8 +32,30 @@ public class PlayRandomAudio : MonoBehaviour
     {
         if (Time.time >= _nextPlayTime)
         {
-            PlayRandomizedAudio();
-            SetNextPlayTime();
+            if (_isInForest)
+            {
+                PlayRandomizedAudio();
+                SetNextPlayTime();
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Rigidbody2D playerRigidbody = collision.GetComponent<Rigidbody2D>();
+
+            if (playerRigidbody.velocity.x > 0)
+            {
+                _isInForest = true;
+                Debug.Log("From right collision, enabling bird sounds");
+            }
+            else
+            {
+                _isInForest = false;
+                Debug.Log("From left collision, desabling bird sounds");
+            }
         }
     }
 

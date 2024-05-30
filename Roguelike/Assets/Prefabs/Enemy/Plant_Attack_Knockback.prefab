@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 653121958750610850}
   - component: {fileID: 653121958750610849}
   - component: {fileID: 653121958750610848}
+  - component: {fileID: 8544380386493367988}
   m_Layer: 6
   m_Name: Plant
   m_TagString: Untagged
@@ -71,7 +72,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.23469925, y: -0.23910391}
+  m_Offset: {x: -0.12624109, y: -0.77506644}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -82,7 +83,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9074783, y: 3.768596}
+  m_Size: {x: 1.9945161, y: 2.696671}
   m_EdgeRadius: 0
 --- !u!114 &653121958750610850
 MonoBehaviour:
@@ -119,7 +120,7 @@ MonoBehaviour:
   _currentHealth: 0
   _maxHealth: 3000
   _onDeathParticle: {fileID: 19800004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
-  _deathAnimationTime: 0.55
+  _deathAnimationTime: 0.7
   _deathEffect: {fileID: 6219346067317580066, guid: b36fb41bf12a24145a16f9711be0cd80, type: 3}
   _pickupItem: {fileID: 2208644363466943341, guid: 7114ae008266a3d4a84455a166d349c1, type: 3}
   drops:
@@ -139,12 +140,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4c860832dcf634e8d312b53d6a08f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRange: 4
+  _attackRange: 5.5
   _damage: 15
   attackDuration: 0.9
   attackRate: 0.9
   _minRandomMultiplier: 1
   _maxRandomMultiplier: 2
+  _canAttack: 0
+--- !u!114 &8544380386493367988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653121958750610854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185a1cb61f21fc34487253a906ad7d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isFacingRight: 0
 --- !u!1 &653121959033222288
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +217,6 @@ GameObject:
   - component: {fileID: 653121959596068954}
   - component: {fileID: 653121959596068953}
   - component: {fileID: 653121959596068952}
-  - component: {fileID: 2219877746171909824}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -311,37 +325,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plant: {fileID: 653121958750610848}
---- !u!114 &2219877746171909824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653121959596068956}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_ComponentVersion: 1
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: b5c612a61958d0860000000079be3945d7bad61e
-  m_ShapePath:
-  - {x: 1.1004639, y: -0.017949104, z: 0}
-  - {x: 1.885498, y: -0.114583015, z: -0.00000047683716}
-  - {x: 1.948349, y: -0.7965965, z: 0}
-  - {x: 1.0589294, y: -0.6270418, z: 0}
-  - {x: 0.69950867, y: -2.088951, z: 0}
-  - {x: -1.1958923, y: -2.077052, z: -0.00000047683716}
-  - {x: -1.1335754, y: -1.4930773, z: 0}
-  - {x: 0.13807678, y: -0.52837944, z: 0}
-  m_ShapePathHash: 1810271765
-  m_Mesh: {fileID: 0}
-  m_InstanceId: -222184
-  m_LocalBounds:
-    m_Center: {x: 0.37622833, y: -1.0534501, z: 0}
-    m_Extent: {x: 1.5721207, y: 1.035501, z: 0}
+  _plantEnemy: {fileID: 653121958750610849}

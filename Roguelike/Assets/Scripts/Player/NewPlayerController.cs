@@ -9,6 +9,7 @@ public class NewPlayerController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private PlayerAttack _playerAttack;
+    [SerializeField] private ParticleSystem _playerHitParticle;
 
     [Header("Mobile")]
     [SerializeField] private GameObject _mobileUI;
@@ -69,7 +70,9 @@ public class NewPlayerController : MonoBehaviour
     {
         _playerHealth.TakeDamage(damage);
         Debug.Log("Player taking damage is broken in the enemy scripts");
+        AudioManager.Instance.PlaySound("OnPlayerHit_SFX");
         DamagePopup.Create(transform.position + Vector3.right + Vector3.up, (int)damage);
+        ParticleManager.Instance.InstantiateParticle(_playerHitParticle, transform.position);
     }
 
 }

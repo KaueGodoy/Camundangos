@@ -17,6 +17,9 @@ public class Plant_Attack : MonoBehaviour
     [SerializeField] private float _minRandomMultiplier = 1f;
     [SerializeField] private float _maxRandomMultiplier = 1.2f;
 
+    [SerializeField] private bool _canAttack = false;
+    public bool CanAttack { get { return _canAttack; } set { _canAttack = value; } }
+
     public float AttackRange { get { return _attackRange; } set { _attackRange = value; } }
     public float Damage
     {
@@ -42,7 +45,11 @@ public class Plant_Attack : MonoBehaviour
 
         if (distance < AttackRange)
         {
-            TriggerAttackAnimation();
+            CanAttack = true;
+        }
+        else
+        {
+            CanAttack = false;
         }
     }
 

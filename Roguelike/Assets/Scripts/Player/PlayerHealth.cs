@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log($"Player takes: {damageAmount} damage");
 
-        AudioManager.Instance.PlaySound("Hit");
+        //AudioManager.Instance.PlaySound("Hit");
         CurrentHealth -= Mathf.FloorToInt(damageAmount);
         IsHit = true;
 
