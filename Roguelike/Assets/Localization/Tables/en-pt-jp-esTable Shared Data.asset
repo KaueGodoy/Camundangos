@@ -147,6 +147,42 @@ MonoBehaviour:
     m_Key: SoundKey
     m_Metadata:
       m_Items: []
+  - m_Id: 34
+    m_Key: CreditsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35
+    m_Key: SkillKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36
+    m_Key: UltKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37
+    m_Key: AboutKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38
+    m_Key: TCCKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39
+    m_Key: AssetsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40
+    m_Key: AdvisorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41
+    m_Key: HighConceptKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42
+    m_Key: StatsKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

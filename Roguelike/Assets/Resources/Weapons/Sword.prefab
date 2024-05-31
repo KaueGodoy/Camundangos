@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3534bc6970329804f9fe7ce226fd1fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackParticle: {fileID: 6703250321131892299, guid: 2b987d41506d172419fa18578f6ac380, type: 3}
+  _canAttack: 0
+  _attackAnimationRate: 0.4
 --- !u!95 &-8629567390892639416
 Animator:
   serializedVersion: 5

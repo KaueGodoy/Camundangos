@@ -150,6 +150,44 @@ MonoBehaviour:
     m_Localized: "\u30B5\u30A6\u30F3\u30C9"
     m_Metadata:
       m_Items: []
+  - m_Id: 34
+    m_Localized: "\u30AF\u30EC\u30B8\u30C3\u30C8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35
+    m_Localized: "<color=green>E</color> \n\u3092\u62BC\u3059\u3068\u30B9\u30AD\u30EB\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36
+    m_Localized: "<color=green>Q</color> \n\u3092\u62BC\u3059\u3068\u30A2\u30EB\u30C6\u30A3\u30E1\u30C3\u30C8\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37
+    m_Localized: "\u306B\u3064\u3044\u3066"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38
+    m_Localized: "\u3053\u306E\u30B2\u30FC\u30E0\u306F<color=yellow>\u5352\u696D\u8AD6\u6587</color>\u306E\u4E00\u90E8\u3068\u3057\u3066<color=orange>FATEC\u3000SAO\u3000CAETANO\u3000DO\u3000SUL</color>\u3068\u3044\u3046\u5927\u5B66\u306E<color=green>\u30C7\u30B8\u30BF\u30EB\u30B2\u30FC\u30E0\u8AB2\u7A0B</color>\u3078\u63D0\u4F9B\u3055\u308C\u308B\u3082\u306E\u3067\u3059\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39
+    m_Localized: "<color=purple>Assets</color>: \"Particle System \"Cartoon FX Remaster
+      Free\" by Jean Moreno\"\u3068\u3044\u3046asset\u3092Unity Asset Store\u306B\u3066\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u307E\u3059\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41
+    m_Localized: "Os Camundangos \u3068\u3044\u3046\u306E\u306F\u30C9\u30C3\u30C8\u7D75\u3067\u63CF\u304B\u308C\u305F\uFF12D\u306E\u30A2\u30AF\u30B7\u30E7\u30F3\u30FB\u30A2\u30C9\u30D9\u30F3\u30C1\u30E3\u30FC\u306E\u30D7\u30E9\u30C3\u30C8\u30D5\u30A9\u30FC\u30E0\u30B2\u30FC\u30E0\u3067\u3059\u3002\u30EF\u30FC\u30EB\u30C9\u3092\u63A2\u7D22\u3057\u305F\u308A\u30A2\u30A4\u30C6\u30E0\u3084\u65B0\u30AD\u30E3\u30E9\u3092\u7372\u5F97\u3057\u305F\u308A\u6575\u3092\u5012\u3057\u305F\u308A\u3059\u308B\u30B2\u30FC\u30E0\u3067\u3059\u3002\n\n\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u76EE\u6A19\u306F\u30D0\u30F3\u30C9\u304C\u906D\u96E3\u3057\u3066\u304B\u3089\u3044\u308B\u3053\u306E\u5947\u5999\u306A\u4E16\u754C\u304B\u3089\u9003\u3052\u3060\u3057\u3066\u5E30\u308A\u9053\u3092\u898B\u3064\u3051\u308B\u3053\u3068\u3067\u3059\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40
+    m_Localized: "<color=red>\u6307\u5C0E\u6559\u5B98</color>: Alexandre Santaella
+      Braga, Raquel Silva, Willians Monteiro da Silva."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42
+    m_Localized: "<color=green>C</color> \n\u3092\u62BC\u3059\u3068\u30D7\u30EC\u30A4\u30E4\u30FC\u30B9\u30C6\u30FC\u30BF\u30B9\u3092\u898B\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

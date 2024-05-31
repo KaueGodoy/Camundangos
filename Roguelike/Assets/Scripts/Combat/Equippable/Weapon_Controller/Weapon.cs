@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IWeapon
@@ -7,15 +8,22 @@ public abstract class Weapon : MonoBehaviour, IWeapon
     public List<BaseStat> Stats { get; set; }
     public float CurrentDamage { get; set; }
 
+    [SerializeField] private ParticleSystem _attackParticle;
+    public ParticleSystem AttackParticle { get { return _attackParticle; } set { _attackParticle = value; } }
+
     public virtual void Awake()
     {
         Animator = GetComponent<Animator>();
     }
 
+   
+
     public virtual void PerformAttack(float damage)
     {
+        //if (PlayerAttack.Instance.AttackRequest) return;
         CurrentDamage = damage;
         AudioManager.Instance.PlaySound("PlayerWeaponAttack");
+        ParticleManager.Instance.InstantiateParticle(AttackParticle, transform.position);
         //Debug.Log(this.name + " basic attack!");
     }
 

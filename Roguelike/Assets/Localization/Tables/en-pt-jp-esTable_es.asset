@@ -71,31 +71,43 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14
-    m_Localized: <color=green>Shift izquierdo</color> Esquivar-se
+    m_Localized: '<color=green>Shift izquierdo</color>
+
+      esquivar-se'
     m_Metadata:
       m_Items: []
   - m_Id: 15
-    m_Localized: <color=green>Barra de espacio</color> para lanzarse
+    m_Localized: '<color=green>Barra de espacio</color>
+
+      para lanzarse'
     m_Metadata:
       m_Items: []
   - m_Id: 16
-    m_Localized: <color=green>Barra de espacio</color>  salto doble
+    m_Localized: '<color=green>Barra de espacio</color>
+
+      salto doble'
     m_Metadata:
       m_Items: []
   - m_Id: 17
-    m_Localized: <color=green>F</color> para interactuar
+    m_Localized: '<color=green>F</color>
+
+      para interactuar'
     m_Metadata:
       m_Items: []
   - m_Id: 18
-    m_Localized: <color=green>A</color> <color=green>D</color>  para moverte
+    m_Localized: '<color=green>A</color> <color=green>D</color>
+
+      para moverte'
     m_Metadata:
       m_Items: []
   - m_Id: 19
-    m_Localized: <color=green>TAB</color> para acceder al inventario
+    m_Localized: '<color=green>TAB</color>
+
+      para acceder al inventario'
     m_Metadata:
       m_Items: []
   - m_Id: 20
-    m_Localized: "<color=green>bot\xF3n izquierdo del rat\xF3n</color>  para golpear"
+    m_Localized: "<color=green>bot\xF3n izquierdo del rat\xF3n</color>\npara golpear"
     m_Metadata:
       m_Items: []
   - m_Id: 21
@@ -149,6 +161,34 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 33
     m_Localized: 'Sonido '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35
+    m_Localized: "<color=green>E</color> \npara usar Habilidad Especial"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36
+    m_Localized: '<color=green>Q</color>
+
+      para usar la Habilidad Definitiva'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37
+    m_Localized: Acerca de
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42
+    m_Localized: '<color=green>C</color>
+
+      para ver el estado del jugador'
     m_Metadata:
       m_Items: []
   references:

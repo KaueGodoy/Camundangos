@@ -7,6 +7,7 @@ public class PlayerUlt : MonoBehaviour
     [Header("Ult")]
     [SerializeField] private Transform UltSpawnPoint;
     [SerializeField] private GameObject Projectile;
+    [SerializeField] private ParticleSystem _ultParticle;
 
     [SerializeField] private float _ultAttackDelay = 0.8f;
     [SerializeField] private float _ultAttackTimer = 0.0f;
@@ -52,6 +53,7 @@ public class PlayerUlt : MonoBehaviour
                 {
                     _isUltPerformed = true;
 
+                    ParticleManager.Instance.InstantiateParticle(_ultParticle, transform.position);
                     Invoke("InstantiateUlt", _ultAttackDelay / 2);
                     Invoke("UltComplete", _ultAttackDelay);
                 }

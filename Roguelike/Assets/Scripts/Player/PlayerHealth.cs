@@ -58,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("Hit");
         CurrentHealth += Mathf.FloorToInt(healAmount);
+        UpdatePlayerHealthBar();
 
         if (CurrentHealth >= MaxHealth)
         {

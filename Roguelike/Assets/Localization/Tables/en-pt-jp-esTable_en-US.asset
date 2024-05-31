@@ -157,6 +157,59 @@ MonoBehaviour:
     m_Localized: Sounds
     m_Metadata:
       m_Items: []
+  - m_Id: 34
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35
+    m_Localized: '<color=green>E</color>
+
+      to use Skill'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36
+    m_Localized: '<color=green>Q</color>
+
+      to use Ultimate'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37
+    m_Localized: About
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38
+    m_Localized: "This game is submitted to the <color=orange>Fatec S\xE3o Caetano
+      do Sul</color> University as part of the <color=yellow>Final Paper</color>
+      of the <color=green>Digital Games </color>undergraduate course. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39
+    m_Localized: '<color=purple>Assets</color>: "Particle System "Cartoon FX Remaster
+      Free" by Jean Moreno" can be accessed on the Unity Asset Store.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40
+    m_Localized: '<color=red>Advisors</color>: Alexandre Santaella Braga, Raquel
+      Silva, Willians Monteiro da Silva.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41
+    m_Localized: 'Os Camundangos is a 2D, platformer, action-adventure, metroidvania
+      game drawn in pixel art, where the player can explore the map, find itens,
+      fight enemies and unlock new characters.
+
+
+      The player has the goal of
+      escaping this bizarre world they ended up in after an accident and find a way
+      back home.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42
+    m_Localized: '<color=green>C</color>
+
+      to see player status'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

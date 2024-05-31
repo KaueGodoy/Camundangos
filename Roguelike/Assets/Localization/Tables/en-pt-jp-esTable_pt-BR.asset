@@ -155,6 +155,56 @@ MonoBehaviour:
     m_Localized: Som
     m_Metadata:
       m_Items: []
+  - m_Id: 34
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35
+    m_Localized: '<color=green>E</color>
+
+      para usar Habilidade Especial'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 36
+    m_Localized: '<color=green>Q</color>
+
+      para usar Habilidade Suprema'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37
+    m_Localized: Sobre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38
+    m_Localized: "Este jogo \xE9 um <color=yellow>Trabalho de Gradua\xE7\xE3o</color>
+      do curso de <color=green>Jogos Digitais </color>da <color=orange>Fatec S\xE3o
+      Caetano do Sul</color>."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39
+    m_Localized: "<color=purple>Assets</color>: \"Sistema de part\xEDculas \"Cartoon
+      FX Remaster Free\" por Jean Moreno\" pode ser acessado na Unity Asset Store."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40
+    m_Localized: '<color=red>Orientadores</color>: Alexandre Santaella Braga, Raquel
+      Silva, Willians Monteiro da Silva.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41
+    m_Localized: "Os Camundangos \xE9 um jogo 2D de plataforma, a\xE7\xE3o e aventura,
+      metroidvania, desenhado em pixel art, onde o jogador pode explorar o mapa,
+      encontrar itens, lutar contra inimigos e desbloquear novos personagens. \n\nO
+      jogador tem o objetivo de escapar desse mundo bizarro que os personagens foram
+      parar ap\xF3s um acidente e encontrar um caminho de volta para casa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42
+    m_Localized: '<color=green>C</color>
+
+      para ver status do jogador'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

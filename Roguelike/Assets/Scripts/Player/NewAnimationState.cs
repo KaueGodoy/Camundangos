@@ -45,7 +45,7 @@ public class NewAnimationState : AnimationController
         // hit
         else if (PlayerHealth.IsHit)
         {
-            ChangeAnimationState(_animation[1]);
+            //ChangeAnimationState(_animation[1]);
         }
         // attack
         else if (PlayerAttack.AttackAnimation)
@@ -72,8 +72,7 @@ public class NewAnimationState : AnimationController
         // skill
         else if (PlayerSkill.SkillAttackAnimation)
         {
-            ChangeAnimationState(_animation[5]);
-
+            ChangeAnimationState(_animation[6]);
         }
         // ult
         else if (PlayerUlt.UltAttackAnimation)

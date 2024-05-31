@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public static PlayerAttack Instance { get; private set; }
+
     #region Attack
 
     [Header("Attack")]
@@ -16,8 +18,13 @@ public class PlayerAttack : MonoBehaviour
     public bool AttackRequest { get; set; }
     public bool attackString = false;
 
-    public static bool AttackAnimation = false;
-    private bool IsAttacking { get; set; }
+    public static bool AttackAnimation { get; set; }
+    public bool IsAttacking { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

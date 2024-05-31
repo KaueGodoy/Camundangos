@@ -67,13 +67,13 @@ public class HandleAnimationStates : AnimationController
             }
             else if (PlayerAttack.CurrentAttack == 2)
             {
-                ChangeAnimationState(_animation[3]);
+                ChangeAnimationState(_animation[2]);
                 //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }
             else if (PlayerAttack.CurrentAttack == 3)
             {
-                ChangeAnimationState(_animation[4]);
+                ChangeAnimationState(_animation[2]);
                 //Debug.Log("Attack string number: " + _playerAttack.CurrentAttack);
 
             }

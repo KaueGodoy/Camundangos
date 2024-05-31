@@ -75,4 +75,9 @@ public class NewPlayerController : MonoBehaviour
         ParticleManager.Instance.InstantiateParticle(_playerHitParticle, transform.position);
     }
 
+    public void HealPlayer(float healAmount)
+    {
+        _playerHealth.Heal(healAmount);
+    }
+
 }

@@ -28,6 +28,6 @@ public class OnCharacterUnlockedVisual : MonoBehaviour
     public void PlayVisualParticles()
     {
         ParticleManager.Instance.ExecuteParticle(_onDestroyParticle);
-        ParticleManager.Instance.CallLerpSpriteRendererAlphaCoroutine(_targetAlpha, _lerpDuration, _spriteRenderer);
+        //ParticleManager.Instance.CallLerpSpriteRendererAlphaCoroutine(_targetAlpha, _lerpDuration, _spriteRenderer);
     }
 }

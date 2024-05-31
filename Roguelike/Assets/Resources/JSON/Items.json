@@ -97,15 +97,15 @@
   },
   {
     "objectSlug": "potion_hp",
-    "itemName": "HP Potion",
-    "description": "A potion that gives MAX HP",
+    "itemName": "Small HP Potion",
+    "description": "A potion that gives some amount of healing",
     "itemType": "Consumable",
     "actionName": "Drink",
     "itemModifier": 1,
     "Stats": [
       {
         "StatType": "HP",
-        "BaseValue": 300,
+        "BaseValue": 100,
         "StatName": "HP"
       }
     ]

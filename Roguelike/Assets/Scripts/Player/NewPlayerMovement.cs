@@ -53,6 +53,7 @@ public class NewPlayerMovement : MonoBehaviour
 
     [Header("Dash")]
     [SerializeField] private TrailRenderer _trailRenderer;
+    [SerializeField] private ParticleSystem _dashParticle;
     [SerializeField] private float _dashSpeed = 5f;
     public float DashSpeed { get { return _dashSpeed; } set { _dashSpeed = value; } }
     [SerializeField] private float _dashingTime = 0.2f;
@@ -350,6 +351,7 @@ public class NewPlayerMovement : MonoBehaviour
 
         Rb.velocity = new Vector2(CurrentRotationDash * _dashSpeed, 0f);
         _trailRenderer.emitting = true;
+        ParticleManager.Instance.InstantiateParticle(_dashParticle, transform.position);
 
         yield return new WaitForSeconds(_dashingTime);
 

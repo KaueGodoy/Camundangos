@@ -7,6 +7,7 @@ public class PlayerSkill : MonoBehaviour
     [Header("Skill")]
     public Transform SkillSpawnPoint;
     public GameObject Projectile;
+    [SerializeField] private ParticleSystem _skillParticle;
 
     // DELETE 
     public Transform SpawnPoint;
@@ -55,6 +56,7 @@ public class PlayerSkill : MonoBehaviour
                 {
                     _isSkillPerformed = true;
 
+                    ParticleManager.Instance.InstantiateParticle(_skillParticle, transform.position);
                     Invoke("InstantiateSkill", _skillAttackDelay - 0.1f);
                     Invoke("SkillComplete", _skillAttackDelay);
 
