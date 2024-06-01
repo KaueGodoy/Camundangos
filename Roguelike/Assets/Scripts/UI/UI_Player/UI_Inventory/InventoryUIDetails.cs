@@ -12,6 +12,9 @@ public class InventoryUIDetails : MonoBehaviour
 
     public TextMeshProUGUI statText;
 
+    [SerializeField] private Button _equippableTabButton;
+
+
     private void Start()
     {
         itemNameText = transform.Find("Item_Name").GetComponent<TextMeshProUGUI>();
@@ -26,6 +29,7 @@ public class InventoryUIDetails : MonoBehaviour
     public void SetItem(Item item, Button selectedButton)
     {
         gameObject.SetActive(true);
+        itemInteractButton.Select();
         statText.text = "";
         if(item.Stats != null)
         {
@@ -51,11 +55,13 @@ public class InventoryUIDetails : MonoBehaviour
         if (item.ItemType == Item.ItemTypes.Consumable)
         {
             InventoryController.Instance.ConsumeItem(item);
+            _equippableTabButton.Select();
             Destroy(selectedItemButton.gameObject);
         }
         else if (item.ItemType == Item.ItemTypes.Weapon)
         {
             InventoryController.Instance.EquipItem(item);
+            _equippableTabButton.Select();
             Destroy(selectedItemButton.gameObject);
         }
 

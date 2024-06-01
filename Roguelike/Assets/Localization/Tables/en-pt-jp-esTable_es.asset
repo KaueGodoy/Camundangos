@@ -182,13 +182,32 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 40
-    m_Localized: 
+    m_Localized: '<color=red>Asesores</color>: Alexandre Santaella Braga, Raquel
+      Silva, Willians Monteiro da Silva.'
     m_Metadata:
       m_Items: []
   - m_Id: 42
     m_Localized: '<color=green>C</color>
 
       para ver el estado del jugador'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38
+    m_Localized: "Este juego es un<color=yellow> proyecto de graduaci\xF3n </color>del
+      curso de <color=green>Juegos digitales</color> de <color=orange>Fatec S\xE3o
+      Caetano do Sul</color>."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39
+    m_Localized: "<color=purple>Assets</color>: \"Se puede acceder al sistema de
+      part\xEDculas \"Cartoon FX Remaster Free\" de Jean Moreno\" en Unity Asset
+      Store."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41
+    m_Localized: "Os Camundangos es un juego metroidvania de plataforma, acci\xF3n
+      y aventuras en 2D, dise\xF1ado en pixel art, donde el jugador puede explorar
+      el mapa, encontrar elementos, luchar contra enemigos y desbloquear nuevos personajes."
     m_Metadata:
       m_Items: []
   references:

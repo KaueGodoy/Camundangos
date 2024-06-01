@@ -1,90 +1,90 @@
-﻿Key,Id,English (United States)(en-US),Portuguese (Brazil)(pt-BR),Japanese(ja),Spanish(es),
-PlayKey,1,Play,Jogar,プレイ,Jugar,
-SettingsKey,2,Settings,Opções,設定,Opciones,
-QuitKey,3,Quit,Sair,終了,Salir,
-ReturnKey,4,Return,Voltar,戻る,Volver,
-LanguageKey,5,Language,Idioma,言語,Idioma,
-EnglishLanguageKey,6,English,English,English,English,
-JapaneseLanguageKey,7,日本語,日本語,日本語,日本語,
-BrazilianPortugueseLanguageKey,8,Português,Português,Português,Português,
-MainMenuKey,9,Main Menu,Menu,メニュー,Menú,
-RestartKey,10,Restart,Reiniciar,リトライ,Reiniciar,
-ResumeKey,11,Resume,Continuar,続ける,Seguir,
-SpanishKey,12,Español,Español,Español,Español,
-CommonChestKey,13,Common Chest,Baú Comum,普通宝箱,Baúl Común,
+﻿Key,Id,English (United States)(en-US),Portuguese (Brazil)(pt-BR),Japanese(ja),Spanish(es)
+PlayKey,1,Play,Jogar,プレイ,Jugar
+SettingsKey,2,Settings,Opções,設定,Opciones
+QuitKey,3,Quit,Sair,終了,Salir
+ReturnKey,4,Return,Voltar,戻る,Volver
+LanguageKey,5,Language,Idioma,言語,Idioma
+EnglishLanguageKey,6,English,English,English,English
+JapaneseLanguageKey,7,日本語,日本語,日本語,日本語
+BrazilianPortugueseLanguageKey,8,Português,Português,Português,Português
+MainMenuKey,9,Main Menu,Menu,メニュー,Menú
+RestartKey,10,Restart,Reiniciar,リトライ,Reiniciar
+ResumeKey,11,Resume,Continuar,続ける,Seguir
+SpanishKey,12,Español,Español,Español,Español
+CommonChestKey,13,Common Chest,Baú Comum,普通宝箱,Baúl Común
 DashKey,14,"<color=green>Left Shift</color> 
 to dash","<color=green>Shift esquerdo</color> 
 para usar esquiva","<color=green>Left Shift</color> 
 を押すとダッシュすることができます","<color=green>Shift izquierdo</color>
-esquivar-se",
+esquivar-se"
 JumpKey,15,"<color=green>Space bar</color> 
 to jump","<color=green>Espaço</color> 
 para pular","<color=green>Space bar</color> 
 を押すとジャンプすることができます","<color=green>Barra de espacio</color>
-para lanzarse",
+para lanzarse"
 JumpMidAirKey,16,"<color=green>Space bar mid air</color> 
 to jump again","<color=green>Espaço no ar</color> 
 para pular novamente","<color=green>空中でSpace bar</color> 
 を押すとまたジャンプすることができます","<color=green>Barra de espacio</color>
-salto doble",
+salto doble"
 InteractKey,17,"<color=green>F</color>
 to interact","<color=green>F</color>
 para interagir","<color=green>F</color>
 を押すとインタラクションすることができます
 ","<color=green>F</color>
-para interactuar",
+para interactuar"
 MoveKey,18,"<color=green>A</color> <color=green>D</color>
 to move around","<color=green>A</color> <color=green>D</color>
 para se mover","<color=green>A</color> <color=green>D</color>
 を押すと移動することができます","<color=green>A</color> <color=green>D</color>
-para moverte",
+para moverte"
 InventoryKey,19,"<color=green>TAB</color>
 to acess the inventory","<color=green>TAB</color>
 para acessar o inventário","<color=green>TAB</color> 
 を押すとインベントリーをオープンすることができます","<color=green>TAB</color>
-para acceder al inventario",
+para acceder al inventario"
 AttackKey,20,"<color=green>Left mouse button</color> 
 to attack","<color=green>Mouse esquerdo</color> 
 para atacar","<color=green>Left mouse button</color> 
 を押すと攻撃することができます","<color=green>botón izquierdo del ratón</color>
-para golpear",
-UseKey,21,Use,Usar,使用,Usar,
-UnlockCharacterKey,22,Continue <color=yellow>exploring </color>to unlock this <color=green>character </color>,Continue <color=yellow>explorando </color>para desbloquear este <color=green>personagem </color>,この<color=green>キャラ</color>をアンロックするには<color=yellow>探索</color>を続けて,Sigue <color=yellow>explorando </color>para desbloquear este <color=green>personaje. </color>,
-IsaForest_QuestKey,23,Find Isa in the forest,Encontre Isa na floresta,森の中でイサを探して,Encontra a Isa em el bosque,
-ChestKey,24,Chest,Baú,宝箱,Baúl,
-SwordKey,25,Sword,Espada,剣,Espada,
-AudioKey,26,Audio,Áudio,音量,Audio,
-BGMKey,27,BGM,BGM,BGM,BGM,
-SFXKey,28,SFX,SFX,SE,SFX,
-MasterKey,29,Master,Geral,マスター,General,
-AnimationKey,30,Animation,Animação,アニメーション,Animación,
-ArtKey,31,Art,Arte,グラフィック,Arte,
-ProgrammingKey,32,Programming,Programação,プログラミング,Programación,
-SoundKey,33,Sounds,Som,サウンド,Sonido ,
-CreditsKey,34,Credits,Créditos,クレジット,Créditos,
+para golpear"
+UseKey,21,Use,Usar,使用,Usar
+UnlockCharacterKey,22,Continue <color=yellow>exploring </color>to unlock this <color=green>character </color>,Continue <color=yellow>explorando </color>para desbloquear este <color=green>personagem </color>,この<color=green>キャラ</color>をアンロックするには<color=yellow>探索</color>を続けて,Sigue <color=yellow>explorando </color>para desbloquear este <color=green>personaje. </color>
+IsaForest_QuestKey,23,Find Isa in the forest,Encontre Isa na floresta,森の中でイサを探して,Encontra a Isa em el bosque
+ChestKey,24,Chest,Baú,宝箱,Baúl
+SwordKey,25,Sword,Espada,剣,Espada
+AudioKey,26,Audio,Áudio,音量,Audio
+BGMKey,27,BGM,BGM,BGM,BGM
+SFXKey,28,SFX,SFX,SE,SFX
+MasterKey,29,Master,Geral,マスター,General
+AnimationKey,30,Animation,Animação,アニメーション,Animación
+ArtKey,31,Art,Arte,グラフィック,Arte
+ProgrammingKey,32,Programming,Programação,プログラミング,Programación
+SoundKey,33,Sounds,Som,サウンド,Sonido 
+CreditsKey,34,Credits,Créditos,クレジット,Créditos
 SkillKey,35,"<color=green>E</color>
 to use Skill","<color=green>E</color>
 para usar Habilidade Especial","<color=green>E</color> 
 を押すとスキルを使用することができます","<color=green>E</color> 
-para usar Habilidad Especial",
+para usar Habilidad Especial"
 UltKey,36,"<color=green>Q</color>
 to use Ultimate","<color=green>Q</color>
 para usar Habilidade Suprema","<color=green>Q</color> 
 を押すとアルティメットを使用することができます","<color=green>Q</color>
-para usar la Habilidad Definitiva",
-AboutKey,37,About,Sobre,について,Acerca de,
-TCCKey,38,This game is submitted to the <color=orange>Fatec São Caetano do Sul</color> University as part of the <color=yellow>Final Paper</color> of the <color=green>Digital Games </color>undergraduate course. ,Este jogo é um <color=yellow>Trabalho de Graduação</color> do curso de <color=green>Jogos Digitais </color>da <color=orange>Fatec São Caetano do Sul</color>.,このゲームは<color=yellow>卒業論文</color>の一部として<color=orange>FATEC　SAO　CAETANO　DO　SUL</color>という大学の<color=green>デジタルゲーム課程</color>へ提供されるものです。,,
-AssetsKey,39,"<color=purple>Assets</color>: ""Particle System ""Cartoon FX Remaster Free"" by Jean Moreno"" can be accessed on the Unity Asset Store.","<color=purple>Assets</color>: ""Sistema de partículas ""Cartoon FX Remaster Free"" por Jean Moreno"" pode ser acessado na Unity Asset Store.","<color=purple>Assets</color>: ""Particle System ""Cartoon FX Remaster Free"" by Jean Moreno""というassetをUnity Asset Storeにてアクセスできます。",,
-AdvisorKey,40,"<color=red>Advisors</color>: Alexandre Santaella Braga, Raquel Silva, Willians Monteiro da Silva.","<color=red>Orientadores</color>: Alexandre Santaella Braga, Raquel Silva, Willians Monteiro da Silva.","<color=red>指導教官</color>: Alexandre Santaella Braga, Raquel Silva, Willians Monteiro da Silva.",,
+para usar la Habilidad Definitiva"
+AboutKey,37,About,Sobre,について,Acerca de
+TCCKey,38,This game is submitted to the <color=orange>Fatec São Caetano do Sul</color> University as part of the <color=yellow>Final Paper</color> of the <color=green>Digital Games </color>undergraduate course. ,Este jogo é um <color=yellow>Trabalho de Graduação</color> do curso de <color=green>Jogos Digitais </color>da <color=orange>Fatec São Caetano do Sul</color>.,このゲームは<color=yellow>卒業論文</color>の一部として<color=orange>FATEC　SAO　CAETANO　DO　SUL</color>という大学の<color=green>デジタルゲーム課程</color>へ提供されるものです。,Este juego es un<color=yellow> proyecto de graduación </color>del curso de <color=green>Juegos digitales</color> de <color=orange>Fatec São Caetano do Sul</color>.
+AssetsKey,39,"<color=purple>Assets</color>: ""Particle System ""Cartoon FX Remaster Free"" by Jean Moreno"" can be accessed on the Unity Asset Store.","<color=purple>Assets</color>: ""Sistema de partículas ""Cartoon FX Remaster Free"" por Jean Moreno"" pode ser acessado na Unity Asset Store.","<color=purple>Assets</color>: ""Particle System ""Cartoon FX Remaster Free"" by Jean Moreno""というassetをUnity Asset Storeにてアクセスできます。","<color=purple>Assets</color>: ""Se puede acceder al sistema de partículas ""Cartoon FX Remaster Free"" de Jean Moreno"" en Unity Asset Store."
+AdvisorKey,40,"<color=red>Advisors</color>: Alexandre Santaella Braga, Raquel Silva, Willians Monteiro da Silva.","<color=red>Orientadores</color>: Alexandre Santaella Braga, Raquel Silva, Willians Monteiro da Silva.","<color=red>指導教官</color>: Alexandre Santaella Braga, Raquel Silva, Willians Monteiro da Silva.","<color=red>Asesores</color>: Alexandre Santaella Braga, Raquel Silva, Willians Monteiro da Silva."
 HighConceptKey,41,"Os Camundangos is a 2D, platformer, action-adventure, metroidvania game drawn in pixel art, where the player can explore the map, find itens, fight enemies and unlock new characters.
 
 The player has the goal of escaping this bizarre world they ended up in after an accident and find a way back home.","Os Camundangos é um jogo 2D de plataforma, ação e aventura, metroidvania, desenhado em pixel art, onde o jogador pode explorar o mapa, encontrar itens, lutar contra inimigos e desbloquear novos personagens. 
 
 O jogador tem o objetivo de escapar desse mundo bizarro que os personagens foram parar após um acidente e encontrar um caminho de volta para casa.","Os Camundangos というのはドット絵で描かれた２Dのアクション・アドベンチャーのプラットフォームゲームです。ワールドを探索したりアイテムや新キャラを獲得したり敵を倒したりするゲームです。
 
-プレイヤーの目標はバンドが遭難してからいるこの奇妙な世界から逃げだして帰り道を見つけることです。",,
+プレイヤーの目標はバンドが遭難してからいるこの奇妙な世界から逃げだして帰り道を見つけることです。","Os Camundangos es un juego metroidvania de plataforma, acción y aventuras en 2D, diseñado en pixel art, donde el jugador puede explorar el mapa, encontrar elementos, luchar contra enemigos y desbloquear nuevos personajes."
 StatsKey,42,"<color=green>C</color>
 to see player status","<color=green>C</color>
 para ver status do jogador","<color=green>C</color> 
 を押すとプレイヤーステータスを見ることができます","<color=green>C</color>
-para ver el estado del jugador",
+para ver el estado del jugador"

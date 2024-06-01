@@ -120,4 +120,9 @@ public abstract class Interactable : MonoBehaviour, IInteractable
             DisableInteraction();
         }
     }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerInteract -= GameInput_OnPlayerInteract;
+    }
 }

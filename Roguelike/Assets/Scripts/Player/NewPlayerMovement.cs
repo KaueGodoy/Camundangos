@@ -407,5 +407,10 @@ public class NewPlayerMovement : MonoBehaviour
         return _jumpMultiplier;
     }
 
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerJump -= GameInput_OnPlayerJump;
+        GameInput.Instance.OnPlayerDash -= GameInput_OnPlayerDash;
+    }
 
 }

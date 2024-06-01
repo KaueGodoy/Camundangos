@@ -179,5 +179,10 @@ public class PlayerCooldowns : MonoBehaviour
         ultForegroundImage.gameObject.SetActive(true);
     }
 
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerSkill -= GameInput_OnPlayerSkill;
+    }
+
     #endregion
 }

@@ -11,6 +11,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Transform _settingsPanel;
     [SerializeField] private Button _creditsButton;
     [SerializeField] private Button _quitButton;
+    [SerializeField] private Button _languageButton;
 
     private void Awake()
     {
@@ -36,12 +37,18 @@ public class MainMenuUI : MonoBehaviour
         });
     }
 
+    private void Start()
+    {
+        _playButton.Select();
+    }
+
     private void OpenSettings()
     {
         AudioManager.Instance.PlaySound("OnUIPressed");
 
         this.gameObject.SetActive(false);
         _settingsPanel.gameObject.SetActive(true);
+        _languageButton.Select();
     }
 
     public void Play()
@@ -60,6 +67,7 @@ public class MainMenuUI : MonoBehaviour
     public void GoToCreditsScene()
     {
         AudioManager.Instance.PlaySound("OnUIPressed");
+
 
         _fader.gameObject.SetActive(true);
         LeanTween.alpha(_fader, 0, 0f);

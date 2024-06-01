@@ -1,4 +1,14 @@
-SFX_Birds
+SFX_Birds00
+SFX_Birds01
+SFX_Birds02
+SFX_Birds03
+SFX_Birds04
+SFX_Birds05
+SFX_Birds06
+SFX_Birds07
+SFX_Birds08
+SFX_Birds09
+SFX_Birds10
 SFX_Crow01
 SFX_Crow02
 SFX_Crow03

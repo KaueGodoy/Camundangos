@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterPanelUI : MonoBehaviour
 {
     [Header("Character Stats")]
     [SerializeField] private RectTransform _characterPanel;
+    [SerializeField] private Button _unequipItemButton;
 
     public bool PanelIsActive { get; set; }
 
@@ -23,8 +25,14 @@ public class CharacterPanelUI : MonoBehaviour
 
     private void ActivateMenu()
     {
+        if (PauseMenu.GameIsPaused) return;
+
         PanelIsActive = !PanelIsActive;
         _characterPanel.gameObject.SetActive(PanelIsActive);
+        if (_characterPanel.gameObject.activeSelf)
+        {
+            _unequipItemButton.Select();
+        }
         OpenMenu(PanelIsActive);
         CloseMenu(!PanelIsActive);
     }
@@ -43,5 +51,10 @@ public class CharacterPanelUI : MonoBehaviour
             AudioManager.Instance.PlaySound("OnStatsClosed");
 
         return menuClosed;
+    }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnCharacterStatsPressed -= GameInput_OnCharacterStatsPressed;
     }
 }

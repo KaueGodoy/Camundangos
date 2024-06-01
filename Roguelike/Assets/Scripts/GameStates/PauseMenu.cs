@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private GameObject _pauseMenuUI;
     [SerializeField] private RectTransform _fader;
+    [SerializeField] private Button _resumeButton;
 
     private void Awake()
     {
@@ -59,6 +61,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         _pauseMenuUI.SetActive(true);
+        _resumeButton.Select(); 
         Time.timeScale = 0f;
         GameIsPaused = true;
 
@@ -102,6 +105,11 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Quitting...");
         Application.Quit();
+    }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPausePressed -= GameInput_OnPausePressed;
     }
 
 }

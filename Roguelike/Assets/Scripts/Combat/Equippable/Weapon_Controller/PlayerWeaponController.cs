@@ -108,4 +108,8 @@ public class PlayerWeaponController : MonoBehaviour
         weaponEquipped.PerformUltAttack();
     }
 
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerAttack -= GameInput_OnPlayerAttack;
+    }
 }

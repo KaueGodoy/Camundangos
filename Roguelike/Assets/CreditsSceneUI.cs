@@ -15,6 +15,11 @@ public class CreditsSceneUI : MonoBehaviour
         });
     }
 
+    private void Start()
+    {
+        _mainMenuButton.Select();
+    }
+
     public void GoBackToMainMenu()
     {
         PauseMenu.GameIsPaused = false;

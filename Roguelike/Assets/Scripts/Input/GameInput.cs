@@ -146,7 +146,7 @@ public class GameInput : MonoBehaviour
         _playerControls.Player.Attack.performed -= Attack_performed;
         _playerControls.Player.Skill.performed -= Skill_performed;
         _playerControls.Player.Ult.performed -= Ult_performed;
-
+        _playerControls.Player.Down.performed -= Down_performed;
 
         _playerControls.UI.Character1.performed -= Character1_performed;
         _playerControls.UI.Character2.performed -= Character2_performed;
@@ -156,10 +156,9 @@ public class GameInput : MonoBehaviour
         _playerControls.UI.Inventory.performed -= Inventory_performed;
         _playerControls.UI.Stats.performed -= Stats_performed;
         _playerControls.UI.Pause.performed -= Pause_performed;
+
         _playerControls.UI.Interact.performed -= Interact_performed;
         _playerControls.UI.ShowCursor.performed -= ShowCursor_performed;
-
-
     }
 
 }

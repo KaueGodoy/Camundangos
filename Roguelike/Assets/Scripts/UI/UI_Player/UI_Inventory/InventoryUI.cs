@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     [Header("Sections")]
     [SerializeField] private RectTransform _sectionPanelWeapon;
     [SerializeField] private RectTransform _sectionPanelConsumable;
+    [SerializeField] private Button _equippableTabButton;
 
     [Header("Content")]
     [SerializeField] private RectTransform _weaponScrollViewContent;
@@ -44,8 +46,16 @@ public class InventoryUI : MonoBehaviour
 
     public void ActivateMenu()
     {
+        if (PauseMenu.GameIsPaused) return; 
+
         MenuIsActive = !MenuIsActive;
         _inventoryPanel.gameObject.SetActive(MenuIsActive);
+
+        if (_inventoryPanel.gameObject.activeSelf)
+        {
+            _equippableTabButton.Select();
+        }
+
         OpenMenu(MenuIsActive);
         CloseMenu(!MenuIsActive);
 
@@ -105,5 +115,10 @@ public class InventoryUI : MonoBehaviour
             emptyItem.transform.SetParent(_weaponScrollViewContent);
             Debug.LogWarning($"{emptyItem.gameObject.name} does not belong to defined types of item");
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnInventoryPressed -= GameInput_OnInventoryPressed;
     }
 }

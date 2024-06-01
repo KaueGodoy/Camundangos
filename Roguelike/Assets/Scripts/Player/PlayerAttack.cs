@@ -105,5 +105,10 @@ public class PlayerAttack : MonoBehaviour
         IsAttacking = false;
     }
 
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerAttack -= GameInput_OnPlayerAttack;
+    }
+
     #endregion
 }

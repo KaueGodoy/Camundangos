@@ -120,6 +120,18 @@ public class AudioManager : MonoBehaviour
         CurrentBGMPlaying.source.Stop();
     }
 
+    public void StopSFX(string name)
+    {
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if (sound == null)
+        {
+            Debug.LogWarning("Sound " + name + " not found!");
+            return;
+        }
+
+        sound.source.Stop();
+    }
+
     public void SetMasterVolume(float volume)
     {
         CurrentMasterVolume = volume;

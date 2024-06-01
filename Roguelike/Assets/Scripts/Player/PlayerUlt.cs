@@ -88,4 +88,9 @@ public class PlayerUlt : MonoBehaviour
             _ultAttackTimer = 0f;
         }
     }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerUlt -= GameInput_OnPlayerUlt;
+    }
 }

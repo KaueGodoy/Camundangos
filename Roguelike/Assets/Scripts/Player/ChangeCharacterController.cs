@@ -98,4 +98,12 @@ public class ChangeCharacterController : MonoBehaviour
     {
         return _currentCharacter;
     }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnCharacterChanged_Slot01 -= GameInput_OnCharacterChanged_Slot01;
+        GameInput.Instance.OnCharacterChanged_Slot02 -= GameInput_OnCharacterChanged_Slot02;
+        GameInput.Instance.OnCharacterChanged_Slot03 -= GameInput_OnCharacterChanged_Slot03;
+        GameInput.Instance.OnCharacterChanged_Slot04 -= GameInput_OnCharacterChanged_Slot04;
+    }
 }

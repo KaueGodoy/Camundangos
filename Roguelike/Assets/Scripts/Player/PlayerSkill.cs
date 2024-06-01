@@ -92,4 +92,9 @@ public class PlayerSkill : MonoBehaviour
             _skillAttackTimer = 0f;
         }
     }
+
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerSkill -= GameInput_OnPlayerSkill;
+    }
 }

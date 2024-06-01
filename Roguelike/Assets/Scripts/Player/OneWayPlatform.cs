@@ -62,4 +62,9 @@ public class OneWayPlatform : MonoBehaviour
         Physics2D.IgnoreCollision(_playerCollider, _platformCollider, false);
     }
 
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerDescendPlatform -= GameInput_OnPlayerDescendPlatform;
+    }
+
 }

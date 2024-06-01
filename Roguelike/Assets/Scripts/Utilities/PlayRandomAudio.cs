@@ -32,11 +32,8 @@ public class PlayRandomAudio : MonoBehaviour
     {
         if (Time.time >= _nextPlayTime)
         {
-            if (_isInForest)
-            {
-                PlayRandomizedAudio();
-                SetNextPlayTime();
-            }
+            PlayRandomizedAudio();
+            SetNextPlayTime();
         }
     }
 
@@ -69,7 +66,18 @@ public class PlayRandomAudio : MonoBehaviour
 
         string randomSoundName = _environmentSoundNames[UnityEngine.Random.Range(0, _environmentSoundNames.Length)];
 
-        AudioManager.Instance.PlaySound(randomSoundName);
+        if (_isInForest)
+        {
+            AudioManager.Instance.PlaySound(randomSoundName);
+            Debug.Log("Is in forest:" + _isInForest);
+        }
+        else
+        {
+            AudioManager.Instance.StopSFX(randomSoundName);
+            Debug.Log("Is in forest:" + _isInForest);
+
+        }
+
         Debug.Log("Playing audio: " + randomSoundName);
     }
 

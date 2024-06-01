@@ -297,6 +297,83 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: fa87d79b04a58e84fa202edb69c13733, type: 3}
+    name: SFX_Birds00
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 1efdcacaa988a4a4f934910e9429e807, type: 3}
+    name: SFX_Birds01
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 659b7de4becdbde4cae27514eebac18a, type: 3}
+    name: SFX_Birds02
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 4adf4090ca09e1043ba0d28304af8831, type: 3}
+    name: SFX_Birds03
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: d41a797577c60604d8e51cc536782150, type: 3}
+    name: SFX_Birds04
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 660f9a44eed3b1d4386612279661c35c, type: 3}
+    name: SFX_Birds05
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: f2a2fee55885b1942a9d190f2f3b3f68, type: 3}
+    name: SFX_Birds06
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: d1886019c8ce4f94b9eda9ad7171f074, type: 3}
+    name: SFX_Birds07
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 1663d7ebaef097543b814a51e8f6c928, type: 3}
+    name: SFX_Birds08
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: aa2d77bd938abd948aa6f019dfdb9371, type: 3}
+    name: SFX_Birds09
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 508a8a90c0bb29c4c85790760c287133, type: 3}
+    name: SFX_Birds10
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
   _masterVolume: 1
   _bgmVolume: 1
   _sfxVolume: 1

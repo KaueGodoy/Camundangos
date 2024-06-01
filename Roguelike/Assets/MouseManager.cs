@@ -47,4 +47,9 @@ public class MouseManager : MonoBehaviour
 
         _isCursorShowing = !_isCursorShowing;
     }
+
+    private void OnDisable()
+    {
+        GameInput.Instance.OnShowCursorPressed -= GameInput_OnShowCursorPressed;
+    }
 }

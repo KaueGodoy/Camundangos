@@ -95,4 +95,9 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnPlayerInteract -= GameInput_OnPlayerInteract;
+    }
+
 }
