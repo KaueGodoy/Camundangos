@@ -1,113 +1,128 @@
 [
-  {
-    "objectSlug": "sword",
-    "itemName": "ZeKa Pyrostorm",
-    "description": "Spanish",
-    "itemType": "Weapon",
-    "actionName": "Equip",
-    "itemModifier": 0,
-    "Stats": [
-      {
-        "StatType": "Attack",
-        "BaseValue": 674,
-        "StatName": "ATK"
-      },
-      {
-        "StatType": "CritRate",
-        "BaseValue": 45,
-        "StatName": "CRIT RATE"
-      },
-      {
-        "StatType": "CritDamage",
-        "BaseValue": 41.1,
-        "StatName": "CRIT DAMAGE"
-      },
-      {
-        "StatType": "AttackBonus",
-        "BaseValue": 20.0,
-        "StatName": "ATK%"
-      },
-      {
-        "StatType": "FlatAttack",
-        "BaseValue": 10,
-        "StatName": "ATK FLAT"
-      },
-      {
-        "StatType": "DamageBonus",
-        "BaseValue": 46.6,
-        "StatName": "DMG BONUS"
-      }
-    ]
-  },
-  {
-    "objectSlug": "staff",
-    "itemName": "Glacial ZeKa",
-    "description": "A chama incessante se torna o gelo nao hesitante, eterno solido",
-    "itemType": "Weapon",
-    "actionName": "Equip",
-    "itemModifier": 0,
-    "Stats": [
-      {
-        "StatType": "Attack",
-        "BaseValue": 542,
-        "StatName": "ATK"
-      },
-      {
-        "StatType": "CritDamage",
-        "BaseValue": 88.2,
-        "StatName": "CRIT DAMAGE"
-      },
-      {
-        "StatType": "AttackBonus",
-        "BaseValue": 15.0,
-        "StatName": "ATK%"
-      }
-    ]
-  },
-   {
-    "objectSlug": "Sword_Untuned",
-    "itemName": "A Desafinada",
-    "description": "Transforma notas certas em erradas",
-    "itemType": "Weapon",
-    "actionName": "Equip",
-    "itemModifier": 0,
-    "Stats": [
-      {
-        "StatType": "Attack",
-        "BaseValue": 185,
-        "StatName": "ATK"
-      }
-    ]
-  },
-  {
-    "objectSlug": "potion_log",
-    "itemName": "Log Potion",
-    "description": "A potion that logs something to the console.",
-    "itemType": "Consumable",
-    "actionName": "Drink",
-    "itemModifier": 0
-  },
-  {
-    "objectSlug": "coin",
-    "itemName": "Coin",
-    "description": "Money",
-    "itemType": "Consumable",
-    "actionName": "Use",
-    "itemModifier": 0
-  },
-  {
-    "objectSlug": "potion_hp",
-    "itemName": "HP Potion",
-    "description": "A potion that gives MAX HP",
-    "itemType": "Consumable",
-    "actionName": "Drink",
-    "itemModifier": 1,
-    "Stats": [
-      {
-        "StatType": "HP",
-        "BaseValue": 300,
-        "StatName": "HP"
-      }
-    ]
-  }
+    {
+        "objectSlug": "sword",
+        "itemName": "Berserker",
+        "description": "Sálvame, berserker.",
+        "itemType": "Weapon",
+        "actionName": "Equipar",
+        "itemModifier": 0,
+        "Stats": [
+            {
+                "StatType": "Attack",
+                "BaseValue": 674,
+                "StatName": "ATQ"
+            },
+            {
+                "StatType": "CritRate",
+                "BaseValue": 60,
+                "StatName": "TASA CRÍTICA"
+            },
+            {
+                "StatType": "CritDamage",
+                "BaseValue": 41.1,
+                "StatName": "DAÑO CRÍTICO"
+            },
+            {
+                "StatType": "AttackBonus",
+                "BaseValue": 20.0,
+                "StatName": "ATQ%"
+            },
+            {
+                "StatType": "FlatAttack",
+                "BaseValue": 10,
+                "StatName": "ATQ"
+            },
+            {
+                "StatType": "DamageBonus",
+                "BaseValue": 46.6,
+                "StatName": "BONO DE DAÑO"
+            }
+        ]
+    },
+    {
+        "objectSlug": "staff",
+        "itemName": "Archer",
+        "description": "Yo soy el hueso de mi espada...",
+        "itemType": "Weapon",
+        "actionName": "Equipar",
+        "itemModifier": 0,
+        "Stats": [
+            {
+                "StatType": "Attack",
+                "BaseValue": 542,
+                "StatName": "ATQ"
+            },
+            {
+                "StatType": "CritRate",
+                "BaseValue": 45,
+                "StatName": "TASA CRÍTICA"
+            },
+            {
+                "StatType": "CritDamage",
+                "BaseValue": 88.2,
+                "StatName": "DAÑO CRÍTICO"
+            },
+            {
+                "StatType": "AttackBonus",
+                "BaseValue": 15.0,
+                "StatName": "ATQ%"
+            }
+        ]
+    },
+    {
+        "objectSlug": "Sword_Untuned",
+        "itemName": "Paper Sword",
+        "description": "Una espada 2D.",
+        "itemType": "Weapon",
+        "actionName": "Equipar",
+        "itemModifier": 0,
+        "Stats": [
+            {
+                "StatType": "Attack",
+                "BaseValue": 185,
+                "StatName": "ATQ"
+            },
+            {
+                "StatType": "CritRate",
+                "BaseValue": 30,
+                "StatName": "TASA CRÍTICA"
+            },
+            {
+                "StatType": "CritDamage",
+                "BaseValue": 15.9,
+                "StatName": "DAÑO CRÍTICO"
+            }
+        ]
+    },
+    {
+        "objectSlug": "potion_log",
+        "itemName": "Log Potion",
+        "description": "Una poción que registra algo en la consola.",
+        "itemType": "Consumable",
+        "actionName": "Beber",
+        "itemModifier": 0
+    },
+    {
+        "objectSlug": "coin",
+        "itemName": "Coin",
+        "description": "Dinero",
+        "itemType": "Consumable",
+        "actionName": "Usar",
+        "itemModifier": 0
+    },
+    {
+        "objectSlug": "potion_hp",
+        "itemName": "Small HP Potion",
+        "description": "Una poción que da una cierta cantidad de curación",
+        "itemType": "Consumable",
+        "actionName": "Beber",
+        "itemModifier": 1,
+        "Stats": [
+            {
+                "StatType": "HP",
+                "BaseValue": 100,
+                "StatName": "PV"
+            }
+        ]
+    }
 ]

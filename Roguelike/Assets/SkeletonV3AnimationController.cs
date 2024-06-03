@@ -7,8 +7,6 @@ public class SkeletonV3AnimationController : MonoBehaviour
 
     private Animator _animator;
 
-    private string _attackAnimation = "Skeleton_V3_Attack";
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();

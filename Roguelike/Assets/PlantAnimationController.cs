@@ -7,9 +7,6 @@ public class PlantAnimationController : MonoBehaviour
 
     private Animator _animator;
 
-    private string _attackAnimation = "Plant_Attack";
-    private string _deathAnimation = "Plant_Death";
-
     private void Awake()
     {
         _animator = GetComponent<Animator>();

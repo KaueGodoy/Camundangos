@@ -29,7 +29,7 @@ public class Chest_DropItemToGround : Chest
         DropTable = new DropTable();
         DropTable.loot = new List<LootDrop>
         {
-            new LootDrop("sword", 100),
+            new LootDrop("potion_hp", 100),
         };
     }
 

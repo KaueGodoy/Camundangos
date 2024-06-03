@@ -12,8 +12,8 @@ public class Plant_Attack : MonoBehaviour
 
     [SerializeField] private float _attackRange = 5f;
     [SerializeField] private float _damage = 20f;
-    [SerializeField] private float attackDuration = 0.9f;
-    [SerializeField] private float attackRate = 0.9f;
+    //[SerializeField] private float attackDuration = 0.9f;
+    //[SerializeField] private float attackRate = 0.9f;
     [SerializeField] private float _minRandomMultiplier = 1f;
     [SerializeField] private float _maxRandomMultiplier = 1.2f;
 

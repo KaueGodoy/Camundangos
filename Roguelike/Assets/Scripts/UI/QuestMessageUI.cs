@@ -10,7 +10,7 @@ public class QuestMessageUI : MonoBehaviour
     [SerializeField] private float _messageHideDelay = 0.5f;
 
     private string _onQuestUpdateSFX = "OnQuestUpdateSFX";
-    private string _currentQuest = "Encontre Isa na floresta";
+    //private string _currentQuest = "Encontre Isa na floresta";
 
     [SerializeField] private Animator _animator;
 

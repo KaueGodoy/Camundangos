@@ -19,6 +19,7 @@ public class SkeletonV3_Attack : MonoBehaviour
 
     [SerializeField] private bool _isAttackShortRange = true;
     [SerializeField] private bool _isAttackLongRange = false;
+    [SerializeField] private bool _isAOEAttack = false;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class SkeletonV3_Attack : MonoBehaviour
     {
         MeleeAttack();
         ProjectileAttack();
+        AOEAttack();
     }
 
     private void ProjectileAttack()
@@ -43,6 +45,24 @@ public class SkeletonV3_Attack : MonoBehaviour
     private void MeleeAttack()
     {
         if (_isAttackShortRange)
+        {
+            float distance = Vector2.Distance(transform.position, _target.position);
+
+            if (distance < AttackRange)
+            {
+                CanAttack = true;
+                //TriggerAttackAnimation();
+            }
+            else
+            {
+                CanAttack = false;
+            }
+        }
+    }
+
+    private void AOEAttack()
+    {
+        if (_isAOEAttack)
         {
             float distance = Vector2.Distance(transform.position, _target.position);
 

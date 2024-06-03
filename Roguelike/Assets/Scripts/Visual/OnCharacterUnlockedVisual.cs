@@ -6,9 +6,9 @@ public class OnCharacterUnlockedVisual : MonoBehaviour
     [Header("Dependencies")]
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private ParticleSystem _onDestroyParticle;
-    [Header("Fader Lerp Settings")]
-    [SerializeField] private float _targetAlpha = 0f;
-    [SerializeField] private float _lerpDuration = 1.5f;
+    //[Header("Fader Lerp Settings")]
+    //[SerializeField] private float _targetAlpha = 0f;
+    //[SerializeField] private float _lerpDuration = 1.5f;
 
     public virtual void Awake()
     {

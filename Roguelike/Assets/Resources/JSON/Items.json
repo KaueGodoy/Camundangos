@@ -1,8 +1,8 @@
 [
   {
     "objectSlug": "sword",
-    "itemName": "ZeKa Pyrostorm",
-    "description": "The legendary sword",
+    "itemName": "Berserker",
+    "description": "Save me, berserker.",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
@@ -14,7 +14,7 @@
       },
       {
         "StatType": "CritRate",
-        "BaseValue": 45,
+        "BaseValue": 60,
         "StatName": "CRIT RATE"
       },
       {
@@ -41,42 +41,57 @@
   },
   {
     "objectSlug": "staff",
-    "itemName": "Glacial ZeKa",
-    "description": "Infinity ice",
+    "itemName": "Archer",
+    "description": "I am the bone of my sword...",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
     "Stats": [
-      {
-        "StatType": "Attack",
-        "BaseValue": 542,
-        "StatName": "ATK"
-      },
-      {
-        "StatType": "CritDamage",
-        "BaseValue": 88.2,
-        "StatName": "CRIT DAMAGE"
-      },
-      {
-        "StatType": "AttackBonus",
-        "BaseValue": 15.0,
-        "StatName": "ATK%"
-      }
+        {
+            "StatType": "Attack",
+            "BaseValue": 542,
+            "StatName": "ATK"
+        },
+        {
+            "StatType": "CritRate",
+            "BaseValue": 45,
+            "StatName": "CRIT RATE"
+        },
+        {
+            "StatType": "CritDamage",
+            "BaseValue": 88.2,
+            "StatName": "CRIT DAMAGE"
+        },
+        {
+            "StatType": "AttackBonus",
+            "BaseValue": 15.0,
+            "StatName": "ATK%"
+        }
     ]
   },
    {
     "objectSlug": "Sword_Untuned",
-    "itemName": "A Desafinada",
-    "description": "To play a wrong note is insignificant; to play without passion is inexcusable.",
+    "itemName": "Paper Sword",
+    "description": "A 2D sword.",
     "itemType": "Weapon",
     "actionName": "Equip",
     "itemModifier": 0,
     "Stats": [
-      {
-        "StatType": "Attack",
-        "BaseValue": 185,
-        "StatName": "ATK"
-      }
+        {
+            "StatType": "Attack",
+            "BaseValue": 185,
+            "StatName": "ATK"
+        },
+        {
+            "StatType": "CritRate",
+            "BaseValue": 30,
+            "StatName": "CRIT RATE"
+        },
+        {
+            "StatType": "CritDamage",
+            "BaseValue": 15.9,
+            "StatName": "CRIT DAMAGE"
+        }
     ]
   },
   {

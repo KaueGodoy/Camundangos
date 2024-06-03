@@ -325,9 +325,9 @@ GameObject:
   - component: {fileID: 266437058321444697}
   - component: {fileID: 6294186944425174866}
   - component: {fileID: 2008666891242067687}
+  - component: {fileID: 5893700054863206717}
   - component: {fileID: 5736744242425253892}
   - component: {fileID: 7009176396382314472}
-  - component: {fileID: 5893700054863206717}
   - component: {fileID: 5598163229302701204}
   m_Layer: 6
   m_Name: SkeletonV2
@@ -399,6 +399,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3599756, y: 3.2213352}
   m_EdgeRadius: 0
+--- !u!114 &5893700054863206717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596552061821336471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae480566b56372459e03ae004b9bc13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 0
+  _maxHealth: 6000
+  _onDeathParticle: {fileID: 19800004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+  _deathAnimationTime: 0.55
+  _deathEffect: {fileID: 6219346067317580066, guid: b36fb41bf12a24145a16f9711be0cd80, type: 3}
+  _pickupItem: {fileID: 2208644363466943341, guid: 7114ae008266a3d4a84455a166d349c1, type: 3}
+  drops:
+  - potion_hp
+  _onHitParticle: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  _healthBarPrefab: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
+  _offset: {x: 0, y: 1.6, z: 0}
 --- !u!114 &5736744242425253892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,29 +468,6 @@ MonoBehaviour:
   _damage: 10
   _minRandomMultiplier: 1
   _maxRandomMultiplier: 2
---- !u!114 &5893700054863206717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8596552061821336471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ae480566b56372459e03ae004b9bc13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHealth: 0
-  _maxHealth: 6000
-  _onDeathParticle: {fileID: 19800004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
-  _deathAnimationTime: 0.55
-  _deathEffect: {fileID: 6219346067317580066, guid: b36fb41bf12a24145a16f9711be0cd80, type: 3}
-  _pickupItem: {fileID: 2208644363466943341, guid: 7114ae008266a3d4a84455a166d349c1, type: 3}
-  drops:
-  - coin
-  _onHitParticle: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
-  _healthBarPrefab: {fileID: 5294296090861672716, guid: 1bf9c7a7d60765840a7de5b47b4b4bc5, type: 3}
-  _offset: {x: 0, y: 1.6, z: 0}
 --- !u!114 &5598163229302701204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,6 +483,7 @@ MonoBehaviour:
   _attackRange: 5
   _isAttackShortRange: 1
   _isAttackLongRange: 0
+  _isAOEAttack: 0
 --- !u!1 &8836444558920455376
 GameObject:
   m_ObjectHideFlags: 0
