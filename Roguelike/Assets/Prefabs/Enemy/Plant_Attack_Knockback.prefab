@@ -140,10 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4c860832dcf634e8d312b53d6a08f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRange: 5.5
+  _attackRange: 3.8
   _damage: 15
-  attackDuration: 0.9
-  attackRate: 0.9
   _minRandomMultiplier: 1
   _maxRandomMultiplier: 2
   _canAttack: 0

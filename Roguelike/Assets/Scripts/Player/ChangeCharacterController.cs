@@ -76,10 +76,10 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            UpdateCurrentCharacter(GetCurrentCharacter(), _derildoVisual);
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //{
+        //    UpdateCurrentCharacter(GetCurrentCharacter(), _derildoVisual);
+        //}
     }
 
     private void UpdateCurrentCharacter(GameObject previousCharacter, GameObject newCharacter)
