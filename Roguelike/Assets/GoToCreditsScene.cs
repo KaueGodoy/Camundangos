@@ -3,7 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class GoToCreditsScene : MonoBehaviour
 {
+    [SerializeField] private RectTransform _goodEnd;
+    [SerializeField] private RectTransform _badEnd;
     [SerializeField] private RectTransform _fader;
+
+    private int _creditsSceneIndex = 2;
+    private bool _hasCollided = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,7 +16,11 @@ public class GoToCreditsScene : MonoBehaviour
 
         if (player != null)
         {
-            GoBackToMainMenu();
+            if (!_hasCollided)
+            {
+                _hasCollided = true;
+                GoBackToMainMenu();
+            }
         }
 
     }
@@ -22,9 +31,12 @@ public class GoToCreditsScene : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        LeanTween.scale(_fader, new Vector3(1.5f, 1.5f, 1.5f), 1f).setEase(LeanTweenType.easeInExpo).setOnComplete(() =>
+        LeanTween.scale(_fader, new Vector3(1f, 1f, 1), 1.5f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
         {
-            SceneManager.LoadScene(2);
+            LeanTween.scale(_fader, new Vector3(1.4f, 1.4f, 1.4f), 5f).setEase(LeanTweenType.easeInOutCubic).setOnComplete(() =>
+            {
+                SceneManager.LoadScene(_creditsSceneIndex);
+            });
         });
 
     }
