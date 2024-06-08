@@ -210,6 +210,10 @@ MonoBehaviour:
       el mapa, encontrar elementos, luchar contra enemigos y desbloquear nuevos personajes."
     m_Metadata:
       m_Items: []
+  - m_Id: 43
+    m_Localized: Coleccionable
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -210,6 +210,10 @@ MonoBehaviour:
       to see player status'
     m_Metadata:
       m_Items: []
+  - m_Id: 43
+    m_Localized: Collectible
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

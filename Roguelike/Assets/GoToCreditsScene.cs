@@ -3,9 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class GoToCreditsScene : MonoBehaviour
 {
+    [SerializeField] private Beetle_CollectibleManager _beetleCollectibles;
     [SerializeField] private RectTransform _goodEnd;
     [SerializeField] private RectTransform _badEnd;
-    [SerializeField] private RectTransform _fader;
+
+    private RectTransform _fader;
 
     private int _creditsSceneIndex = 2;
     private bool _hasCollided = false;
@@ -19,8 +21,35 @@ public class GoToCreditsScene : MonoBehaviour
             if (!_hasCollided)
             {
                 _hasCollided = true;
+                CheckAllCollectiblesCollected();
                 GoBackToMainMenu();
             }
+        }
+
+    }
+
+    public void CheckAllCollectiblesCollected()
+    {
+        bool allCollected = true;
+
+        foreach (Collectible collectible in _beetleCollectibles.BettleCollectibles)
+        {
+            if (!collectible.HasBeenCollected)
+            {
+                allCollected = false;
+                break;
+            }
+        }
+
+        if (allCollected)
+        {
+            Debug.Log("All collectibles have been collected. Trigger good ending.");
+            _fader = _goodEnd;
+        }
+        else
+        {
+            Debug.Log("Not all collectibles have been collected. Trigger bad ending.");
+            _fader = _badEnd;
         }
 
     }
@@ -31,7 +60,7 @@ public class GoToCreditsScene : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        LeanTween.scale(_fader, new Vector3(1f, 1f, 1), 1.5f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
+        LeanTween.scale(_fader, new Vector3(1.1f, 1.1f, 1.1f), 1.5f).setEase(LeanTweenType.easeSpring).setOnComplete(() =>
         {
             LeanTween.scale(_fader, new Vector3(1.4f, 1.4f, 1.4f), 5f).setEase(LeanTweenType.easeInOutCubic).setOnComplete(() =>
             {

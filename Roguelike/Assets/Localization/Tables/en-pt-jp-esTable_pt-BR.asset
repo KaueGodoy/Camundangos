@@ -205,6 +205,10 @@ MonoBehaviour:
       para ver status do jogador'
     m_Metadata:
       m_Items: []
+  - m_Id: 43
+    m_Localized: "Colecion\xE1vel"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

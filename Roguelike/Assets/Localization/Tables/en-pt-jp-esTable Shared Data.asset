@@ -183,6 +183,10 @@ MonoBehaviour:
     m_Key: StatsKey
     m_Metadata:
       m_Items: []
+  - m_Id: 43
+    m_Key: CollectibleKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
