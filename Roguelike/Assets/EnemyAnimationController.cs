@@ -23,7 +23,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(EnemyIdle);
+        //Debug.Log(EnemyIdle);
     }
 
     private void Update()

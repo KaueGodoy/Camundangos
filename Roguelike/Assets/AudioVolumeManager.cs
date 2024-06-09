@@ -9,11 +9,6 @@ public class AudioVolumeManager : MonoBehaviour
 
     private float _sliderDefaultValue = 1;
 
-    private void Awake()
-    {
-     
-    }
-
     private void Start()
     {
         _masterSlider.value = _sliderDefaultValue;

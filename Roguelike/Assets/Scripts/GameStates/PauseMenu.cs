@@ -38,6 +38,8 @@ public class PauseMenu : MonoBehaviour
             Pause();
         }
 
+        AudioManager.Instance.PlaySoundWhilePaused("SFX_OnPaused");
+
         MouseManager.Instance.ShowCursor();
     }
 
@@ -53,6 +55,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        AudioManager.Instance.PlaySoundWhilePaused("SFX_OnPaused");
+
         _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -61,16 +65,15 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         _pauseMenuUI.SetActive(true);
-        _resumeButton.Select(); 
+        _resumeButton.Select();
         Time.timeScale = 0f;
         GameIsPaused = true;
-
-        // disable all audio
-        //AudioListener.pause = true;
     }
 
     public void Restart()
     {
+        AudioManager.Instance.PlaySoundWhilePaused("OnUIPressed");
+
         Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -78,6 +81,8 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
+        AudioManager.Instance.PlaySoundWhilePaused("OnUIPressed");
+
         GameIsPaused = false;
 
         _fader.gameObject.SetActive(true);
@@ -103,6 +108,8 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        AudioManager.Instance.PlaySoundWhilePaused("OnUIPressed");
+
         Debug.Log("Quitting...");
         Application.Quit();
     }

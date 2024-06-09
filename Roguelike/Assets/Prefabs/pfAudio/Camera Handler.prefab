@@ -374,6 +374,13 @@ MonoBehaviour:
     loop: 0
     spatialBlend: 0
     source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: f6a186d584813a140abe636b5dc5e7e6, type: 3}
+    name: SFX_OnPaused
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
   _masterVolume: 1
   _bgmVolume: 1
   _sfxVolume: 1

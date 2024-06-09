@@ -23,14 +23,13 @@ public class OnCollisionShowTutorial : MonoBehaviour
         {
             string localizedMessage = handle.Result;
 
-            ShowMessage(localizedMessage, "OnTutorialShowUp");
+            ShowMessage(localizedMessage);
         };
     }
 
-    private void ShowMessage(string message, string audioString)
+    private void ShowMessage(string message)
     {
         _tutorialText.text = message;
-        AudioManager.Instance.PlaySound(audioString);
         //Debug.Log("Message showing");
     }
 
@@ -40,6 +39,7 @@ public class OnCollisionShowTutorial : MonoBehaviour
         {
             if (_tutorialGameObject != null)
             {
+                AudioManager.Instance.PlaySound("OnTutorialShowUp");
                 _tutorialGameObject.SetActive(true);
             }
         }

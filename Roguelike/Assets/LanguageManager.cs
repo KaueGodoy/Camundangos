@@ -51,8 +51,10 @@ public class LanguageManager : MonoBehaviour
     private void Start()
     {
         int id = PlayerPrefs.GetInt(_localeKey, _currentLocaleId);
-        ChangeLocaleId(id);
-        Debug.Log("Locale id: " + _currentLocaleId);
+        //ChangeLocaleId(id);
+
+        if (_isActive) return;
+        CallSetLocaleCoroutine(id);
     }
 
     public void ChangeLocaleId(int localeId)

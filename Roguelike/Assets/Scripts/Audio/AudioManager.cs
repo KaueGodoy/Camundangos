@@ -88,7 +88,21 @@ public class AudioManager : MonoBehaviour
         }
 
         sound.source.volume = sound.volume * CurrentSFXVolume * CurrentMasterVolume;
-        //Debug.Log(sound.volume);
+        Debug.Log(sound.name);
+        sound.source.Play();
+    }
+
+    public void PlaySoundWhilePaused(string name)
+    {
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if (sound == null)
+        {
+            Debug.LogWarning("Sound " + name + " not found!");
+            return;
+        }
+
+        sound.source.volume = sound.volume * CurrentSFXVolume * CurrentMasterVolume;
+        Debug.Log(sound.name);
         sound.source.Play();
     }
 

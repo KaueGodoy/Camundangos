@@ -9,7 +9,7 @@ public class QuestMessageUI : MonoBehaviour
     [SerializeField] private float _messageShowDelay = 0.5f;
     [SerializeField] private float _messageHideDelay = 0.5f;
 
-    private string _onQuestUpdateSFX = "OnQuestUpdateSFX";
+    //private string _onQuestUpdateSFX = "OnQuestUpdateSFX";
     //private string _currentQuest = "Encontre Isa na floresta";
 
     [SerializeField] private Animator _animator;
@@ -24,7 +24,7 @@ public class QuestMessageUI : MonoBehaviour
         StartCoroutine(ShowAfterDelay(_messageShowDelay));
     }
 
-    private void ShowMessage(string message, string audioString)
+    private void ShowMessage(string message)
     {
         StartCoroutine(HideAfterDelay(_messageHideDelay));
 
@@ -32,7 +32,7 @@ public class QuestMessageUI : MonoBehaviour
 
         _messageText.text = message;
         _animator.Play(_fadeInAnimation);
-        AudioManager.Instance.PlaySound(audioString);
+        //AudioManager.Instance.PlaySound(audioString);
         StartCoroutine(HideAfterDelay(_messageHideDelay));
     }
 
@@ -52,7 +52,7 @@ public class QuestMessageUI : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        ShowMessage(_messageText.text, _onQuestUpdateSFX);
+        ShowMessage(_messageText.text);
     }
 
     private void Hide()
