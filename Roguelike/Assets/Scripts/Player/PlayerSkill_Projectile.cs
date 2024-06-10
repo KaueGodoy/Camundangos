@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerSkill_Projectile : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-
     [Header("Stats")]
-    [SerializeField] private float _damage = 6f;
     [SerializeField] private float _travelSpeed = 5f;
     [SerializeField] private float _travelDistance = 2f;
 
+    private float _damage = 6f;
     private bool _isCritical;
+
+    private Rigidbody2D _rb;
 
     private void Awake()
     {
@@ -18,6 +18,8 @@ public class PlayerSkill_Projectile : MonoBehaviour
 
     private void Start()
     {
+        _damage = PlayerSkill.Instance.FinalDamage;
+
         _rb.velocity = transform.right * _travelSpeed;
     }
 

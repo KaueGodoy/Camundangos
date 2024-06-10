@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
+    public static PlayerSkill Instance { get; private set; }
+
     private PlayerCooldowns _playerCooldowns;
 
     [Header("Skill")]
@@ -19,8 +21,16 @@ public class PlayerSkill : MonoBehaviour
     public bool SkillAttackRequest { get; set; }
     public static bool SkillAttackAnimation { get; set; }
 
+    [SerializeField] private float _skillBaseDamage = 500f;
+    [SerializeField] private float _skillMultiplier = 1f;
+    public float SkillBaseDamage { get { return _skillBaseDamage; } private set { } }
+    public float SkillMultiplier { get { return _skillMultiplier; } set { _skillMultiplier = value; } }
+    public float FinalDamage { get { return SkillBaseDamage * SkillMultiplier; } private set { } }
+
     private void Awake()
     {
+        Instance = this;
+
         _playerCooldowns = GetComponent<PlayerCooldowns>();
     }
 
