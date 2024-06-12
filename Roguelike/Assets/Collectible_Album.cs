@@ -12,5 +12,6 @@ public class Collectible_Album : Collectible
         // Increase ult and skill scaling 
 
         PlayerSkill.Instance.SkillMultiplier += 0.20f;
+        PlayerUlt.Instance.UltMultiplier += 0.40f;
     }
 }

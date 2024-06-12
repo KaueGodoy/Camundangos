@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerUlt : MonoBehaviour
 {
+    public static PlayerUlt Instance;
+
     private PlayerCooldowns _playerCooldowns;
 
     [Header("Ult")]
@@ -17,8 +19,16 @@ public class PlayerUlt : MonoBehaviour
     public bool UltAttackRequest { get; set; }
     public static bool UltAttackAnimation { get; set; }
 
+    [SerializeField] private float _ultBaseDamage = 1000f;
+    [SerializeField] private float _ultMultiplier = 1f;
+    public float UltBaseDamage { get { return _ultBaseDamage; } private set { } }
+    public float UltMultiplier { get { return _ultMultiplier; } set { _ultMultiplier = value; } }
+    public float FinalDamage { get { return UltBaseDamage * UltMultiplier; } private set { } }
+
     private void Awake()
     {
+        Instance = this;
+
         _playerCooldowns = GetComponent<PlayerCooldowns>();
     }
 

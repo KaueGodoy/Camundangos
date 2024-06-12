@@ -18,6 +18,8 @@ public class PlayerUlt_Projectile : MonoBehaviour
 
     private void Awake()
     {
+        _damage = PlayerUlt.Instance.FinalDamage;
+
         _isFacingRight = NewPlayerMovement.Instance.IsFacingRight;
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
