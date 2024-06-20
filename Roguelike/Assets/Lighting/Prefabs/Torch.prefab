@@ -121,6 +121,8 @@ GameObject:
   m_Component:
   - component: {fileID: 538834088426293271}
   - component: {fileID: 6574612427812609139}
+  - component: {fileID: 6376915609653462176}
+  - component: {fileID: 8721755592434853974}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -158,6 +160,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df40707fea3e41f49963a741ad415616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6376915609653462176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538834088426293264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6e4145b910a2240877dacdfa66ec86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &8721755592434853974
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538834088426293264}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
 --- !u!1 &538834088656437242
 GameObject:
   m_ObjectHideFlags: 0

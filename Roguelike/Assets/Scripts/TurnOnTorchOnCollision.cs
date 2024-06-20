@@ -5,7 +5,9 @@ using UnityEngine;
 public class TurnOnTorchOnCollision : MonoBehaviour
 {
     [SerializeField] private GameObject[] _torchArray;
-    [SerializeField] private float _delayBetweenTorches = 0.3f; 
+    [SerializeField] private float _delayBetweenTorches = 0.3f;
+
+    private bool _hasBeenActivated = false;
 
     private void Start()
     {
@@ -30,10 +32,13 @@ public class TurnOnTorchOnCollision : MonoBehaviour
     {
         NewPlayerController player = collision.GetComponent<NewPlayerController>();
 
+        if (_hasBeenActivated) return;
+
         if (player != null)
         {
             // Start the coroutine to turn on torches one by one
             StartCoroutine(ActivateTorchesOneByOne());
+            _hasBeenActivated = true;
         }
     }
 
@@ -43,6 +48,8 @@ public class TurnOnTorchOnCollision : MonoBehaviour
         {
             Transform lamp = torch.transform.Find("Lamp");
             Transform particle = torch.transform.Find("Particle");
+
+            AudioManager.Instance.PlaySound("FireTorchLightUp");
 
             if (lamp != null)
             {

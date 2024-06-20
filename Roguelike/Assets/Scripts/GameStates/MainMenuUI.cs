@@ -68,12 +68,11 @@ public class MainMenuUI : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("OnUIPressed");
 
-
         _fader.gameObject.SetActive(true);
         LeanTween.alpha(_fader, 0, 0f);
         LeanTween.alpha(_fader, 1, 0.5f).setOnComplete(() =>
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
         });
     }
 
