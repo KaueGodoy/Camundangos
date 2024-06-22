@@ -9,7 +9,7 @@ public class GoToCreditsScene : MonoBehaviour
 
     private RectTransform _fader;
 
-    private int _creditsSceneIndex = 2;
+    private int _creditsSceneIndex = 3;
     private bool _hasCollided = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
