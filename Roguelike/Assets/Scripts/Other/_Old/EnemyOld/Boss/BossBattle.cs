@@ -351,6 +351,7 @@ public class BossBattle : MonoBehaviour
     [SerializeField] private Skeleton skeletonBoss;
     private float skeletonHealthFromSlime;
     private float skeletonMaxHealth;
+    [SerializeField] private Transform _platforms;
 
     private void StageThree()
     {
@@ -360,6 +361,7 @@ public class BossBattle : MonoBehaviour
 
         MoveSlime();
         SpawnSkeleton();
+        EnablePlatforms();
 
     }
 
@@ -384,6 +386,13 @@ public class BossBattle : MonoBehaviour
                     " This is the skeleton health value changed: " + skeletonBoss.CurrentHealth +
                     " Old max health from prefab: " + skeletonMaxHealth);
 
+    }
+
+    private void EnablePlatforms()
+    {
+        if (_platforms == null) return;
+
+        _platforms.gameObject.SetActive(true);
     }
 
     #endregion
