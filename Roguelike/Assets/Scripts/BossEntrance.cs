@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class BossEntrance : MonoBehaviour
 {
+    public static BossEntrance Instance { get; private set; }
 
-    //[SerializeField] EnemyKnockback enemyKnockback;
+    public event EventHandler OnBossEntranceFailed;
 
-    private BoxCollider2D boxCollider;
+    private BoxCollider2D _boxCollider;
 
     private void Awake()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        Instance = this;
+        _boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -25,16 +26,14 @@ public class BossEntrance : MonoBehaviour
                 OnCharacterUnlocked.Instance.IsMatiasUnlocked &&
                 OnCharacterUnlocked.Instance.IsLeoUnlocked)
             {
-
-                //enemyKnockback.GetComponent<EnemyKnockback>().enabled = false;
-                boxCollider.enabled = false;
+                _boxCollider.enabled = false;
                 Debug.Log("All characters unlocked");
             }
             else
             {
+                OnBossEntranceFailed?.Invoke(this, EventArgs.Empty);
                 Debug.Log("Unlock all characters");
             }
         }
     }
-
 }

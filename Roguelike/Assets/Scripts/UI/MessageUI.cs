@@ -17,13 +17,26 @@ public class MessageUI : MonoBehaviour
     private string _fadeInAnimation = "FadeInAnimation";
 
     private string _onCharacterChangeFailedMessageKey = "UnlockCharacterKey";
+    private string _onBossEntranceFailedMessageKey = "UnlockCharacterKey";
+
     private string _onCharacterChangeFailedSFX = "OnCharacterChangedFailed";
 
     private void Start()
     {
         ChangeCharacterController.Instance.OnCharacterChangedFailed += ChangeCharacterController_OnCharacterChangedFailed;
+        BossEntrance.Instance.OnBossEntranceFailed += BossEntrance_OnBossEntranceFailed;
 
         Hide();
+    }
+
+    private void BossEntrance_OnBossEntranceFailed(object sender, EventArgs e)
+    {
+        LocalizationSettings.StringDatabase.GetLocalizedStringAsync(_onBossEntranceFailedMessageKey).Completed += handle =>
+        {
+            string localizedMessage = handle.Result;
+
+            ShowMessage(localizedMessage, _onCharacterChangeFailedSFX);
+        };
     }
 
     private void ChangeCharacterController_OnCharacterChangedFailed(object sender, System.EventArgs e)
