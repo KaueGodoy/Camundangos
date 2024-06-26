@@ -185,6 +185,7 @@ public class BossBattle : MonoBehaviour
     [Header("Stage 01")]
     [SerializeField] private GameObject pfSlime;
     [SerializeField] private GameObject pfSkeleton;
+    [SerializeField] private Transform _bossLockCollider;
     [SerializeField] private int maxEnemyCount = 10; // Set your desired maximum enemy count here
 
     private EnemyPatrolAttack slimePatrol;
@@ -196,8 +197,14 @@ public class BossBattle : MonoBehaviour
     private void StageOne()
     {
         Debug.Log("This is the stage 1");
+        EnableBossLockCollider();
         SpawnEnemy();
         slimePatrol.enabled = true;
+    }
+
+    private void EnableBossLockCollider()
+    {
+        _bossLockCollider.gameObject.SetActive(true);
     }
 
     private void SpawnEnemy()
