@@ -187,6 +187,10 @@ MonoBehaviour:
     m_Key: CollectibleKey
     m_Metadata:
       m_Items: []
+  - m_Id: 44
+    m_Key: BossEntranceFailedKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

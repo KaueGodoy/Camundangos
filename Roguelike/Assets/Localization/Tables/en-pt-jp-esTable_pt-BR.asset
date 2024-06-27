@@ -209,6 +209,10 @@ MonoBehaviour:
     m_Localized: "Colecion\xE1vel"
     m_Metadata:
       m_Items: []
+  - m_Id: 44
+    m_Localized: "Salve todos os seus companheiros antes de avan\xE7ar"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

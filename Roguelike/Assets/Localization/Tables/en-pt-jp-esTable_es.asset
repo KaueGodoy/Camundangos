@@ -214,6 +214,10 @@ MonoBehaviour:
     m_Localized: Coleccionable
     m_Metadata:
       m_Items: []
+  - m_Id: 44
+    m_Localized: Rescata a todos tus amigos antes de avanzar
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

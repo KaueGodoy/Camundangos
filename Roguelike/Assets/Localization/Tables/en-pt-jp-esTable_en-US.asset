@@ -214,6 +214,10 @@ MonoBehaviour:
     m_Localized: Collectible
     m_Metadata:
       m_Items: []
+  - m_Id: 44
+    m_Localized: Rescue all your friends before advancing
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

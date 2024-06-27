@@ -89,3 +89,4 @@ para ver status do jogador","<color=green>C</color>
 を押すとプレイヤーステータスを見ることができます","<color=green>C</color>
 para ver el estado del jugador"
 CollectibleKey,43,Collectible,Colecionável,収集可能,Coleccionable
+BossEntranceFailedKey,44,Rescue all your friends before advancing,Salve todos os seus companheiros antes de avançar,仲間を全員助けてから進んでください,Rescata a todos tus amigos antes de avanzar

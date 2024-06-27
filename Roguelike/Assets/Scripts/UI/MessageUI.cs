@@ -17,7 +17,7 @@ public class MessageUI : MonoBehaviour
     private string _fadeInAnimation = "FadeInAnimation";
 
     private string _onCharacterChangeFailedMessageKey = "UnlockCharacterKey";
-    private string _onBossEntranceFailedMessageKey = "UnlockCharacterKey";
+    private string _onBossEntranceFailedMessageKey = "BossEntranceFailedKey";
 
     private string _onCharacterChangeFailedSFX = "OnCharacterChangedFailed";
 
