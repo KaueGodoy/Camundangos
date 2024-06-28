@@ -285,10 +285,10 @@ MonoBehaviour:
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: cae8c67091fb82d43aaeb978cfba4751, type: 3}
     name: OnTorchPlaying
-    volume: 0.4
+    volume: 1
     pitch: 1
     loop: 1
-    spatialBlend: 1
+    spatialBlend: 0
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: d96364d06bc99eb4e945715a951b98c1, type: 3}
     name: OnPlayerHit_SFX
@@ -383,6 +383,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - clip: {fileID: 8300000, guid: 7d695c9ed0098764db8a712a875ed451, type: 3}
     name: FireTorchLightUp
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    spatialBlend: 0
+    source: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 2542acea8fd4ea94e9108b9f6df48ffb, type: 3}
+    name: OnDoorClosing
     volume: 0.15
     pitch: 1
     loop: 0

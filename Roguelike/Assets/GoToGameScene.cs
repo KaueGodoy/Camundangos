@@ -9,7 +9,7 @@ public class GoToGameScene : MonoBehaviour
 
     public void GoToGameSceneOnAnimationFinished()
     {
-        AudioManager.Instance.PlaySound("OnUIPressed");
+        //AudioManager.Instance.PlaySound("OnUIPressed");
 
         _fader.gameObject.SetActive(true);
         LeanTween.alpha(_fader, 0, 0f);

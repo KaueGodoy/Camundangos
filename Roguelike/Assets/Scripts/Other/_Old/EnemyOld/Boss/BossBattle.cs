@@ -20,6 +20,7 @@ public class BossBattle : MonoBehaviour
     [SerializeField] private ColliderTrigger _colliderTrigger;
     [SerializeField] private Slime _slime;
     [SerializeField] private NewPlayerController _player;
+    [SerializeField] private Transform _bossEntranceDoor;
 
     // idea
     // count time when battle starts and let the skeleton hp be the slime remaining hp * time passed since battle
@@ -99,6 +100,9 @@ public class BossBattle : MonoBehaviour
     private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
     {
         StartBattle();
+        Animator _bossEntranceDoorAnimator = _bossEntranceDoor.GetComponent<Animator>();
+        _bossEntranceDoorAnimator.Play("ClosingDoorAnimation");
+        AudioManager.Instance.PlaySound("OnDoorClosing");
         _colliderTrigger.OnPlayerEnterTrigger -= ColliderTrigger_OnPlayerEnterTrigger;
     }
 
