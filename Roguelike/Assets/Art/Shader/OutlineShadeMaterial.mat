@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainText:
-        m_Texture: {fileID: 2800000, guid: b1e62bc18466c7a408985cdb46ad50a1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8f7909ce343b5244ca331c87f602dd86, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -55,10 +55,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _OutilneThickness: 1
+    - _OutilneThickness: 3
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _OutilineColor: {r: 1, g: 0.8150047, b: 0.2311321, a: 0}
+    - _OutilineColor: {r: 1, g: 0.7602041, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
