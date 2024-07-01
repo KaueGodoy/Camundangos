@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OutlineShadeMaterialBronzeChestSide
+  m_Name: OutlineShadeMaterialBronzeChestSide 1
   m_Shader: {fileID: -6465566751694194690, guid: 5cec9227c00d0f34291548c53ee67e05, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
