@@ -8,7 +8,7 @@ public class PlayerSkill : MonoBehaviour
 
     [Header("Skill")]
     public Transform SkillSpawnPoint;
-    public GameObject Projectile;
+    [SerializeField] private GameObject _projectile;
     [SerializeField] private ParticleSystem _skillParticle;
 
     // DELETE 
@@ -80,9 +80,14 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
+    public void SetCurrentSkill(GameObject newSkill)
+    {
+        _projectile = newSkill;
+    }
+
     private void InstantiateSkill()
     {
-        Instantiate(Projectile, SkillSpawnPoint.position, SkillSpawnPoint.rotation);
+        Instantiate(_projectile, SkillSpawnPoint.position, SkillSpawnPoint.rotation);
         AudioManager.Instance.PlaySound("Attack");
     }
 

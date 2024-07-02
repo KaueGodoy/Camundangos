@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ChangeCharacterController : MonoBehaviour
 {
-    public static ChangeCharacterController Instance { get; private set; }     
+    public static ChangeCharacterController Instance { get; private set; }
 
     public event EventHandler OnCharacterChangedFailed;
 
@@ -23,13 +23,14 @@ public class ChangeCharacterController : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;    
+        Instance = this;
     }
 
     private void Start()
     {
         _currentCharacter = _marceloVisual;
         _currentCharacter.SetActive(true);
+        SkillManager.Instance.UpdateCurrentSkill(_currentCharacter);
 
         GameInput.Instance.OnCharacterChanged_Slot01 += GameInput_OnCharacterChanged_Slot01;
         GameInput.Instance.OnCharacterChanged_Slot02 += GameInput_OnCharacterChanged_Slot02;
@@ -89,6 +90,8 @@ public class ChangeCharacterController : MonoBehaviour
         previousCharacter.SetActive(false);
         _currentCharacter = newCharacter;
         _currentCharacter.SetActive(true);
+
+        SkillManager.Instance.UpdateCurrentSkill(newCharacter);
 
         OnCharacterChangedParticles?.Invoke(this, EventArgs.Empty);
         AudioManager.Instance.PlaySound(_onCharacterChangedSFX);

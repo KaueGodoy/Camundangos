@@ -11,7 +11,6 @@ public class OnCharacterUnlocked : MonoBehaviour
 
     public event EventHandler OnCharacterUnlockedVisual;
 
-
     public bool IsIsaUnlocked { get; set; }
     public bool IsMatiasUnlocked { get; set; }
     public bool IsLeoUnlocked { get; set; }
