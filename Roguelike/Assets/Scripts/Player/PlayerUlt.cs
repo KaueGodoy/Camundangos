@@ -8,7 +8,7 @@ public class PlayerUlt : MonoBehaviour
 
     [Header("Ult")]
     [SerializeField] private Transform UltSpawnPoint;
-    [SerializeField] private GameObject Projectile;
+    [SerializeField] private GameObject _projectile;
     [SerializeField] private ParticleSystem _ultParticle;
 
     [SerializeField] private float _ultAttackDelay = 0.8f;
@@ -75,9 +75,14 @@ public class PlayerUlt : MonoBehaviour
         }
     }
 
+    public void SetCurrentUlt(GameObject newSkill)
+    {
+        _projectile = newSkill;
+    }
+
     private void InstantiateUlt()
     {
-        Instantiate(Projectile, UltSpawnPoint.position, UltSpawnPoint.rotation);
+        Instantiate(_projectile, UltSpawnPoint.position, UltSpawnPoint.rotation);
         AudioManager.Instance.PlaySound("Attack");
     }
 

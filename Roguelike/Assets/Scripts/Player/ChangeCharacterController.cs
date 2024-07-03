@@ -31,6 +31,7 @@ public class ChangeCharacterController : MonoBehaviour
         _currentCharacter = _marceloVisual;
         _currentCharacter.SetActive(true);
         SkillManager.Instance.UpdateCurrentSkill(_currentCharacter);
+        UltManager.Instance.UpdateCurrentUlt(_currentCharacter);
 
         GameInput.Instance.OnCharacterChanged_Slot01 += GameInput_OnCharacterChanged_Slot01;
         GameInput.Instance.OnCharacterChanged_Slot02 += GameInput_OnCharacterChanged_Slot02;
@@ -75,14 +76,6 @@ public class ChangeCharacterController : MonoBehaviour
         UpdateCurrentCharacter(GetCurrentCharacter(), _marceloVisual);
     }
 
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //{
-        //    UpdateCurrentCharacter(GetCurrentCharacter(), _derildoVisual);
-        //}
-    }
-
     private void UpdateCurrentCharacter(GameObject previousCharacter, GameObject newCharacter)
     {
         if (previousCharacter == newCharacter) return;
@@ -92,6 +85,7 @@ public class ChangeCharacterController : MonoBehaviour
         _currentCharacter.SetActive(true);
 
         SkillManager.Instance.UpdateCurrentSkill(newCharacter);
+        UltManager.Instance.UpdateCurrentUlt(newCharacter);
 
         OnCharacterChangedParticles?.Invoke(this, EventArgs.Empty);
         AudioManager.Instance.PlaySound(_onCharacterChangedSFX);
