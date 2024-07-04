@@ -63,7 +63,7 @@ public class PlayerUlt : MonoBehaviour
                 {
                     _isUltPerformed = true;
 
-                    ParticleManager.Instance.InstantiateParticle(_ultParticle, transform.position);
+                    //ParticleManager.Instance.InstantiateParticle(_ultParticle, transform.position);
                     Invoke("InstantiateUlt", _ultAttackDelay / 2);
                     Invoke("UltComplete", _ultAttackDelay);
                 }

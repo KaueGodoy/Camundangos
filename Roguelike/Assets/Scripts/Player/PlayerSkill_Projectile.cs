@@ -5,6 +5,7 @@ public class PlayerSkill_Projectile : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float _travelSpeed = 5f;
     [SerializeField] private float _travelDistance = 2f;
+    [SerializeField] private ParticleSystem _skillParticle;
 
     private float _damage = 6f;
     private bool _isCritical;
@@ -18,6 +19,7 @@ public class PlayerSkill_Projectile : MonoBehaviour
 
     private void Start()
     {
+        ParticleManager.Instance.InstantiateParticle(_skillParticle, transform.position);
         _damage = PlayerSkill.Instance.FinalDamage;
 
         _rb.velocity = transform.right * _travelSpeed;

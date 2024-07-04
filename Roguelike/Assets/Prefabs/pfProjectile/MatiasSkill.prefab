@@ -170,3 +170,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _travelSpeed: 18
   _travelDistance: 2
+  _skillParticle: {fileID: 4425544509863617629, guid: d552e90926df03a4596ccf40851b2dce, type: 3}

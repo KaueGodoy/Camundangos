@@ -11,6 +11,8 @@ public class PlayerUlt_Projectile : MonoBehaviour
     [SerializeField] private float _travelDistance = 2f;
     [SerializeField] private float _angle = 45f;
 
+    [SerializeField] private ParticleSystem _ultParticle;
+
     private float _radians;
     private float _horizontalVelocity;
     private float _verticalVelocity;
@@ -27,6 +29,8 @@ public class PlayerUlt_Projectile : MonoBehaviour
 
     private void Start()
     {
+        ParticleManager.Instance.InstantiateParticle(_ultParticle, transform.position);
+
         _radians = _angle * Mathf.Deg2Rad;
 
         if (_isFacingRight)

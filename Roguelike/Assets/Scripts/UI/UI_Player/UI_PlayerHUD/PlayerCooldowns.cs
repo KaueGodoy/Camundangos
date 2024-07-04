@@ -5,7 +5,6 @@ using TMPro;
 public class PlayerCooldowns : MonoBehaviour
 {
     [SerializeField] private PlayerAttack _playerAttack;
-    private PlayerControls _playerControls;
 
     private float _fillAmountFull = 1f;
 
@@ -32,7 +31,6 @@ public class PlayerCooldowns : MonoBehaviour
 
     private void Awake()
     {
-        _playerControls = new PlayerControls();
         offCooldown = true;
     }
 
@@ -42,31 +40,17 @@ public class PlayerCooldowns : MonoBehaviour
         UltResetCooldown();
 
         GameInput.Instance.OnPlayerSkill += GameInput_OnPlayerSkill;
+        GameInput.Instance.OnPlayerUlt += GameInput_OnPlayerUlt;
+    }
+
+    private void GameInput_OnPlayerUlt(object sender, System.EventArgs e)
+    {
+        ultTriggerCooldown = true;
     }
 
     private void GameInput_OnPlayerSkill(object sender, System.EventArgs e)
     {
         triggerCooldown = true;
-    }
-
-    private void OnEnable()
-    {
-        _playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _playerControls.Disable();
-    }
-
-    private void Update()
-    {
-
-        if (_playerControls.Player.Ult.triggered)
-        {
-            ultTriggerCooldown = true;
-        }
-
     }
 
     private void FixedUpdate()
@@ -182,6 +166,7 @@ public class PlayerCooldowns : MonoBehaviour
     private void OnDestroy()
     {
         GameInput.Instance.OnPlayerSkill -= GameInput_OnPlayerSkill;
+        GameInput.Instance.OnPlayerUlt -= GameInput_OnPlayerUlt;
     }
 
     #endregion

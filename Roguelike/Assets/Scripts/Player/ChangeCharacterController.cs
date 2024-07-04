@@ -32,6 +32,7 @@ public class ChangeCharacterController : MonoBehaviour
         _currentCharacter.SetActive(true);
         SkillManager.Instance.UpdateCurrentSkill(_currentCharacter);
         UltManager.Instance.UpdateCurrentUlt(_currentCharacter);
+        //PlayerNewCooldown.Instance.UpdateCurrentCharacter(_currentCharacter.name);
 
         GameInput.Instance.OnCharacterChanged_Slot01 += GameInput_OnCharacterChanged_Slot01;
         GameInput.Instance.OnCharacterChanged_Slot02 += GameInput_OnCharacterChanged_Slot02;
@@ -86,6 +87,7 @@ public class ChangeCharacterController : MonoBehaviour
 
         SkillManager.Instance.UpdateCurrentSkill(newCharacter);
         UltManager.Instance.UpdateCurrentUlt(newCharacter);
+        //PlayerNewCooldown.Instance.UpdateCurrentCharacter(newCharacter.name);
 
         OnCharacterChangedParticles?.Invoke(this, EventArgs.Empty);
         AudioManager.Instance.PlaySound(_onCharacterChangedSFX);
