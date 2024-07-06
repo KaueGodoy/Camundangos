@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayParticlesOnCollisionTrigger : MonoBehaviour
 {
     [SerializeField] private ParticleSystem[] _particles;
+    [SerializeField] private Transform _particlesTransform;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class PlayParticlesOnCollisionTrigger : MonoBehaviour
             if (particleTransform != null)
             {
                 particleTransform.gameObject.SetActive(false);
+                _particlesTransform.gameObject.SetActive(false);
             }
         }
     }
@@ -34,6 +36,7 @@ public class PlayParticlesOnCollisionTrigger : MonoBehaviour
                 if (particleTransform != null)
                 {
                     particleTransform.gameObject.SetActive(true);
+                    _particlesTransform.gameObject.SetActive(true);
                 }
             }
         }
